@@ -1,0 +1,2217 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "Airtel Locate platform enables enterprises and small businesses to easily track device location to enhance their IoT use cases irrespective of device's GPS capabilities. Airtel Locate APIs will allow you to easily get Assets' location and manage consent. \n\nKey word : \n* MSISDN – represents a valid 10 or 13 digit airtel mobile number \n* Locate – Airtel Locate platform\n* Resource – a resource is equivalent to a MSISDN\n* Location – location of the resource \n* License – represents an Airtel Locate customer’s commercial license to use location API’s ",
+    "version": "1.4.8",
+    "title": "Locate API Catalog",
+    "contact": {
+      "name": "Support",
+      "email": "locate.support@airtel.com"
+    }
+  },
+  "tags": [
+    {
+      "name": "Authorization API",
+      "description": "This API will help you to generate token from the client credentials shared upon subscription to location services. In case you have not yet subscribed to location service, email us to locate.support@airtel.com"
+    },
+    {
+      "name": "Resource Consent API",
+      "description": "This set of APIs allow customer initiate consent, fetch consent details, delete resource, fetch list of msisdn for consent was initiated and various other API to handle consumer msisdn's and their consent"
+    },
+    {
+      "name": "Location API",
+      "description": "This API will return location of MSISDN including Latitude and Longitude."
+    },
+    {
+      "name": "Validation API",
+      "description": "These set of APIs allow customer to validate a physical address against network fetched live location. To get access to these API's please email to  locate.support@airtel.com"
+    },
+    {
+      "name": "Tenant API",
+      "description": "\nThese set of Tenant APIs allow customer to initiate consent, fetch consent details, delete consent, fetch list of msisdn for consent was initiated and various other API to handle tenant msisdn's and their consent.\n"
+    }
+  ],
+  "paths": {
+    "/locate/apis/customers/{customerBaId}/oauth2_token": {
+      "post": {
+        "tags": [
+          "Authorization API"
+        ],
+        "summary": "Generate Oauth token",
+        "description": "This API will generate Access Token for given scope. Generated token will be valid for 24 hours. To access Airtel Locate APIs, user will need generated access token.",
+        "operationId": "getOrCreateOauthTokenUsingPOST_2",
+        "parameters": [
+          {
+            "name": "customerBaId",
+            "in": "path",
+            "description": "customerBaId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccessTokenRequest"
+              }
+            }
+          },
+          "description": "credentials",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OauthAccessToken"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request for invalid scope"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Customer BA ID not found"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/locate/apis/customers/{customerBaId}/resources": {
+      "get": {
+        "tags": [
+          "Resource Consent API"
+        ],
+        "summary": "Fetch MSISDNs",
+        "description": "This API returns the list of resource registered by customer for location tracking. Optional query params consent, tracking and daysSinceLastLocationFetched can be used to further filter the result.This API returns the list of resource for which consent initiated by customer for location tracking. \n\n",
+        "operationId": "findAllUsingGET_2",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "consent",
+            "in": "query",
+            "description": "consent",
+            "required": false,
+            "allowEmptyValue": false,
+            "example": "PENDING",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customerBaId",
+            "in": "path",
+            "description": "customerBaId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "daysSinceLastLocationFetched",
+            "in": "query",
+            "description": "daysSinceLastLocationFetched",
+            "required": false,
+            "allowEmptyValue": false,
+            "example": "10",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page to be returned (0..N)",
+            "required": false,
+            "schema": {
+              "type": "ref",
+              "default": "0"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Number of records per page.",
+            "required": false,
+            "schema": {
+              "type": "ref",
+              "default": "20"
+            }
+          },
+          {
+            "name": "tracking",
+            "in": "query",
+            "description": "tracking",
+            "required": false,
+            "allowEmptyValue": false,
+            "example": "true",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/locate/apis/customers/{customerBaId}/resources/consent": {
+      "post": {
+        "tags": [
+          "Resource Consent API"
+        ],
+        "summary": "Initiate Consent",
+        "description": "This API shall allow the customer to initiate consent on number prefixed by 91 via available channel. Current supported channels are IVR and SMS. \n Use this to \n - Initiating new consent\n - Initiating consent if current state is REJECTED \n - Initiate consent in different language then previous\n\n> *__Supported Language__*\n> *English(en) | Hindi(hi) | Assamese(as) | Bengali(bn) | Oriya(or) | Kannada(kn) | Malayalam(ml) | Tamil(ta) | Telugu(te)*\n\n__Sample Message__:\n - __Customer with short code__ :To allow ABC Pvt Ltd. to fetch your location using your SIM Provider, please reply \"Y\" (Toll Free). \n - __Customer without short code__: To allow ABC Pvt Ltd. to fetch your location using your SIM Provider, please reply \"{unique_id} Y\" (Toll Free).",
+        "operationId": "initiateConsentUsingPOST_3",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customerBaId",
+            "in": "path",
+            "description": "customerBaId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsentRequest"
+              }
+            }
+          },
+          "description": "consentRequest",
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "accepted"
+          },
+          "400": {
+            "description": "Bad Request\n   • Invalid language\n   • Not an airtel number\n   • Invalid channel"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden consent state or channel"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/locate/apis/customers/{customerBaId}/resources/{msisdn}": {
+      "get": {
+        "tags": [
+          "Resource Consent API"
+        ],
+        "summary": "Search Resource",
+        "description": "This API will return the details for requested MSISDN like name, consent status and tracking status.",
+        "operationId": "searchUsingGET_2",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customerBaId",
+            "in": "path",
+            "description": "customerBaId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "msisdn",
+            "in": "path",
+            "description": "msisdn",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Resource Consent API"
+        ],
+        "summary": "Remove MSISDN",
+        "description": "This API will allow you to remove a MSISDN. It requires customer ID and MSISDN to be deleted.",
+        "operationId": "deleteResourceUsingDELETE_3",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customerBaId",
+            "in": "path",
+            "description": "customerBaId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "msisdn",
+            "in": "path",
+            "description": "msisdn",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted Successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Msisdn not found for customer"
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "Resource Consent API"
+        ],
+        "summary": "Modify Resource",
+        "description": "API to modify tracking and alias(name) for registered msisdn.\n",
+        "operationId": "patchResourceUsingPATCH_3",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customerBaId",
+            "in": "path",
+            "description": "customerBaId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "msisdn",
+            "in": "path",
+            "description": "msisdn",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/ResourcePatchOptions"
+        },
+        "responses": {
+          "204": {
+            "description": "Successfully updated"
+          },
+          "400": {
+            "description": "Bad Request in case of bad json body"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden if number issued licenses exhausted"
+          },
+          "404": {
+            "description": "Msisdn not found for customer"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/locate/apis/customers/{customerBaId}/resources/{msisdn}/consent": {
+      "get": {
+        "tags": [
+          "Resource Consent API"
+        ],
+        "summary": "Fetch Consent Details",
+        "description": "API to get the consent details insight\n>  *__Consent  States__*    -- _PROCESSING | INITIATED | PENDING | ALLOWED | REJECTED | FAILED_\n\n*__Consent Events Types__*  -- _MT | DR | MO | CALL | CDR_\n\n - _MT- Event when platform sends consent via SMS_\n - _DR- Event when delivery report is received against a sent MT event_\n - _MO- Event when platform receives a valid consent sent by user via SMS_\n - _CALL- Event when platform initiates consent call via IVR_\n - _CDR- Event when platform receives call data record  against the initiated CALL event_\n\n",
+        "operationId": "getConsentUsingGET_2",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customerBaId",
+            "in": "path",
+            "description": "customerBaId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "msisdn",
+            "in": "path",
+            "description": "msisdn",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConsentResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Msisdn not found for customer"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/locate/apis/customers/{customerBaId}/resources/{msisdn}/location": {
+      "get": {
+        "tags": [
+          "Location API"
+        ],
+        "summary": "Get Location",
+        "description": "This API shall allow user to fetch the location of the registered resource. The access token must be generated with “location” scope for using this API. The value for query parameter “type” is ”sync” for synchronous request and ”async” for asynchronous request and the default value is ”sync”. Customer need to register the callback listener for the async API where Locate would post the location.",
+        "operationId": "getLocationUsingGET_3",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customerBaId",
+            "in": "path",
+            "description": "customerBaId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "msisdn",
+            "in": "path",
+            "description": "msisdn",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "type",
+            "required": true,
+            "allowEmptyValue": false,
+            "example": "async",
+            "schema": {
+              "type": "string",
+              "default": "sync"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok - successful synchronous location request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationResponse"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted - successful asynchronous location request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AsyncCorrelationId"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden-  \n Subscription expired | Subscription limit reached || resource has not given consent | tracking is disabled | callback url is not registered"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "429": {
+            "description": "Request for location fetch can before location rate issues in license| Location request in progress for given msisdn"
+          },
+          "502": {
+            "description": "Error in Fetching location of msisdn because of network error in HLR, \n MME, MSC. The ~5-10% of such error is expected."
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/locate/apis/customers/{customerBaId}/resources/{msisdn}/validation/address": {
+      "post": {
+        "tags": [
+          "Validation API"
+        ],
+        "summary": "Address validation API",
+        "description": "API to get the distance between live network location and given physical address.",
+        "operationId": "addressValidationUsingPOST_1",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customerBaId",
+            "in": "path",
+            "description": "customerBaId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "msisdn",
+            "in": "path",
+            "description": "msisdn",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/AddressValidationDto"
+        },
+        "responses": {
+          "200": {
+            "description": "Ok - successful address validation request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddressValidationResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden-  \nresource has not given consent | tracking is disabled "
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "502": {
+            "description": "Error in Fetching location of msisdn because of network error in HLR, \n MME, MSC. The ~5-10% of such error is expected.| Error retrieving geocode while processing request. Please try again!"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/locate/apis/customers/{customerBaId}/tenants": {
+      "get": {
+        "tags": [
+          "Tenant API"
+        ],
+        "summary": "Fetch Customer Tenants",
+        "description": "This API returns the list of tenants registered by customer.\n",
+        "operationId": "getCustomerTenantsUsingGET_1",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customerBaId",
+            "in": "path",
+            "description": "customerBaId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "organizationName",
+            "in": "query",
+            "description": "organizationName",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "paged",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "profileNeeded",
+            "in": "query",
+            "description": "profileNeeded",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort.sorted",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "sort.unsorted",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "unpaged",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerTenantResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/locate/apis/customers/{customerBaId}/tenants/consent/purpose": {
+      "get": {
+        "tags": [
+          "Tenant API"
+        ],
+        "summary": "Fetch Tenant Consent purpose",
+        "description": "This API returns the list of available tenant consent purpose for initiating consent. This API returns the list of consent purpose for which consent can be initiated by customer for location tracking. \n\n",
+        "operationId": "getAllConsentPurposeUsingGET_1",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customerBaId",
+            "in": "path",
+            "description": "customerBaId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "paged",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "sort.sorted",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "sort.unsorted",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "unpaged",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConsentPurpose"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/locate/apis/customers/{customerBaId}/tenants/{tenantId}/resources": {
+      "get": {
+        "tags": [
+          "Tenant API"
+        ],
+        "summary": "Fetch MSISDNs",
+        "description": "This API returns the list of resource registered by customer for location tracking. Optional query params consent, tracking and daysSinceLastLocationFetched can be used to further filter the result.This API returns the list of resource for which consent initiated by customer for location tracking. \n\n",
+        "operationId": "findAllUsingGET_3",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "consent",
+            "in": "query",
+            "description": "consent",
+            "required": false,
+            "allowEmptyValue": false,
+            "example": "PENDING",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customerBaId",
+            "in": "path",
+            "description": "customerBaId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "daysSinceLastLocationFetched",
+            "in": "query",
+            "description": "daysSinceLastLocationFetched",
+            "required": false,
+            "allowEmptyValue": false,
+            "example": "10",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "paged",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "sort.sorted",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "sort.unsorted",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "tenantId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tracking",
+            "in": "query",
+            "description": "tracking",
+            "required": false,
+            "allowEmptyValue": false,
+            "example": "true",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unpaged",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/locate/apis/customers/{customerBaId}/tenants/{tenantId}/resources/consent": {
+      "post": {
+        "tags": [
+          "Tenant API"
+        ],
+        "summary": "Initiate Consent",
+        "description": "This API shall allow the customer to initiate consent on number prefixed by 91 via available channel. Current supported channels are IVR and SMS. \n Use this to \n - Initiating new consent\n - Initiating consent if current state is REJECTED \n - Initiate consent in different language then previous\n\n> *__Supported Language__*\n> *English(en) | Hindi(hi) | Assamese(as) | Bengali(bn) | Oriya(or) | Kannada(kn) | Malayalam(ml) | Tamil(ta) | Telugu(te)*\n\n__Sample Message__:\n - __Customer with short code__ :To allow ABC Pvt Ltd. to fetch your location using your SIM Provider, please reply \"Y\" (Toll Free). \n - __Customer without short code__: To allow ABC Pvt Ltd. to fetch your location using your SIM Provider, please reply \"{unique_id} Y\" (Toll Free).",
+        "operationId": "initiateConsentUsingPOST_4",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customerBaId",
+            "in": "path",
+            "description": "customerBaId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "tenantId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TenantConsentRequest"
+              }
+            }
+          },
+          "description": "consentRequest",
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "accepted"
+          },
+          "400": {
+            "description": "Bad Request\n   • Invalid language\n   • Not an airtel number\n   • Invalid channel"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden consent state or channel"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/locate/apis/customers/{customerBaId}/tenants/{tenantId}/resources/{msisdn}": {
+      "get": {
+        "tags": [
+          "Tenant API"
+        ],
+        "summary": "Search Resource",
+        "description": "This API will return the details for requested MSISDN like name, consent status and tracking status.",
+        "operationId": "searchUsingGET_3",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customerBaId",
+            "in": "path",
+            "description": "customerBaId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "msisdn",
+            "in": "path",
+            "description": "msisdn",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "tenantId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Tenant API"
+        ],
+        "summary": "Remove MSISDN",
+        "description": "This API will allow you to remove a MSISDN. It requires customer ID and MSISDN to be deleted.",
+        "operationId": "deleteResourceUsingDELETE_4",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customerBaId",
+            "in": "path",
+            "description": "customerBaId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "msisdn",
+            "in": "path",
+            "description": "msisdn",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "tenantId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted Successfully"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Msisdn not found for customer"
+          }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [
+          "Tenant API"
+        ],
+        "summary": "Modify Resource",
+        "description": "API to modify tracking and alias(name) for registered msisdn.\n",
+        "operationId": "patchResourceUsingPATCH_4",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customerBaId",
+            "in": "path",
+            "description": "customerBaId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "msisdn",
+            "in": "path",
+            "description": "msisdn",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "tenantId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/ResourcePatchOptions"
+        },
+        "responses": {
+          "204": {
+            "description": "Successfully updated"
+          },
+          "400": {
+            "description": "Bad Request in case of bad json body"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden if number issued licenses exhausted"
+          },
+          "404": {
+            "description": "Msisdn not found for customer"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/locate/apis/customers/{customerBaId}/tenants/{tenantId}/resources/{msisdn}/consent": {
+      "get": {
+        "tags": [
+          "Tenant API"
+        ],
+        "summary": "Fetch Consent Details",
+        "description": "API to get the consent details insight\n>  *__Consent  States__*    -- _PROCESSING | INITIATED | PENDING | ALLOWED | REJECTED | FAILED_\n\n*__Consent Events Types__*  -- _MT | DR | MO | CALL | CDR_\n\n - _MT- Event when platform sends consent via SMS_\n - _DR- Event when delivery report is received against a sent MT event_\n - _MO- Event when platform receives a valid consent sent by user via SMS_\n - _CALL- Event when platform initiates consent call via IVR_\n - _CDR- Event when platform receives call data record  against the initiated CALL event_\n\n",
+        "operationId": "getConsentUsingGET_3",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customerBaId",
+            "in": "path",
+            "description": "customerBaId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "msisdn",
+            "in": "path",
+            "description": "msisdn",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "tenantId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConsentResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Msisdn not found for customer"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/locate/apis/customers/{customerBaId}/tenants/{tenantId}/resources/{msisdn}/location": {
+      "get": {
+        "tags": [
+          "Tenant API"
+        ],
+        "summary": "Get Location",
+        "description": "This API shall allow user to fetch the location of the registered resource. The access token must be generated with “location” scope for using this API. The value for query parameter “type” is ”sync” for synchronous request and ”async” for asynchronous request and the default value is ”sync”. Customer need to register the callback listener for the async API where Locate would post the location.",
+        "operationId": "getLocationForTenantsUsingGET_1",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customerBaId",
+            "in": "path",
+            "description": "customerBaId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "msisdn",
+            "in": "path",
+            "description": "msisdn",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "tenantId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "type",
+            "required": true,
+            "allowEmptyValue": false,
+            "example": "async",
+            "schema": {
+              "type": "string",
+              "default": "sync"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok - successful synchronous location request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationResponse"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted - successful asynchronous location request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AsyncCorrelationId"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden-  \n Subscription expired | Subscription limit reached || resource has not given consent | tracking is disabled | callback url is not registered"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "429": {
+            "description": "Request for location fetch can before location rate issues in license| Location request in progress for given msisdn"
+          },
+          "502": {
+            "description": "Error in Fetching location of msisdn because of network error in HLR, \n MME, MSC. The ~5-10% of such error is expected."
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/locate/apis/customers/{customerBaId}/tenants/{tenantId}/resources/{msisdn}/validation/address": {
+      "post": {
+        "tags": [
+          "Tenant API"
+        ],
+        "summary": "Address validation API",
+        "description": "API to get the distance between live network location and given physical address.",
+        "operationId": "addressValidationForTenantsUsingPOST_1",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "customerBaId",
+            "in": "path",
+            "description": "customerBaId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "msisdn",
+            "in": "path",
+            "description": "msisdn",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "tenantId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/AddressValidationDto"
+        },
+        "responses": {
+          "200": {
+            "description": "Ok - successful address validation request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddressValidationResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden-  \nresource has not given consent | tracking is disabled "
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "502": {
+            "description": "Error in Fetching location of msisdn because of network error in HLR, \n MME, MSC. The ~5-10% of such error is expected.| Error retrieving geocode while processing request. Please try again!"
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://openapi.airtel.in/"
+    }
+  ],
+  "components": {
+    "requestBodies": {
+      "AddressValidationDto": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/AddressValidationDto"
+            }
+          }
+        },
+        "description": "address",
+        "required": true
+      },
+      "ResourcePatchOptions": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ResourcePatchOptions"
+            }
+          }
+        },
+        "description": "resourcePatchOptions",
+        "required": true
+      }
+    },
+    "schemas": {
+      "AccessTokenRequest": {
+        "type": "object",
+        "required": [
+          "client_id",
+          "client_secret",
+          "scope"
+        ],
+        "properties": {
+          "client_id": {
+            "type": "string"
+          },
+          "client_secret": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string",
+            "example": "location",
+            "enum": [
+              "location",
+              "resource"
+            ]
+          }
+        },
+        "title": "AccessTokenRequest"
+      },
+      "AddressValidationDto": {
+        "type": "object",
+        "required": [
+          "address"
+        ],
+        "properties": {
+          "address": {
+            "type": "string",
+            "example": "string",
+            "description": "address to be validated"
+          }
+        },
+        "title": "AddressValidationDto"
+      },
+      "AddressValidationResponseDto": {
+        "type": "object",
+        "properties": {
+          "distance": {
+            "type": "number",
+            "format": "double"
+          },
+          "distanceUnit": {
+            "type": "string",
+            "description": "Km/m"
+          },
+          "geocode": {
+            "$ref": "#/components/schemas/GeocodeDetails"
+          },
+          "message": {
+            "type": "string",
+            "description": "when the subscriber is absent or in restricted zone."
+          },
+          "networkCoordinates": {
+            "$ref": "#/components/schemas/LatLong"
+          },
+          "status": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "title": "AddressValidationResponseDto"
+      },
+      "AsyncCorrelationId": {
+        "type": "object",
+        "properties": {
+          "correlationId": {
+            "type": "string"
+          }
+        },
+        "title": "AsyncCorrelationId"
+      },
+      "ConsentEventMeta": {
+        "type": "object",
+        "properties": {
+          "callStatus": {
+            "type": "string"
+          },
+          "consentId": {
+            "type": "string"
+          },
+          "delivered": {
+            "type": "boolean"
+          },
+          "keyPressed": {
+            "type": "boolean"
+          },
+          "language": {
+            "type": "string",
+            "enum": [
+              "EN",
+              "HI",
+              "AS",
+              "BN",
+              "OR",
+              "KN",
+              "ML",
+              "TA",
+              "TE"
+            ]
+          }
+        },
+        "title": "ConsentEventMeta"
+      },
+      "ConsentEvents": {
+        "type": "object",
+        "properties": {
+          "channel": {
+            "type": "string",
+            "enum": [
+              "IVR",
+              "SMS"
+            ]
+          },
+          "consentId": {
+            "type": "string"
+          },
+          "initiatedBy": {
+            "type": "string",
+            "enum": [
+              "PLATFORM",
+              "CUSTOMER"
+            ]
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ConsentEventMeta"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "FAIL",
+              "SUCCESS"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "MT",
+              "DR",
+              "MO",
+              "CALL",
+              "CDR"
+            ]
+          }
+        },
+        "title": "ConsentEvents"
+      },
+      "ConsentPurpose": {
+        "type": "object",
+        "properties": {
+          "purposeKey": {
+            "type": "string"
+          },
+          "purposeValue": {
+            "type": "string"
+          }
+        },
+        "title": "ConsentPurpose"
+      },
+      "ConsentRequest": {
+        "type": "object",
+        "required": [
+          "msisdn"
+        ],
+        "properties": {
+          "channel": {
+            "type": "string",
+            "example": "SMS",
+            "description": "The channel to initiate consent. Defaults to SMS"
+          },
+          "language": {
+            "type": "string",
+            "example": "EN",
+            "description": "Preferred language to initiate the consent. Default to EN(english)"
+          },
+          "msisdn": {
+            "type": "string",
+            "example": "91XXXXXXXXXX",
+            "description": "The Airtel number must be prefixed with 91 followed by 10 digit mobile number."
+          }
+        },
+        "title": "ConsentRequest"
+      },
+      "ConsentResponse": {
+        "type": "object",
+        "properties": {
+          "channel": {
+            "type": "string",
+            "enum": [
+              "IVR",
+              "SMS"
+            ]
+          },
+          "consent": {
+            "type": "string",
+            "enum": [
+              "PROCESSING",
+              "INITIATED",
+              "ALLOWED",
+              "PENDING",
+              "REJECTED",
+              "FAILED"
+            ]
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConsentEvents"
+            }
+          },
+          "lastRecordedConsent": {
+            "type": "string",
+            "enum": [
+              "PROCESSING",
+              "INITIATED",
+              "ALLOWED",
+              "PENDING",
+              "REJECTED",
+              "FAILED"
+            ]
+          },
+          "lastRecordedConsentChannel": {
+            "type": "string",
+            "enum": [
+              "IVR",
+              "SMS"
+            ]
+          },
+          "lastRecordedConsentUpdatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "title": "ConsentResponse"
+      },
+      "CustomerTenantProfileResponseDto": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "customerSpocContactNumber": {
+            "type": "string"
+          },
+          "customerSpocEmail": {
+            "type": "string"
+          },
+          "customerSpocName": {
+            "type": "string"
+          },
+          "pincode": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          }
+        },
+        "title": "CustomerTenantProfileResponseDto"
+      },
+      "CustomerTenantResponseDto": {
+        "type": "object",
+        "properties": {
+          "active": {
+            "type": "boolean"
+          },
+          "consentChannels": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "IVR",
+                "SMS"
+              ]
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "customerBaId": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "organizationName": {
+            "type": "string"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/CustomerTenantProfileResponseDto"
+          }
+        },
+        "title": "CustomerTenantResponseDto"
+      },
+      "GeocodeDetails": {
+        "type": "object",
+        "properties": {
+          "formattedAddress": {
+            "type": "string",
+            "description": "this shows the formatted address of the POI."
+          },
+          "geocodeLevel": {
+            "type": "string",
+            "description": "this shows on which level the POI has been geocoded."
+          },
+          "inputAddress": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "title": "GeocodeDetails"
+      },
+      "LatLong": {
+        "type": "object",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "radius": {
+            "type": "string"
+          }
+        },
+        "title": "LatLong"
+      },
+      "LocationResponse": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "$ref": "#/components/schemas/LatLong"
+          },
+          "message": {
+            "type": "string"
+          },
+          "retrievedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "yyyy-MM-dd HH:mm:ss",
+            "description": "location"
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "title": "LocationResponse"
+      },
+      "OauthAccessToken": {
+        "type": "object",
+        "required": [
+          "access_token",
+          "expires_in",
+          "token_type"
+        ],
+        "properties": {
+          "access_token": {
+            "type": "string"
+          },
+          "expires_in": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "token_type": {
+            "type": "string"
+          }
+        },
+        "title": "OauthAccessToken"
+      },
+      "Pageable": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paged": {
+            "type": "boolean"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/Sort"
+          },
+          "unpaged": {
+            "type": "boolean"
+          }
+        },
+        "title": "Pageable"
+      },
+      "ResourcePatchOptions": {
+        "type": "object",
+        "properties": {
+          "alias": {
+            "type": "string",
+            "example": "Albert Einstein",
+            "description": "The name to msisdn for which consent was initiated"
+          },
+          "isTrackingEnabled": {
+            "type": "boolean",
+            "example": true,
+            "description": "enable/disable tracking for a MSISDN."
+          }
+        },
+        "title": "ResourcePatchOptions"
+      },
+      "ResourceResponseDto": {
+        "type": "object",
+        "properties": {
+          "consent": {
+            "type": "string",
+            "enum": [
+              "PROCESSING",
+              "INITIATED",
+              "ALLOWED",
+              "PENDING",
+              "REJECTED",
+              "FAILED"
+            ]
+          },
+          "consentPurpose": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string",
+            "enum": [
+              "EN",
+              "HI",
+              "AS",
+              "BN",
+              "OR",
+              "KN",
+              "ML",
+              "TA",
+              "TE"
+            ]
+          },
+          "lastFetchedLocationTimestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "msisdn": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "tracking": {
+            "type": "boolean"
+          }
+        },
+        "title": "ResourceResponseDto"
+      },
+      "Sort": {
+        "type": "object",
+        "properties": {
+          "empty": {
+            "type": "boolean"
+          },
+          "sorted": {
+            "type": "boolean"
+          },
+          "unsorted": {
+            "type": "boolean"
+          }
+        },
+        "title": "Sort"
+      },
+      "TenantConsentRequest": {
+        "type": "object",
+        "required": [
+          "msisdn",
+          "purpose"
+        ],
+        "properties": {
+          "channel": {
+            "type": "string",
+            "example": "SMS",
+            "description": "The channel to initiate consent. Defaults to SMS"
+          },
+          "language": {
+            "type": "string",
+            "example": "EN",
+            "description": "Preferred language to initiate the consent. Default to EN(english)"
+          },
+          "msisdn": {
+            "type": "string",
+            "example": "91XXXXXXXXXX",
+            "description": "The Airtel number must be prefixed with 91 followed by 10 digit mobile number."
+          },
+          "purpose": {
+            "type": "string",
+            "example": "TRACKING",
+            "description": "The purpose to initiate consent."
+          }
+        },
+        "title": "TenantConsentRequest"
+      },
+      "Mono_AddressValidationResponseDto_": {
+        "type": "object",
+        "title": "Mono«AddressValidationResponseDto»"
+      },
+      "Mono_ResponseEntity_object_": {
+        "type": "object",
+        "title": "Mono«ResponseEntity«object»»"
+      },
+      "Page_ConsentPurpose_": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConsentPurpose"
+            }
+          },
+          "empty": {
+            "type": "boolean"
+          },
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numberOfElements": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageable": {
+            "$ref": "#/components/schemas/Pageable"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/Sort"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "title": "Page«ConsentPurpose»"
+      },
+      "Page_CustomerTenantResponseDto_": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomerTenantResponseDto"
+            }
+          },
+          "empty": {
+            "type": "boolean"
+          },
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numberOfElements": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageable": {
+            "$ref": "#/components/schemas/Pageable"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/Sort"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "title": "Page«CustomerTenantResponseDto»"
+      },
+      "Page_ResourceResponseDto_": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceResponseDto"
+            }
+          },
+          "empty": {
+            "type": "boolean"
+          },
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numberOfElements": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageable": {
+            "$ref": "#/components/schemas/Pageable"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/Sort"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "title": "Page«ResourceResponseDto»"
+      }
+    }
+  }
+}

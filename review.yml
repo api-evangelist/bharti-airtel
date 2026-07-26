@@ -1,0 +1,411 @@
+aid: bharti-airtel
+name: Bharti Airtel
+review:
+  question: >-
+    Does Bharti Airtel expose a real, self-serve, publicly documented API surface —
+    and what is its CAMARA / GSMA Open Gateway posture?
+  answer: partial
+  date: '2026-07-25'
+  reviewer: API Evangelist
+  homeMarket: India
+  tier: mno-carrier
+  gated: false
+  gatedNote: >-
+    Marked not-gated because the product-connectivity documentation (Airtel IQ,
+    Airtel IoT, Airtel Locate) is genuinely public and a self-serve trial exists.
+    The network/CAMARA surface is fully gated and the "Airtel API Marketplace"
+    is a login wall — both recorded below.
+findings:
+  summary: |
+    Bharti Airtel is a split case, and the split runs exactly along the line this
+    sector study predicts. Airtel's CONNECTIVITY PRODUCT APIs are real, public and
+    specification-backed: four OpenAPI/Swagger documents were harvested anonymously,
+    two of them complete OpenAPI 3.0 catalogues. Airtel's NETWORK APIs — the CAMARA
+    and GSMA Open Gateway surface that is the defining signal of this sector — are
+    entirely unreachable from Airtel directly. There is no CAMARA endpoint, no CAMARA
+    specification, no CIBA authorization surface, and no network-API developer portal
+    on any airtel.in host. Airtel's commercially launched CAMARA SIM Swap API is sold
+    to Indian banks through a GSMA-certified federated Jio/Vi/Airtel channel, and its
+    wider network capability reaches developers through Aduna (in which Airtel is a
+    founding operator shareholder) and through Nokia's Network as Code platform. The
+    aggregator owns the developer relationship; Airtel owns the network.
+  developerPortals:
+    - url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+      status: 200
+      verdict: real-self-serve
+      note: >-
+        Airtel IQ API documentation (React SPA under assets.airtel.in/static-assets/
+        airtel-ccp/api-docs). Public, no login. Renders Swagger fetched live from
+        openapi.airtel.in. Sibling routes /sms/overview, /voice/overview,
+        /voice/callflow-api, /voice/sample-cdr, /whatsapp/whatsapp-api, /rcs/rcs-api
+        all return 200. A self-serve trial account (1 Intelliphone + 500 free pulses)
+        is offered at the CPaaS dashboard signup.
+    - url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+      status: 200
+      verdict: real-public-reference
+      note: >-
+        "Dev Portal - Airtel Iot". Server-rendered Redoc (v2.2.0) page, 743 KB, with a
+        complete OpenAPI 3.0.1 document embedded in __redoc_state. No login required to
+        read; production credentials are enterprise-issued.
+    - url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+      status: 200
+      verdict: real-public-reference
+      note: >-
+        "Dev Portal - Locate Api Catalog". Server-rendered Redoc (v2.1.3) page, 275 KB,
+        with a complete OpenAPI 3.0.0 document (v1.4.8) embedded in __redoc_state.
+    - url: https://developers.airtel.in/
+      status: 200
+      verdict: login-wall
+      note: >-
+        "Airtel API Marketplace". React SPA shell only (1,647 bytes); every route
+        (/products, /gettingstarted, /register) returns the same shell. Meta description
+        reads "Login to Airtel API Marketplace portal for any API related buy." Backend is
+        https://m2m.airteliot.co.in/ and its catalogue call /api/auth/list returns HTTP 401
+        anonymously. Ships RapiDoc, so specifications exist behind the wall but are not
+        served to anonymous callers.
+    - url: https://openapi.airtel.in/smartapi/
+      status: 200
+      verdict: legacy-abandoned
+      note: >-
+        "Smart API" — Airtel's original 2017 partner developer programme. AngularJS
+        application, footer reads "© Airtel India 2017", asset pageVersion '19Jul17'.
+        Still serves real public documentation (OAuth flows, carrier billing, subscription,
+        LRN lookup, UIDAI/Aadhaar DigiAuth) but production hosts are redacted to
+        <IP>:<Port> and access requires partner registration.
+  deadOrMissingHosts:
+    - host: developer.airtel.in
+      result: no DNS / connection failed (curl 000)
+    - host: docs.airtel.in
+      result: no DNS / connection failed (curl 000)
+    - host: api.airtel.in
+      result: no DNS / connection failed (curl 000)
+    - host: opengateway.airtel.in
+      result: no DNS / connection failed (curl 000)
+    - host: developers.opengateway.airtel.in
+      result: no DNS / connection failed (curl 000)
+    - host: iot.airtel.in
+      result: no DNS / connection failed (curl 000)
+    - url: https://www.airtel.in/developer
+      result: 200 but serves the generic airtel.in consumer homepage — soft 404, not a portal
+    - url: https://www.airtel.in/developers
+      result: 200 but serves the generic airtel.in consumer homepage — soft 404, not a portal
+    - url: https://www.airtel.in/opengateway
+      result: 200 but serves the generic airtel.in consumer homepage — soft 404, no Open Gateway page exists
+    - url: https://www.airtel.in/business/api
+      result: 404
+  specsHarvested:
+    count: 4
+    note: >-
+      All four fetched anonymously and confirmed to parse as OpenAPI/Swagger with a
+      paths object. Verbatim source documents preserved under openapi/_original/;
+      content-identical YAML renderings under openapi/.
+    specs:
+      - file: openapi/bharti-airtel-iq-sms-openapi.yml
+        original: openapi/_original/airtel-iq-sms-core-apis.json
+        title: Airtel IQ SMS Core APIs
+        version: 2.0 (Swagger)
+        sourceURL: https://openapi.airtel.in/gateway/airtel-iq-sms-utility/v2/api-docs
+        httpStatus: 200
+        fetched: '2026-07-25'
+        host: iqsms.airtel.in
+        operations: 5
+        note: Discovered in the api-docs SPA bundle main.5bed473e.chunk.js.
+      - file: openapi/bharti-airtel-iq-reporting-openapi.yml
+        original: openapi/_original/airtel-iq-reporting-cdr.json
+        title: Airtel IQ API Documentation (Sample CDR)
+        version: 2.0 (Swagger)
+        sourceURL: https://openapi.airtel.in/gateway/airtel-xchange-reporting/v2/api-docs
+        httpStatus: 200
+        fetched: '2026-07-25'
+        host: openapi.airtel.in
+        operations: 1
+      - file: openapi/bharti-airtel-iot-openapi.yml
+        original: openapi/_original/airtel-iot.json
+        title: Airtel IoT
+        version: 3.0.1 (OpenAPI)
+        sourceURL: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+        httpStatus: 200
+        fetched: '2026-07-25'
+        extraction: embedded verbatim in the page's Redoc __redoc_state.spec.data
+        server: https://m2m.airteliot.co.in/iot/api/
+        paths: 42
+        operations: 43
+        schemas: 63
+      - file: openapi/bharti-airtel-locate-openapi.yml
+        original: openapi/_original/airtel-locate.json
+        title: Locate API Catalog
+        version: 3.0.0 (OpenAPI), API version 1.4.8
+        sourceURL: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+        httpStatus: 200
+        fetched: '2026-07-25'
+        extraction: embedded verbatim in the page's Redoc __redoc_state.spec.data
+        server: https://openapi.airtel.in/
+        paths: 15
+        operations: 19
+        schemas: 25
+  specEndpointsProbedButNotHarvested:
+    - url: https://openapi.airtel.in/gateway/airtel-ccp-voice-manager/v2/api-docs
+      httpStatus: 401
+      note: 'Airtel IQ Voice Manager. Returns {"message":"Unauthorized"} — gated.'
+    - url: https://openapi.airtel.in/gateway/airtel-xchange/v2/api-docs
+      httpStatus: 404
+    - url: https://openapi.airtel.in/gateway/airtel-xchange/iq-whatsapp/v1/api-docs
+      httpStatus: 503
+      note: WhatsApp Business API spec. Nginx 503 on four attempts across the review — broken, not gated.
+    - url: https://openapi.airtel.in/gateway/airtel-xchange/iq-whatsapp/v1/rcs-api-docs
+      httpStatus: 503
+      note: RCS Business Messaging spec. Nginx 503 on four attempts — broken, not gated.
+    - url: https://m2m.airteliot.co.in/v3/api-docs
+      httpStatus: 404
+    - url: https://m2m.airteliot.co.in/swagger.json
+      httpStatus: 404
+  camara:
+    posture: >-
+      GSMA Open Gateway signatory and founding Aduna shareholder with one CAMARA API
+      (SIM Swap) commercially launched through a federated bank channel — but nothing
+      CAMARA is callable, specified, or documented on any Airtel host. Developers reach
+      Airtel's network APIs only through aggregators (Aduna, Nokia Network as Code),
+      never directly from Airtel.
+    apisWithRealEvidence:
+      - name: SIM Swap
+        status: launched-commercially
+        evidence: >-
+          GSMA press release, 9 October 2025: "Bharti Airtel, Reliance Jio and Vodafone
+          Idea have already launched the SIM Swap API", sold to banks to block account
+          takeover. Announced at India Mobile Congress 2025 as a GSMA-certified
+          federated service across all three Indian operators.
+        callableFromAirtel: false
+        specPublishedByAirtel: false
+    apisAnnouncedNotVerified:
+      - name: Number Verification
+        status: announced-only
+        evidence: >-
+          Same GSMA release states all three operators "plan to launch a CAMARA-based
+          Number Verification API before the end of 2025." No Airtel endpoint,
+          specification, or documentation was found confirming it went live. Recorded
+          as an announcement, not an implementation.
+    openGatewayMember: true
+    openGatewayEvidence: >-
+      Bharti Airtel was among the 21 founding carriers of GSMA Open Gateway announced at
+      MWC in February 2023, and is named as a participating operator in the GSMA's
+      October 2025 India federated-network-services announcement.
+    aduna:
+      participant: true
+      role: founding operator shareholder
+      evidence: >-
+        Aduna was formed in July 2025 as a joint venture between Ericsson and 12 global
+        operators including Bharti Airtel, aggregating CAMARA network APIs into a single
+        commercial channel. Aduna stated API services would become available in India
+        "in the coming months".
+    otherAggregatorChannels:
+      - name: Nokia Network as Code
+        note: >-
+          Nokia and Bharti Airtel announced a partnership to expose Airtel's India-wide
+          network APIs — latency insight, bandwidth control, location-aware functions
+          across Airtel's 5G, AI and edge footprint — through NOKIA's developer portal
+          on a subscription basis. The API documentation, testing tools and integration
+          resources live with Nokia, not Airtel.
+    pressReleaseOnly: false
+    pressReleaseNote: >-
+      This is stronger than a press release — SIM Swap is genuinely in commercial use.
+      But it is materially weaker than a developer surface: Airtel publishes no CAMARA
+      OpenAPI, exposes no CAMARA host, and offers no way for a developer to discover,
+      read about, or call a CAMARA API from anything Airtel operates. The distinction
+      matters and is recorded deliberately.
+    camaraProjectGitHub: >-
+      Bharti Airtel is not listed as a participant or contributor on the
+      github.com/camaraproject organisation page.
+    airtelOwnedLocationApiIsNotCamara: >-
+      Airtel Locate is a real, publicly specified, consent-gated network location API —
+      but it is Airtel's own proprietary product with its own path scheme
+      (/locate/apis/customers/{customerBaId}/resources/{msisdn}/location). It is NOT the
+      CAMARA DeviceLocation or LocationVerification API and must not be counted as one.
+  tmForum:
+    conformanceFound: false
+    note: >-
+      No TM Forum Open API conformance certification was found for Bharti Airtel, and no
+      TMF-numbered API (TMF620, TMF622, TMF641, etc.) is published on any Airtel host.
+      The legacy Smart API portal's client-side router still whitelists a public
+      documentation route "/docs/Tmforum", but the corresponding content has been removed
+      from the docs template — a dangling route, not an implementation. Recorded as a
+      trace of an abandoned TM Forum intent, not as conformance.
+  threeGppExposure:
+    nefOrScef: not-published
+    networkSlicing: not-published
+    edgeMec: not-published
+    note: >-
+      No NEF or SCEF surface, network-slicing API, or edge/MEC API is publicly documented
+      by Airtel. Nokia's Network as Code partnership describes latency-insight and
+      bandwidth-control capabilities over Airtel's 5G footprint, but those are exposed
+      and documented by Nokia.
+  authModel:
+    schemes:
+      - product: Airtel IQ (SMS, Voice, CDR)
+        scheme: HTTP Basic
+        detail: >-
+          "The Airtel IQ APIs use API keys to authenticate requests. Authentication to the
+          API is performed via HTTP Basic Auth." Credentials are base64(username:password),
+          managed in the IQ dashboard; all requests must be HTTPS. The published docs page
+          performs its live "try it" call with an Authorization: Basic header.
+      - product: Airtel IoT
+        scheme: OAuth 2.0 client-credentials
+        detail: >-
+          POST /auth/v2/generate/authtoken with client_id and client_secret as
+          application/x-www-form-urlencoded, plus POST /auth/v2/refresh/authtoken taking a
+          refresh_token.
+      - product: Airtel Locate
+        scheme: OAuth 2.0 bearer token
+        detail: >-
+          POST /locate/apis/customers/{customerBaId}/oauth2_token, layered with an explicit
+          per-MSISDN subscriber consent API that must be satisfied before location is returned.
+      - product: Smart API (legacy)
+        scheme: OAuth 2.0 authorization-code and implicit grants
+        detail: >-
+          Fully documented authorization-code and implicit flows with on-net vs off-net
+          handling, scoped to payment:charge and subscription:activate.
+    ciba:
+      present: false
+      note: >-
+        CIBA (Client-Initiated Backchannel Authentication), which CAMARA specifies alongside
+        OIDC for network-based authorization, does NOT appear anywhere in Airtel's public
+        surface — not in any harvested specification, not in any documentation page. Its
+        absence is consistent with the finding that Airtel operates no first-party CAMARA
+        authorization surface.
+    wellKnown:
+      - url: https://openapi.airtel.in/.well-known/openid-configuration
+        status: 404
+      - url: https://openapi.airtel.in/.well-known/oauth-authorization-server
+        status: 404
+      - url: https://developers.airtel.in/.well-known/openid-configuration
+        status: 200
+        note: Returns the SPA HTML shell, not JSON — not an OIDC discovery document.
+  webhooks:
+    present: true
+    asyncapiPublished: false
+    events:
+      - product: Airtel Locate
+        detail: >-
+          Asynchronous location mode requires the customer to "register the callback
+          listener for the async API where Locate would post the location". A documented
+          error state is "callback url is not registered".
+      - product: Airtel IQ Voice
+        detail: >-
+          Inbound call flows post call information to enterprise-supplied endpoints;
+          callflow configuration accepts callbackURLs, and enterprises may serve call-flow
+          configuration back to Airtel during a live call.
+    note: No AsyncAPI document is published for any Airtel event surface.
+  graphql:
+    present: false
+    note: No /graphql surface was found on any Airtel host.
+  grpc:
+    present: false
+    note: No published .proto files were found.
+  postman:
+    publicWorkspace: false
+    note: >-
+      Airtel IQ documentation references a "Postman Integration button" inside the
+      authenticated outbound-callflow dashboard. No public Postman workspace or published
+      collection was found.
+  sdks:
+    firstParty: []
+    note: >-
+      No first-party Airtel SDK was found on npm or PyPI. The PyPI package "airtel" is
+      third-party (author rivo2302, an Airtel Money Africa wrapper). The GitHub organisation
+      "airtelindia" exists but was created 2025-11-13, has no name or description, and holds
+      a single unrelated repository — it is not a developer-facing presence. GitHub
+      organisations "airtel", "bharti-airtel" and "airtel-digital" return 404.
+  channelToDevelopers: >-
+    Split. For CPaaS, IoT and Locate, Airtel reaches developers directly through its own
+    public documentation and a self-serve CPaaS trial. For network APIs — the capability
+    only a carrier can sell — Airtel reaches developers exclusively through aggregators:
+    Aduna for CAMARA, Nokia Network as Code for 5G/edge/latency, and a GSMA-certified
+    federated operator channel for SIM Swap. This is the central sector finding, and Airtel
+    is a clean instance of it.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://iqsms.airtel.in/api/v1
+      documented: true
+      note: Airtel IQ SMS.
+    - protocol: REST
+      scheme: https
+      baseURL: https://m2m.airteliot.co.in/iot/api/
+      documented: true
+      note: Airtel IoT connectivity management.
+    - protocol: REST
+      scheme: https
+      baseURL: https://openapi.airtel.in/locate/apis
+      documented: true
+      note: Airtel Locate device location and consent.
+    - protocol: REST
+      scheme: https
+      baseURL: https://openapi.airtel.in/gateway/airtel-xchange-reporting/v2
+      documented: true
+      note: Airtel IQ CDR reporting.
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: Customer-registered callback listeners for async Locate and inbound IQ voice call flows.
+    - protocol: GraphQL
+      documented: false
+    - protocol: gRPC
+      documented: false
+    - protocol: WebSocket
+      documented: false
+sources:
+  - url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+    type: APIReference
+    status: 200
+    note: Airtel IQ SMS API reference; public, no login.
+  - url: https://openapi.airtel.in/gateway/airtel-iq-sms-utility/v2/api-docs
+    type: OpenAPI
+    status: 200
+    note: Swagger 2.0, harvested verbatim.
+  - url: https://openapi.airtel.in/gateway/airtel-xchange-reporting/v2/api-docs
+    type: OpenAPI
+    status: 200
+    note: Swagger 2.0, harvested verbatim.
+  - url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+    type: OpenAPI
+    status: 200
+    note: OpenAPI 3.0.1 embedded in Redoc state, harvested verbatim.
+  - url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+    type: OpenAPI
+    status: 200
+    note: OpenAPI 3.0.0 v1.4.8 embedded in Redoc state, harvested verbatim.
+  - url: https://www.airtel.in/webcms/content/card/name/airtel-iq-documentation
+    type: Documentation
+    status: 200
+    note: Source of the Airtel IQ authentication and getting-started content.
+  - url: https://developers.airtel.in/
+    type: DeveloperPortal
+    status: 200
+    note: Airtel API Marketplace — login wall.
+  - url: https://openapi.airtel.in/smartapi/
+    type: DeveloperPortal
+    status: 200
+    note: Legacy 2017 Smart API partner programme.
+  - url: https://www.gsma.com/newsroom/press-release/indian-mobile-operators-help-online-businesses-combat-scams-and-identity-theft-through-new-federated-network-services-supported-by-gsma-open-gateway/
+    type: PressRelease
+    note: GSMA, 2025-10-09 — SIM Swap launched by Airtel/Jio/Vi; Number Verification planned.
+  - url: https://www.ericsson.com/en/news/2025/6/aduna-expands-ecosystem-with-major-new-partnerships
+    type: PressRelease
+    note: Aduna ecosystem; Bharti Airtel among the founding operator shareholders.
+  - url: https://www.thefastmode.com/technology-solutions/46250-nokia-bharti-airtel-open-network-apis-to-developers-via-network-as-code
+    type: PressRelease
+    note: Airtel network APIs delivered through Nokia's Network as Code developer portal.
+  - url: https://github.com/camaraproject
+    type: Standard
+    status: 200
+    note: Bharti Airtel not listed as a participant or contributor.
+actions:
+  openapiHarvested: 4
+  openapiDirectory: openapi/
+  originalsPreserved: openapi/_original/
+  apisYmlCreated: true
+  reason: >-
+    Four genuine specifications were harvested anonymously and Airtel's CAMARA posture was
+    established from primary sources, so this is a built profile rather than a stub. The
+    CAMARA facts are recorded with the distinction between what is commercially launched
+    (SIM Swap), what is merely announced (Number Verification), and what is callable from
+    Airtel itself (nothing).
