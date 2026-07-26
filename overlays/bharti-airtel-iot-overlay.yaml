@@ -1,0 +1,24 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Airtel IoT
+  version: 1.0.0
+extends: openapi/bharti-airtel-iot-openapi.yml
+x-generated: '2026-07-25'
+x-method: generated
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: bharti-airtel
+    x-apievangelist-tags:
+    - IoT
+    - M2M
+    - SIM Lifecycle
+    - Connectivity
+    x-apievangelist-authentication: OAuth 2.0 client credentials via POST /auth/v2/generate/authtoken
+    x-apievangelist-artifacts:
+      authentication: authentication/bharti-airtel-authentication.yml
+      conventions: conventions/bharti-airtel-conventions.yml
+      errors: errors/bharti-airtel-problem-types.yml
+      lifecycle: lifecycle/bharti-airtel-lifecycle.yml
+      data_model: data-model/bharti-airtel-data-model.yml
+      agentic_access: agentic-access/bharti-airtel-agentic-access.yml

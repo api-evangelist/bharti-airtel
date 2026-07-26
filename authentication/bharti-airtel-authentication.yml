@@ -1,0 +1,130 @@
+generated: '2026-07-25'
+method: searched
+source: >-
+  Airtel IQ documentation (https://www.airtel.in/webcms/content/card/name/airtel-iq-documentation,
+  HTTP 200), the Airtel IoT OpenAPI 3.0.1 catalogue, the Airtel Locate OpenAPI 3.0.0 catalogue,
+  and the legacy Smart API partner documentation at https://openapi.airtel.in/smartapi/
+docs: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview
+spec_note: >-
+  0-working/derive-authentication.py produced no profile for this provider: not one of the four
+  harvested specifications declares an OpenAPI securityScheme. Airtel IoT sets `security: []` at
+  the document root, Airtel Locate models its bearer token as a plain required `access_token`
+  header PARAMETER on every operation instead of a securityScheme, and both Airtel IQ Swagger 2.0
+  documents omit securityDefinitions entirely. The auth model below is therefore SEARCHED from
+  Airtel's published documentation and from the token-issuing operations that do appear in the
+  specifications — it is real, but it is not machine-readable from the specs, which is itself the
+  finding.
+summary:
+  types:
+    - http-basic
+    - oauth2
+  api_key_in: []
+  oauth2_flows:
+    - clientCredentials
+    - authorizationCode
+    - implicit
+  declared_in_openapi: false
+schemes:
+  - name: Airtel IQ HTTP Basic
+    api: iq-sms, iq-reporting
+    type: http
+    scheme: basic
+    in: header
+    parameter: Authorization
+    value_format: Basic base64(username:password)
+    credential_source: Airtel IQ dashboard (https://www.airtel.in/business/b2b/airtel-ccp/dashboard/)
+    transport: HTTPS required for all requests
+    docs: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview
+    evidence: >-
+      "The Airtel IQ APIs use API keys to authenticate requests. Authentication to the API is
+      performed via HTTP Basic Auth. Basic Auth credentials can be viewed and managed in the IQ
+      dashboard." … "All API requests must be made over HTTPS."
+    sources:
+      - openapi/bharti-airtel-iq-sms-openapi.yml
+      - openapi/bharti-airtel-iq-reporting-openapi.yml
+    in_spec: false
+  - name: Airtel IoT OAuth 2.0 client credentials
+    api: iot
+    type: oauth2
+    flow: clientCredentials
+    token_url: https://m2m.airteliot.co.in/iot/api/auth/v2/generate/authtoken
+    refresh_url: https://m2m.airteliot.co.in/iot/api/auth/v2/refresh/authtoken
+    request_encoding: application/x-www-form-urlencoded
+    credentials:
+      - client_id
+      - client_secret
+    refresh_supported: true
+    operations:
+      - openapi/bharti-airtel-iot-openapi.yml#generateAccessTokenUsingPOST
+      - openapi/bharti-airtel-iot-openapi.yml#refreshAccessTokenUsingPOST
+    scopes_declared: false
+    sources:
+      - openapi/bharti-airtel-iot-openapi.yml
+    in_spec: false
+    in_spec_note: >-
+      The token-issuing operations are in the specification under the "Account Authorization" tag,
+      but no securityScheme binds them to the other 41 operations.
+  - name: Airtel Locate OAuth 2.0 client credentials
+    api: locate
+    type: oauth2
+    flow: clientCredentials
+    token_url: https://openapi.airtel.in/locate/apis/customers/{customerBaId}/oauth2_token
+    request_encoding: application/json
+    credentials:
+      - client_id
+      - client_secret
+      - scope
+    scopes:
+      - location
+      - resource
+    token_type_field: token_type
+    token_lifetime: 24 hours (per the specification description of the Authorization API)
+    token_transport:
+      in: header
+      parameter: access_token
+      note: >-
+        Every non-token Locate operation declares a REQUIRED `access_token` header parameter. This
+        is not an RFC 6750 Authorization: Bearer header and is not declared as a securityScheme.
+    operations:
+      - openapi/bharti-airtel-locate-openapi.yml#getOrCreateOauthTokenUsingPOST_2
+    layered_authorization:
+      model: per-subscriber consent
+      note: >-
+        A valid access token is NOT sufficient to read a location. Airtel Locate additionally
+        requires explicit per-MSISDN subscriber consent captured over SMS or IVR before
+        getLocationUsingGET_3 will return a position; a resource that has not consented returns
+        403 with "resource has not given consent".
+    sources:
+      - openapi/bharti-airtel-locate-openapi.yml
+    in_spec: false
+  - name: Airtel Smart API OAuth 2.0 (legacy)
+    api: smart-api
+    type: oauth2
+    flows:
+      - authorizationCode
+      - implicit
+    status: legacy
+    scopes:
+      - ChargeAmount
+      - subscription
+    docs: https://openapi.airtel.in/smartapi/#/docs/developerAuth
+    evidence: >-
+      The 2017 Smart API partner documentation publishes both grant types with
+      `?scope={scope}&client_id={client_id}&response_type=code|token&state={state}` authorization
+      requests and worked examples using scope=ChargeAmount and scope=subscription. Production
+      hosts are redacted to <IP>:<Port>; the portal is unmaintained (2017 copyright).
+    in_spec: false
+oidc:
+  present: false
+  note: >-
+    No /.well-known/openid-configuration is served on www.airtel.in, openapi.airtel.in or
+    m2m.airteliot.co.in (all HTTP 404). developers.airtel.in returns HTTP 200 for the path but
+    serves its SPA HTML shell, not a discovery document.
+ciba:
+  present: false
+  note: >-
+    CIBA (Client-Initiated Backchannel Authentication), which CAMARA pairs with OIDC for
+    network-based authorization, appears nowhere in Airtel's public surface. Consistent with the
+    finding that Airtel operates no first-party CAMARA authorization surface.
+mtls:
+  present: false

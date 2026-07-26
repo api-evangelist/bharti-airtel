@@ -1,0 +1,71 @@
+generated: '2026-07-25'
+method: searched
+source: >-
+  https://www.airtel.in/webcms/content/card/name/airtel-iq-documentation (HTTP 200) and
+  openapi/bharti-airtel-iot-openapi.yml
+summary: >-
+  Airtel publishes no sandbox host, no test-vs-live key prefix scheme and no magic test values. What
+  it does publish is a free-tier TRIAL on the live platform for Airtel IQ, and a first-class
+  test-SIM state in the Airtel IoT SIM lifecycle. Both are real; neither is a simulator.
+test_vs_live:
+  separation: none
+  key_prefixes: []
+  modes: []
+  note: >-
+    There is no test mode. Airtel IQ trial credentials are ordinary live credentials against the
+    live network with a free allowance; an SMS sent from a trial account is a real SMS delivered to
+    a real handset over Airtel's pan-India network.
+trial:
+  api: iq
+  self_serve: true
+  signup: https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup
+  console: https://www.airtel.in/business/b2b/airtel-ccp/dashboard/
+  allowance:
+    - '1 Intelliphone (a phone number for outbound/inbound calls, usage records and recording), free'
+    - '500 pulses, free — a pulse is a 60-second billing unit, so a 75-second call bills as 2 pulses'
+  evidence: >-
+    "Click here to create trial account and get 1 intelliphone and 500 pulses free for testing." …
+    "For trial account we are providing one Intelliphone for free." … "In trial account 500 free
+    pulses are provided, each unit of pulse is measured as multiples of 60 seconds."
+  credentials: Issued in the Airtel IQ dashboard; HTTP Basic (see authentication/).
+  preconfigured_flows: >-
+    "Test pre-configured outbound and inbound call flows by using call flow Id mentioned in your
+    account." A custom flow requires contacting Airtel.
+test_sims:
+  api: iot
+  supported: true
+  note: >-
+    The Airtel IoT SIM lifecycle models a TEST state as a first-class stage, not as a separate
+    sandbox environment. A SIM can be activated into test and then promoted from test to live
+    against the production API with production credentials.
+  operations:
+    - operationId: activateTestSimsUsingPOST
+      source: openapi/bharti-airtel-iot-openapi.yml#activateTestSimsUsingPOST
+      note: Activate SIMs in the test state.
+    - operationId: activateSimFromTestUsingPOST
+      source: openapi/bharti-airtel-iot-openapi.yml#activateSimFromTestUsingPOST
+      note: Promote a SIM out of the test state into live service.
+magic_values:
+  test_numbers: []
+  test_cards: []
+  test_tokens: []
+  note: >-
+    Airtel publishes no reserved test MSISDN range (the CPaaS-sector equivalent of Twilio's
+    +1500555xxxx magic numbers), no test card numbers and no hosted test tokens. Nothing was
+    invented here; the absence is the record.
+time_simulation:
+  supported: false
+fixtures_and_triggers:
+  supported: false
+  note: >-
+    No event-trigger or fixture tooling is published. The Airtel IQ CDR surface does ship a
+    dedicated sample endpoint for integration testing — POST /sampleCdr
+    (openapi/bharti-airtel-iq-reporting-openapi.yml#postSampleCdrUsingPOST) is documented as "a
+    sample API to test the CDR integration of Integrator with Airtel IQ. The Integrator needs to
+    develop a post API similar to this API, on which all these details would be posted." It is a
+    shape reference for the webhook the integrator must build, not a trigger.
+postman:
+  public_workspace: false
+  note: >-
+    The Airtel IQ documentation references a "Postman Integration button" inside the authenticated
+    outbound-callflow dashboard. No public Postman workspace or published collection exists.

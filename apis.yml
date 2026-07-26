@@ -79,6 +79,8 @@ apis:
         url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
       - type: OpenAPI
         url: openapi/bharti-airtel-iq-sms-openapi.yml
+      - type: Overlay
+        url: overlays/bharti-airtel-iq-sms-overlay.yaml
       - type: SignUp
         url: https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup
   - aid: bharti-airtel:airtel-iq-reporting-api
@@ -103,6 +105,8 @@ apis:
         url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr
       - type: OpenAPI
         url: openapi/bharti-airtel-iq-reporting-openapi.yml
+      - type: Overlay
+        url: overlays/bharti-airtel-iq-reporting-overlay.yaml
   - aid: bharti-airtel:airtel-iot-api
     name: Airtel IoT API
     description: >-
@@ -130,6 +134,8 @@ apis:
         url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
       - type: OpenAPI
         url: openapi/bharti-airtel-iot-openapi.yml
+      - type: Overlay
+        url: overlays/bharti-airtel-iot-overlay.yaml
   - aid: bharti-airtel:airtel-locate-api
     name: Airtel Locate API
     description: >-
@@ -157,6 +163,8 @@ apis:
         url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
       - type: OpenAPI
         url: openapi/bharti-airtel-locate-openapi.yml
+      - type: Overlay
+        url: overlays/bharti-airtel-locate-overlay.yaml
   - aid: bharti-airtel:airtel-smart-api
     name: Airtel Smart API (legacy)
     description: >-
@@ -189,16 +197,70 @@ apis:
       - type: Documentation
         url: https://openapi.airtel.in/smartapi/#/docs/developerAuth
 common:
+  - type: AgenticAccess
+    url: agentic-access/bharti-airtel-agentic-access.yml
+  - type: DomainSecurity
+    url: security/bharti-airtel-domain-security.yml
+  - type: VulnerabilityDisclosure
+    url: security/bharti-airtel-vulnerability-disclosure.yml
+  - type: Authentication
+    url: authentication/bharti-airtel-authentication.yml
+  - type: OAuthScopes
+    url: scopes/bharti-airtel-scopes.yml
+  - type: Conventions
+    url: conventions/bharti-airtel-conventions.yml
+  - type: ErrorCatalog
+    url: errors/bharti-airtel-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/bharti-airtel-lifecycle.yml
+  - type: Conformance
+    url: conformance/bharti-airtel-conformance.yml
+  - type: DataModel
+    url: data-model/bharti-airtel-data-model.yml
+  - type: Sandbox
+    url: sandbox/bharti-airtel-sandbox.yml
+  - type: Webhooks
+    url: asyncapi/bharti-airtel-webhooks.yml
+  - type: MCPServer
+    url: mcp/bharti-airtel-mcp.yml
+  - type: Packages
+    url: packages/bharti-airtel-packages.yml
+  - type: WellKnown
+    url: well-known/bharti-airtel-well-known.yml
+  - type: LLMsTxt
+    url: llms/bharti-airtel-llms.txt
+  - type: LLMsTxt
+    name: API-surface llms.txt (generated companion)
+    url: llms/bharti-airtel-apis-llms.txt
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: AgentSkill
+    name: Send a DLT-compliant SMS with Airtel IQ
+    url: skills/bharti-airtel-send-compliant-sms.md
+  - type: AgentSkill
+    name: Locate a device with subscriber consent using Airtel Locate
+    url: skills/bharti-airtel-locate-device-with-consent.md
+  - type: AgentSkill
+    name: Manage the Airtel IoT SIM lifecycle
+    url: skills/bharti-airtel-manage-iot-sim-lifecycle.md
   - type: Website
     url: https://www.airtel.in/
   - type: Documentation
     url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  - type: GettingStarted
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview
   - type: DeveloperPortal
     url: https://developers.airtel.in/
   - type: SignUp
     url: https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup
   - type: Console
     url: https://www.airtel.in/business/b2b/airtel-ccp/dashboard/
+  - type: Support
+    url: https://www.airtel.in/contact-us
+  - type: Blog
+    url: https://www.airtel.in/blog/
   - type: Pricing
     url: https://www.airtel.in/business/b2b/cpaas
   - type: PrivacyPolicy

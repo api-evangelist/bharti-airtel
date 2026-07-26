@@ -1,0 +1,102 @@
+generated: '2026-07-25'
+method: searched
+source: live HTTP probes, 2026-07-25
+summary: >-
+  Bharti Airtel serves NO /.well-known/ discovery document on any host in its API estate. The one
+  machine-readable discovery file it does publish sits at the web root, not under /.well-known/:
+  https://www.airtel.in/llms.txt (HTTP 200, text/plain, 529,945 bytes), saved verbatim to
+  llms/bharti-airtel-llms.txt.
+soft_404_warning: >-
+  www.airtel.in is an Angular application that returns HTTP 200 with an 8,991-byte HTML shell for
+  ANY unmatched path, and developers.airtel.in returns HTTP 200 with a 1,647-byte SPA shell for
+  every path. A 200 from either host is not evidence a document exists — every 200 below was
+  checked for content type and body before being recorded.
+hosts:
+  - host: https://www.airtel.in
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /security.txt
+        status: 200
+        content_type: text/html
+        bytes: 9787
+        verdict: soft-404 — Angular SPA shell, not an RFC 9116 document
+      - path: /llms.txt
+        status: 200
+        content_type: text/plain
+        bytes: 529945
+        verdict: real
+        file: ../llms/bharti-airtel-llms.txt
+  - host: https://openapi.airtel.in
+    note: The Airtel Locate and Airtel IQ CDR API host.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /llms.txt
+        status: 404
+  - host: https://m2m.airteliot.co.in
+    note: The Airtel IoT API host and the backend of the developers.airtel.in marketplace.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /llms.txt
+        status: 404
+  - host: https://iqsms.airtel.in
+    note: The Airtel IQ SMS API host. Refused all anonymous connections (curl exit 000).
+    documents:
+      - path: /.well-known/security.txt
+        status: '000'
+      - path: /.well-known/openid-configuration
+        status: '000'
+      - path: /.well-known/oauth-authorization-server
+        status: '000'
+  - host: https://developers.airtel.in
+    note: >-
+      The "Airtel API Marketplace" login wall. Returns HTTP 200 for every path including every
+      /.well-known/ path, always serving the same SPA shell. No document here is real.
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        verdict: soft-404 — SPA shell
+      - path: /.well-known/openid-configuration
+        status: 200
+        verdict: soft-404 — SPA shell, not an OIDC discovery document
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        verdict: soft-404 — SPA shell
+security_txt:
+  present: false
+api_catalog:
+  present: false
+oidc_discovery:
+  present: false

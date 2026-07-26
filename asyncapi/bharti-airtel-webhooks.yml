@@ -1,0 +1,94 @@
+generated: '2026-07-25'
+method: searched
+source: >-
+  openapi/bharti-airtel-locate-openapi.yml, openapi/bharti-airtel-iq-reporting-openapi.yml and
+  https://www.airtel.in/webcms/content/card/name/airtel-iq-documentation (HTTP 200)
+spec_type: Webhooks
+asyncapi_published: false
+asyncapi_note: >-
+  No AsyncAPI document is published for any Airtel event surface. /asyncapi.yaml and /asyncapi.json
+  return 404 on openapi.airtel.in and m2m.airteliot.co.in, and return HTTP 200 with the 8,991-byte
+  Angular SPA HTML shell (text/html) on www.airtel.in — a soft 404, not a specification. The webhook
+  catalogue below is the real event surface, captured from Airtel's own documentation and
+  specifications. NOTHING here is fabricated: where Airtel does not publish a payload schema, the
+  schema field is null.
+direction: >-
+  Every Airtel event surface is INBOUND-TO-THE-CUSTOMER: Airtel POSTs to an endpoint the enterprise
+  builds and registers with Airtel. There is no subscription API, no event catalogue, no signature
+  scheme and no delivery-retry contract published anywhere in the estate.
+webhooks:
+  - name: locate.location.async
+    api: locate
+    product: Airtel Locate
+    trigger: >-
+      A location request made with type=async
+      (openapi/bharti-airtel-locate-openapi.yml#getLocationUsingGET_3 or
+      #getLocationForTenantsUsingGET_1). Airtel returns 202 with an AsyncCorrelationId and later
+      POSTs the resolved location to the customer's registered callback listener.
+    correlation_field: correlationId
+    registration: >-
+      "Customer need to register the callback listener for the async API where Locate would post
+      the location." Registration is performed out of band; no registration API is published.
+    failure_mode: >-
+      HTTP 403 on the location request with "callback url is not registered" — a documented,
+      first-class error state.
+    payload_schema: openapi/bharti-airtel-locate-openapi.yml#/components/schemas/LocationResponse
+    payload_note: >-
+      The specification defines LocationResponse (location.latitude/longitude, status, message,
+      retrievedAt) for the synchronous 200. Airtel does not publish a separate schema for the
+      asynchronous callback body.
+    signature: null
+    retry_policy: null
+  - name: iq.voice.cdr
+    api: iq-reporting
+    product: Airtel IQ Voice
+    trigger: Completion of an inbound or outbound call placed through an Airtel IQ Intelliphone.
+    registration: >-
+      "the Integrator endpoint for receiving CDR can either be preconfigured at Airtel IQ end or
+      can be passed in the callBackURLs in callFlowConfiguration of execute callflow Api."
+    payload_schema: openapi/bharti-airtel-iq-reporting-openapi.yml#/definitions
+    payload_note: >-
+      Airtel ships a reference implementation of the customer side rather than a schema for its own
+      sender: POST /sampleCdr (#postSampleCdrUsingPOST) is "a sample API to test the CDR
+      integration of Integrator with Airtel IQ. The Integrator needs to develop a post API similar
+      to this API, on which all these details would be posted." The CDR carries Time, Date,
+      Duration, Caller_ID, Destination_Number, Status and the call-recording URL.
+    signature: null
+    retry_policy: null
+  - name: iq.voice.incoming-call
+    api: iq-voice
+    product: Airtel IQ Voice (inbound call flows)
+    trigger: An inbound call landing on an Intelliphone.
+    registration: >-
+      "Enterprise shares API endpoints with Airtel IQ on which details of the incoming call will be
+      posted. Airtel IQ posts the call information as soon as the call lands on the Airtel IQ
+      platform." The call-flow components incomingCallParameters (pass callbackURLs and metadata)
+      and incomingCallAction (accept/reject/redirect) drive this exchange.
+    bidirectional: true
+    bidirectional_note: >-
+      Case 2 of the documented inbound patterns inverts the relationship entirely — Airtel calls
+      the ENTERPRISE'S API mid-call to fetch call-flow configuration (destination number, audio
+      URLs) while the call is live. The enterprise is the API provider in that exchange.
+    payload_schema: null
+    signature: null
+    retry_policy: null
+  - name: iq.sms.delivery-report
+    api: iq-sms
+    product: Airtel IQ SMS
+    status: referenced-not-specified
+    note: >-
+      Delivery reports are referenced in Airtel's SMS product marketing ("delivery reports" is a
+      target keyword on https://www.airtel.in/b2b/sms-api) and DR is an enumerated consent-event
+      type in the Locate consent lifecycle, but no delivery-report callback contract, payload or
+      registration mechanism is published in openapi/bharti-airtel-iq-sms-openapi.yml or in the
+      Airtel IQ documentation. Recorded as referenced, not as a specified webhook.
+    payload_schema: null
+counts:
+  webhooks_specified: 3
+  webhooks_referenced_only: 1
+  asyncapi_documents: 0
+gaps:
+  - No signature or authentication scheme is published for any Airtel callback.
+  - No delivery retry, ordering or at-least-once guarantee is documented.
+  - No webhook registration API exists; every listener is registered out of band.
+  - No event catalogue or subscription surface exists for any Airtel product.

@@ -1,0 +1,90 @@
+generated: '2026-07-25'
+method: derived
+source: openapi/ (4xx/5xx responses across all four harvested specifications)
+format: none
+format_note: Airtel publishes no RFC 9457 application/problem+json media type on any surface. The Airtel
+  Locate catalogue documents status codes with prose descriptions and no error response schema; the Airtel
+  IoT catalogue declares a generic 400 and 500 on every operation. The two Airtel IQ Swagger 2.0 documents
+  declare only 200 responses, so their error surface is undocumented in the specification and is signalled
+  in-band instead.
+in_band_errors:
+- api: iq-sms
+  field: errorMessage
+  schema: openapi/bharti-airtel-iq-sms-openapi.yml#/definitions/SendSmsResponseVO
+  note: SendSmsResponseVO carries errorMessage (error text received during the SMS request) and incorrectNum
+    (numbers rejected as shorter than 10 digits) on an HTTP 200.
+problems:
+- status: 400
+  api: iot
+  title: Request Message is not correct
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#generateAccessTokenUsingPOST
+- status: 500
+  api: iot
+  title: Internal Server Error.
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#generateAccessTokenUsingPOST
+- status: 400
+  api: locate
+  title: Bad request for invalid scope
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#getOrCreateOauthTokenUsingPOST_2
+- status: 400
+  api: locate
+  title: Bad request
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#findAllUsingGET_2
+- status: 400
+  api: locate
+  title: Bad Request • Invalid language • Not an airtel number • Invalid channel
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#initiateConsentUsingPOST_3
+- status: 400
+  api: locate
+  title: Bad Request in case of bad json body
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#patchResourceUsingPATCH_3
+- status: 401
+  api: locate
+  title: Unauthorized
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#getOrCreateOauthTokenUsingPOST_2
+- status: 403
+  api: locate
+  title: Forbidden consent state or channel
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#initiateConsentUsingPOST_3
+- status: 403
+  api: locate
+  title: Forbidden if number issued licenses exhausted
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#patchResourceUsingPATCH_3
+- status: 403
+  api: locate
+  title: Forbidden- Subscription expired | Subscription limit reached || resource has not given consent
+    | tracking is disabled | callback url is not registered
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#getLocationUsingGET_3
+- status: 403
+  api: locate
+  title: Forbidden- resource has not given consent | tracking is disabled
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#addressValidationUsingPOST_1
+- status: 404
+  api: locate
+  title: Customer BA ID not found
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#getOrCreateOauthTokenUsingPOST_2
+- status: 404
+  api: locate
+  title: Msisdn not found for customer
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#deleteResourceUsingDELETE_3
+- status: 404
+  api: locate
+  title: Not Found
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#getLocationUsingGET_3
+- status: 429
+  api: locate
+  title: Request for location fetch can before location rate issues in license| Location request in progress
+    for given msisdn
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#getLocationUsingGET_3
+- status: 502
+  api: locate
+  title: Error in Fetching location of msisdn because of network error in HLR, MME, MSC. The ~5-10% of
+    such error is expected.
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#getLocationUsingGET_3
+- status: 502
+  api: locate
+  title: Error in Fetching location of msisdn because of network error in HLR, MME, MSC. The ~5-10% of
+    such error is expected.| Error retrieving geocode while processing request. Please try again!
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#addressValidationUsingPOST_1
+counts:
+  problem_types: 17

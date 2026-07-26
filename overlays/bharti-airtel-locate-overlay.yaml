@@ -1,0 +1,24 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Locate API Catalog
+  version: 1.0.0
+extends: openapi/bharti-airtel-locate-openapi.yml
+x-generated: '2026-07-25'
+x-method: generated
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: bharti-airtel
+    x-apievangelist-tags:
+    - Device Location
+    - Consent
+    - Network API
+    x-apievangelist-authentication: OAuth 2.0 client credentials via POST /locate/apis/customers/{customerBaId}/oauth2_token
+      with scope location|resource; the token is sent in the access_token request header
+    x-apievangelist-artifacts:
+      authentication: authentication/bharti-airtel-authentication.yml
+      conventions: conventions/bharti-airtel-conventions.yml
+      errors: errors/bharti-airtel-problem-types.yml
+      lifecycle: lifecycle/bharti-airtel-lifecycle.yml
+      data_model: data-model/bharti-airtel-data-model.yml
+      agentic_access: agentic-access/bharti-airtel-agentic-access.yml

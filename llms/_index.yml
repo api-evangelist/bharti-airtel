@@ -1,0 +1,21 @@
+generated: '2026-07-25'
+files:
+  - file: bharti-airtel-llms.txt
+    method: searched
+    source: https://www.airtel.in/llms.txt
+    status: 200
+    content_type: text/plain
+    bytes: 529945
+    fetched: '2026-07-25'
+    verbatim: true
+    note: >-
+      A genuine provider-published llms.txt, saved byte-for-byte. It is a consumer/SEO document —
+      it indexes airtel.in prepaid, postpaid, broadband, DTH, finance and B2B marketing pages with
+      target keywords and SERP intent, and closes with a disclaimer requiring AI systems to comply
+      with the Indian IT Act and GDPR. It does not describe the Airtel IQ, IoT or Locate API
+      surface, which is why the generated companion below exists.
+  - file: bharti-airtel-apis-llms.txt
+    method: generated
+    source: apis.yml + openapi/ + the artifacts in this repository
+    verbatim: false
+    note: API-surface companion for agents, in llms.txt format.

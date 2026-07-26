@@ -1,0 +1,174 @@
+generated: '2026-07-25'
+method: searched
+source: >-
+  Airtel IQ documentation (https://www.airtel.in/webcms/content/card/name/airtel-iq-documentation,
+  HTTP 200) plus derivation from the four harvested specifications in openapi/
+scope_note: >-
+  Airtel does not publish a single cross-cutting "API conventions" page. Airtel IQ, Airtel IoT and
+  Airtel Locate are three separately built platforms with three different conventions, so this
+  document records them per API rather than provider-wide. That divergence is the finding.
+authentication:
+  style: mixed
+  summary: HTTP Basic on Airtel IQ; OAuth 2.0 client-credentials on Airtel IoT and Airtel Locate
+  detail: authentication/bharti-airtel-authentication.yml
+  transport: HTTPS required (stated explicitly in the Airtel IQ documentation)
+idempotency:
+  supported: false
+  header: null
+  evidence: >-
+    No Idempotency-Key (or equivalent) header, parameter or documented replay contract appears in
+    any of the four harvested specifications or in any Airtel developer documentation page fetched
+    during this round. Airtel IQ's SMS send operations are unconditionally repeatable: a retried
+    POST /api/v1/send-sms sends a second message. The nearest thing to a de-duplication handle is
+    the response-side messageRequestId, which is assigned by Airtel AFTER submission and therefore
+    cannot be used by a client to make a retry safe.
+  risk: >-
+    Materially significant for agents. Six of the operations classified in
+    agentic-access/bharti-airtel-agentic-access.yml carry physical or safety-critical consequence
+    (SIM activation, SIM swap, safe custody, temporary disconnection) and none of them is
+    idempotent or replay-protected.
+pagination:
+  - api: locate
+    style: page-number
+    params:
+      - name: page
+        in: query
+        default: '0'
+        description: Page to be returned (0..N)
+      - name: size
+        in: query
+        default: '20'
+        description: Number of records per page
+      - name: sort
+        in: query
+        description: 'Sorting criteria: property(,asc|desc). Default sort order is ascending.'
+    operations:
+      - openapi/bharti-airtel-locate-openapi.yml#findAllUsingGET_2
+      - openapi/bharti-airtel-locate-openapi.yml#findAllUsingGET_3
+  - api: iot
+    style: page-number
+    note: >-
+      Listing operations in the Airtel IoT catalogue (fetchJobsUsingGET, fetchOrdersUsingGET,
+      fetchCustomerSimsUsingGET, fetchMessageHistoryUsingGET and siblings) take page/size style
+      query parameters; no cursor pagination is offered anywhere in the estate.
+  - api: iq-sms
+    style: none
+    note: The five Airtel IQ SMS operations are all write operations; there is no list surface.
+filtering:
+  - api: locate
+    params:
+      - consent
+      - tracking
+      - daysSinceLastLocationFetched
+    note: Server-side filtering of the resource list by consent state and tracking status.
+field_expansion:
+  supported: false
+  note: No expand / include / fields sparse-fieldset convention is published on any Airtel API.
+metadata:
+  supported: true
+  api: iq-sms
+  fields:
+    - metaData
+    - metaMap
+  note: >-
+    Airtel IQ SMS accepts a free-form metaData object on every send operation ("Specifies all the
+    additional parameters") and echoes it back on SendSmsResponseVO. There is no documented size
+    limit, key namespace or type constraint.
+request_tracing:
+  request_id_header: null
+  correlation:
+    - api: iq-sms
+      field: messageRequestId
+      note: Response-side unique id per submitted SMS request; the handle for downstream reporting.
+    - api: locate
+      field: correlationId
+      note: >-
+        Returned in a 202 from an async location request (AsyncCorrelationId) and used to match the
+        callback that Airtel Locate later POSTs to the customer's registered listener.
+  note: No provider-wide request-id or trace header is documented on any Airtel API.
+versioning:
+  scheme: uri-path
+  detail:
+    - api: iq-sms
+      current: v1
+      example: https://iqsms.airtel.in/api/v1/send-sms
+    - api: iq-reporting
+      current: v2
+      example: https://openapi.airtel.in/gateway/airtel-xchange-reporting/v2
+    - api: iot
+      current: v2 (auth); unversioned resource paths under /iot/api/
+      example: https://m2m.airteliot.co.in/iot/api/auth/v2/generate/authtoken
+    - api: locate
+      current: unversioned path; document version 1.4.8
+      example: https://openapi.airtel.in/locate/apis/customers/{customerBaId}/resources
+  media_type_versioning: false
+  header_versioning: false
+  detail_artifact: lifecycle/bharti-airtel-lifecycle.yml
+error_envelope:
+  format: none
+  rfc9457: false
+  detail: errors/bharti-airtel-problem-types.yml
+  note: >-
+    No application/problem+json anywhere. Airtel Locate returns bare status codes with prose
+    descriptions; Airtel IoT declares a generic 400/500 on all 43 operations; Airtel IQ SMS
+    signals failure in-band on an HTTP 200 via SendSmsResponseVO.errorMessage and
+    SendSmsResponseVO.incorrectNum.
+rate_limiting:
+  headers: []
+  documented: partial
+  signals:
+    - api: locate
+      status: 429
+      meaning: >-
+        "Request for location fetch can before location rate issues in license | Location request
+        in progress for given msisdn" — the licence, not a global quota, is the rate boundary, and
+        a second concurrent location request for the same MSISDN is rejected.
+      operations:
+        - openapi/bharti-airtel-locate-openapi.yml#getLocationUsingGET_3
+        - openapi/bharti-airtel-locate-openapi.yml#getLocationForTenantsUsingGET_1
+    - api: locate
+      status: 403
+      meaning: '"Subscription expired | Subscription limit reached" — commercial ceiling enforced as 403, not 429.'
+    - api: iot
+      surface: SMS quota
+      operations:
+        - openapi/bharti-airtel-iot-openapi.yml#fetchSMSQuotaDetailsUsingGET
+      note: >-
+        The Messaging Centre exposes a queryable SMS quota rather than response-header rate-limit
+        signalling.
+  note: >-
+    No X-RateLimit-* / RateLimit (RFC 9331 style) response headers are documented on any Airtel
+    API. An agent cannot learn its remaining budget without exhausting it.
+compliance_in_path:
+  - name: TRAI DLT scrubbing
+    api: iq-sms
+    required_fields:
+      - entityId
+      - dltTemplateId
+      - sourceAddress
+    message_types:
+      - PROMOTIONAL
+      - TRANSACTIONAL
+      - SERVICE_IMPLICIT
+      - SERVICE_EXPLICIT
+      - INTERNATIONAL
+    note: >-
+      Every DLT-scrubbed send requires a principal-entity id and a content-template id registered
+      on the Indian regulator's distributed-ledger platform, plus a registered sender header. This
+      is a regulatory precondition applied in-path, not an Airtel option. The
+      /api/v1/send-sms-cm content-moderation route is the documented alternative "without
+      providing DLT details".
+    consent_flag: filterBlacklistNumbers (enable/disable filtering of blacklisted numbers)
+  - name: Subscriber consent
+    api: locate
+    note: >-
+      Location cannot be returned until the subscriber has consented over SMS or IVR. Consent
+      states are PROCESSING | INITIATED | PENDING | ALLOWED | REJECTED | FAILED and consent events
+      are MT | DR | MO | CALL | CDR. Consent may be initiated in nine Indian languages.
+cross_links:
+  authentication: authentication/bharti-airtel-authentication.yml
+  scopes: scopes/bharti-airtel-scopes.yml
+  errors: errors/bharti-airtel-problem-types.yml
+  lifecycle: lifecycle/bharti-airtel-lifecycle.yml
+  webhooks: asyncapi/bharti-airtel-webhooks.yml
+  agentic_access: agentic-access/bharti-airtel-agentic-access.yml

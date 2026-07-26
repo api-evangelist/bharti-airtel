@@ -1,0 +1,108 @@
+generated: '2026-07-25'
+method: searched
+source: >-
+  Live probes of airtel.in / openapi.airtel.in / m2m.airteliot.co.in plus derivation from the four
+  harvested specifications in openapi/
+versioning:
+  scheme: uri-path
+  per_api:
+    - api: iq-sms
+      current: v1
+      base: https://iqsms.airtel.in/api/v1
+    - api: iq-reporting
+      current: v2
+      base: https://openapi.airtel.in/gateway/airtel-xchange-reporting/v2
+    - api: iot
+      current: auth v2; resource paths unversioned
+      base: https://m2m.airteliot.co.in/iot/api/
+      document_version: not stated in info.version
+    - api: locate
+      current: unversioned path
+      base: https://openapi.airtel.in/locate/apis
+      document_version: 1.4.8
+  docs: null
+  policy_published: false
+  note: >-
+    Airtel publishes no versioning policy. Version numbers are visible in the URI path and, for
+    Airtel Locate, in the specification's info.version (1.4.8), but nothing states how a version is
+    introduced, supported or retired.
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  deprecated_operations: []
+  note: >-
+    RFC 8594 Sunset and RFC 9745 Deprecation headers appear nowhere. Every operation in all four
+    specifications carries an explicit `deprecated: false`, so the estate declares no deprecated
+    operation — but there is also no published policy telling a consumer what warning they would
+    get. The legacy Smart API programme at openapi.airtel.in/smartapi is the counter-example: it
+    was never formally deprecated, it was simply abandoned in place (2017 copyright, assets stamped
+    19Jul17) and still serves documentation today.
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No public SLA or uptime commitment is published for Airtel IQ, Airtel IoT or Airtel Locate.
+    Airtel Locate's own specification is unusually candid about expected failure instead — a 502 on
+    getLocationUsingGET_3 is documented as "Error in Fetching location of msisdn because of network
+    error in HLR, MME, MSC. The ~5-10% of such error is expected."
+status_page: null
+status_page_probes:
+  - url: https://status.airtel.in
+    status: '000'
+    result: no DNS / connection failed
+  - url: https://airtel.statuspage.io
+    status: 200
+    result: >-
+      redirects to https://www.atlassian.com/software/statuspage — the Statuspage marketing site,
+      not an Airtel status page. Not a real status surface.
+  - url: https://www.airtel.in/business/status
+    status: 404
+changelog:
+  url: null
+  published: false
+  note: >-
+    No dated changelog or release-notes page was found for any Airtel API. The Airtel Locate
+    specification carries a version number (1.4.8) with no accompanying history.
+roadmap:
+  url: null
+  published: false
+support:
+  - api: locate
+    contact: locate.support@airtel.com
+    source: openapi/bharti-airtel-locate-openapi.yml#/info/contact
+    note: >-
+      Published in the specification's contact block and repeated in two tag descriptions ("To get
+      access to these API's please email to locate.support@airtel.com").
+  - api: iq
+    contact: iqsalessupport@airtel.com
+    source: apis.yml
+maturity:
+  - api: iq-sms
+    stage: generally-available
+    self_serve: true
+    note: Trial account with 1 Intelliphone and 500 free pulses; credentials from the IQ dashboard.
+  - api: iq-reporting
+    stage: generally-available
+    self_serve: true
+  - api: iot
+    stage: generally-available
+    self_serve: false
+    note: Documentation is public; credentials are enterprise-issued.
+  - api: locate
+    stage: generally-available
+    self_serve: false
+    note: Access granted by emailing locate.support@airtel.com.
+  - api: smart-api
+    stage: abandoned-in-place
+    self_serve: false
+    note: >-
+      2017 partner programme. Documentation still served; production hosts redacted to <IP>:<Port>;
+      no successor announced and no deprecation notice published.
+  - api: camara
+    stage: not-published-by-airtel
+    note: >-
+      SIM Swap is commercially launched through a GSMA-certified federated Indian operator channel
+      and Airtel is a founding Aduna shareholder, but no CAMARA endpoint, specification or portal
+      exists on any Airtel host. See review.yml for the full evidence trail.

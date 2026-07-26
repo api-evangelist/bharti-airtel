@@ -1,0 +1,82 @@
+generated: '2026-07-25'
+method: searched
+source: >-
+  openapi/bharti-airtel-locate-openapi.yml (AccessTokenRequest.scope enum) and the legacy Smart API
+  partner documentation at https://openapi.airtel.in/smartapi/#/docs/developerAuth
+docs: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+derive_note: >-
+  0-working/derive-oauth-scopes.py yields nothing for this provider because no harvested
+  specification declares an oauth2 securityScheme. The scopes below are real and published, but
+  they are carried in a request-body enum and in prose documentation rather than in a
+  securityScheme flows map.
+schemes:
+  - name: Airtel Locate OAuth 2.0
+    source: openapi/bharti-airtel-locate-openapi.yml
+    flows:
+      - flow: clientCredentials
+        tokenUrl: https://openapi.airtel.in/locate/apis/customers/{customerBaId}/oauth2_token
+        scope_parameter: request body field `scope` on AccessTokenRequest (required)
+  - name: Airtel Smart API OAuth 2.0 (legacy)
+    source: https://openapi.airtel.in/smartapi/#/docs/developerAuth
+    status: legacy
+    flows:
+      - flow: authorizationCode
+        scope_parameter: '?scope={scope} on the authorization request'
+      - flow: implicit
+        scope_parameter: '?scope={scope} on the authorization request'
+scopes:
+  - scope: location
+    api: locate
+    description: >-
+      Required to call the Airtel Locate Location API. Per the specification: "The access token
+      must be generated with 'location' scope for using this API."
+    flows:
+      - clientCredentials
+    sources:
+      - openapi/bharti-airtel-locate-openapi.yml
+    grants:
+      - openapi/bharti-airtel-locate-openapi.yml#getLocationUsingGET_3
+      - openapi/bharti-airtel-locate-openapi.yml#getLocationForTenantsUsingGET_1
+  - scope: resource
+    api: locate
+    description: >-
+      The second value of the AccessTokenRequest.scope enum, covering the Resource Consent and
+      resource-management surface (register, search, modify, delete MSISDNs and their consent).
+    flows:
+      - clientCredentials
+    sources:
+      - openapi/bharti-airtel-locate-openapi.yml
+  - scope: ChargeAmount
+    api: smart-api
+    description: >-
+      Legacy Smart API carrier-billing scope required for the charge-amount operation. Published
+      verbatim in the 2017 partner documentation's worked authorization example.
+    flows:
+      - authorizationCode
+      - implicit
+    status: legacy
+    sources:
+      - https://openapi.airtel.in/smartapi/#/docs/payment
+  - scope: subscription
+    api: smart-api
+    description: >-
+      Legacy Smart API subscription scope used for subscription activation and deactivation.
+    flows:
+      - authorizationCode
+      - implicit
+    status: legacy
+    sources:
+      - https://openapi.airtel.in/smartapi/#/docs/subscriptions
+scope_administration: >-
+  Per the Smart API documentation, "scopes are configured when the service is provisioned by the
+  platform administrator" — Airtel scopes are provisioned per partner, not self-selected.
+counts:
+  scopes: 4
+  active: 2
+  legacy: 2
+gaps:
+  - >-
+    Airtel IoT issues client-credentials tokens (POST /auth/v2/generate/authtoken) but publishes no
+    scope vocabulary at all — its 43 operations are all reachable with one undifferentiated token.
+  - >-
+    Airtel IQ (SMS, Voice, CDR) uses HTTP Basic and has no scope surface.

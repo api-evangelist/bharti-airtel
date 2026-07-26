@@ -1,0 +1,362 @@
+generated: '2026-07-25'
+method: derived
+status: candidate
+source: openapi/ (one candidate tool per operationId across all four harvested specifications)
+searched:
+  official_server: false
+  evidence:
+  - source: https://registry.modelcontextprotocol.io/v0/servers?search=airtel
+    status: 200
+    result: 0 servers returned
+  - source: https://api.github.com/orgs/airtelindia/repos
+    status: 200
+    result: 1 repository (HDO_HO_P-C, 'Process and Excellence'); no MCP server published
+  note: No official or hosted MCP server for any Bharti Airtel API was found. The tools below are a candidate
+    surface derived from Airtel's own published specifications and are not operated by Airtel.
+server:
+  name: bharti-airtel
+  transport: http
+  url: null
+counts:
+  tools: 68
+tools:
+- name: sendSmsUsingGET
+  api: iq-sms
+  description: Send Single SMS GET API
+  http: GET /api/v1/send-sms
+  source_operation: openapi/bharti-airtel-iq-sms-openapi.yml#sendSmsUsingGET
+- name: sendSmsUsingPOST_2
+  api: iq-sms
+  description: Send Single SMS POST API
+  http: POST /api/v1/send-sms
+  source_operation: openapi/bharti-airtel-iq-sms-openapi.yml#sendSmsUsingPOST_2
+- name: sendSmsUsingPOST
+  api: iq-sms
+  description: Multiple SMS Requests API
+  http: POST /api/v1/send-sms-bulk
+  source_operation: openapi/bharti-airtel-iq-sms-openapi.yml#sendSmsUsingPOST
+- name: sendSmsViaCsvUsingPOST
+  api: iq-sms
+  description: Send SMS Via Content Moderation API
+  http: POST /api/v1/send-sms-cm
+  source_operation: openapi/bharti-airtel-iq-sms-openapi.yml#sendSmsViaCsvUsingPOST
+- name: sendSmsViaCsvUsingPOST_1
+  api: iq-sms
+  description: Send SMS Via CSV API
+  http: POST /api/v1/send-sms-csv
+  source_operation: openapi/bharti-airtel-iq-sms-openapi.yml#sendSmsViaCsvUsingPOST_1
+- name: postSampleCdrUsingPOST
+  api: iq-reporting
+  description: Post CDR
+  http: POST /sampleCdr
+  source_operation: openapi/bharti-airtel-iq-reporting-openapi.yml#postSampleCdrUsingPOST
+- name: generateAccessTokenUsingPOST
+  api: iot
+  description: Generate Access Token
+  http: POST /auth/v2/generate/authtoken
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#generateAccessTokenUsingPOST
+- name: refreshAccessTokenUsingPOST
+  api: iot
+  description: Refresh Access Token
+  http: POST /auth/v2/refresh/authtoken
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#refreshAccessTokenUsingPOST
+- name: activateTestSimsUsingPOST
+  api: iot
+  description: Activate SIM in Test Mode
+  http: POST /job/activate/test/sims
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#activateTestSimsUsingPOST
+- name: activateSimFromTestUsingPOST
+  api: iot
+  description: Activate SIM from Test Mode
+  http: POST /job/activate/sim/from/test
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#activateSimFromTestUsingPOST
+- name: changePlanUsingPOST
+  api: iot
+  description: Change Plan
+  http: POST /job/change/plan
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#changePlanUsingPOST
+- name: downloadBulkOrderTemplateUsingPOST
+  api: iot
+  description: Bulk Order Template Download
+  http: POST /bulk/sim/download/template
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#downloadBulkOrderTemplateUsingPOST
+- name: bulkUploadUsingPOST
+  api: iot
+  description: Bulk Upload
+  http: POST /bulk/sim/upload
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#bulkUploadUsingPOST
+- name: fetchDownloadHistoryUsingGET
+  api: iot
+  description: Download History
+  http: GET /bulk/download/history
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#fetchDownloadHistoryUsingGET
+- name: downloadTemplateFileUsingGET
+  api: iot
+  description: Download File
+  http: GET /bulk/download/{downloadFileId}
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#downloadTemplateFileUsingGET
+- name: fetchJobsUsingGET
+  api: iot
+  description: Fetch Jobs
+  http: GET /job/all
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#fetchJobsUsingGET
+- name: fetchOrdersUsingGET
+  api: iot
+  description: Fetch Order IDs
+  http: GET /job/{jobId}/order
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#fetchOrdersUsingGET
+- name: fetchDeviceInfoUsingGET
+  api: iot
+  description: Get Device Info
+  http: GET /sim/device/info
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#fetchDeviceInfoUsingGET
+- name: fetchDataUsageUsingGET
+  api: iot
+  description: Get Data Usage
+  http: GET /sim/data/usage
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#fetchDataUsageUsingGET
+- name: fetchSMSWhitelistedNumbersUsingGET
+  api: iot
+  description: Fetch SMS Whitelisted Number
+  http: GET /wt/numbers
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#fetchSMSWhitelistedNumbersUsingGET
+- name: smsWhitelistedNumbersBatchUsingPOST
+  api: iot
+  description: SMS Batch Whitelisting API
+  http: POST /wt/numbers/batch
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#smsWhitelistedNumbersBatchUsingPOST
+- name: fetchSimKycDetailsListUsingGET
+  api: iot
+  description: Fetch SIM KYC Details
+  http: GET /kyc/sim/details
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#fetchSimKycDetailsListUsingGET
+- name: updateSimKycDetailsUsingPOST
+  api: iot
+  description: Update SIM KYC details
+  http: POST /kyc/sim/update
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#updateSimKycDetailsUsingPOST
+- name: fetchSMSQuotaDetailsUsingGET
+  api: iot
+  description: Fetch SMS Quota
+  http: GET /billing/quota
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#fetchSMSQuotaDetailsUsingGET
+- name: fetchPurchaseHistoryUsingGET
+  api: iot
+  description: Fetch Billing History
+  http: GET /billing/history
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#fetchPurchaseHistoryUsingGET
+- name: fetchTemplatesUsingGET
+  api: iot
+  description: Fetch SMS Template Details
+  http: GET /template/
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#fetchTemplatesUsingGET
+- name: sendSMSUsingPOST
+  api: iot
+  description: Send SMS
+  http: POST /send
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#sendSMSUsingPOST
+- name: sendCustomSMSUsingPOST
+  api: iot
+  description: Send Custom SMS
+  http: POST /send/custom/message
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#sendCustomSMSUsingPOST
+- name: downloadBulkSMSTemplateUsingPOST
+  api: iot
+  description: Download Batch SMS Template
+  http: POST /download/batch/template
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#downloadBulkSMSTemplateUsingPOST
+- name: sendBatchSMSUsingPOST
+  api: iot
+  description: Send Batch SMS
+  http: POST /send/batch
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#sendBatchSMSUsingPOST
+- name: fetchMessageHistoryUsingGET
+  api: iot
+  description: Fetch SMS History
+  http: GET /box
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#fetchMessageHistoryUsingGET
+- name: fetchJobHistoryUsingGET
+  api: iot
+  description: Fetch SMS Jobs
+  http: GET /job/history
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#fetchJobHistoryUsingGET
+- name: fetchSmsOrderDetailsUsingGET
+  api: iot
+  description: Fetch SMS Job Orders
+  http: GET /order/detail
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#fetchSmsOrderDetailsUsingGET
+- name: deviceDiagnoseRadiusUsingGET
+  api: iot
+  description: Device Diagnose API.
+  http: GET /device/diagnose/radius
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#deviceDiagnoseRadiusUsingGET
+- name: fetchCustomerProfileUsingGET
+  api: iot
+  description: Fetch Customer Profile
+  http: GET /details/
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#fetchCustomerProfileUsingGET
+- name: fetchCustomerStatsUsingGET
+  api: iot
+  description: Fetch Customer Statistics
+  http: GET /details/stats
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#fetchCustomerStatsUsingGET
+- name: fetchCustomerPlansUsingGET_1
+  api: iot
+  description: Fetch Customer Plans
+  http: GET /details/plans
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#fetchCustomerPlansUsingGET_1
+- name: activateSimsUsingPOST
+  api: iot
+  description: Activate SIM
+  http: POST /job/sim/activate
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#activateSimsUsingPOST
+- name: swapSimUsingPOST
+  api: iot
+  description: Swap SIM
+  http: POST /job/sim/swap
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#swapSimUsingPOST
+- name: downloadDataUsagesUsingPOST
+  api: iot
+  description: Bulk Data Usage
+  http: POST /bulk/dataUsages/download
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#downloadDataUsagesUsingPOST
+- name: fetchVoiceWhitelistedNumbersUsingGET
+  api: iot
+  description: Fetch Voice Whitelist Numbers from CMP
+  http: GET /voice/numbers
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#fetchVoiceWhitelistedNumbersUsingGET
+- name: updateVoiceWhitelistNumberUsingPOST
+  api: iot
+  description: Update Voice Whitelist Number API in CMP
+  http: POST /voice/numbers
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#updateVoiceWhitelistNumberUsingPOST
+- name: downloadSimInventoryOrderUsingGET
+  api: iot
+  description: Download SIM Inventory
+  http: GET /bulk/sim/inventory/download
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#downloadSimInventoryOrderUsingGET
+- name: fetchCustomerBasketsUsingGET
+  api: iot
+  description: Fetch Customer Baskets
+  http: GET /details/baskets
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#fetchCustomerBasketsUsingGET
+- name: safeCustodyUsingPOST
+  api: iot
+  description: Safe Custody
+  http: POST /job/sim/voluntary/suspend
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#safeCustodyUsingPOST
+- name: outOfSafeCustodyUsingPOST
+  api: iot
+  description: Out of Safe Custody
+  http: POST /job/sim/voluntary/resume
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#outOfSafeCustodyUsingPOST
+- name: tempDisconnectionUsingPOST
+  api: iot
+  description: Temp Disconnection
+  http: POST /job/temp/disconnect
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#tempDisconnectionUsingPOST
+- name: tdResumeUsingPOST
+  api: iot
+  description: Resume from TD
+  http: POST /job/td/resume
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#tdResumeUsingPOST
+- name: fetchCustomerSimsUsingGET
+  api: iot
+  description: Fetch SIMs.
+  http: GET /details/basket/{basketId}/sims
+  source_operation: openapi/bharti-airtel-iot-openapi.yml#fetchCustomerSimsUsingGET
+- name: getOrCreateOauthTokenUsingPOST_2
+  api: locate
+  description: Generate Oauth token
+  http: POST /locate/apis/customers/{customerBaId}/oauth2_token
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#getOrCreateOauthTokenUsingPOST_2
+- name: findAllUsingGET_2
+  api: locate
+  description: Fetch MSISDNs
+  http: GET /locate/apis/customers/{customerBaId}/resources
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#findAllUsingGET_2
+- name: initiateConsentUsingPOST_3
+  api: locate
+  description: Initiate Consent
+  http: POST /locate/apis/customers/{customerBaId}/resources/consent
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#initiateConsentUsingPOST_3
+- name: searchUsingGET_2
+  api: locate
+  description: Search Resource
+  http: GET /locate/apis/customers/{customerBaId}/resources/{msisdn}
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#searchUsingGET_2
+- name: deleteResourceUsingDELETE_3
+  api: locate
+  description: Remove MSISDN
+  http: DELETE /locate/apis/customers/{customerBaId}/resources/{msisdn}
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#deleteResourceUsingDELETE_3
+- name: patchResourceUsingPATCH_3
+  api: locate
+  description: Modify Resource
+  http: PATCH /locate/apis/customers/{customerBaId}/resources/{msisdn}
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#patchResourceUsingPATCH_3
+- name: getConsentUsingGET_2
+  api: locate
+  description: Fetch Consent Details
+  http: GET /locate/apis/customers/{customerBaId}/resources/{msisdn}/consent
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#getConsentUsingGET_2
+- name: getLocationUsingGET_3
+  api: locate
+  description: Get Location
+  http: GET /locate/apis/customers/{customerBaId}/resources/{msisdn}/location
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#getLocationUsingGET_3
+- name: addressValidationUsingPOST_1
+  api: locate
+  description: Address validation API
+  http: POST /locate/apis/customers/{customerBaId}/resources/{msisdn}/validation/address
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#addressValidationUsingPOST_1
+- name: getCustomerTenantsUsingGET_1
+  api: locate
+  description: Fetch Customer Tenants
+  http: GET /locate/apis/customers/{customerBaId}/tenants
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#getCustomerTenantsUsingGET_1
+- name: getAllConsentPurposeUsingGET_1
+  api: locate
+  description: Fetch Tenant Consent purpose
+  http: GET /locate/apis/customers/{customerBaId}/tenants/consent/purpose
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#getAllConsentPurposeUsingGET_1
+- name: findAllUsingGET_3
+  api: locate
+  description: Fetch MSISDNs
+  http: GET /locate/apis/customers/{customerBaId}/tenants/{tenantId}/resources
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#findAllUsingGET_3
+- name: initiateConsentUsingPOST_4
+  api: locate
+  description: Initiate Consent
+  http: POST /locate/apis/customers/{customerBaId}/tenants/{tenantId}/resources/consent
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#initiateConsentUsingPOST_4
+- name: searchUsingGET_3
+  api: locate
+  description: Search Resource
+  http: GET /locate/apis/customers/{customerBaId}/tenants/{tenantId}/resources/{msisdn}
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#searchUsingGET_3
+- name: deleteResourceUsingDELETE_4
+  api: locate
+  description: Remove MSISDN
+  http: DELETE /locate/apis/customers/{customerBaId}/tenants/{tenantId}/resources/{msisdn}
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#deleteResourceUsingDELETE_4
+- name: patchResourceUsingPATCH_4
+  api: locate
+  description: Modify Resource
+  http: PATCH /locate/apis/customers/{customerBaId}/tenants/{tenantId}/resources/{msisdn}
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#patchResourceUsingPATCH_4
+- name: getConsentUsingGET_3
+  api: locate
+  description: Fetch Consent Details
+  http: GET /locate/apis/customers/{customerBaId}/tenants/{tenantId}/resources/{msisdn}/consent
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#getConsentUsingGET_3
+- name: getLocationForTenantsUsingGET_1
+  api: locate
+  description: Get Location
+  http: GET /locate/apis/customers/{customerBaId}/tenants/{tenantId}/resources/{msisdn}/location
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#getLocationForTenantsUsingGET_1
+- name: addressValidationForTenantsUsingPOST_1
+  api: locate
+  description: Address validation API
+  http: POST /locate/apis/customers/{customerBaId}/tenants/{tenantId}/resources/{msisdn}/validation/address
+  source_operation: openapi/bharti-airtel-locate-openapi.yml#addressValidationForTenantsUsingPOST_1

@@ -1,0 +1,42 @@
+generated: '2026-07-25'
+method: searched
+source: npm registry search, PyPI, and Airtel's own developer documentation
+result: none
+packages: []
+official_sdk_count: 0
+finding: >-
+  Bharti Airtel ships NO first-party client library for any of its APIs. This is recorded as a
+  verified negative, not as an unchecked gap: the registries were searched and every Airtel-named
+  package that exists is third-party and belongs to Airtel Money in Africa, not to Bharti Airtel's
+  Indian API estate. Consumers of Airtel IQ, Airtel IoT and Airtel Locate write raw HTTP.
+evidence:
+  - registry: npm
+    query: https://registry.npmjs.org/-/v1/search?text=airtel&size=20
+    status: 200
+    result: >-
+      20 results, none first-party. The whole result set is Airtel Money / mobile-money wrappers
+      for African markets (airtel-money-node-sdk, airtelmoney, airtime-pay, @lepresk/momo-api,
+      flexpay, umojasdk and similar), published by individual developers. The bare package `airtel`
+      is published by user `silclis` with no description. No package is published by or attributed
+      to Bharti Airtel.
+  - registry: pypi
+    query: https://pypi.org/pypi/airtel/json
+    status: 200
+    result: >-
+      airtel 0.0.1, author rivo2302, home_page https://github.com/rivo2302/airtel_money_api — a
+      third-party Airtel Money Africa wrapper, not a Bharti Airtel SDK.
+  - registry: github
+    query: https://api.github.com/orgs/airtelindia
+    status: 200
+    result: >-
+      The organisation exists but is not a developer-facing presence: no name, no description, and
+      a single repository (HDO_HO_P-C, "Process and Excellence") unrelated to any API. The
+      organisations `airtel`, `bharti-airtel` and `airtel-digital` return 404.
+  - source: https://www.airtel.in/webcms/content/card/name/airtel-iq-documentation
+    status: 200
+    result: >-
+      The Airtel IQ getting-started documentation walks a developer through dashboard credentials,
+      HTTP Basic construction and a Postman button inside the authenticated dashboard. No SDK,
+      client library or code sample in any language is offered.
+consequence: >-
+  No `SDKs` pointer is emitted for this provider — there is no official client library to point at.

@@ -1,0 +1,89 @@
+# Bharti Airtel — API surface
+
+> Bharti Airtel Limited is an Indian multinational telecommunications operator and one of the two
+> dominant mobile network operators in India. This file describes the machine-readable API surface
+> Airtel publishes for developers. It is a generated companion to Airtel's own llms.txt
+> (https://www.airtel.in/llms.txt), which covers airtel.in consumer marketing pages and does not
+> describe any API.
+>
+> generated: 2026-07-25 | method: generated | source: api-evangelist/bharti-airtel apis.yml + openapi/
+
+Airtel's API posture splits in two. The connectivity-product side (Airtel IQ CPaaS, Airtel IoT,
+Airtel Locate) is genuinely API-native and publicly specified with no login. The network-API side
+(CAMARA / GSMA Open Gateway) is not reachable from Airtel at all: Airtel is an Open Gateway
+signatory and a founding Aduna shareholder with a commercially launched SIM Swap API, but it
+publishes no CAMARA endpoint, no CAMARA specification and no network-API portal. Developers reach
+Airtel's network capabilities only through aggregators — Aduna and Nokia Network as Code.
+
+## APIs
+
+- [Airtel IQ SMS API](https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility):
+  Single, bulk, CSV-batch and content-moderated A2P SMS over Airtel's pan-India network, with TRAI
+  DLT scrubbing applied in-path. Base URL https://iqsms.airtel.in/api/v1. HTTP Basic auth.
+  5 operations.
+- [Airtel IQ Reporting API](https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr):
+  Call Detail Record reporting for voice traffic placed through Airtel IQ Intelliphones. Base URL
+  https://openapi.airtel.in/gateway/airtel-xchange-reporting/v2. HTTP Basic auth. 1 operation.
+- [Airtel IoT API](https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/):
+  IoT/M2M connectivity management — SIM lifecycle (activate, swap, change plan, safe custody,
+  temporary disconnection), bulk lifecycle, inventory, device and session information, SMS/voice
+  whitelisting, KYC and a messaging centre. Base URL https://m2m.airteliot.co.in/iot/api/.
+  OAuth 2.0 client credentials. 43 operations.
+- [Airtel Locate API](https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/):
+  Network-based device location by MSISDN without device GPS, gated by explicit per-subscriber
+  consent captured over SMS or IVR in nine Indian languages, with synchronous and callback-based
+  asynchronous modes. Base URL https://openapi.airtel.in/locate/apis. OAuth 2.0 client credentials
+  with scopes location and resource. 19 operations.
+- [Airtel Smart API (legacy)](https://openapi.airtel.in/smartapi/#/docs): The 2017 partner
+  programme — carrier billing, subscription activation, LRN lookup and UIDAI/Aadhaar DigiAuth.
+  Abandoned in place; production hosts redacted; no specification is harvestable.
+
+## Specifications
+
+- [Airtel IQ SMS, Swagger 2.0](https://openapi.airtel.in/gateway/airtel-iq-sms-utility/v2/api-docs)
+- [Airtel IQ CDR reporting, Swagger 2.0](https://openapi.airtel.in/gateway/airtel-xchange-reporting/v2/api-docs)
+- Airtel IoT, OpenAPI 3.0.1 — embedded in the Redoc state of the IoT documentation page
+- Airtel Locate, OpenAPI 3.0.0 v1.4.8 — embedded in the Redoc state of the Locate documentation page
+
+Verbatim copies of all four, plus content-identical YAML renderings, are held in
+https://github.com/api-evangelist/bharti-airtel/tree/main/openapi
+
+## Authentication
+
+- Airtel IQ (SMS, Voice, CDR): HTTP Basic, `Authorization: Basic base64(username:password)`,
+  credentials issued in the Airtel IQ dashboard. HTTPS required.
+- Airtel IoT: OAuth 2.0 client credentials, POST /auth/v2/generate/authtoken
+  (application/x-www-form-urlencoded), refresh via POST /auth/v2/refresh/authtoken.
+- Airtel Locate: OAuth 2.0 client credentials, POST
+  /locate/apis/customers/{customerBaId}/oauth2_token with scope `location` or `resource`;
+  the token travels in a bespoke `access_token` request header, not `Authorization: Bearer`.
+  A valid token is not sufficient — the subscriber must have consented.
+- No securityScheme is declared in any Airtel specification. No OIDC discovery, no CIBA, no mTLS.
+
+## Getting started
+
+- [Airtel IQ documentation and getting started](https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview)
+- [Airtel IQ trial signup](https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup) —
+  1 Intelliphone and 500 pulses free for testing
+- [Airtel IQ dashboard](https://www.airtel.in/business/b2b/airtel-ccp/dashboard/)
+- Airtel Locate access: email locate.support@airtel.com
+
+## Things an agent should know
+
+- There is no idempotency contract anywhere in the estate. Retrying a send or a SIM lifecycle
+  write repeats the action.
+- There is no RFC 9457 problem+json. Airtel IQ SMS reports failures in-band on an HTTP 200 via
+  SendSmsResponseVO.errorMessage and SendSmsResponseVO.incorrectNum.
+- There are no rate-limit response headers. Airtel Locate signals exhaustion as 429 (licence rate,
+  or a location request already in flight for that MSISDN) and commercial ceilings as 403.
+- Airtel Locate documents a ~5-10% expected 502 rate from HLR/MME/MSC network errors. Handle it.
+- Every A2P SMS send needs a TRAI DLT entityId, dltTemplateId and a registered sourceAddress
+  unless you use the content-moderation route /api/v1/send-sms-cm.
+- No status page, no changelog, no deprecation policy, no SLA and no first-party SDK exist.
+
+## Artifacts
+
+All derived and searched artifacts for this provider live at
+https://github.com/api-evangelist/bharti-airtel — authentication/, scopes/, conventions/, errors/,
+lifecycle/, conformance/, sandbox/, data-model/, agentic-access/, asyncapi/, mcp/, overlays/,
+security/, skills/, well-known/.
