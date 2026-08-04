@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  version: ''
+  version: "1.0"
   title: Airtel IoT
   contact:
     email: m2m.support@airtel.com
