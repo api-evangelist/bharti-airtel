@@ -1,0 +1,907 @@
+{
+  "item": [
+    {
+      "id": "aea0458f-ea28-4056-8385-bd93c2e117ea",
+      "name": "Bulk SMS APIs",
+      "description": {
+        "content": "These APIs can be used to send Bulk SMS in different ways as documented below",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "40c48042-23cb-4e1f-8fac-9e57c052a35f",
+          "name": "Multiple SMS Requests API",
+          "request": {
+            "name": "Multiple SMS Requests API",
+            "description": {
+              "content": "This API can be used to send a request to leverage multiple SMS requests within the same instant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "send-sms-bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"customerId\": \"<string>\",\n    \"dltTemplateId\": \"<string>\",\n    \"entityId\": \"<string>\",\n    \"message\": \"<string>\",\n    \"messageType\": \"<string>\",\n    \"sourceAddress\": \"<string>\",\n    \"destinationAddress\": \"<string>\",\n    \"filterBlacklistNumbers\": \"<boolean>\",\n    \"metaData\": \"<object>\",\n    \"priority\": \"<boolean>\",\n    \"urlShortenerParams\": {\n      \"campaignId\": \"<string>\",\n      \"campaignName\": \"<string>\",\n      \"campaignType\": \"<string>\",\n      \"hitsAllowed\": \"<integer>\",\n      \"isEnabled\": \"<string>\",\n      \"isUniqueUrl\": \"<string>\",\n      \"metaData\": \"<object>\",\n      \"shortCode\": \"<string>\",\n      \"systemMetaData\": \"<object>\",\n      \"validity\": \"<integer>\"\n    }\n  },\n  {\n    \"customerId\": \"<string>\",\n    \"dltTemplateId\": \"<string>\",\n    \"entityId\": \"<string>\",\n    \"message\": \"<string>\",\n    \"messageType\": \"<string>\",\n    \"sourceAddress\": \"<string>\",\n    \"destinationAddress\": \"<string>\",\n    \"filterBlacklistNumbers\": \"<boolean>\",\n    \"metaData\": \"<object>\",\n    \"priority\": \"<boolean>\",\n    \"urlShortenerParams\": {\n      \"campaignId\": \"<string>\",\n      \"campaignName\": \"<string>\",\n      \"campaignType\": \"<string>\",\n      \"hitsAllowed\": \"<integer>\",\n      \"isEnabled\": \"<string>\",\n      \"isUniqueUrl\": \"<string>\",\n      \"metaData\": \"<object>\",\n      \"shortCode\": \"<string>\",\n      \"systemMetaData\": \"<object>\",\n      \"validity\": \"<integer>\"\n    }\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1e262484-2d73-463b-84cc-7b97487525e0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "send-sms-bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"customerId\": \"<string>\",\n    \"dltTemplateId\": \"<string>\",\n    \"entityId\": \"<string>\",\n    \"message\": \"<string>\",\n    \"messageType\": \"<string>\",\n    \"sourceAddress\": \"<string>\",\n    \"destinationAddress\": \"<string>\",\n    \"filterBlacklistNumbers\": false,\n    \"metaData\": \"<object>\",\n    \"priority\": false,\n    \"urlShortenerParams\": {\n      \"campaignId\": \"<string>\",\n      \"campaignName\": \"<string>\",\n      \"campaignType\": \"<string>\",\n      \"hitsAllowed\": \"<integer>\",\n      \"isEnabled\": \"false\",\n      \"isUniqueUrl\": \"false\",\n      \"metaData\": \"<object>\",\n      \"shortCode\": \"<string>\",\n      \"systemMetaData\": \"<object>\",\n      \"validity\": \"<integer>\"\n    }\n  },\n  {\n    \"customerId\": \"<string>\",\n    \"dltTemplateId\": \"<string>\",\n    \"entityId\": \"<string>\",\n    \"message\": \"<string>\",\n    \"messageType\": \"<string>\",\n    \"sourceAddress\": \"<string>\",\n    \"destinationAddress\": \"<string>\",\n    \"filterBlacklistNumbers\": false,\n    \"metaData\": \"<object>\",\n    \"priority\": false,\n    \"urlShortenerParams\": {\n      \"campaignId\": \"<string>\",\n      \"campaignName\": \"<string>\",\n      \"campaignType\": \"<string>\",\n      \"hitsAllowed\": \"<integer>\",\n      \"isEnabled\": \"false\",\n      \"isUniqueUrl\": \"false\",\n      \"metaData\": \"<object>\",\n      \"shortCode\": \"<string>\",\n      \"systemMetaData\": \"<object>\",\n      \"validity\": \"<integer>\"\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1fe83447-1aba-4fbf-817c-59697c0a5b73",
+          "name": "Send SMS Via Content Moderation API",
+          "request": {
+            "name": "Send SMS Via Content Moderation API",
+            "description": {
+              "content": "This API can be used to send a request without providing DLT details to more than one recipient within the same instant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "send-sms-cm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "customerId",
+                  "value": "<string>",
+                  "description": "(Required) customerId"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"<string>\",\n  \"destinationAddress\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"message\": \"<string>\",\n  \"filterBlacklistNumbers\": \"<boolean>\",\n  \"metaData\": \"<object>\",\n  \"priority\": \"<boolean>\",\n  \"urlShortenerParams\": {\n    \"campaignId\": \"<string>\",\n    \"campaignName\": \"<string>\",\n    \"campaignType\": \"<string>\",\n    \"hitsAllowed\": \"<integer>\",\n    \"isEnabled\": \"<string>\",\n    \"isUniqueUrl\": \"<string>\",\n    \"metaData\": \"<object>\",\n    \"shortCode\": \"<string>\",\n    \"systemMetaData\": \"<object>\",\n    \"validity\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "22adcc1b-d0e8-491e-91dc-cf8a9fcec013",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "send-sms-cm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"<string>\",\n  \"destinationAddress\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"message\": \"<string>\",\n  \"filterBlacklistNumbers\": false,\n  \"metaData\": \"<object>\",\n  \"priority\": false,\n  \"urlShortenerParams\": {\n    \"campaignId\": \"<string>\",\n    \"campaignName\": \"<string>\",\n    \"campaignType\": \"<string>\",\n    \"hitsAllowed\": \"<integer>\",\n    \"isEnabled\": \"false\",\n    \"isUniqueUrl\": \"false\",\n    \"metaData\": \"<object>\",\n    \"shortCode\": \"<string>\",\n    \"systemMetaData\": \"<object>\",\n    \"validity\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"customerId\": \"string\",\n  \"destinationAddress\": [\n    \"string\",\n    \"string\"\n  ],\n  \"dltTemplateId\": \"string\",\n  \"entityId\": \"string\",\n  \"errorMessage\": \"string\",\n  \"incorrectNum\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\",\n  \"messageRequestId\": \"string\",\n  \"messageType\": \"SERVICE_EXPLICIT\",\n  \"metaData\": {},\n  \"sourceAddress\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1699ed8e-4c98-4566-8612-3b25de9fb527",
+          "name": "Send SMS Via CSV API",
+          "request": {
+            "name": "Send SMS Via CSV API",
+            "description": {
+              "content": "This API can be used to send SMS to multiple destination addresses provided in csv file",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "send-sms-csv"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "customerId",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Specifies the source/client's id registered and wants to use the SMS APIs"
+                },
+                {
+                  "key": "destinationAddress",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "type": "text",
+                  "description": "(Required) Specifies the mobile numbers on which message needs to be delivered"
+                },
+                {
+                  "key": "dltTemplateId",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Specifies the template id received after dlt registration."
+                },
+                {
+                  "key": "entityId",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Specifies the entity id received after dlt registration."
+                },
+                {
+                  "key": "message",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Specifies the message which needs to be delivered"
+                },
+                {
+                  "key": "messageType",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Specifies the type of message which needs to be sent. (This can only be one of PROMOTIONAL,TRANSACTIONAL,SERVICE_IMPLICIT,SERVICE_EXPLICIT,INTERNATIONAL)"
+                },
+                {
+                  "key": "sourceAddress",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Specifies the shortcode/senderId through which message would be sent"
+                },
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "Specifies the CSV file to be uploaded"
+                },
+                {
+                  "key": "filterBlacklistNumbers",
+                  "value": "<boolean>",
+                  "type": "text",
+                  "description": "Specifies the flag to enable/disable filtering of blacklisted numbers"
+                },
+                {
+                  "key": "metaData",
+                  "value": "<object>",
+                  "type": "text",
+                  "description": "Specifies all the additional parameters"
+                },
+                {
+                  "key": "otp",
+                  "value": "<boolean>",
+                  "type": "text",
+                  "description": "Specifies the flag for priority of the messages"
+                },
+                {
+                  "key": "urlShortenerParams.campaignId",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "urlShortenerParams.campaignName",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "urlShortenerParams.campaignType",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "urlShortenerParams.hitsAllowed",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "urlShortenerParams.isEnabled",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "urlShortenerParams.isUniqueUrl",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "urlShortenerParams.metaData",
+                  "value": "<object>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "urlShortenerParams.shortCode",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "urlShortenerParams.systemMetaData",
+                  "value": "<object>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "urlShortenerParams.validity",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "43c1e828-f230-4296-8967-2c92c3310c51",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "send-sms-csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Specifies the source/client's id registered and wants to use the SMS APIs",
+                        "type": "text/plain"
+                      },
+                      "key": "customerId",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Specifies the mobile numbers on which message needs to be delivered",
+                        "type": "text/plain"
+                      },
+                      "key": "destinationAddress",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Specifies the template id received after dlt registration.",
+                        "type": "text/plain"
+                      },
+                      "key": "dltTemplateId",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Specifies the entity id received after dlt registration.",
+                        "type": "text/plain"
+                      },
+                      "key": "entityId",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Specifies the message which needs to be delivered",
+                        "type": "text/plain"
+                      },
+                      "key": "message",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Specifies the type of message which needs to be sent. (This can only be one of PROMOTIONAL,TRANSACTIONAL,SERVICE_IMPLICIT,SERVICE_EXPLICIT,INTERNATIONAL)",
+                        "type": "text/plain"
+                      },
+                      "key": "messageType",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Specifies the shortcode/senderId through which message would be sent",
+                        "type": "text/plain"
+                      },
+                      "key": "sourceAddress",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Specifies the CSV file to be uploaded",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Specifies the flag to enable/disable filtering of blacklisted numbers",
+                        "type": "text/plain"
+                      },
+                      "key": "filterBlacklistNumbers",
+                      "value": "<boolean>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Specifies all the additional parameters",
+                        "type": "text/plain"
+                      },
+                      "key": "metaData",
+                      "value": "<object>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Specifies the flag for priority of the messages",
+                        "type": "text/plain"
+                      },
+                      "key": "otp",
+                      "value": "<boolean>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "urlShortenerParams.campaignId",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "urlShortenerParams.campaignName",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "urlShortenerParams.campaignType",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "urlShortenerParams.hitsAllowed",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "urlShortenerParams.isEnabled",
+                      "value": "\"false\"",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "urlShortenerParams.isUniqueUrl",
+                      "value": "\"false\"",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "urlShortenerParams.metaData",
+                      "value": "<object>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "urlShortenerParams.shortCode",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "urlShortenerParams.systemMetaData",
+                      "value": "<object>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "urlShortenerParams.validity",
+                      "value": "<integer>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"customerId\": \"string\",\n  \"destinationAddress\": [\n    \"string\",\n    \"string\"\n  ],\n  \"dltTemplateId\": \"string\",\n  \"entityId\": \"string\",\n  \"errorMessage\": \"string\",\n  \"incorrectNum\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\",\n  \"messageRequestId\": \"string\",\n  \"messageType\": \"SERVICE_EXPLICIT\",\n  \"metaData\": {},\n  \"sourceAddress\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "d952f4e8-e1d4-4dfd-9925-9d2509d5538f",
+      "name": "Individual SMS APIs",
+      "description": {
+        "content": "These APIs can be used to send a single SMS in a single request as documented below",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e5c75a50-f843-4e27-b2b5-cc8b89067fbb",
+          "name": "Send Single SMS GET API",
+          "request": {
+            "name": "Send Single SMS GET API",
+            "description": {
+              "content": "This API can be used to send SMS to single destination address through GET request",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "send-sms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "customerId",
+                  "value": "<string>",
+                  "description": "Specifies the source/client's id registered and wants to use the SMS APIs"
+                },
+                {
+                  "disabled": false,
+                  "key": "destinationAddress",
+                  "value": "<string>",
+                  "description": "Specifies the mobile numbers on which message needs to be delivered"
+                },
+                {
+                  "disabled": false,
+                  "key": "dltTemplateId",
+                  "value": "<string>",
+                  "description": "Specifies the template id received after dlt registration."
+                },
+                {
+                  "disabled": false,
+                  "key": "entityId",
+                  "value": "<string>",
+                  "description": "Specifies the entity id received after dlt registration."
+                },
+                {
+                  "disabled": false,
+                  "key": "filterBlacklistNumbers",
+                  "value": "<boolean>",
+                  "description": "Specifies the flag to enable/disable filtering of blacklisted numbers"
+                },
+                {
+                  "disabled": false,
+                  "key": "message",
+                  "value": "<string>",
+                  "description": "Specifies the message which needs to be delivered"
+                },
+                {
+                  "disabled": false,
+                  "key": "messageType",
+                  "value": "<string>",
+                  "description": "Specifies the type of message which needs to be sent."
+                },
+                {
+                  "disabled": false,
+                  "key": "priority",
+                  "value": "<boolean>",
+                  "description": "Specifies the flag for priority of the messages"
+                },
+                {
+                  "disabled": false,
+                  "key": "sourceAddress",
+                  "value": "<string>",
+                  "description": "Specifies the shortcode/senderId through which message would be sent"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b132228a-1df8-49e5-b6d1-313b5a46e631",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "send-sms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "destinationAddress",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dltTemplateId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entityId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterBlacklistNumbers",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "message",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "messageType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "priority",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "sourceAddress",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"customerId\": \"string\",\n  \"destinationAddress\": [\n    \"string\",\n    \"string\"\n  ],\n  \"dltTemplateId\": \"string\",\n  \"entityId\": \"string\",\n  \"errorMessage\": \"string\",\n  \"incorrectNum\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\",\n  \"messageRequestId\": \"string\",\n  \"messageType\": \"SERVICE_EXPLICIT\",\n  \"metaData\": {},\n  \"sourceAddress\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "73b6fb06-3627-411d-b53b-a82d7e7bc5dd",
+          "name": "Send Single SMS POST API",
+          "request": {
+            "name": "Send Single SMS POST API",
+            "description": {
+              "content": "This API can be used to send SMS to a single destination address through POST request",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "send-sms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"<string>\",\n  \"dltTemplateId\": \"<string>\",\n  \"entityId\": \"<string>\",\n  \"message\": \"<string>\",\n  \"messageType\": \"<string>\",\n  \"sourceAddress\": \"<string>\",\n  \"destinationAddress\": \"<string>\",\n  \"filterBlacklistNumbers\": \"<boolean>\",\n  \"metaData\": \"<object>\",\n  \"priority\": \"<boolean>\",\n  \"urlShortenerParams\": {\n    \"campaignId\": \"<string>\",\n    \"campaignName\": \"<string>\",\n    \"campaignType\": \"<string>\",\n    \"hitsAllowed\": \"<integer>\",\n    \"isEnabled\": \"<string>\",\n    \"isUniqueUrl\": \"<string>\",\n    \"metaData\": \"<object>\",\n    \"shortCode\": \"<string>\",\n    \"systemMetaData\": \"<object>\",\n    \"validity\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f6052e23-41b2-4e70-b143-ec174ab82270",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "send-sms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customerId\": \"<string>\",\n  \"dltTemplateId\": \"<string>\",\n  \"entityId\": \"<string>\",\n  \"message\": \"<string>\",\n  \"messageType\": \"<string>\",\n  \"sourceAddress\": \"<string>\",\n  \"destinationAddress\": \"<string>\",\n  \"filterBlacklistNumbers\": false,\n  \"metaData\": \"<object>\",\n  \"priority\": false,\n  \"urlShortenerParams\": {\n    \"campaignId\": \"<string>\",\n    \"campaignName\": \"<string>\",\n    \"campaignType\": \"<string>\",\n    \"hitsAllowed\": \"<integer>\",\n    \"isEnabled\": \"false\",\n    \"isUniqueUrl\": \"false\",\n    \"metaData\": \"<object>\",\n    \"shortCode\": \"<string>\",\n    \"systemMetaData\": \"<object>\",\n    \"validity\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"customerId\": \"string\",\n  \"destinationAddress\": [\n    \"string\",\n    \"string\"\n  ],\n  \"dltTemplateId\": \"string\",\n  \"entityId\": \"string\",\n  \"errorMessage\": \"string\",\n  \"incorrectNum\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\",\n  \"messageRequestId\": \"string\",\n  \"messageType\": \"SERVICE_EXPLICIT\",\n  \"metaData\": {},\n  \"sourceAddress\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "//iqsms.airtel.in",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a8b7a769-3b13-4e22-887a-ec85a50da8f4",
+    "name": "Airtel IQ SMS Core APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

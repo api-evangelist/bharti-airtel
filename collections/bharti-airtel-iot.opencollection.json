@@ -1,0 +1,1982 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Airtel IoT",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account Authorization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate Access Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m2m.airteliot.co.in/iot/api/auth/v2/generate/authtoken",
+            "headers": [
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "client_id",
+                  "value": ""
+                },
+                {
+                  "name": "client_secret",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "This API shall allow user to generate Access Token to be used while doing any operations on the portal via APIs. **As per our recent upgrade, a new attribute 'refresh_expires_in' has been added to the response field which would display the time (in seconds) after which the refresh token would expire.**"
+        },
+        {
+          "info": {
+            "name": "Refresh Access Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m2m.airteliot.co.in/iot/api/auth/v2/refresh/authtoken",
+            "headers": [
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "refresh_token",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "This API shall allow user to refresh Access Token to be used while doing any operations on the portal via APIs."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SIM LifeCycle ",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Activate SIM in Test Mode",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m2m.airteliot.co.in/iot/api/job/activate/test/sims",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API shall allow user to change the state of SIM from Available (Ready to Activate) to Activate in Test Mode. It requires inputs as mobile number and plan code."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SIM LifeCycle",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Activate SIM from Test Mode",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m2m.airteliot.co.in/iot/api/job/activate/sim/from/test",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API shall allow user to change the Bill Plan on a particular SIM from test plan to the commercial plan associated with that Billable account. It requires inputs as mobile number and target plan code."
+        },
+        {
+          "info": {
+            "name": "Change Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m2m.airteliot.co.in/iot/api/job/change/plan",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API shall allow user to change the Bill Plan on a particular SIM from one Plan to the other Plan associated with that Billable account. It requires inputs as mobile number and target plan code."
+        },
+        {
+          "info": {
+            "name": "Activate SIM",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m2m.airteliot.co.in/iot/api/job/sim/activate",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API shall allow user to change the state of SIM from Available (Ready to Activate) to Active with Plan that is associated with the Billable account. It requires inputs as mobile number and plan code."
+        },
+        {
+          "info": {
+            "name": "Swap SIM",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m2m.airteliot.co.in/iot/api/job/sim/swap",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "In case the user wishes to replace SIM card associated with a Mobile number, in case of any issue with the SIM, this API shall allow user to change the SIM on that Billable account. It requires inputs as source SIM and target SIM number."
+        },
+        {
+          "info": {
+            "name": "Safe Custody",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m2m.airteliot.co.in/iot/api/job/sim/voluntary/suspend",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "In case the user wishes to voluntarily suspend the SIM card for sometime, there is an option to put the SIM in safe custody. This API shall allow user to put the SIM in safe custody on that Billable account. It requires inputs as mobile number."
+        },
+        {
+          "info": {
+            "name": "Out of Safe Custody",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m2m.airteliot.co.in/iot/api/job/sim/voluntary/resume",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "In case the user wishes to change the number state from Suspended to Active state, this API shall allow user to do the same on that Billable account. It requires inputs as mobile number."
+        },
+        {
+          "info": {
+            "name": "Temp Disconnection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m2m.airteliot.co.in/iot/api/job/temp/disconnect",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API is used to initiate disconnection of M2M SIMs. Initially, SIMs will go into temporary disconnection for 5 days and then SIMs will be permanently disconnected on completion of 5 days."
+        },
+        {
+          "info": {
+            "name": "Resume from TD",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m2m.airteliot.co.in/iot/api/job/td/resume",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API is used to resume SIMs from temporary disconnection within 5 days of initiation of disconnection."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SIM LifeCycle Bulk",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Bulk Order Template Download",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m2m.airteliot.co.in/iot/api/bulk/sim/download/template",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API call is used to download the Bulk template for performing Bulk Operations on the account. It returns the file in excel format for that Billable account."
+        },
+        {
+          "info": {
+            "name": "Bulk Upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m2m.airteliot.co.in/iot/api/bulk/sim/upload",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "action",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "basketId",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "This API call is used to upload the Bulk Operations template for performing Bulk Operations on the account. It returns the Job ID along with Order counts in success, failure or rejected status and number status."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Inventory Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m2m.airteliot.co.in/iot/api/bulk/download/history",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page Number in case of pagination. Default Page No. is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page Size in pagination. Default Page Size is 25 and Maximum is 100."
+              }
+            ]
+          },
+          "docs": "This API call is used to get the records for downloading files from Download History page that are processed for Download on the portal. It returns the Download Type, Requested and Completion date, status of download, and file name."
+        },
+        {
+          "info": {
+            "name": "Download File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m2m.airteliot.co.in/iot/api/bulk/download/:downloadFileId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "downloadFileId",
+                "value": "",
+                "type": "path",
+                "description": "downloadFileId"
+              }
+            ]
+          },
+          "docs": "This API call is used to download the file which is available or ready to download after processing from Download History Page."
+        },
+        {
+          "info": {
+            "name": "Download SIM Inventory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m2m.airteliot.co.in/iot/api/bulk/sim/inventory/download",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This API call returns the SIM inventory file in excel format for that Billable account."
+        },
+        {
+          "info": {
+            "name": "Fetch Customer Baskets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m2m.airteliot.co.in/iot/api/details/baskets",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "basketId",
+                "value": "",
+                "type": "query",
+                "description": "Basket ID"
+              },
+              {
+                "name": "basketName",
+                "value": "",
+                "type": "query",
+                "description": "Basket Name"
+              },
+              {
+                "name": "detailedView",
+                "value": "",
+                "type": "query",
+                "description": "${detailedView.notes}"
+              },
+              {
+                "name": "myBaskets",
+                "value": "false",
+                "type": "query",
+                "description": "My Baskets(Basket Onwer)"
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page Number in case of pagination. Default Page No. is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page Size in pagination. Default Page Size is 25 and Maximum is 100."
+              }
+            ]
+          },
+          "docs": "This API shall allow user to fetch the details of Baskets that are created on that Customer Account. It can fetch the details of a particular basket at any given point. It returns the SIM details in that basket with different states (Active, Available, Safe Custody, Test Mode, Suspended) along with Basket description and user details to whom that basket is assigned."
+        },
+        {
+          "info": {
+            "name": "Fetch SIMs.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m2m.airteliot.co.in/iot/api/details/basket/:basketId/sims",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "basketId",
+                "value": "",
+                "type": "path",
+                "description": "Basket ID"
+              },
+              {
+                "name": "filterValue",
+                "value": "",
+                "type": "query",
+                "description": "Value on which Sims to be filtered"
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page Number in case of pagination. Default Page No. is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page Size in pagination. Default Page Size is 25 and Maximum is 100."
+              },
+              {
+                "name": "simFilterType",
+                "value": "",
+                "type": "query",
+                "description": "Filter Type on which Sims to be filtered. The allowed types are MSISDN / SIM "
+              },
+              {
+                "name": "simStatus",
+                "value": "",
+                "type": "query",
+                "description": "Status of SIM(s) being fetched from a basket"
+              }
+            ]
+          },
+          "docs": "This API shall allow user to fetch the details of SIMs in a particular Basket on that Customer Account. It can fetch the details of one or more SIMs at a time from a particular basket including SIM details, Plan details, SIM status, and other required details of SIMs in basket as it is shown on the CMP portal."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Job Status",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m2m.airteliot.co.in/iot/api/job/all",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "displayRejectedRecords",
+                "value": "",
+                "type": "query",
+                "description": "Show Rejected Jobs"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End Date in a date range to fetch Job IDs. Format DD/MM/YYY"
+              },
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "query",
+                "description": "Job ID, in case a particular Job ID to be fetched"
+              },
+              {
+                "name": "jobType",
+                "value": "",
+                "type": "query",
+                "description": "Job Type as defined in CMP"
+              },
+              {
+                "name": "mobileNo",
+                "value": "",
+                "type": "query",
+                "description": "Mobile Number, in case Job IDs for a particular mobile number needs to be fetched"
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page Number in case of pagination. Default Page No. is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page Size in pagination. Default Page Size is 25 and Maximum is 100."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start Date in a date range to fetch Job IDs. Format DD/MM/YYY"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status of Job IDs"
+              }
+            ]
+          },
+          "docs": "For all orders initiated on CMP, single or Bulk, there is a Job ID that gets generated for all orders. One Job ID may have one or multiple Order IDs. This API will allow user to fetch Job details in that Billable account."
+        },
+        {
+          "info": {
+            "name": "Fetch Order IDs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m2m.airteliot.co.in/iot/api/job/:jobId/order",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "Job ID, in case order in a particular Job ID to be fetched"
+              },
+              {
+                "name": "mobileNo",
+                "value": "",
+                "type": "query",
+                "description": "Mobile Number, in case Order IDs for a particular mobile number needs to be fetched"
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page Number in case of pagination. Default Page No. is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page Size in pagination. Default Page Size is 25 and Maximum is 100."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status of Order ID"
+              }
+            ]
+          },
+          "docs": "To fetch Order IDs in single Job ID, this API will allow user to fetch single or multiple Order IDs in a Job in that Billable account."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Device & Session Information",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Device Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m2m.airteliot.co.in/iot/api/sim/device/info",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "mobileNo",
+                "value": "",
+                "type": "query",
+                "description": "Mobile No."
+              }
+            ]
+          },
+          "docs": "Once the SIM is active on the network and inserted in a device to use data, this API will allow user to fetch device related parameters including IMEI, previous IMEI, device make / model, device type, etc."
+        },
+        {
+          "info": {
+            "name": "Get Data Usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m2m.airteliot.co.in/iot/api/sim/data/usage",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "mobileNo",
+                "value": "",
+                "type": "query",
+                "description": "Mobile No."
+              }
+            ]
+          },
+          "docs": "To fetch real-time data usage on a specific SIM, this API will allow user to get total data allocation, available data and used data for the SIM."
+        },
+        {
+          "info": {
+            "name": "Device Diagnose API.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m2m.airteliot.co.in/iot/api/device/diagnose/radius",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End DateTime For AAA Radius.  Format DD/MM/YYYY"
+              },
+              {
+                "name": "mobileNo",
+                "value": "",
+                "type": "query",
+                "description": "Mobile No."
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page Number in case of pagination. Default Page No. is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page Size in pagination for AAA session details. Default Page Size is 20 and Maximum is 100."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start DateTime For AAA Radius. Format DD/MM/YYYY"
+              }
+            ]
+          },
+          "docs": "Fetch Device Diagnose Radius Attributes."
+        },
+        {
+          "info": {
+            "name": "Bulk Data Usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m2m.airteliot.co.in/iot/api/bulk/dataUsages/download",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API call is used to initiate download of Bulk data usage file from a specific Basket. It returns the file name along with creation and completion date for that basket. Since, the number of SIMs in a basket is restricted to 5000, hence the maximum number of SIMs in this Bulk data usage file will be 5000."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Whitelisting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch SMS Whitelisted Number ",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m2m.airteliot.co.in/iot/api/wt/numbers",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "basketId",
+                "value": "",
+                "type": "query",
+                "description": "Basket ID"
+              },
+              {
+                "name": "msisdn",
+                "value": "",
+                "type": "query",
+                "description": "msisdn"
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page Number in case of pagination. Default Page No. is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page Size in pagination. Default Page Size is 25 and Maximum is 100."
+              },
+              {
+                "name": "simNo",
+                "value": "",
+                "type": "query",
+                "description": "SIM Number"
+              }
+            ]
+          },
+          "docs": "Fetch SMS Whitelisted Number by msisdn, simNo,basketName,pageNo,pagesize"
+        },
+        {
+          "info": {
+            "name": "SMS Batch Whitelisting API",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m2m.airteliot.co.in/iot/api/wt/numbers/batch",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "SMS batch whitelisting on Airtel IoT portal. Minimum 1 and Maximum 100 MSISDN can be whitelisted at once"
+        },
+        {
+          "info": {
+            "name": "Fetch Voice Whitelist Numbers from CMP",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m2m.airteliot.co.in/iot/api/voice/numbers",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "msisdn",
+                "value": "",
+                "type": "query",
+                "description": "msisdn"
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page Number in case of pagination. Default Page No. is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page Size in pagination. Default Page Size is 25 and Maximum is 100."
+              },
+              {
+                "name": "simNo",
+                "value": "",
+                "type": "query",
+                "description": "SIM Number"
+              }
+            ]
+          },
+          "docs": "This API will fetch all numbers for Voice Whitelist on CMP portal with existing whitelisted records"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "KYC Manager",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch SIM KYC Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m2m.airteliot.co.in/iot/api/kyc/sim/details",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "activationDate",
+                "value": "",
+                "type": "query",
+                "description": "Activation date range on which SIMs will be filtered. Format DD/MM/YYYY - DD/MM/YYYY"
+              },
+              {
+                "name": "basketId",
+                "value": "",
+                "type": "query",
+                "description": "basketId"
+              },
+              {
+                "name": "complianceDate",
+                "value": "",
+                "type": "query",
+                "description": "Compliance Date range on which SIMs will be filtered. Format DD/MM/YYYY - DD/MM/YYYY"
+              },
+              {
+                "name": "msisdn",
+                "value": "",
+                "type": "query",
+                "description": "Mobile No."
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "pageNo"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "pageSize"
+              },
+              {
+                "name": "simNo",
+                "value": "",
+                "type": "query",
+                "description": "Sim No"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter Type on which SIMs will be filtered. The allowed type are Compliant / Non-Compliant /Pending"
+              }
+            ]
+          },
+          "docs": "FetchSIMKYCDetails API"
+        },
+        {
+          "info": {
+            "name": "Update SIM KYC details",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m2m.airteliot.co.in/iot/api/kyc/sim/update",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "UpdateSIMKycDetails API"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Messaging Centre",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch SMS Quota",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m2m.airteliot.co.in/iot/api/billing/quota",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This API will fetch the available SMS Quota balance."
+        },
+        {
+          "info": {
+            "name": "Fetch Billing History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m2m.airteliot.co.in/iot/api/billing/history",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page Number in case of pagination. Default Page No. is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page Size in pagination. Default Page Size is 25 and Maximum is 100."
+              },
+              {
+                "name": "purchaseEndDate",
+                "value": "",
+                "type": "query",
+                "description": "Purchase Date / Transaction Date to fetch billing history. Format DD/MM/YYYY"
+              },
+              {
+                "name": "purchaseStartDate",
+                "value": "",
+                "type": "query",
+                "description": "Purchase Date / Transaction Date to fetch billing history. Format DD/MM/YYYY"
+              },
+              {
+                "name": "subscriptionEvent",
+                "value": "",
+                "type": "query",
+                "description": "Type of event which user want to filter."
+              }
+            ]
+          },
+          "docs": "This API will be used to fetch Plan Subscribe / Un-Subscribe history."
+        },
+        {
+          "info": {
+            "name": "Fetch SMS Template Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m2m.airteliot.co.in/iot/api/template/",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fetchOnlyActiveTemplates",
+                "value": "",
+                "type": "query",
+                "description": "Pass true to fetch only Active Templates on which SMS can be sent."
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page Number in case of pagination. Default Page No. is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page Size in pagination. Default Page Size is 25 and Maximum is 100."
+              },
+              {
+                "name": "templateName",
+                "value": "",
+                "type": "query",
+                "description": "Template Name to Search"
+              }
+            ]
+          },
+          "docs": "This API will be used to fetch the list of Template Name and Template ID created on Messaging Centre on CMP. These templates details will be used to send SMS using 'Send SMS' or 'Send Batch SMS' feature."
+        },
+        {
+          "info": {
+            "name": "Send SMS",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m2m.airteliot.co.in/iot/api/send",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API is used to initiate request for sending SMS on M2M SIMs. A single job can be used to send SMS to a maximum of 100 MSISDNs. This is an asynchronous API which will take input in specified JSON format mentioning MSISDN(s) and Template ID. In return it will provide a Job ID by which status of Job created by request can be tracked using 'Fetch SMS Jobs' and 'Fetch SMS Job Orders' APIs."
+        },
+        {
+          "info": {
+            "name": "Send Custom SMS",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m2m.airteliot.co.in/iot/api/send/custom/message",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API is used to initiate request for sending either Text or Binary SMS on M2M SIMs. A single job can be used to send SMS to a maximum of 10 MSISDNs. This is an asynchronous API which will take input in specified JSON format mentioning MSISDN(s) and Custom Message. In return it will provide a Job ID by which status of Job created by request can be tracked using 'Fetch SMS Jobs' and 'Fetch SMS Job Orders' APIs. Use API for below mentioned scenarios </br><ul><li><u>Send Text SMS</u> : Pass <b>b"
+        },
+        {
+          "info": {
+            "name": "Download Batch SMS Template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m2m.airteliot.co.in/iot/api/download/batch/template",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API call is used to download the Batch template for performing 'Send Batch SMS' Operations on the account. It returns the file in excel format."
+        },
+        {
+          "info": {
+            "name": "Send Batch SMS",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m2m.airteliot.co.in/iot/api/send/batch",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "basketId",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "This API is used to initiate request for sending SMS on M2M SIMs in Batch. This is an asynchronous API which will take input in excel file mentioning MSISDN(s) and Template Name. In return it will provide a Job ID by which status of Job created by request can be tracked using 'Fetch SMS Jobs' and 'Fetch SMS Job Orders' APIs. Batch SMS template can be used to send SMS to up to 5,000 numbers in a single job."
+        },
+        {
+          "info": {
+            "name": "Fetch SMS History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m2m.airteliot.co.in/iot/api/box",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End Date in a date range to fetch Job IDs. Format DD/MM/YYY"
+              },
+              {
+                "name": "messageType",
+                "value": "",
+                "type": "query",
+                "description": "Message types. Available types are - incoming/outgoing."
+              },
+              {
+                "name": "msisdn",
+                "value": "",
+                "type": "query",
+                "description": "Mobile Number, in case Job IDs for a particular mobile number needs to be fetched"
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page Number in case of pagination. Default Page No. is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page Size in pagination. Default Page Size is 25 and Maximum is 100."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start Date in a date range to fetch Job IDs. Format DD/MM/YYY"
+              }
+            ]
+          },
+          "docs": "This API is used to fetch history of both Incoming as well as Outgoing Messages received on Messaging Centre. API also provide a list of filters by which data specific to a MSISDN, Message Type, Sent Date etc. can be fetched."
+        },
+        {
+          "info": {
+            "name": "Fetch SMS Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m2m.airteliot.co.in/iot/api/job/history",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End Date in a date range to fetch Job IDs. Format DD/MM/YYY"
+              },
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "query",
+                "description": "Job ID, in case a particular Job ID to be fetched"
+              },
+              {
+                "name": "jobType",
+                "value": "",
+                "type": "query",
+                "description": "jobType"
+              },
+              {
+                "name": "msisdn",
+                "value": "",
+                "type": "query",
+                "description": "msisdn"
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page Number in case of pagination. Default Page No. is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page Size in pagination. Default Page Size is 25 and Maximum is 100."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start Date in a date range to fetch Job IDs. Format DD/MM/YYY"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status of SMS"
+              }
+            ]
+          },
+          "docs": "This API is used to fetch Jobs created while sending SMS either by 'Send SMS' or 'Send Batch SMS' feature. Using Job IDs mentioned in response of API, customer can fetch the details of SMS sent in that particular Job."
+        },
+        {
+          "info": {
+            "name": "Fetch SMS Job Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m2m.airteliot.co.in/iot/api/order/detail",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "query",
+                "description": "jobId"
+              },
+              {
+                "name": "msisdn",
+                "value": "",
+                "type": "query",
+                "description": "msisdn"
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query",
+                "description": "Page Number in case of pagination. Default Page No. is 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page Size in pagination. Default Page Size is 25 and Maximum is 100."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status of SMS"
+              }
+            ]
+          },
+          "docs": "This API is used to fetch line item details of each SMS sent to MSISDN either by 'Send SMS' or 'Send Batch SMS' feature in a Job. Job ID used in this API can be fetched from Fetch SMS Jobs."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Account Details",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch Customer Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m2m.airteliot.co.in/iot/api/details/",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This API shall allow user to fetch the overall profile of Customer as created at the time of On-Boarding."
+        },
+        {
+          "info": {
+            "name": "Fetch Customer Statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m2m.airteliot.co.in/iot/api/details/stats",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This API shall allow user to fetch the SIM Inventory statistics of a Customer Account at any given time. It returns the summary of SIM inventory as itâs shown on CMP portal."
+        },
+        {
+          "info": {
+            "name": "Fetch Customer Plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://m2m.airteliot.co.in/iot/api/details/plans",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This API shall allow user to fetch the details of Plans that are associated with the Customer Account. It returns the Plan code, plan name and plan description as defined on the account."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Whitelisting APIs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update Voice Whitelist Number API in CMP",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://m2m.airteliot.co.in/iot/api/voice/numbers",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "apikey",
+                "value": ""
+              },
+              {
+                "name": "customer-id",
+                "value": ""
+              },
+              {
+                "name": "iv-user",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API will update the Voice Whitelist number in CMP. Customer can Add, Update or Delete whitelisted numbers with this API"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

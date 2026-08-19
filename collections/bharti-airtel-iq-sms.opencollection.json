@@ -1,0 +1,151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Airtel IQ SMS Core APIs",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Individual SMS APIs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send Single SMS GET API",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/send-sms",
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the source/client's id registered and wants to use the SMS APIs"
+              },
+              {
+                "name": "destinationAddress",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the mobile numbers on which message needs to be delivered"
+              },
+              {
+                "name": "dltTemplateId",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the template id received after dlt registration."
+              },
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the entity id received after dlt registration."
+              },
+              {
+                "name": "filterBlacklistNumbers",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the flag to enable/disable filtering of blacklisted numbers"
+              },
+              {
+                "name": "message",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the message which needs to be delivered"
+              },
+              {
+                "name": "messageType",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the type of message which needs to be sent."
+              },
+              {
+                "name": "metaMap",
+                "value": "",
+                "type": "query",
+                "description": "Specifies url Shortener params and all the additional parameters"
+              },
+              {
+                "name": "priority",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the flag for priority of the messages"
+              },
+              {
+                "name": "sourceAddress",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the shortcode/senderId through which message would be sent"
+              }
+            ]
+          },
+          "docs": "This API can be used to send SMS to single destination address through GET request"
+        },
+        {
+          "info": {
+            "name": "Send Single SMS POST API",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/send-sms"
+          },
+          "docs": "This API can be used to send SMS to a single destination address through POST request"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Bulk SMS APIs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Multiple SMS Requests API",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/send-sms-bulk"
+          },
+          "docs": "This API can be used to send a request to leverage multiple SMS requests within the same instant."
+        },
+        {
+          "info": {
+            "name": "Send SMS Via Content Moderation API",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/send-sms-cm",
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "query",
+                "description": "customerId"
+              }
+            ]
+          },
+          "docs": "This API can be used to send a request without providing DLT details to more than one recipient within the same instant."
+        },
+        {
+          "info": {
+            "name": "Send SMS Via CSV API",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/send-sms-csv"
+          },
+          "docs": "This API can be used to send SMS to multiple destination addresses provided in csv file"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

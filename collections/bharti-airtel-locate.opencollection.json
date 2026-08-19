@@ -1,0 +1,844 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Locate API Catalog",
+    "version": "1.4.8"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authorization API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate Oauth token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://openapi.airtel.in/locate/apis/customers/:customerBaId/oauth2_token",
+            "params": [
+              {
+                "name": "customerBaId",
+                "value": "",
+                "type": "path",
+                "description": "customerBaId"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API will generate Access Token for given scope. Generated token will be valid for 24 hours. To access Airtel Locate APIs, user will need generated access token."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Resource Consent API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch MSISDNs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://openapi.airtel.in/locate/apis/customers/:customerBaId/resources",
+            "headers": [
+              {
+                "name": "access_token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "consent",
+                "value": "PENDING",
+                "type": "query",
+                "description": "consent"
+              },
+              {
+                "name": "customerBaId",
+                "value": "",
+                "type": "path",
+                "description": "customerBaId"
+              },
+              {
+                "name": "daysSinceLastLocationFetched",
+                "value": "10",
+                "type": "query",
+                "description": "daysSinceLastLocationFetched"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page to be returned (0..N)"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page."
+              },
+              {
+                "name": "tracking",
+                "value": "true",
+                "type": "query",
+                "description": "tracking"
+              }
+            ]
+          },
+          "docs": "This API returns the list of resource registered by customer for location tracking. Optional query params consent, tracking and daysSinceLastLocationFetched can be used to further filter the result.This API returns the list of resource for which consent initiated by customer for location tracking. \n\n"
+        },
+        {
+          "info": {
+            "name": "Initiate Consent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://openapi.airtel.in/locate/apis/customers/:customerBaId/resources/consent",
+            "headers": [
+              {
+                "name": "access_token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerBaId",
+                "value": "",
+                "type": "path",
+                "description": "customerBaId"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API shall allow the customer to initiate consent on number prefixed by 91 via available channel. Current supported channels are IVR and SMS. \n Use this to \n - Initiating new consent\n - Initiating consent if current state is REJECTED \n - Initiate consent in different language then previous\n\n> *__Supported Language__*\n> *English(en) | Hindi(hi) | Assamese(as) | Bengali(bn) | Oriya(or) | Kannada(kn) | Malayalam(ml) | Tamil(ta) | Telugu(te)*\n\n__Sample Message__:\n - __Customer with short code__ "
+        },
+        {
+          "info": {
+            "name": "Search Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://openapi.airtel.in/locate/apis/customers/:customerBaId/resources/:msisdn",
+            "headers": [
+              {
+                "name": "access_token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerBaId",
+                "value": "",
+                "type": "path",
+                "description": "customerBaId"
+              },
+              {
+                "name": "msisdn",
+                "value": "",
+                "type": "path",
+                "description": "msisdn"
+              }
+            ]
+          },
+          "docs": "This API will return the details for requested MSISDN like name, consent status and tracking status."
+        },
+        {
+          "info": {
+            "name": "Modify Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://openapi.airtel.in/locate/apis/customers/:customerBaId/resources/:msisdn",
+            "headers": [
+              {
+                "name": "access_token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerBaId",
+                "value": "",
+                "type": "path",
+                "description": "customerBaId"
+              },
+              {
+                "name": "msisdn",
+                "value": "",
+                "type": "path",
+                "description": "msisdn"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "API to modify tracking and alias(name) for registered msisdn.\n"
+        },
+        {
+          "info": {
+            "name": "Remove MSISDN",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://openapi.airtel.in/locate/apis/customers/:customerBaId/resources/:msisdn",
+            "headers": [
+              {
+                "name": "access_token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerBaId",
+                "value": "",
+                "type": "path",
+                "description": "customerBaId"
+              },
+              {
+                "name": "msisdn",
+                "value": "",
+                "type": "path",
+                "description": "msisdn"
+              }
+            ]
+          },
+          "docs": "This API will allow you to remove a MSISDN. It requires customer ID and MSISDN to be deleted."
+        },
+        {
+          "info": {
+            "name": "Fetch Consent Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://openapi.airtel.in/locate/apis/customers/:customerBaId/resources/:msisdn/consent",
+            "headers": [
+              {
+                "name": "access_token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerBaId",
+                "value": "",
+                "type": "path",
+                "description": "customerBaId"
+              },
+              {
+                "name": "msisdn",
+                "value": "",
+                "type": "path",
+                "description": "msisdn"
+              }
+            ]
+          },
+          "docs": "API to get the consent details insight\n>  *__Consent  States__*    -- _PROCESSING | INITIATED | PENDING | ALLOWED | REJECTED | FAILED_\n\n*__Consent Events Types__*  -- _MT | DR | MO | CALL | CDR_\n\n - _MT- Event when platform sends consent via SMS_\n - _DR- Event when delivery report is received against a sent MT event_\n - _MO- Event when platform receives a valid consent sent by user via SMS_\n - _CALL- Event when platform initiates consent call via IVR_\n - _CDR- Event when platform receives call d"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Location API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://openapi.airtel.in/locate/apis/customers/:customerBaId/resources/:msisdn/location",
+            "headers": [
+              {
+                "name": "access_token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerBaId",
+                "value": "",
+                "type": "path",
+                "description": "customerBaId"
+              },
+              {
+                "name": "msisdn",
+                "value": "",
+                "type": "path",
+                "description": "msisdn"
+              },
+              {
+                "name": "type",
+                "value": "async",
+                "type": "query",
+                "description": "type"
+              }
+            ]
+          },
+          "docs": "This API shall allow user to fetch the location of the registered resource. The access token must be generated with “location” scope for using this API. The value for query parameter “type” is ”sync” for synchronous request and ”async” for asynchronous request and the default value is ”sync”. Customer need to register the callback listener for the async API where Locate would post the location."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Validation API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Address validation API",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://openapi.airtel.in/locate/apis/customers/:customerBaId/resources/:msisdn/validation/address",
+            "headers": [
+              {
+                "name": "access_token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerBaId",
+                "value": "",
+                "type": "path",
+                "description": "customerBaId"
+              },
+              {
+                "name": "msisdn",
+                "value": "",
+                "type": "path",
+                "description": "msisdn"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "API to get the distance between live network location and given physical address."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tenant API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch Customer Tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://openapi.airtel.in/locate/apis/customers/:customerBaId/tenants",
+            "headers": [
+              {
+                "name": "access_token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerBaId",
+                "value": "",
+                "type": "path",
+                "description": "customerBaId"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "organizationName",
+                "value": "",
+                "type": "query",
+                "description": "organizationName"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "paged",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "profileNeeded",
+                "value": "",
+                "type": "query",
+                "description": "profileNeeded"
+              },
+              {
+                "name": "sort.sorted",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort.unsorted",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "unpaged",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "This API returns the list of tenants registered by customer.\n"
+        },
+        {
+          "info": {
+            "name": "Fetch Tenant Consent purpose",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://openapi.airtel.in/locate/apis/customers/:customerBaId/tenants/consent/purpose",
+            "headers": [
+              {
+                "name": "access_token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerBaId",
+                "value": "",
+                "type": "path",
+                "description": "customerBaId"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "paged",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort.sorted",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort.unsorted",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "unpaged",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "This API returns the list of available tenant consent purpose for initiating consent. This API returns the list of consent purpose for which consent can be initiated by customer for location tracking. \n\n"
+        },
+        {
+          "info": {
+            "name": "Fetch MSISDNs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://openapi.airtel.in/locate/apis/customers/:customerBaId/tenants/:tenantId/resources",
+            "headers": [
+              {
+                "name": "access_token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "consent",
+                "value": "PENDING",
+                "type": "query",
+                "description": "consent"
+              },
+              {
+                "name": "customerBaId",
+                "value": "",
+                "type": "path",
+                "description": "customerBaId"
+              },
+              {
+                "name": "daysSinceLastLocationFetched",
+                "value": "10",
+                "type": "query",
+                "description": "daysSinceLastLocationFetched"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "paged",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort.sorted",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort.unsorted",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "tenantId"
+              },
+              {
+                "name": "tracking",
+                "value": "true",
+                "type": "query",
+                "description": "tracking"
+              },
+              {
+                "name": "unpaged",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "This API returns the list of resource registered by customer for location tracking. Optional query params consent, tracking and daysSinceLastLocationFetched can be used to further filter the result.This API returns the list of resource for which consent initiated by customer for location tracking. \n\n"
+        },
+        {
+          "info": {
+            "name": "Initiate Consent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://openapi.airtel.in/locate/apis/customers/:customerBaId/tenants/:tenantId/resources/consent",
+            "headers": [
+              {
+                "name": "access_token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerBaId",
+                "value": "",
+                "type": "path",
+                "description": "customerBaId"
+              },
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "tenantId"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API shall allow the customer to initiate consent on number prefixed by 91 via available channel. Current supported channels are IVR and SMS. \n Use this to \n - Initiating new consent\n - Initiating consent if current state is REJECTED \n - Initiate consent in different language then previous\n\n> *__Supported Language__*\n> *English(en) | Hindi(hi) | Assamese(as) | Bengali(bn) | Oriya(or) | Kannada(kn) | Malayalam(ml) | Tamil(ta) | Telugu(te)*\n\n__Sample Message__:\n - __Customer with short code__ "
+        },
+        {
+          "info": {
+            "name": "Search Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://openapi.airtel.in/locate/apis/customers/:customerBaId/tenants/:tenantId/resources/:msisdn",
+            "headers": [
+              {
+                "name": "access_token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerBaId",
+                "value": "",
+                "type": "path",
+                "description": "customerBaId"
+              },
+              {
+                "name": "msisdn",
+                "value": "",
+                "type": "path",
+                "description": "msisdn"
+              },
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "tenantId"
+              }
+            ]
+          },
+          "docs": "This API will return the details for requested MSISDN like name, consent status and tracking status."
+        },
+        {
+          "info": {
+            "name": "Modify Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://openapi.airtel.in/locate/apis/customers/:customerBaId/tenants/:tenantId/resources/:msisdn",
+            "headers": [
+              {
+                "name": "access_token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerBaId",
+                "value": "",
+                "type": "path",
+                "description": "customerBaId"
+              },
+              {
+                "name": "msisdn",
+                "value": "",
+                "type": "path",
+                "description": "msisdn"
+              },
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "tenantId"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "API to modify tracking and alias(name) for registered msisdn.\n"
+        },
+        {
+          "info": {
+            "name": "Remove MSISDN",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://openapi.airtel.in/locate/apis/customers/:customerBaId/tenants/:tenantId/resources/:msisdn",
+            "headers": [
+              {
+                "name": "access_token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerBaId",
+                "value": "",
+                "type": "path",
+                "description": "customerBaId"
+              },
+              {
+                "name": "msisdn",
+                "value": "",
+                "type": "path",
+                "description": "msisdn"
+              },
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "tenantId"
+              }
+            ]
+          },
+          "docs": "This API will allow you to remove a MSISDN. It requires customer ID and MSISDN to be deleted."
+        },
+        {
+          "info": {
+            "name": "Fetch Consent Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://openapi.airtel.in/locate/apis/customers/:customerBaId/tenants/:tenantId/resources/:msisdn/consent",
+            "headers": [
+              {
+                "name": "access_token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerBaId",
+                "value": "",
+                "type": "path",
+                "description": "customerBaId"
+              },
+              {
+                "name": "msisdn",
+                "value": "",
+                "type": "path",
+                "description": "msisdn"
+              },
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "tenantId"
+              }
+            ]
+          },
+          "docs": "API to get the consent details insight\n>  *__Consent  States__*    -- _PROCESSING | INITIATED | PENDING | ALLOWED | REJECTED | FAILED_\n\n*__Consent Events Types__*  -- _MT | DR | MO | CALL | CDR_\n\n - _MT- Event when platform sends consent via SMS_\n - _DR- Event when delivery report is received against a sent MT event_\n - _MO- Event when platform receives a valid consent sent by user via SMS_\n - _CALL- Event when platform initiates consent call via IVR_\n - _CDR- Event when platform receives call d"
+        },
+        {
+          "info": {
+            "name": "Get Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://openapi.airtel.in/locate/apis/customers/:customerBaId/tenants/:tenantId/resources/:msisdn/location",
+            "headers": [
+              {
+                "name": "access_token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerBaId",
+                "value": "",
+                "type": "path",
+                "description": "customerBaId"
+              },
+              {
+                "name": "msisdn",
+                "value": "",
+                "type": "path",
+                "description": "msisdn"
+              },
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "tenantId"
+              },
+              {
+                "name": "type",
+                "value": "async",
+                "type": "query",
+                "description": "type"
+              }
+            ]
+          },
+          "docs": "This API shall allow user to fetch the location of the registered resource. The access token must be generated with “location” scope for using this API. The value for query parameter “type” is ”sync” for synchronous request and ”async” for asynchronous request and the default value is ”sync”. Customer need to register the callback listener for the async API where Locate would post the location."
+        },
+        {
+          "info": {
+            "name": "Address validation API",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://openapi.airtel.in/locate/apis/customers/:customerBaId/tenants/:tenantId/resources/:msisdn/validation/address",
+            "headers": [
+              {
+                "name": "access_token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerBaId",
+                "value": "",
+                "type": "path",
+                "description": "customerBaId"
+              },
+              {
+                "name": "msisdn",
+                "value": "",
+                "type": "path",
+                "description": "msisdn"
+              },
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "tenantId"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "API to get the distance between live network location and given physical address."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

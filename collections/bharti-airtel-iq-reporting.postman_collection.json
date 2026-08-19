@@ -1,0 +1,120 @@
+{
+  "item": [
+    {
+      "id": "5385bc6d-b959-4afa-a8c3-73afe69ff3a5",
+      "name": "Airtel IQ Sample CDR(Call Data Record) API",
+      "description": {
+        "content": "<strong>Call Detail Record (CDR)</strong> is the detailed record of the call, which contains various call details such as Time, Date, Duration, Caller_ID, Destination_Number, Status, recording URL, etc. of the call\n<br><strong>Sample CDR(Call Data Record)</strong> API is a sample API to test the CDR integration of Integrator with Airtel IQ. The Integrator needs to develop a post API similar to this API, on which all these details would be posted.\n<br>For the actual integration for Inbound/Outbound calls, the Integrator endpoint for receiving CDR can either be preconfigured at Airtel IQ end or can be passed in the callBackURLs in callFlowConfiguration of execute callflow Api.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4e3315d2-1e09-4b79-8076-c400ea064167",
+          "name": "Post CDR",
+          "request": {
+            "name": "Post CDR",
+            "description": {},
+            "url": {
+              "path": [
+                "sampleCdr"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Billable_Duration\": \"<string>\",\n  \"Call_ID\": \"<string>\",\n  \"Call_Type\": \"<string>\",\n  \"Caller_Circle_Name\": \"<string>\",\n  \"Caller_Duration\": \"<long>\",\n  \"Caller_ID\": \"<string>\",\n  \"Caller_Name\": \"<string>\",\n  \"Caller_Number\": \"<string>\",\n  \"Caller_Operator_Name\": \"<string>\",\n  \"Caller_Retry_Count\": \"<string>\",\n  \"Caller_Status\": \"<string>\",\n  \"Caller_Status_Detail\": \"<string>\",\n  \"Caller_Waiting_Time\": \"<string>\",\n  \"Conversation_Duration\": \"<string>\",\n  \"Customer_Name\": \"<string>\",\n  \"DTMF_Capture\": \"<string>\",\n  \"Date\": \"<string>\",\n  \"Destination_CLI\": \"<string>\",\n  \"Destination_Circle_Name\": \"<string>\",\n  \"Destination_Name\": \"<string>\",\n  \"Destination_Number\": \"<string>\",\n  \"Destination_Operator_Name\": \"<string>\",\n  \"Destination_Retry_Count\": \"<integer>\",\n  \"Destination_Status\": \"<string>\",\n  \"Destination_Status_Detail\": \"<string>\",\n  \"Hangup_Cause\": \"<string>\",\n  \"Missed_Destination_Number\": \"<string>\",\n  \"Overall_Call_Duration\": \"<string>\",\n  \"Overall_Call_Status\": \"<string>\",\n  \"Pulse_Count\": \"<integer>\",\n  \"Recording\": \"<string>\",\n  \"Session_ID\": \"<string>\",\n  \"Time\": \"<string>\",\n  \"audios\": [\n    {\n      \"audioURL\": \"<string>\",\n      \"dtmfInput\": \"<string>\",\n      \"endTime\": \"<dateTime>\",\n      \"startTime\": \"<dateTime>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"audioURL\": \"<string>\",\n      \"dtmfInput\": \"<string>\",\n      \"endTime\": \"<dateTime>\",\n      \"startTime\": \"<dateTime>\",\n      \"status\": \"<string>\"\n    }\n  ],\n  \"callType\": \"<string>\",\n  \"conversationDuration\": \"<long>\",\n  \"customerId\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"endTime\": \"<long>\",\n  \"events\": [\n    {\n      \"audioURL\": \"<string>\",\n      \"causeCode\": \"<string>\",\n      \"comments\": \"<string>\",\n      \"event\": \"<string>\",\n      \"eventId\": \"<string>\",\n      \"eventType\": \"<string>\",\n      \"metaData\": \"<object>\",\n      \"participantAddress\": \"<string>\",\n      \"participantIndex\": \"<integer>\",\n      \"sipCode\": \"<string>\",\n      \"time\": \"<dateTime>\",\n      \"waitTime\": \"<string>\"\n    },\n    {\n      \"audioURL\": \"<string>\",\n      \"causeCode\": \"<string>\",\n      \"comments\": \"<string>\",\n      \"event\": \"<string>\",\n      \"eventId\": \"<string>\",\n      \"eventType\": \"<string>\",\n      \"metaData\": \"<object>\",\n      \"participantAddress\": \"<string>\",\n      \"participantIndex\": \"<integer>\",\n      \"sipCode\": \"<string>\",\n      \"time\": \"<dateTime>\",\n      \"waitTime\": \"<string>\"\n    }\n  ],\n  \"fromWaitingTime\": \"<long>\",\n  \"overallCallStatus\": \"<string>\",\n  \"participants\": [\n    {\n      \"amdCause\": \"<string>\",\n      \"amdStatus\": \"<string>\",\n      \"audios\": [\n        {\n          \"audioURL\": \"<string>\",\n          \"dtmfInput\": \"<string>\",\n          \"endTime\": \"<dateTime>\",\n          \"startTime\": \"<dateTime>\",\n          \"status\": \"<string>\"\n        },\n        {\n          \"audioURL\": \"<string>\",\n          \"dtmfInput\": \"<string>\",\n          \"endTime\": \"<dateTime>\",\n          \"startTime\": \"<dateTime>\",\n          \"status\": \"<string>\"\n        }\n      ],\n      \"billableDuration\": \"<integer>\",\n      \"callAnswerTime\": \"<dateTime>\",\n      \"callQualityParams\": {\n        \"averageJitter\": \"<double>\",\n        \"averageLatency\": \"<double>\",\n        \"averagePacketLoss\": \"<double>\",\n        \"mos\": \"<double>\",\n        \"packetsReceived\": \"<double>\",\n        \"packetsSent\": \"<double>\"\n      },\n      \"callReason\": \"<string>\",\n      \"callerId\": \"<string>\",\n      \"callerIdCircle\": \"<string>\",\n      \"callerIdCountryCode\": \"<string>\",\n      \"callerIdInternationalPoint\": \"<string>\",\n      \"callerIdType\": \"<string>\",\n      \"chargeType\": \"<string>\",\n      \"circleId\": \"<string>\",\n      \"circleName\": \"<string>\",\n      \"duration\": \"<integer>\",\n      \"endTime\": \"<dateTime>\",\n      \"hangupCause\": \"<string>\",\n      \"internationPoint\": \"<string>\",\n      \"mergeType\": \"<string>\",\n      \"operatorId\": \"<string>\",\n      \"operatorName\": \"<string>\",\n      \"parallelDisconnected\": \"<boolean>\",\n      \"participantAddress\": \"<string>\",\n      \"participantCallType\": \"<string>\",\n      \"participantIndex\": \"<integer>\",\n      \"participantName\": \"<string>\",\n      \"participantNumberCountryCode\": \"<string>\",\n      \"participantNumberType\": \"<string>\",\n      \"pulse\": \"<integer>\",\n      \"requestName\": \"<string>\",\n      \"requestNo\": \"<integer>\",\n      \"retryCount\": \"<integer>\",\n      \"secondaryCLI\": \"<string>\",\n      \"startTime\": \"<dateTime>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"amdCause\": \"<string>\",\n      \"amdStatus\": \"<string>\",\n      \"audios\": [\n        {\n          \"audioURL\": \"<string>\",\n          \"dtmfInput\": \"<string>\",\n          \"endTime\": \"<dateTime>\",\n          \"startTime\": \"<dateTime>\",\n          \"status\": \"<string>\"\n        },\n        {\n          \"audioURL\": \"<string>\",\n          \"dtmfInput\": \"<string>\",\n          \"endTime\": \"<dateTime>\",\n          \"startTime\": \"<dateTime>\",\n          \"status\": \"<string>\"\n        }\n      ],\n      \"billableDuration\": \"<integer>\",\n      \"callAnswerTime\": \"<dateTime>\",\n      \"callQualityParams\": {\n        \"averageJitter\": \"<double>\",\n        \"averageLatency\": \"<double>\",\n        \"averagePacketLoss\": \"<double>\",\n        \"mos\": \"<double>\",\n        \"packetsReceived\": \"<double>\",\n        \"packetsSent\": \"<double>\"\n      },\n      \"callReason\": \"<string>\",\n      \"callerId\": \"<string>\",\n      \"callerIdCircle\": \"<string>\",\n      \"callerIdCountryCode\": \"<string>\",\n      \"callerIdInternationalPoint\": \"<string>\",\n      \"callerIdType\": \"<string>\",\n      \"chargeType\": \"<string>\",\n      \"circleId\": \"<string>\",\n      \"circleName\": \"<string>\",\n      \"duration\": \"<integer>\",\n      \"endTime\": \"<dateTime>\",\n      \"hangupCause\": \"<string>\",\n      \"internationPoint\": \"<string>\",\n      \"mergeType\": \"<string>\",\n      \"operatorId\": \"<string>\",\n      \"operatorName\": \"<string>\",\n      \"parallelDisconnected\": \"<boolean>\",\n      \"participantAddress\": \"<string>\",\n      \"participantCallType\": \"<string>\",\n      \"participantIndex\": \"<integer>\",\n      \"participantName\": \"<string>\",\n      \"participantNumberCountryCode\": \"<string>\",\n      \"participantNumberType\": \"<string>\",\n      \"pulse\": \"<integer>\",\n      \"requestName\": \"<string>\",\n      \"requestNo\": \"<integer>\",\n      \"retryCount\": \"<integer>\",\n      \"secondaryCLI\": \"<string>\",\n      \"startTime\": \"<dateTime>\",\n      \"status\": \"<string>\"\n    }\n  ],\n  \"startTime\": \"<long>\",\n  \"timestamp\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7153f1f5-8127-424e-9aa0-35ad40128b35",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sampleCdr"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Billable_Duration\": \"00:58\",\n  \"Call_ID\": \"<string>\",\n  \"Call_Type\": \"INBOUND\",\n  \"Caller_Circle_Name\": \"MP and Chattisgarh\",\n  \"Caller_Duration\": 42495,\n  \"Caller_ID\": \"<string>\",\n  \"Caller_Name\": \"Xyz\",\n  \"Caller_Number\": \"<string>\",\n  \"Caller_Operator_Name\": \"Airtel\",\n  \"Caller_Retry_Count\": \"<string>\",\n  \"Caller_Status\": \"Answer\",\n  \"Caller_Status_Detail\": \"16 | 699 | Normal call clearing | Disconnected\",\n  \"Caller_Waiting_Time\": \"00:21\",\n  \"Conversation_Duration\": \"00:58\",\n  \"Customer_Name\": \"XYZ\",\n  \"DTMF_Capture\": \"1 | 3 | 9\",\n  \"Date\": \"14/07/2020\",\n  \"Destination_CLI\": \"<string>\",\n  \"Destination_Circle_Name\": \"MP and Chattisgarh\",\n  \"Destination_Name\": \"Abc\",\n  \"Destination_Number\": \"<string>\",\n  \"Destination_Operator_Name\": \"Airtel\",\n  \"Destination_Retry_Count\": 2,\n  \"Destination_Status\": \"Answer\",\n  \"Destination_Status_Detail\": \"17 | 486 | User Busy | Busy\",\n  \"Hangup_Cause\": \"SYSTEM_INITIATED\",\n  \"Missed_Destination_Number\": \"09999999999 | 09999999998\",\n  \"Overall_Call_Duration\": \"01:17\",\n  \"Overall_Call_Status\": \"Answered\",\n  \"Pulse_Count\": 4,\n  \"Recording\": \"<string>\",\n  \"Session_ID\": \"5ea2aded87fcb12816bcd27b\",\n  \"Time\": \"08:42:06\",\n  \"audios\": [\n    {\n      \"audioURL\": \"<string>\",\n      \"dtmfInput\": \"<string>\",\n      \"endTime\": \"<dateTime>\",\n      \"startTime\": \"<dateTime>\",\n      \"status\": \"Stopped\"\n    },\n    {\n      \"audioURL\": \"<string>\",\n      \"dtmfInput\": \"<string>\",\n      \"endTime\": \"<dateTime>\",\n      \"startTime\": \"<dateTime>\",\n      \"status\": \"Stopped\"\n    }\n  ],\n  \"callType\": \"INBOUND\",\n  \"conversationDuration\": 12225,\n  \"customerId\": \"<string>\",\n  \"duration\": 77998,\n  \"endTime\": 1594696326667,\n  \"events\": [\n    {\n      \"audioURL\": \"<string>\",\n      \"causeCode\": \"<string>\",\n      \"comments\": \"<string>\",\n      \"event\": \"CalledNumber\",\n      \"eventId\": \"12ab\",\n      \"eventType\": \"CALL\",\n      \"metaData\": \"<object>\",\n      \"participantAddress\": \"<string>\",\n      \"participantIndex\": \"<integer>\",\n      \"sipCode\": \"<string>\",\n      \"time\": \"<dateTime>\",\n      \"waitTime\": \"<string>\"\n    },\n    {\n      \"audioURL\": \"<string>\",\n      \"causeCode\": \"<string>\",\n      \"comments\": \"<string>\",\n      \"event\": \"CalledNumber\",\n      \"eventId\": \"12ab\",\n      \"eventType\": \"CALL\",\n      \"metaData\": \"<object>\",\n      \"participantAddress\": \"<string>\",\n      \"participantIndex\": \"<integer>\",\n      \"sipCode\": \"<string>\",\n      \"time\": \"<dateTime>\",\n      \"waitTime\": \"<string>\"\n    }\n  ],\n  \"fromWaitingTime\": 41774,\n  \"overallCallStatus\": \"Answered\",\n  \"participants\": [\n    {\n      \"amdCause\": \"<string>\",\n      \"amdStatus\": \"<string>\",\n      \"audios\": [\n        {\n          \"audioURL\": \"<string>\",\n          \"dtmfInput\": \"<string>\",\n          \"endTime\": \"<dateTime>\",\n          \"startTime\": \"<dateTime>\",\n          \"status\": \"Stopped\"\n        },\n        {\n          \"audioURL\": \"<string>\",\n          \"dtmfInput\": \"<string>\",\n          \"endTime\": \"<dateTime>\",\n          \"startTime\": \"<dateTime>\",\n          \"status\": \"Stopped\"\n        }\n      ],\n      \"billableDuration\": 100,\n      \"callAnswerTime\": \"<dateTime>\",\n      \"callQualityParams\": {\n        \"averageJitter\": \"<double>\",\n        \"averageLatency\": \"<double>\",\n        \"averagePacketLoss\": \"<double>\",\n        \"mos\": \"<double>\",\n        \"packetsReceived\": \"<double>\",\n        \"packetsSent\": \"<double>\"\n      },\n      \"callReason\": \"<string>\",\n      \"callerId\": \"<string>\",\n      \"callerIdCircle\": \"Karnataka\",\n      \"callerIdCountryCode\": \"+91\",\n      \"callerIdInternationalPoint\": \"<string>\",\n      \"callerIdType\": \"<string>\",\n      \"chargeType\": \"DOMESTIC\",\n      \"circleId\": \"<string>\",\n      \"circleName\": \"Delhi\",\n      \"duration\": 137137,\n      \"endTime\": \"<dateTime>\",\n      \"hangupCause\": \"SYSTEM_INITIATED\",\n      \"internationPoint\": \"<string>\",\n      \"mergeType\": \"<string>\",\n      \"operatorId\": \"ATL\",\n      \"operatorName\": \"Airtel\",\n      \"parallelDisconnected\": \"<boolean>\",\n      \"participantAddress\": \"<string>\",\n      \"participantCallType\": \"INBOUND\",\n      \"participantIndex\": \"<integer>\",\n      \"participantName\": \"Abc\",\n      \"participantNumberCountryCode\": \"+91\",\n      \"participantNumberType\": \"<string>\",\n      \"pulse\": 2,\n      \"requestName\": \"<string>\",\n      \"requestNo\": \"<integer>\",\n      \"retryCount\": 1,\n      \"secondaryCLI\": \"<string>\",\n      \"startTime\": \"<dateTime>\",\n      \"status\": \"Disconnected\"\n    },\n    {\n      \"amdCause\": \"<string>\",\n      \"amdStatus\": \"<string>\",\n      \"audios\": [\n        {\n          \"audioURL\": \"<string>\",\n          \"dtmfInput\": \"<string>\",\n          \"endTime\": \"<dateTime>\",\n          \"startTime\": \"<dateTime>\",\n          \"status\": \"Stopped\"\n        },\n        {\n          \"audioURL\": \"<string>\",\n          \"dtmfInput\": \"<string>\",\n          \"endTime\": \"<dateTime>\",\n          \"startTime\": \"<dateTime>\",\n          \"status\": \"Stopped\"\n        }\n      ],\n      \"billableDuration\": 100,\n      \"callAnswerTime\": \"<dateTime>\",\n      \"callQualityParams\": {\n        \"averageJitter\": \"<double>\",\n        \"averageLatency\": \"<double>\",\n        \"averagePacketLoss\": \"<double>\",\n        \"mos\": \"<double>\",\n        \"packetsReceived\": \"<double>\",\n        \"packetsSent\": \"<double>\"\n      },\n      \"callReason\": \"<string>\",\n      \"callerId\": \"<string>\",\n      \"callerIdCircle\": \"Karnataka\",\n      \"callerIdCountryCode\": \"+91\",\n      \"callerIdInternationalPoint\": \"<string>\",\n      \"callerIdType\": \"<string>\",\n      \"chargeType\": \"DOMESTIC\",\n      \"circleId\": \"<string>\",\n      \"circleName\": \"Delhi\",\n      \"duration\": 137137,\n      \"endTime\": \"<dateTime>\",\n      \"hangupCause\": \"SYSTEM_INITIATED\",\n      \"internationPoint\": \"<string>\",\n      \"mergeType\": \"<string>\",\n      \"operatorId\": \"ATL\",\n      \"operatorName\": \"Airtel\",\n      \"parallelDisconnected\": \"<boolean>\",\n      \"participantAddress\": \"<string>\",\n      \"participantCallType\": \"INBOUND\",\n      \"participantIndex\": \"<integer>\",\n      \"participantName\": \"Abc\",\n      \"participantNumberCountryCode\": \"+91\",\n      \"participantNumberType\": \"<string>\",\n      \"pulse\": 2,\n      \"requestName\": \"<string>\",\n      \"requestNo\": \"<integer>\",\n      \"retryCount\": 1,\n      \"secondaryCLI\": \"<string>\",\n      \"startTime\": \"<dateTime>\",\n      \"status\": \"Disconnected\"\n    }\n  ],\n  \"startTime\": 1594696326667,\n  \"timestamp\": \"2020-07-14 02:54:09\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"CREATED\",\n  \"statusCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "//openapi.airtel.in/gateway/airtel-xchange-reporting/v2/api-docs",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "cedd4e70-d1de-49c0-9d3c-4f820bc551af",
+    "name": "Airtel IQ API Documentation",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}
