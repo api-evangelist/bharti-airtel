@@ -181,6 +181,12 @@ apis:
     humanURL: https://openapi.airtel.in/smartapi/#/docs
     tags:
       - Carrier Billing
+      - Subscription
+      - Identity Verification
+      - Legacy
+      - Authentication
+    tags_raw:
+      - Carrier Billing
       - Subscriptions
       - Identity Verification
       - Legacy
