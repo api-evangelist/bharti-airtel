@@ -55,154 +55,610 @@ created: '2026-07-25'
 modified: '2026-07-25'
 specificationVersion: '0.23'
 apis:
-  - aid: bharti-airtel:airtel-iq-sms-api
-    name: Airtel IQ SMS API
-    description: >-
-      The messaging half of Airtel IQ, Airtel's network-embedded CPaaS suite.
-      Sends single, bulk, CSV-batch and content-moderated A2P SMS over Airtel's
-      pan-India network, with TRAI DLT (Hyperledger-based distributed ledger)
-      scrubbing for sender header, content template and consent compliance
-      applied in-path. Authenticated with HTTP Basic using API-key credentials
-      issued from the Airtel IQ dashboard. Swagger 2.0 published openly at
-      openapi.airtel.in.
-    humanURL: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
-    baseURL: https://iqsms.airtel.in/api/v1
-    tags:
-      - Messaging
-      - SMS
-      - CPaaS
-      - India
-    properties:
-      - type: Documentation
-        url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/overview
-      - type: APIReference
-        url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
-      - type: OpenAPI
-        url: openapi/bharti-airtel-iq-sms-openapi.yml
-      - type: Overlay
-        url: overlays/bharti-airtel-iq-sms-overlay.yaml
-      - type: SignUp
-        url: https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup
-  - aid: bharti-airtel:airtel-iq-reporting-api
-    name: Airtel IQ Reporting API
-    description: >-
-      The Call Detail Record (CDR) reporting surface of Airtel IQ. Returns
-      detailed per-call records — time, date, duration, caller ID, destination
-      number, status and call-recording URL — for voice traffic placed through
-      Airtel IQ Intelliphones and call flows. Swagger 2.0 published openly at
-      openapi.airtel.in.
-    humanURL: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr
-    baseURL: https://openapi.airtel.in/gateway/airtel-xchange-reporting/v2
-    tags:
-      - Voice
-      - Reporting
-      - CDR
-      - CPaaS
-    properties:
-      - type: Documentation
-        url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview
-      - type: APIReference
-        url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr
-      - type: OpenAPI
-        url: openapi/bharti-airtel-iq-reporting-openapi.yml
-      - type: Overlay
-        url: overlays/bharti-airtel-iq-reporting-overlay.yaml
-  - aid: bharti-airtel:airtel-iot-api
-    name: Airtel IoT API
-    description: >-
-      Airtel's IoT/M2M connectivity-management API, published as a complete
-      OpenAPI 3.0.1 catalogue of 43 operations across ten areas: account
-      authorization, account details, inventory management, SIM lifecycle
-      (activate, swap, change plan, safe custody, temporary disconnection),
-      bulk SIM lifecycle, job status, device and session information, SMS and
-      voice whitelisting, KYC management, and a messaging centre. Authenticated
-      with OAuth 2.0 client-credentials against /auth/v2/generate/authtoken with
-      refresh-token support. Documented publicly with Redoc, no login required.
-    humanURL: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
-    baseURL: https://m2m.airteliot.co.in/iot/api/
-    tags:
-      - IoT
-      - M2M
-      - SIM Management
-      - Connectivity
-      - eSIM
-      - KYC
-    properties:
-      - type: Documentation
-        url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
-      - type: APIReference
-        url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
-      - type: OpenAPI
-        url: openapi/bharti-airtel-iot-openapi.yml
-      - type: Overlay
-        url: overlays/bharti-airtel-iot-overlay.yaml
-  - aid: bharti-airtel:airtel-locate-api
-    name: Airtel Locate API
-    description: >-
-      Airtel Locate is the operator's network-based device-location platform,
-      letting enterprises track a device by MSISDN without relying on the
-      device's GPS. Published as an OpenAPI 3.0.0 catalogue (version 1.4.8) of
-      19 operations across five areas — Authorization, Resource Consent,
-      Location, Address Validation and Tenant management — with explicit
-      subscriber consent capture and an asynchronous mode that posts location
-      to a customer-registered callback listener. This is Airtel's proprietary
-      location API, not the CAMARA Device Location or Location Verification
-      API. Documented publicly with Redoc, no login required.
-    humanURL: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
-    baseURL: https://openapi.airtel.in/locate/apis
-    tags:
-      - Device Location
-      - Consent Management
-      - IoT
-      - Location
-      - Address Validation
-    properties:
-      - type: Documentation
-        url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
-      - type: APIReference
-        url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
-      - type: OpenAPI
-        url: openapi/bharti-airtel-locate-openapi.yml
-      - type: Overlay
-        url: overlays/bharti-airtel-locate-overlay.yaml
-  - aid: bharti-airtel:airtel-smart-api
-    name: Airtel Smart API (legacy)
-    description: >-
-      Airtel's original partner developer programme, launched in 2017 and now
-      an unmaintained legacy portal (the site still carries a 2017 copyright).
-      Its public documentation still describes real OAuth 2.0 authorization-code
-      and implicit grant flows and three partner services — carrier-billing
-      charge, subscription activation/deactivation, and an LRN (local routing
-      number) and porting lookup — plus an Aadhaar/UIDAI DigiAuth
-      authentication and e-KYC integration. Production host is not published;
-      documented endpoints use an <IP>:<Port> placeholder and access is
-      granted only after partner registration, so no specification was
-      harvestable.
-    humanURL: https://openapi.airtel.in/smartapi/#/docs
-    tags:
-      - Carrier Billing
-      - Subscription
-      - Identity Verification
-      - Legacy
-      - Authentication
-    tags_raw:
-      - Carrier Billing
-      - Subscriptions
-      - Identity Verification
-      - Legacy
-      - OAuth
-    properties:
-      - type: Documentation
-        url: https://openapi.airtel.in/smartapi/#/docs
-      - type: APIReference
-        url: https://openapi.airtel.in/smartapi/#/docs/subscriptions
-      - type: Documentation
-        url: https://openapi.airtel.in/smartapi/#/docs/payment
-      - type: Documentation
-        url: https://openapi.airtel.in/smartapi/#/docs/UIDAI
-      - type: Documentation
-        url: https://openapi.airtel.in/smartapi/#/docs/developerAuth
+- aid: bharti-airtel:airtel-smart-api
+  name: Airtel Smart API (legacy)
+  description: >-
+    Airtel's original partner developer programme, launched in 2017 and now an unmaintained legacy portal
+    (the site still carries a 2017 copyright). Its public documentation still describes real OAuth 2.0
+    authorization-code and implicit grant flows and three partner services — carrier-billing charge, subscription
+    activation/deactivation, and an LRN (local routing number) and porting lookup — plus an Aadhaar/UIDAI
+    DigiAuth authentication and e-KYC integration. Production host is not published; documented endpoints
+    use an <IP>:<Port> placeholder and access is granted only after partner registration, so no specification
+    was harvestable.
+  humanURL: https://openapi.airtel.in/smartapi/#/docs
+  tags:
+  - Carrier Billing
+  - Subscription
+  - Identity Verification
+  - Legacy
+  - Authentication
+  tags_raw:
+  - Carrier Billing
+  - Subscriptions
+  - Identity Verification
+  - Legacy
+  - OAuth
+  properties:
+  - type: Documentation
+    url: https://openapi.airtel.in/smartapi/#/docs
+  - type: APIReference
+    url: https://openapi.airtel.in/smartapi/#/docs/subscriptions
+  - type: Documentation
+    url: https://openapi.airtel.in/smartapi/#/docs/payment
+  - type: Documentation
+    url: https://openapi.airtel.in/smartapi/#/docs/UIDAI
+  - type: Documentation
+    url: https://openapi.airtel.in/smartapi/#/docs/developerAuth
+- aid: bharti-airtel:bharti-airtel-account-authorization-api
+  name: Bharti Airtel Account Authorization API
+  description: >-
+    This set of APIs shall allow user to generate Access Token and refresh Access Token to perform any
+    action on CMP via the API gateway.
+  humanURL: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  baseURL: https://iqsms.airtel.in/api/v1
+  tags:
+  - Account Authorization
+  properties:
+  - type: OpenAPI
+    url: openapi/bharti-airtel-account-authorization-api-openapi.yml
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  - type: SignUp
+    url: https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+- aid: bharti-airtel:bharti-airtel-account-details-api
+  name: Bharti Airtel Account Details API
+  description: >-
+    This set of APIs fetch various details about a Billable Customer Account including Customer Profile,
+    Plan details, User details and so on.
+  humanURL: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  baseURL: https://iqsms.airtel.in/api/v1
+  tags:
+  - Account Details
+  properties:
+  - type: OpenAPI
+    url: openapi/bharti-airtel-account-details-api-openapi.yml
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  - type: SignUp
+    url: https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+- aid: bharti-airtel:bharti-airtel-airtel-iq-sample-cdr-call-data-record-api-api
+  name: Bharti Airtel Airtel IQ Sample CDR(Call Data Record) API
+  description: >-
+    <strong>Call Detail Record (CDR)</strong> is the detailed record of the call, which contains various
+    call details such as Time, Date, Duration, Caller_ID, Destination_Number, Status, recording URL, etc.
+    of the call
+
+    <br><strong>Sample CDR(Call Data Record)</strong> API is a sample API to test the CDR integration
+    of Integrator with Airtel IQ. The Integrator needs to develop a post API similar to this API, on which
+    all these details would be posted.
+
+    <br>For the actual integration for Inbound/Outbound calls, the Integrator endpoint for receiving CDR
+    can either be preconfigured at Airtel IQ end or can be passed in the callBackURLs in callFlowConfiguration
+    of execute callflow Api.
+  humanURL: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  baseURL: https://iqsms.airtel.in/api/v1
+  tags:
+  - Airtel IQ Sample CDR(Call Data Record) API
+  properties:
+  - type: OpenAPI
+    url: openapi/bharti-airtel-airtel-iq-sample-cdr-call-data-record-api-api-openapi.yml
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  - type: SignUp
+    url: https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+- aid: bharti-airtel:bharti-airtel-authorization-api-api
+  name: Bharti Airtel Authorization API
+  description: >-
+    This API will help you to generate token from the client credentials shared upon subscription to location
+    services. In case you have not yet subscribed to location service, email us to locate.support@airtel.com
+  humanURL: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  baseURL: https://iqsms.airtel.in/api/v1
+  tags:
+  - Authorization API
+  properties:
+  - type: OpenAPI
+    url: openapi/bharti-airtel-authorization-api-api-openapi.yml
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  - type: SignUp
+    url: https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+- aid: bharti-airtel:bharti-airtel-bulk-sms-apis-api
+  name: Bharti Airtel Bulk SMS APIs API
+  description: These APIs can be used to send Bulk SMS in different ways as documented below
+  humanURL: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  baseURL: https://iqsms.airtel.in/api/v1
+  tags:
+  - Bulk SMS APIs
+  properties:
+  - type: OpenAPI
+    url: openapi/bharti-airtel-bulk-sms-apis-api-openapi.yml
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  - type: SignUp
+    url: https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+- aid: bharti-airtel:bharti-airtel-device-session-information-api
+  name: Bharti Airtel Device & Session Information API
+  description: >-
+    To data usage on a specific SIM, this API will allow user to get total data allocation, available
+    data, used data, device information & session information for the SIM.
+  humanURL: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  baseURL: https://iqsms.airtel.in/api/v1
+  tags:
+  - Device & Session Information
+  properties:
+  - type: OpenAPI
+    url: openapi/bharti-airtel-device-session-information-api-openapi.yml
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  - type: SignUp
+    url: https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+- aid: bharti-airtel:bharti-airtel-individual-sms-apis-api
+  name: Bharti Airtel Individual SMS APIs API
+  description: These APIs can be used to send a single SMS in a single request as documented below
+  humanURL: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  baseURL: https://iqsms.airtel.in/api/v1
+  tags:
+  - Individual SMS APIs
+  properties:
+  - type: OpenAPI
+    url: openapi/bharti-airtel-individual-sms-apis-api-openapi.yml
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  - type: SignUp
+    url: https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+- aid: bharti-airtel:bharti-airtel-inventory-management-api
+  name: Bharti Airtel Inventory Management API
+  description: >-
+    This set of APIs fetch various details about Sim details, Basket details and so on in the account.
+  humanURL: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  baseURL: https://iqsms.airtel.in/api/v1
+  tags:
+  - Inventory Management
+  properties:
+  - type: OpenAPI
+    url: openapi/bharti-airtel-inventory-management-api-openapi.yml
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  - type: SignUp
+    url: https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+- aid: bharti-airtel:bharti-airtel-job-status-api
+  name: Bharti Airtel Job Status API
+  description: >-
+    This API will allow user to fetch Job details for any operations being performed in that Billable
+    account.
+  humanURL: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  baseURL: https://iqsms.airtel.in/api/v1
+  tags:
+  - Job Status
+  properties:
+  - type: OpenAPI
+    url: openapi/bharti-airtel-job-status-api-openapi.yml
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  - type: SignUp
+    url: https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+- aid: bharti-airtel:bharti-airtel-kyc-manager-api
+  name: Bharti Airtel KYC Manager API
+  description: This set of APIs to manage SIM KYC details.
+  humanURL: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  baseURL: https://iqsms.airtel.in/api/v1
+  tags:
+  - KYC Manager
+  properties:
+  - type: OpenAPI
+    url: openapi/bharti-airtel-kyc-manager-api-openapi.yml
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  - type: SignUp
+    url: https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+- aid: bharti-airtel:bharti-airtel-location-api-api
+  name: Bharti Airtel Location API
+  description: This API will return location of MSISDN including Latitude and Longitude.
+  humanURL: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  baseURL: https://iqsms.airtel.in/api/v1
+  tags:
+  - Location API
+  properties:
+  - type: OpenAPI
+    url: openapi/bharti-airtel-location-api-api-openapi.yml
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  - type: SignUp
+    url: https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+- aid: bharti-airtel:bharti-airtel-messaging-centre-api
+  name: Bharti Airtel Messaging Centre API
+  description: These set of APIs allow lifecycle management of the Messaging Centre functionality
+  humanURL: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  baseURL: https://iqsms.airtel.in/api/v1
+  tags:
+  - Messaging Centre
+  properties:
+  - type: OpenAPI
+    url: openapi/bharti-airtel-messaging-centre-api-openapi.yml
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  - type: SignUp
+    url: https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+- aid: bharti-airtel:bharti-airtel-resource-consent-api-api
+  name: Bharti Airtel Resource Consent API
+  description: >-
+    This set of APIs allow customer initiate consent, fetch consent details, delete resource, fetch list
+    of msisdn for consent was initiated and various other API to handle consumer msisdn's and their consent
+  humanURL: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  baseURL: https://iqsms.airtel.in/api/v1
+  tags:
+  - Resource Consent API
+  properties:
+  - type: OpenAPI
+    url: openapi/bharti-airtel-resource-consent-api-api-openapi.yml
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  - type: SignUp
+    url: https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+- aid: bharti-airtel:bharti-airtel-sim-lifecycle-api
+  name: Bharti Airtel SIM LifeCycle API
+  description: This API shall allow user to change the state of SIMs.
+  humanURL: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  baseURL: https://iqsms.airtel.in/api/v1
+  tags:
+  - SIM LifeCycle
+  properties:
+  - type: OpenAPI
+    url: openapi/bharti-airtel-sim-lifecycle-api-openapi.yml
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  - type: SignUp
+    url: https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+- aid: bharti-airtel:bharti-airtel-sim-lifecycle-bulk-api
+  name: Bharti Airtel SIM LifeCycle Bulk API
+  description: This API shall allow user to change the state of SIMs.
+  humanURL: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  baseURL: https://iqsms.airtel.in/api/v1
+  tags:
+  - SIM LifeCycle Bulk
+  properties:
+  - type: OpenAPI
+    url: openapi/bharti-airtel-sim-lifecycle-bulk-api-openapi.yml
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  - type: SignUp
+    url: https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+- aid: bharti-airtel:bharti-airtel-tenant-api-api
+  name: Bharti Airtel Tenant API
+  description: >-
+    These set of Tenant APIs allow customer to initiate consent, fetch consent details, delete consent,
+    fetch list of msisdn for consent was initiated and various other API to handle tenant msisdn's and
+    their consent.
+  humanURL: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  baseURL: https://iqsms.airtel.in/api/v1
+  tags:
+  - Tenant API
+  properties:
+  - type: OpenAPI
+    url: openapi/bharti-airtel-tenant-api-api-openapi.yml
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  - type: SignUp
+    url: https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+- aid: bharti-airtel:bharti-airtel-validation-api-api
+  name: Bharti Airtel Validation API
+  description: >-
+    These set of APIs allow customer to validate a physical address against network fetched live location.
+    To get access to these API's please email to  locate.support@airtel.com
+  humanURL: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  baseURL: https://iqsms.airtel.in/api/v1
+  tags:
+  - Validation API
+  properties:
+  - type: OpenAPI
+    url: openapi/bharti-airtel-validation-api-api-openapi.yml
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  - type: SignUp
+    url: https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+- aid: bharti-airtel:bharti-airtel-whitelisting-api
+  name: Bharti Airtel Whitelisting API
+  description: This set of APIs to manage whitelisting numbers on Airtel IoT portal in Batch
+  humanURL: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  baseURL: https://iqsms.airtel.in/api/v1
+  tags:
+  - Whitelisting
+  properties:
+  - type: OpenAPI
+    url: openapi/bharti-airtel-whitelisting-api-openapi.yml
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  - type: SignUp
+    url: https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+- aid: bharti-airtel:bharti-airtel-whitelisting-apis-api
+  name: Bharti Airtel Whitelisting APIs API
+  description: The Whitelisting APIs API from Bharti Airtel — 1 operation(s) for whitelisting apis.
+  humanURL: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  baseURL: https://iqsms.airtel.in/api/v1
+  tags:
+  - Whitelisting APIs
+  properties:
+  - type: OpenAPI
+    url: openapi/bharti-airtel-whitelisting-apis-api-openapi.yml
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
+  - type: SignUp
+    url: https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup
+  - type: Documentation
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview
+  - type: APIReference
+    url: https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/
+  - type: Documentation
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
+  - type: APIReference
+    url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
 common:
+  - type: Overlay
+    url: overlays/bharti-airtel-iq-sms-overlay.yaml
+  - type: Overlay
+    url: overlays/bharti-airtel-iq-reporting-overlay.yaml
+  - type: Overlay
+    url: overlays/bharti-airtel-iot-overlay.yaml
+  - type: Overlay
+    url: overlays/bharti-airtel-locate-overlay.yaml
   - type: AgenticAccess
     url: agentic-access/bharti-airtel-agentic-access.yml
   - type: DomainSecurity
