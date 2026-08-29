@@ -663,6 +663,9 @@ apis:
   - type: APIReference
     url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
 common:
+  - type: CapabilityMap
+    url: capabilities/bharti-airtel-capability-edges.yml
+    name: Bharti Airtel Business Capability Map
   - type: Overlay
     url: overlays/bharti-airtel-iq-sms-overlay.yaml
   - type: Overlay

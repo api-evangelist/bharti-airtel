@@ -1,0 +1,48 @@
+slug: bharti-airtel
+provider: Bharti Airtel
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Telecommunications
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: SIM LifeCycle
+  spec_file: bharti-airtel-sim-lifecycle-api-openapi.yml
+  capability_id: BC-2640.20
+  capability_id_l1: BC-2640
+  capability_name: SIM & eSIM Lifecycle Management
+  confidence: 0.94
+  evidence: '''Activate SIM'', ''Swap SIM'', ''Safe Custody'', ''Temp Disconnection'', ''Activate SIM
+    in Test Mode'''
+  reason: Operations perform SIM state transitions — activation, swap, suspension/safe custody, temporary
+    disconnection and resumption — which is exactly physical SIM lifecycle management on a connectivity
+    management platform.
+- tag: Inventory Management
+  spec_file: bharti-airtel-inventory-management-api-openapi.yml
+  capability_id: BC-2640.20
+  capability_id_l1: BC-2640
+  capability_name: SIM & eSIM Lifecycle Management
+  confidence: 0.72
+  evidence: '"Download SIM Inventory", "Fetch SIMs."; schemas "SimDetailsVO", "SimApnVO", "Baskets"'
+  reason: Despite the generic tag, the operations manage SIM inventory baskets and per-SIM details for
+    the IoT connectivity management platform — SIM lifecycle/inventory stewardship rather than general
+    goods inventory.
+- tag: SIM LifeCycle Bulk
+  spec_file: bharti-airtel-sim-lifecycle-bulk-api-openapi.yml
+  capability_id: BC-2640.20
+  capability_id_l1: BC-2640
+  capability_name: SIM & eSIM Lifecycle Management
+  confidence: 0.72
+  evidence: POST /bulk/sim/upload 'Bulk Upload'; POST /bulk/sim/download/template 'Bulk Order Template
+    Download'; description mentions 'Changing SIM state (Test Mode, Activate, Change Plan, Safe custody),
+    ... Performing bulk operations'
+  reason: Bulk file mechanism for issuing the same SIM state-change orders as the SIM LifeCycle tag, so
+    it realises SIM lifecycle management; lower confidence because the operations themselves are template/upload
+    plumbing.
