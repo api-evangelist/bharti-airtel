@@ -109,6 +109,8 @@ apis:
   humanURL: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
   baseURL: https://iqsms.airtel.in/api/v1
   tags:
+  - Account - Authorization
+  tags_raw:
   - Account Authorization
   properties:
   - type: OpenAPI
@@ -177,7 +179,8 @@ apis:
     of execute callflow Api.
   humanURL: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
   baseURL: https://iqsms.airtel.in/api/v1
-  tags:
+  tags: []
+  tags_raw:
   - Airtel IQ Sample CDR(Call Data Record) API
   properties:
   - type: OpenAPI
