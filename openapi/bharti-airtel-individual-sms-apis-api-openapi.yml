@@ -1,0 +1,261 @@
+openapi: 3.2.0
+info:
+  version: 1.0.0
+  title: Airtel IQ SMS Core Individual SMS APIs API
+  description: These APIs can be used to send a single SMS in a single request as documented below
+servers:
+- url: https://iqsms.airtel.in/
+tags:
+- name: Individual SMS APIs
+  description: These APIs can be used to send a single SMS in a single request as documented below
+paths:
+  /api/v1/send-sms:
+    get:
+      tags:
+      - Individual SMS APIs
+      summary: Send Single SMS GET API
+      description: This API can be used to send SMS to single destination address through GET request
+      operationId: sendSmsUsingGET
+      parameters:
+      - name: customerId
+        in: query
+        description: Specifies the source/client's id registered and wants to use the SMS APIs
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: destinationAddress
+        in: query
+        description: Specifies the mobile numbers on which message needs to be delivered
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: dltTemplateId
+        in: query
+        description: Specifies the template id received after dlt registration.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: entityId
+        in: query
+        description: Specifies the entity id received after dlt registration.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: filterBlacklistNumbers
+        in: query
+        description: Specifies the flag to enable/disable filtering of blacklisted numbers
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: boolean
+      - name: message
+        in: query
+        description: Specifies the message which needs to be delivered
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      - name: messageType
+        in: query
+        description: Specifies the type of message which needs to be sent.
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+          enum:
+          - PROMOTIONAL
+          - TRANSACTIONAL
+          - SERVICE_IMPLICIT
+          - SERVICE_EXPLICIT
+          - INTERNATIONAL
+      - name: metaMap
+        in: query
+        description: Specifies url Shortener params and all the additional parameters
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: object
+      - name: priority
+        in: query
+        description: Specifies the flag for priority of the messages
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: boolean
+      - name: sourceAddress
+        in: query
+        description: Specifies the shortcode/senderId through which message would be sent
+        required: false
+        allowEmptyValue: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendSmsResponseVO'
+      deprecated: false
+    post:
+      tags:
+      - Individual SMS APIs
+      summary: Send Single SMS POST API
+      description: This API can be used to send SMS to a single destination address through POST request
+      operationId: sendSmsUsingPOST_2
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendSmsResponseVO'
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SingleSmsRequestVO'
+        description: singleSendSmsRequestVo
+        required: true
+components:
+  schemas:
+    UrlShortenerParams:
+      type: object
+      properties:
+        campaignId:
+          type: string
+          description: campaign id
+        campaignName:
+          type: string
+          description: campaign name
+        campaignType:
+          type: string
+          description: campaign type
+        hitsAllowed:
+          type: integer
+          format: int32
+          description: No of hits allowed for the url
+        isEnabled:
+          type: string
+          example: 'false'
+          description: flag to check if convert to short url
+        isUniqueUrl:
+          type: string
+          example: 'false'
+          description: flag to create unique url for each request
+        metaData:
+          type: object
+          description: url shortener meta data
+        shortCode:
+          type: string
+          description: short code provided by client
+        systemMetaData:
+          type: object
+          description: url shortener system meta data
+        validity:
+          type: integer
+          format: int32
+          description: validity for which the url will be active
+      title: UrlShortenerParams
+    SingleSmsRequestVO:
+      type: object
+      required:
+      - customerId
+      - dltTemplateId
+      - entityId
+      - message
+      - messageType
+      - sourceAddress
+      properties:
+        customerId:
+          type: string
+          description: Specifies the source/client's id registered and wants to use the SMS APIs
+        destinationAddress:
+          type: string
+          description: Specifies the mobile numbers on which message needs to be delivered
+        dltTemplateId:
+          type: string
+          description: Specifies the template id received after dlt registration.
+        entityId:
+          type: string
+          description: Specifies the entity id received after dlt registration.
+        filterBlacklistNumbers:
+          type: boolean
+          example: false
+          description: Specifies the flag to enable/disable filtering of blacklisted numbers
+        message:
+          type: string
+          description: Specifies the message which needs to be delivered
+        messageType:
+          type: string
+          description: Specifies the type of message which needs to be sent.
+          enum:
+          - PROMOTIONAL
+          - TRANSACTIONAL
+          - SERVICE_IMPLICIT
+          - SERVICE_EXPLICIT
+        metaData:
+          type: object
+          description: Specifies all the additional parameters
+        priority:
+          type: boolean
+          example: false
+          description: Specifies the flag for priority of the messages
+        sourceAddress:
+          type: string
+          description: Specifies the shortcode/senderId through which message would be sent
+        urlShortenerParams:
+          description: Specifies the parameters to convert long url to short
+          $ref: '#/components/schemas/UrlShortenerParams'
+      title: SingleSmsRequestVO
+    SendSmsResponseVO:
+      type: object
+      properties:
+        customerId:
+          type: string
+          description: Specifies the source/client's id registered and wants to use the SMS APIs
+        destinationAddress:
+          type: array
+          description: Specifies the mobile numbers on which message requests were submitted
+          items:
+            type: string
+        dltTemplateId:
+          type: string
+          description: Specifies the template id received after dlt registration.
+        entityId:
+          type: string
+          description: Specifies the entity id received after dlt registration.
+        errorMessage:
+          type: string
+          description: Specifies the error message if received any during sms request
+        incorrectNum:
+          type: array
+          description: Specifies incorrect numbers in request (less than 10 digit numbers)
+          items:
+            type: string
+        message:
+          type: string
+          description: Specifies the message for which request was received
+        messageRequestId:
+          type: string
+          description: Specifies unique message request id
+        messageType:
+          type: string
+          description: Specifies the type of message sent.
+          enum:
+          - PROMOTIONAL
+          - TRANSACTIONAL
+          - SERVICE_IMPLICIT
+          - SERVICE_EXPLICIT
+        metaData:
+          type: object
+          description: Specifies the additional information received with each sms
+        sourceAddress:
+          type: string
+          description: Specifies the shortcode/senderId through which message was sent
+      title: SendSmsResponseVO

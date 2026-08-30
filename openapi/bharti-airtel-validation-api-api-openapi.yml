@@ -1,0 +1,131 @@
+openapi: 3.2.0
+info:
+  description: "Airtel Locate platform enables enterprises and small businesses to easily track device location to enhance their IoT use cases irrespective of device's GPS capabilities. Airtel Locate APIs will allow you to easily get Assets' location and manage consent. \n\nKey word : \n* MSISDN – represents a valid 10 or 13 digit airtel mobile number \n* Locate – Airtel Locate platform\n* Resource – a resource is equivalent to a MSISDN\n* Location – location of the resource \n* License – represents an Airtel Locate customer’s commercial license to use location API’s "
+  version: 1.4.8
+  title: Locate API Catalog Validation API
+  contact:
+    name: Support
+    email: locate.support@airtel.com
+servers:
+- url: https://openapi.airtel.in/
+tags:
+- name: Validation API
+  description: These set of APIs allow customer to validate a physical address against network fetched live location. To get access to these API's please email to  locate.support@airtel.com
+paths:
+  /locate/apis/customers/{customerBaId}/resources/{msisdn}/validation/address:
+    post:
+      tags:
+      - Validation API
+      summary: Address validation API
+      description: API to get the distance between live network location and given physical address.
+      operationId: addressValidationUsingPOST_1
+      parameters:
+      - name: access_token
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: customerBaId
+        in: path
+        description: customerBaId
+        required: true
+        schema:
+          type: string
+      - name: msisdn
+        in: path
+        description: msisdn
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/AddressValidationDto'
+      responses:
+        '200':
+          description: Ok - successful address validation request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddressValidationResponseDto'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: "Forbidden-  \nresource has not given consent | tracking is disabled "
+        '404':
+          description: Not Found
+        '502':
+          description: "Error in Fetching location of msisdn because of network error in HLR, \n MME, MSC. The ~5-10% of such error is expected.| Error retrieving geocode while processing request. Please try again!"
+      deprecated: false
+components:
+  schemas:
+    AddressValidationDto:
+      type: object
+      required:
+      - address
+      properties:
+        address:
+          type: string
+          example: string
+          description: address to be validated
+      title: AddressValidationDto
+    GeocodeDetails:
+      type: object
+      properties:
+        formattedAddress:
+          type: string
+          description: this shows the formatted address of the POI.
+        geocodeLevel:
+          type: string
+          description: this shows on which level the POI has been geocoded.
+        inputAddress:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+      title: GeocodeDetails
+    LatLong:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        radius:
+          type: string
+      title: LatLong
+    AddressValidationResponseDto:
+      type: object
+      properties:
+        distance:
+          type: number
+          format: double
+        distanceUnit:
+          type: string
+          description: Km/m
+        geocode:
+          $ref: '#/components/schemas/GeocodeDetails'
+        message:
+          type: string
+          description: when the subscriber is absent or in restricted zone.
+        networkCoordinates:
+          $ref: '#/components/schemas/LatLong'
+        status:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+      title: AddressValidationResponseDto
+  requestBodies:
+    AddressValidationDto:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AddressValidationDto'
+      description: address
+      required: true

@@ -1,0 +1,147 @@
+openapi: 3.2.0
+info:
+  version: '1.0'
+  title: Airtel IoT Account Authorization API
+  contact:
+    email: m2m.support@airtel.com
+  description: "# Overview\n ## Introduction\n <div class=\"iot-intro\">Airtel IoT Developer Portal showcases APIs that allows you\n to access data of the CMP Billable account from any external application. Using the APIs, you\n can perform almost all the operations that you perform through the CMP portal including Managing\n SIM Inventory, Changing SIM state (Test Mode, Activate, Change Plan, Safe custody), Monitoring\n data usage, Performing bulk operations and so on.</div>\n                     \n In this section, you’ll learn Airtel IoT Developer Portal Dashboard.\n\n   ## API Credentials\n   This section provide static details of Customer which will be used for accessing APIs.\n\n \n   <div class=\"bullet-list\">  Key Authentication   </div>\n    <div class=\"bullet-list-content\" > A Unique Identification Secret Key per Customer, must be passed in Headers while calling API and will be used for Authentication purpose.</div>\n   \n\n   <div class=\"bullet-list\" > Customer Information  </div>\n  <div class=\"bullet-list-content\" > Customer Information will show details of Customer Developer Account. This shows Customer Id, Customer Account No, Email Id, iv-user, Name, Developer Created By and Developer Created On. Some of these information will be used in accessing APIs.</div>\n\n\n   <div class=\"bullet-list\" > OAuth2.0  </div>\n  <div class=\"bullet-list-content\" > Customer has to use unique Client Id and Client Secret mentioned in OAuth Credential table for Authentication of APIs.</div>\n  \n\n ## Usage Information\n This section provide Customer API usages details. This can show details based on different timestamps:       \n   \n ## Activating your first SIM \n\n <div id=\"auth-2.0-page\" ><section class=\"kong-doc\"><h2>Generating OAuth 2.0 token</h2> <p>\n       The OAuth 2.0 authorization code grant will be used by customer to gain access to protected\n       resources, such as APIs.\n       This set of APIs shall allow user to generate Access Token and refresh Access Token to perform\n       any action on CMP via the API gateway.\n     </p> <h2><a id=\"Request_an_Access_Token_0\"></a>Request an Access Token</h2> <p>To get a token by using the client Id &amp; Client Secret, send a POST request to the <code>/developer/generate/authtoken</code></p> <h1><a id=\"auth-request\"></a>Sample Request</h1> <pre><code>curl -X POST \"https://openapi.airtel.in/iot/api/developer/generate/authtoken\"\n         -H \"accept: application/json\"\n         -H \"apikey: XXXXXXXXXXXXXXXXXXXXXX\"\n         -H \"iv-user: XXXXXXXXXXXXXXXXXXXXXX\"\n         -H \"Content-Type: application/x-www-form-urlencoded\"\n         -d \"client_id=XXXXXXXXXXXXXXXXXXXXXX&amp;client_secret=XXXXXXXXXXXXXXXXXXXXXX\"\n       </code></pre> <h1><a id=\"auth-response\"></a>Sample Response</h1> <pre><code>{\n           \"data\": {\n             \"refresh_token\": \"XXXXXXXXXXXXXXXXXXXXXX\",\n             \"token_type\": \"bearer\",\n             \"access_token\": \"XXXXXXXXXXXXXXXXXXXXXX\",\n             \"expires_in\": 1800\n           }\n         }\n         </code></pre> &nbsp; &nbsp; &nbsp; &nbsp;You can generate same request response from Airtel IoT Developer Portal. To do so :\n           <ul><li>Navigate to <em>Documentation</em> → <em>Account Authorization</em> → <em>Generate Access Token</em> → <em>Test Endpoint</em></li> <li>Put values of <strong>apikey</strong>, <strong>client_id</strong>, <strong>client_secret</strong>, <strong>iv-user</strong> in mentioned text fields from Dashboard</li> <li><strong>Make API Call</strong>.</li></ul></section></div>\n\n <div id=\"sim-inventory-page\" ><section class=\"kong-doc\"><h1>Fetch SIM Inventory</h1> <p>\n       This API shall allow user to fetch the details of SIMs on that Customer\n       Account. It can fetch the details of one or more SIMs at a time.\n     </p> <h1><a id=\"sim-inventory-request\"></a>Sample Request</h1> \n     <pre><code>curl -X GET \"https://openapi.airtel.in/iot/api/customer/details/basket/0/sims\n       ?pageNo=1&amp;pageSize=1&amp;simStatus=INITIAL\"\n       -H \"accept: application/json\"\n       -H \"Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXX\"\n       -H \"apikey: XXXXXXXXXXXXXXXXXXXXXX\"\n       -H \"customer-id: XXXX\"\n       -H \"iv-user: XXXXXXXXXXXXXXXXXXXXXX\"\n     </code></pre> <h1><a id=\"sim-inventory-response\"></a>Sample Response</h1> <pre><code>{\n       \"data\":\n       {\n         \"sims\": [\n         {\n           \"simId\": \"5165173\",\n           \"mobileNo\": \"51967694502\",\n           \"simNo\": \"9999000000000000000\",\n           \"imsi\": \"30811010404043400\",\n           \"lsi\": \" \",\n           \"status\": \"INITIAL\",\n           \"isPaired\": \"0\",\n           \"isPrepaidSim\": \"0\",\n           \"circleName\": \"DELHI\",\n           \"planCode\": \"M2M_PLN_0324\",\n           \"planName\": \"VTS 49 special plan(without voice with sms)\",\n           \"description\": \"VTS 49 special plan(without voice with sms)\",\n           \"dataType\": \"2G\",\n           \"dataUnits\": \"250\",\n           \"planType\": \"0\"\n         }\n         ],\n         \"total\": \"10000\"\n       }\n     }\n     </code></pre> \n        &nbsp; &nbsp; &nbsp; &nbsp;You can generate same request response from Airtel IoT Developer Portal. To do so :\n       <ul><li>Navigate to <em>Documentation</em> → <em>Manage SIMs</em> → <em>Fetch SIMs</em> → <em>Test Endpoint</em></li> <li>Replace Bearer Token from access token generated from\n           <a id=\"go-to-auth\" class=\"nav-link\">Generating OAuth 2.0 token</a></li><li>Put values of <strong>apikey</strong>, <strong>iv-user</strong> &amp; <strong>customer-id</strong> in mentioned text fields from Dashboard.</li> <li>Select <strong>simStatus</strong> as <strong>INITIAL</strong></li> <li><strong>Make API Call</strong>.</li></ul></section></div>\n \n <div ><section class=\"kong-doc\"><h1 id=\"fetch-plans-page\">Fetch Plans</h1> <p>\n       This API shall allow user to fetch the details of Plans that are associated with the Customer\n       Account. It returns the Plan code, plan name, plan description and whether it is a test plan or\n       actual plan as defined on the account.\n     </p> <h1 id=\"fetchPlans-request\"> Sample Request</h1><h1><pre><code>curl -X GET \"https://openapi.airtel.in/iot/api/customer/details/plans\"\n         -H \"accept: application/json\"\n         -H \"Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXX\"\n         -H \"apikey: XXXXXXXXXXXXXXXXXXXXXX\"\n         -H \"customer-id: XXXX\"\n         -H \"iv-user: XXXXXXXXXXXXXXXXXXXXXX\"\n       </code></pre></h1><h1 id=\"fetchPlans-response\">Sample Response</h1> <pre><code>{\n         \"data\": [\n         {\n           \"planCode\": \"M2M_PLN_0001\",\n           \"planName\": \"M2M-2G-1GB PLAN\",\n           \"planDescription\": \"M2M-2G-1GB PLAN\",\n           \"testPlan\": false\n         },\n         {\n           \"planCode\": \"M2M_PLN_0003\",\n           \"planName\": \"M2M 3G - 100 MB PLAN\",\n           \"planDescription\": \"M2M 3G - 100 MB PLAN\",\n           \"testPlan\": true\n         }\n         ]\n       }\n     </code></pre> &nbsp; &nbsp; &nbsp; &nbsp;You can generate same request response from Airtel IoT Developer Portal. To do so :\n         <ul><li>Navigate to <em>Documentation</em> → <em>Account Details</em> → <em>Fetch Customer Plans</em> → <em>Test Endpoint</em></li> <li>Replace Bearer Token from access token generated from\n             <a id=\"go-to-auth\" class=\"nav-link\">Generating OAuth 2.0 token</a></li> <li>Put values of <strong>apikey</strong>, <strong>iv-user</strong> &amp; <strong>customer-id</strong> in mentioned text fields from Dashboard.</li> <li><strong>Make API Call</strong>.</li></ul></section></div>\n       <div id=\"activate-sim-page\" ><section class=\"kong-doc\"><h1>Perform Activation</h1> <p>\n       This API shall allow user to change the state of SIM from Available (Initial to Activate) to\n       Active with Plan that is associated with the Billable account. It requires inputs as mobile\n       number and plan code.\n     </p> <h1 id=\"activate-sim-request\"> Sample Request</h1><h1><pre><code>curl -X POST \"https://openapi.airtel.in/iot/api/om/job/sim/activate\"\n         -H \"accept: application/json\"\n         -H \"Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXX\"\n         -H \"apikey: XXXXXXXXXXXXXXXXXXXXXXXXX\"\n         -H \"customer-id: XXXX\"\n         -H \"iv-user: XXXXXXXXXXXXXXXXXXXXXXXXX\"\n         -H \"Content-Type: application/json\"\n         -d \"{ \\\"simDOList\\\": [ { \\\"mobileNO\\\": \\\"51967694502\\\",\n         \\\"planDO\\\": { \\\"planCode\\\": \\\"M2M_PLN_0001\\\" } } ]}\"\n       </code></pre></h1><h1><a id=\"activate-sim-response\"></a>Sample Response</h1> <pre><code>{\n       \"data\": {\n           \"jobId\": 795405,\n           \"jobType\": \"ACTIVATE_SIM\",\n           \"orderCount\": 0,\n           \"successCount\": 0,\n           \"failureCount\": 0,\n           \"inProgressCount\": 0,\n           \"rejectedCount\": 0,\n           \"orderInitiateDate\": \"25-04-2019 03:35:40 PM\",\n           \"statusMessage\": \"Your request is in progress\"\n       }\n   }\n   </code></pre> &nbsp; &nbsp; &nbsp; &nbsp;You can generate same request response from Airtel IoT Developer Portal. To do so :\n   <ul><li>Navigate to <em>Documentation</em> → <em>New Orders</em> → <em>Activate Sim</em> → <em>Activate Sim</em> → <em>Test Endpoint</em></li> <li>Replace Bearer Token from access token generated from\n     <a id=\"go-to-auth\" class=\"nav-link\">Generating OAuth 2.0 token</a></li> <li>Put values of <strong>apikey</strong>, <strong>iv-user</strong> &amp; <strong>customer-id</strong> in mentioned text fields from Dashboard.</li> <li>Put mobileNo in body fetched from response of API\n     <a id=\"go-to-sim-inventory\" class=\"nav-link\">Fetch SIM Inventory</a></li> <li>Put planCode in body fetched from response of API\n     <a id=\"go-to-fetch-plans\" class=\"nav-link\"> Fetch Plans </a></li> <li><strong>Make API Call</strong>.</li></ul><hr> <p><strong>NOTE</strong><br>\n   The JobId in the response is important to track the status of activation order. The details of JobId can be fetched from Fetch Jobs API. There shall be Order ID(s) within a JobId to view status of specific Order(s) in a JobId.</p> <hr></section></div>\n"
+servers:
+- url: https://m2m.airteliot.co.in/iot/api/
+security: []
+tags:
+- name: Account Authorization
+  description: This set of APIs shall allow user to generate Access Token and refresh Access Token to perform any action on CMP via the API gateway.
+paths:
+  /auth/v2/generate/authtoken:
+    post:
+      tags:
+      - Account Authorization
+      summary: Generate Access Token
+      description: This API shall allow user to generate Access Token to be used while doing any operations on the portal via APIs. **As per our recent upgrade, a new attribute 'refresh_expires_in' has been added to the response field which would display the time (in seconds) after which the refresh token would expire.**
+      operationId: generateAccessTokenUsingPOST
+      parameters:
+      - name: apikey
+        in: header
+        description: apikey
+        required: true
+        schema:
+          type: string
+      - name: iv-user
+        in: header
+        description: Developer Account User ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+              - client_id
+              - client_secret
+              properties:
+                client_id:
+                  type: string
+                  description: Unique ID to Authorize Customer (shared during On-Boarding process)
+                client_secret:
+                  type: string
+                  description: Developer Account Secret Key (shared during On-Boarding process) that shall be used to generate Token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  properties: {}
+        '201':
+          description: Resource Created Successfully
+          content: {}
+        '400':
+          description: Request Message is not correct
+          content: {}
+        '500':
+          description: Internal Server Error.
+          content: {}
+      deprecated: false
+  /auth/v2/refresh/authtoken:
+    post:
+      tags:
+      - Account Authorization
+      summary: Refresh Access Token
+      description: This API shall allow user to refresh Access Token to be used while doing any operations on the portal via APIs.
+      operationId: refreshAccessTokenUsingPOST
+      parameters:
+      - name: apikey
+        in: header
+        description: apikey
+        required: true
+        schema:
+          type: string
+      - name: iv-user
+        in: header
+        description: Developer Account User ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+              - refresh_token
+              properties:
+                refresh_token:
+                  type: string
+                  description: Token used to refresh access_token
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  properties: {}
+        '201':
+          description: Resource Created Successfully
+          content: {}
+        '400':
+          description: Request Message is not correct
+          content: {}
+        '500':
+          description: Internal Server Error.
+          content: {}
+      deprecated: false
+x-tagGroups:
+- name: Manage Customer APIs
+  tags:
+  - Account Authorization
+  - Account Details
+  - Inventory Management
+- name: New Orders APIs
+  tags:
+  - SIM LifeCycle
+- name: Bulk Orders APIs
+  tags:
+  - SIM LifeCycle Bulk
+- name: Jobs APIs
+  tags:
+  - Job Status
+- name: Device Details APIs
+  tags:
+  - Device & Session Information
+- name: Whitelisting APIs
+  tags:
+  - Whitelisting
+- name: KYC APIs
+  tags:
+  - KYC Manager
+- name: Messaging Centre APIs
+  tags:
+  - Messaging Centre

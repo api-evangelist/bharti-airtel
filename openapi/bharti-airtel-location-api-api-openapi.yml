@@ -1,0 +1,109 @@
+openapi: 3.2.0
+info:
+  description: "Airtel Locate platform enables enterprises and small businesses to easily track device location to enhance their IoT use cases irrespective of device's GPS capabilities. Airtel Locate APIs will allow you to easily get Assets' location and manage consent. \n\nKey word : \n* MSISDN – represents a valid 10 or 13 digit airtel mobile number \n* Locate – Airtel Locate platform\n* Resource – a resource is equivalent to a MSISDN\n* Location – location of the resource \n* License – represents an Airtel Locate customer’s commercial license to use location API’s "
+  version: 1.4.8
+  title: Locate API Catalog Location API
+  contact:
+    name: Support
+    email: locate.support@airtel.com
+servers:
+- url: https://openapi.airtel.in/
+tags:
+- name: Location API
+  description: This API will return location of MSISDN including Latitude and Longitude.
+paths:
+  /locate/apis/customers/{customerBaId}/resources/{msisdn}/location:
+    get:
+      tags:
+      - Location API
+      summary: Get Location
+      description: This API shall allow user to fetch the location of the registered resource. The access token must be generated with “location” scope for using this API. The value for query parameter “type” is ”sync” for synchronous request and ”async” for asynchronous request and the default value is ”sync”. Customer need to register the callback listener for the async API where Locate would post the location.
+      operationId: getLocationUsingGET_3
+      parameters:
+      - name: access_token
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: customerBaId
+        in: path
+        description: customerBaId
+        required: true
+        schema:
+          type: string
+      - name: msisdn
+        in: path
+        description: msisdn
+        required: true
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: type
+        required: true
+        allowEmptyValue: false
+        example: async
+        schema:
+          type: string
+          default: sync
+      responses:
+        '200':
+          description: Ok - successful synchronous location request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationResponse'
+        '202':
+          description: Accepted - successful asynchronous location request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncCorrelationId'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: "Forbidden-  \n Subscription expired | Subscription limit reached || resource has not given consent | tracking is disabled | callback url is not registered"
+        '404':
+          description: Not Found
+        '429':
+          description: Request for location fetch can before location rate issues in license| Location request in progress for given msisdn
+        '502':
+          description: "Error in Fetching location of msisdn because of network error in HLR, \n MME, MSC. The ~5-10% of such error is expected."
+      deprecated: false
+components:
+  schemas:
+    AsyncCorrelationId:
+      type: object
+      properties:
+        correlationId:
+          type: string
+      title: AsyncCorrelationId
+    LatLong:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        radius:
+          type: string
+      title: LatLong
+    LocationResponse:
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/LatLong'
+        message:
+          type: string
+        retrievedAt:
+          type: string
+          format: date-time
+          example: yyyy-MM-dd HH:mm:ss
+          description: location
+        status:
+          type: string
+      title: LocationResponse

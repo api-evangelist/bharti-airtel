@@ -1,0 +1,441 @@
+openapi: 3.2.0
+info:
+  description: "Airtel Locate platform enables enterprises and small businesses to easily track device location to enhance their IoT use cases irrespective of device's GPS capabilities. Airtel Locate APIs will allow you to easily get Assets' location and manage consent. \n\nKey word : \n* MSISDN – represents a valid 10 or 13 digit airtel mobile number \n* Locate – Airtel Locate platform\n* Resource – a resource is equivalent to a MSISDN\n* Location – location of the resource \n* License – represents an Airtel Locate customer’s commercial license to use location API’s "
+  version: 1.4.8
+  title: Locate API Catalog Resource Consent API
+  contact:
+    name: Support
+    email: locate.support@airtel.com
+servers:
+- url: https://openapi.airtel.in/
+tags:
+- name: Resource Consent API
+  description: This set of APIs allow customer initiate consent, fetch consent details, delete resource, fetch list of msisdn for consent was initiated and various other API to handle consumer msisdn's and their consent
+paths:
+  /locate/apis/customers/{customerBaId}/resources:
+    get:
+      tags:
+      - Resource Consent API
+      summary: Fetch MSISDNs
+      description: "This API returns the list of resource registered by customer for location tracking. Optional query params consent, tracking and daysSinceLastLocationFetched can be used to further filter the result.This API returns the list of resource for which consent initiated by customer for location tracking. \n\n"
+      operationId: findAllUsingGET_2
+      parameters:
+      - name: access_token
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: consent
+        in: query
+        description: consent
+        required: false
+        allowEmptyValue: false
+        example: PENDING
+        schema:
+          type: string
+      - name: customerBaId
+        in: path
+        description: customerBaId
+        required: true
+        schema:
+          type: string
+      - name: daysSinceLastLocationFetched
+        in: query
+        description: daysSinceLastLocationFetched
+        required: false
+        allowEmptyValue: false
+        example: '10'
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Page to be returned (0..N)
+        required: false
+        schema:
+          type: ref
+          default: '0'
+      - name: size
+        in: query
+        description: Number of records per page.
+        required: false
+        schema:
+          type: ref
+          default: '20'
+      - name: tracking
+        in: query
+        description: tracking
+        required: false
+        allowEmptyValue: false
+        example: 'true'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponseDto'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+      deprecated: false
+  /locate/apis/customers/{customerBaId}/resources/consent:
+    post:
+      tags:
+      - Resource Consent API
+      summary: Initiate Consent
+      description: "This API shall allow the customer to initiate consent on number prefixed by 91 via available channel. Current supported channels are IVR and SMS. \n Use this to \n - Initiating new consent\n - Initiating consent if current state is REJECTED \n - Initiate consent in different language then previous\n\n> *__Supported Language__*\n> *English(en) | Hindi(hi) | Assamese(as) | Bengali(bn) | Oriya(or) | Kannada(kn) | Malayalam(ml) | Tamil(ta) | Telugu(te)*\n\n__Sample Message__:\n - __Customer with short code__ :To allow ABC Pvt Ltd. to fetch your location using your SIM Provider, please reply \"Y\" (Toll Free). \n - __Customer without short code__: To allow ABC Pvt Ltd. to fetch your location using your SIM Provider, please reply \"{unique_id} Y\" (Toll Free)."
+      operationId: initiateConsentUsingPOST_3
+      parameters:
+      - name: access_token
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: customerBaId
+        in: path
+        description: customerBaId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsentRequest'
+        description: consentRequest
+        required: true
+      responses:
+        '202':
+          description: accepted
+        '400':
+          description: "Bad Request\n   • Invalid language\n   • Not an airtel number\n   • Invalid channel"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden consent state or channel
+      deprecated: false
+  /locate/apis/customers/{customerBaId}/resources/{msisdn}:
+    get:
+      tags:
+      - Resource Consent API
+      summary: Search Resource
+      description: This API will return the details for requested MSISDN like name, consent status and tracking status.
+      operationId: searchUsingGET_2
+      parameters:
+      - name: access_token
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: customerBaId
+        in: path
+        description: customerBaId
+        required: true
+        schema:
+          type: string
+      - name: msisdn
+        in: path
+        description: msisdn
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponseDto'
+      deprecated: false
+    delete:
+      tags:
+      - Resource Consent API
+      summary: Remove MSISDN
+      description: This API will allow you to remove a MSISDN. It requires customer ID and MSISDN to be deleted.
+      operationId: deleteResourceUsingDELETE_3
+      parameters:
+      - name: access_token
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: customerBaId
+        in: path
+        description: customerBaId
+        required: true
+        schema:
+          type: string
+      - name: msisdn
+        in: path
+        description: msisdn
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted Successfully
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Msisdn not found for customer
+      deprecated: false
+    patch:
+      tags:
+      - Resource Consent API
+      summary: Modify Resource
+      description: 'API to modify tracking and alias(name) for registered msisdn.
+
+        '
+      operationId: patchResourceUsingPATCH_3
+      parameters:
+      - name: access_token
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: customerBaId
+        in: path
+        description: customerBaId
+        required: true
+        schema:
+          type: string
+      - name: msisdn
+        in: path
+        description: msisdn
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/ResourcePatchOptions'
+      responses:
+        '204':
+          description: Successfully updated
+        '400':
+          description: Bad Request in case of bad json body
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden if number issued licenses exhausted
+        '404':
+          description: Msisdn not found for customer
+      deprecated: false
+  /locate/apis/customers/{customerBaId}/resources/{msisdn}/consent:
+    get:
+      tags:
+      - Resource Consent API
+      summary: Fetch Consent Details
+      description: "API to get the consent details insight\n>  *__Consent  States__*    -- _PROCESSING | INITIATED | PENDING | ALLOWED | REJECTED | FAILED_\n\n*__Consent Events Types__*  -- _MT | DR | MO | CALL | CDR_\n\n - _MT- Event when platform sends consent via SMS_\n - _DR- Event when delivery report is received against a sent MT event_\n - _MO- Event when platform receives a valid consent sent by user via SMS_\n - _CALL- Event when platform initiates consent call via IVR_\n - _CDR- Event when platform receives call data record  against the initiated CALL event_\n\n"
+      operationId: getConsentUsingGET_2
+      parameters:
+      - name: access_token
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: customerBaId
+        in: path
+        description: customerBaId
+        required: true
+        schema:
+          type: string
+      - name: msisdn
+        in: path
+        description: msisdn
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsentResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Msisdn not found for customer
+      deprecated: false
+components:
+  schemas:
+    ConsentResponse:
+      type: object
+      properties:
+        channel:
+          type: string
+          enum:
+          - IVR
+          - SMS
+        consent:
+          type: string
+          enum:
+          - PROCESSING
+          - INITIATED
+          - ALLOWED
+          - PENDING
+          - REJECTED
+          - FAILED
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsentEvents'
+        lastRecordedConsent:
+          type: string
+          enum:
+          - PROCESSING
+          - INITIATED
+          - ALLOWED
+          - PENDING
+          - REJECTED
+          - FAILED
+        lastRecordedConsentChannel:
+          type: string
+          enum:
+          - IVR
+          - SMS
+        lastRecordedConsentUpdatedAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      title: ConsentResponse
+    ConsentRequest:
+      type: object
+      required:
+      - msisdn
+      properties:
+        channel:
+          type: string
+          example: SMS
+          description: The channel to initiate consent. Defaults to SMS
+        language:
+          type: string
+          example: EN
+          description: Preferred language to initiate the consent. Default to EN(english)
+        msisdn:
+          type: string
+          example: 91XXXXXXXXXX
+          description: The Airtel number must be prefixed with 91 followed by 10 digit mobile number.
+      title: ConsentRequest
+    ConsentEventMeta:
+      type: object
+      properties:
+        callStatus:
+          type: string
+        consentId:
+          type: string
+        delivered:
+          type: boolean
+        keyPressed:
+          type: boolean
+        language:
+          type: string
+          enum:
+          - EN
+          - HI
+          - AS
+          - BN
+          - OR
+          - KN
+          - ML
+          - TA
+          - TE
+      title: ConsentEventMeta
+    ResourcePatchOptions:
+      type: object
+      properties:
+        alias:
+          type: string
+          example: Albert Einstein
+          description: The name to msisdn for which consent was initiated
+        isTrackingEnabled:
+          type: boolean
+          example: true
+          description: enable/disable tracking for a MSISDN.
+      title: ResourcePatchOptions
+    ConsentEvents:
+      type: object
+      properties:
+        channel:
+          type: string
+          enum:
+          - IVR
+          - SMS
+        consentId:
+          type: string
+        initiatedBy:
+          type: string
+          enum:
+          - PLATFORM
+          - CUSTOMER
+        meta:
+          $ref: '#/components/schemas/ConsentEventMeta'
+        status:
+          type: string
+          enum:
+          - FAIL
+          - SUCCESS
+        timestamp:
+          type: string
+          format: date-time
+        type:
+          type: string
+          enum:
+          - MT
+          - DR
+          - MO
+          - CALL
+          - CDR
+      title: ConsentEvents
+    ResourceResponseDto:
+      type: object
+      properties:
+        consent:
+          type: string
+          enum:
+          - PROCESSING
+          - INITIATED
+          - ALLOWED
+          - PENDING
+          - REJECTED
+          - FAILED
+        consentPurpose:
+          type: string
+        language:
+          type: string
+          enum:
+          - EN
+          - HI
+          - AS
+          - BN
+          - OR
+          - KN
+          - ML
+          - TA
+          - TE
+        lastFetchedLocationTimestamp:
+          type: string
+          format: date-time
+        msisdn:
+          type: string
+        name:
+          type: string
+        tracking:
+          type: boolean
+      title: ResourceResponseDto
+  requestBodies:
+    ResourcePatchOptions:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResourcePatchOptions'
+      description: resourcePatchOptions
+      required: true
