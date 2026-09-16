@@ -169,7 +169,7 @@ apis:
   - type: APIReference
     url: https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/
 - aid: bharti-airtel:bharti-airtel-airtel-iq-sample-cdr-call-data-record-api-api
-  name: Bharti Airtel Airtel IQ Sample CDR(Call Data Record) API
+  name: Bharti Airtel IQ Sample CDR(Call Data Record) API
   description: '<strong>Call Detail Record (CDR)</strong> is the detailed record of the call, which contains
     various call details such as Time, Date, Duration, Caller_ID, Destination_Number, Status, recording
     URL, etc. of the call
