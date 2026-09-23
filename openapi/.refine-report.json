@@ -1,0 +1,71 @@
+{
+  "provider": "bharti-airtel",
+  "sources": [
+    "_original/airtel-iot.json",
+    "_original/airtel-iq-reporting-cdr.json",
+    "_original/airtel-iq-sms-core-apis.json",
+    "_original/airtel-locate.json"
+  ],
+  "outputs": [
+    "bharti-airtel-account-authorization-api-openapi.yml",
+    "bharti-airtel-account-details-api-openapi.yml",
+    "bharti-airtel-device-session-information-api-openapi.yml",
+    "bharti-airtel-inventory-management-api-openapi.yml",
+    "bharti-airtel-job-status-api-openapi.yml",
+    "bharti-airtel-kyc-manager-api-openapi.yml",
+    "bharti-airtel-messaging-centre-api-openapi.yml",
+    "bharti-airtel-sim-lifecycle-api-openapi.yml",
+    "bharti-airtel-sim-lifecycle-bulk-api-openapi.yml",
+    "bharti-airtel-whitelisting-api-openapi.yml",
+    "bharti-airtel-whitelisting-apis-api-openapi.yml",
+    "bharti-airtel-airtel-iq-sample-cdr-call-data-record-api-api-openapi.yml",
+    "bharti-airtel-bulk-sms-apis-api-openapi.yml",
+    "bharti-airtel-individual-sms-apis-api-openapi.yml",
+    "bharti-airtel-authorization-api-api-openapi.yml",
+    "bharti-airtel-location-api-api-openapi.yml",
+    "bharti-airtel-resource-consent-api-api-openapi.yml",
+    "bharti-airtel-tenant-api-api-openapi.yml",
+    "bharti-airtel-validation-api-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [
+    "airtel-iot.json: info.version missing"
+  ],
+  "notes": [
+    "4 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (4 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "airtel-iot.json: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "airtel-iot.json: declared missing tag: SIM LifeCycle ",
+    "airtel-iot.json: declared missing tag: Whitelisting APIs",
+    "airtel-iq-reporting-cdr.json: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "airtel-iq-sms-core-apis.json: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "airtel-locate.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "_original/bharti-airtel-locate-openapi.yml: archived document superseded by a larger archived document",
+    "_original/bharti-airtel-iq-sms-openapi.yml: archived document superseded by a larger archived document",
+    "_original/bharti-airtel-iq-reporting-openapi.yml: archived document superseded by a larger archived document",
+    "_original/bharti-airtel-iot-openapi.yml: archived document superseded by a larger archived document",
+    "bharti-airtel-account-authorization-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bharti-airtel-account-details-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bharti-airtel-airtel-iq-sample-cdr-call-data-record-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bharti-airtel-authorization-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bharti-airtel-bulk-sms-apis-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bharti-airtel-device-session-information-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bharti-airtel-individual-sms-apis-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bharti-airtel-inventory-management-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bharti-airtel-job-status-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bharti-airtel-kyc-manager-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bharti-airtel-location-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bharti-airtel-messaging-centre-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bharti-airtel-resource-consent-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bharti-airtel-sim-lifecycle-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bharti-airtel-sim-lifecycle-bulk-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bharti-airtel-tenant-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bharti-airtel-validation-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bharti-airtel-whitelisting-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bharti-airtel-whitelisting-apis-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

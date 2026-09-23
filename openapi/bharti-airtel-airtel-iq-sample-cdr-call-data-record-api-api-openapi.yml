@@ -1,21 +1,13 @@
 openapi: 3.2.0
 info:
   version: 1.0.0
-  title: Airtel IQ API Documentation Airtel IQ Sample CDR(Call Data Record) API
-  description: '<strong>Call Detail Record (CDR)</strong> is the detailed record of the call, which contains various call details such as Time, Date, Duration, Caller_ID, Destination_Number, Status, recording URL, etc. of the call
-
-    <br><strong>Sample CDR(Call Data Record)</strong> API is a sample API to test the CDR integration of Integrator with Airtel IQ. The Integrator needs to develop a post API similar to this API, on which all these details would be posted.
-
-    <br>For the actual integration for Inbound/Outbound calls, the Integrator endpoint for receiving CDR can either be preconfigured at Airtel IQ end or can be passed in the callBackURLs in callFlowConfiguration of execute callflow Api.'
+  title: Airtel IQ API Documentation Airtel IQ Sample CDR(Call Data…
+  description: Call Detail Record (CDR) is the detailed record of the call, which contains various call details such as Time, Date, Duration, Caller_ID, Destination_Number, Status, recording URL, etc.
 servers:
 - url: https://openapi.airtel.in/gateway/airtel-xchange-reporting/v2/api-docs
 tags:
 - name: Airtel IQ Sample CDR(Call Data Record) API
-  description: '<strong>Call Detail Record (CDR)</strong> is the detailed record of the call, which contains various call details such as Time, Date, Duration, Caller_ID, Destination_Number, Status, recording URL, etc. of the call
-
-    <br><strong>Sample CDR(Call Data Record)</strong> API is a sample API to test the CDR integration of Integrator with Airtel IQ. The Integrator needs to develop a post API similar to this API, on which all these details would be posted.
-
-    <br>For the actual integration for Inbound/Outbound calls, the Integrator endpoint for receiving CDR can either be preconfigured at Airtel IQ end or can be passed in the callBackURLs in callFlowConfiguration of execute callflow Api.'
+  description: Call Detail Record (CDR) is the detailed record of the call, which contains various call details such as Time, Date, Duration, Caller_ID, Destination_Number, Status, recording URL, etc.
 paths:
   /sampleCdr:
     post:
@@ -101,6 +93,153 @@ components:
           example: 201
           description: status code
       title: SampleResponse
+    participant:
+      type: object
+      properties:
+        amdCause:
+          type: string
+        amdStatus:
+          type: string
+        audios:
+          type: array
+          description: Sound File URL which can be played during the wait time of the call
+          items:
+            $ref: '#/components/schemas/audio'
+        billableDuration:
+          type: integer
+          format: int32
+          example: 100
+          description: Billable duration for participant, in milliseconds
+        callAnswerTime:
+          type: string
+          format: date-time
+          example: 1594695097242
+          description: 'Time at which participant answered call. Format : Epoch millis'
+        callQualityParams:
+          description: call quality parameters
+          $ref: '#/components/schemas/CallQualityParamsVo'
+        callReason:
+          type: string
+        callerId:
+          type: string
+          example: 8045477000
+          description: Caller ID/ Virtual Number displayed to participant
+        callerIdCircle:
+          type: string
+          example: Karnataka
+          description: Circle or state of callerId
+        callerIdCountryCode:
+          type: string
+          example: '+91'
+          description: Country code of CallerId
+        callerIdInternationalPoint:
+          type: string
+        callerIdType:
+          type: string
+          description: Type of callerId. Values can be TOLL_FREE or sim recording ..
+        chargeType:
+          type: string
+          example: DOMESTIC
+          description: DOMESTIC/INTERNATIONAL based on countryCode of callerID and participant
+          enum:
+          - DOMESTIC
+          - INTERNATIONAL
+        circleId:
+          type: string
+          example: 102
+          description: 'Unique circle ID for this participant address. Eg : 102 for Delhi'
+        circleName:
+          type: string
+          example: Delhi
+          description: Unique circle name for this participant address
+        duration:
+          type: integer
+          format: int32
+          example: 137137
+          description: 'Total duration for participant. Format : Epoch millis'
+        endTime:
+          type: string
+          format: date-time
+          example: 1594695097242
+          description: 'End time for participant. Format : Epoch millis'
+        hangupCause:
+          type: string
+          example: SYSTEM_INITIATED
+          description: 'Captures the cause of hangup. Eg : SYSTEM_INITIATED or USER_INITIATED'
+        internationPoint:
+          type: string
+        mergeType:
+          type: string
+          description: Merge type of participant
+        operatorId:
+          type: string
+          example: ATL
+          description: 'Unique operator ID for this participant address. Eg : ATL for Airtel'
+        operatorName:
+          type: string
+          example: Airtel
+          description: Unique operator name for this participant address
+        parallelDisconnected:
+          type: boolean
+        participantAddress:
+          type: string
+          example: 999999999
+          description: Participant number
+        participantCallType:
+          type: string
+          example: INBOUND
+          description: Captures if the participant was dialled out or he/she dialled into the call
+          enum:
+          - INBOUND
+          - OUTBOUND
+          - VoiceBot
+        participantIndex:
+          type: integer
+          format: int32
+        participantName:
+          type: string
+          example: Abc
+          description: Name of participant
+        participantNumberCountryCode:
+          type: string
+          example: '+91'
+          description: Country code of Participant
+        participantNumberType:
+          type: string
+          description: Type of participant Number. Values can be TOLL_FREE or mobile or international
+          enum:
+          - TOLL_FREE
+          - MOBILE
+          - INTERNATIONAL
+          - VoiceBot
+        pulse:
+          type: integer
+          format: int32
+          example: 2
+          description: Pulse recorded for participant
+        requestName:
+          type: string
+        requestNo:
+          type: integer
+          format: int32
+        retryCount:
+          type: integer
+          format: int32
+          example: 1
+          description: Number of retries to participant
+        secondaryCLI:
+          type: string
+        startTime:
+          type: string
+          format: date-time
+          example: 1594695097242
+          description: 'Start time for participant. Format : Epoch millis'
+        status:
+          type: string
+          example: Disconnected
+          description: 'Action triggered for the call initiated to the participant no. Eg : Disconnected, NetworkError, NotReachable, Busy, Noanswer, Removed, Answer'
+      title: participant
+      description: Object specifying Participant information passed
     CallQualityParamsVo:
       type: object
       properties:
@@ -342,150 +481,3 @@ components:
           example: '2020-07-14 02:54:09'
           description: 'End time of call. Format : yyyy-MM-dd hh:mm:ss'
       title: SampleRequest
-    participant:
-      type: object
-      properties:
-        amdCause:
-          type: string
-        amdStatus:
-          type: string
-        audios:
-          type: array
-          description: Sound File URL which can be played during the wait time of the call
-          items:
-            $ref: '#/components/schemas/audio'
-        billableDuration:
-          type: integer
-          format: int32
-          example: 100
-          description: Billable duration for participant, in milliseconds
-        callAnswerTime:
-          type: string
-          format: date-time
-          example: 1594695097242
-          description: 'Time at which participant answered call. Format : Epoch millis'
-        callQualityParams:
-          description: call quality parameters
-          $ref: '#/components/schemas/CallQualityParamsVo'
-        callReason:
-          type: string
-        callerId:
-          type: string
-          example: 8045477000
-          description: Caller ID/ Virtual Number displayed to participant
-        callerIdCircle:
-          type: string
-          example: Karnataka
-          description: Circle or state of callerId
-        callerIdCountryCode:
-          type: string
-          example: '+91'
-          description: Country code of CallerId
-        callerIdInternationalPoint:
-          type: string
-        callerIdType:
-          type: string
-          description: Type of callerId. Values can be TOLL_FREE or sim recording ..
-        chargeType:
-          type: string
-          example: DOMESTIC
-          description: DOMESTIC/INTERNATIONAL based on countryCode of callerID and participant
-          enum:
-          - DOMESTIC
-          - INTERNATIONAL
-        circleId:
-          type: string
-          example: 102
-          description: 'Unique circle ID for this participant address. Eg : 102 for Delhi'
-        circleName:
-          type: string
-          example: Delhi
-          description: Unique circle name for this participant address
-        duration:
-          type: integer
-          format: int32
-          example: 137137
-          description: 'Total duration for participant. Format : Epoch millis'
-        endTime:
-          type: string
-          format: date-time
-          example: 1594695097242
-          description: 'End time for participant. Format : Epoch millis'
-        hangupCause:
-          type: string
-          example: SYSTEM_INITIATED
-          description: 'Captures the cause of hangup. Eg : SYSTEM_INITIATED or USER_INITIATED'
-        internationPoint:
-          type: string
-        mergeType:
-          type: string
-          description: Merge type of participant
-        operatorId:
-          type: string
-          example: ATL
-          description: 'Unique operator ID for this participant address. Eg : ATL for Airtel'
-        operatorName:
-          type: string
-          example: Airtel
-          description: Unique operator name for this participant address
-        parallelDisconnected:
-          type: boolean
-        participantAddress:
-          type: string
-          example: 999999999
-          description: Participant number
-        participantCallType:
-          type: string
-          example: INBOUND
-          description: Captures if the participant was dialled out or he/she dialled into the call
-          enum:
-          - INBOUND
-          - OUTBOUND
-          - VoiceBot
-        participantIndex:
-          type: integer
-          format: int32
-        participantName:
-          type: string
-          example: Abc
-          description: Name of participant
-        participantNumberCountryCode:
-          type: string
-          example: '+91'
-          description: Country code of Participant
-        participantNumberType:
-          type: string
-          description: Type of participant Number. Values can be TOLL_FREE or mobile or international
-          enum:
-          - TOLL_FREE
-          - MOBILE
-          - INTERNATIONAL
-          - VoiceBot
-        pulse:
-          type: integer
-          format: int32
-          example: 2
-          description: Pulse recorded for participant
-        requestName:
-          type: string
-        requestNo:
-          type: integer
-          format: int32
-        retryCount:
-          type: integer
-          format: int32
-          example: 1
-          description: Number of retries to participant
-        secondaryCLI:
-          type: string
-        startTime:
-          type: string
-          format: date-time
-          example: 1594695097242
-          description: 'Start time for participant. Format : Epoch millis'
-        status:
-          type: string
-          example: Disconnected
-          description: 'Action triggered for the call initiated to the participant no. Eg : Disconnected, NetworkError, NotReachable, Busy, Noanswer, Removed, Answer'
-      title: participant
-      description: Object specifying Participant information passed

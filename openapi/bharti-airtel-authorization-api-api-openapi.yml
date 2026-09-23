@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: "Airtel Locate platform enables enterprises and small businesses to easily track device location to enhance their IoT use cases irrespective of device's GPS capabilities. Airtel Locate APIs will allow you to easily get Assets' location and manage consent. \n\nKey word : \n* MSISDN – represents a valid 10 or 13 digit airtel mobile number \n* Locate – Airtel Locate platform\n* Resource – a resource is equivalent to a MSISDN\n* Location – location of the resource \n* License – represents an Airtel Locate customer’s commercial license to use location API’s "
+  description: Airtel Locate platform enables enterprises and small businesses to easily track device location to enhance their IoT use cases irrespective of device's GPS capabilities.
   version: 1.4.8
   title: Locate API Catalog Authorization API
   contact:
@@ -49,21 +49,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    OauthAccessToken:
-      type: object
-      required:
-      - access_token
-      - expires_in
-      - token_type
-      properties:
-        access_token:
-          type: string
-        expires_in:
-          type: integer
-          format: int64
-        token_type:
-          type: string
-      title: OauthAccessToken
     AccessTokenRequest:
       type: object
       required:
@@ -82,3 +67,18 @@ components:
           - location
           - resource
       title: AccessTokenRequest
+    OauthAccessToken:
+      type: object
+      required:
+      - access_token
+      - expires_in
+      - token_type
+      properties:
+        access_token:
+          type: string
+        expires_in:
+          type: integer
+          format: int64
+        token_type:
+          type: string
+      title: OauthAccessToken

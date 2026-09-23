@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: "Airtel Locate platform enables enterprises and small businesses to easily track device location to enhance their IoT use cases irrespective of device's GPS capabilities. Airtel Locate APIs will allow you to easily get Assets' location and manage consent. \n\nKey word : \n* MSISDN – represents a valid 10 or 13 digit airtel mobile number \n* Locate – Airtel Locate platform\n* Resource – a resource is equivalent to a MSISDN\n* Location – location of the resource \n* License – represents an Airtel Locate customer’s commercial license to use location API’s "
+  description: Airtel Locate platform enables enterprises and small businesses to easily track device location to enhance their IoT use cases irrespective of device's GPS capabilities.
   version: 1.4.8
   title: Locate API Catalog Resource Consent API
   contact:
@@ -17,7 +17,7 @@ paths:
       tags:
       - Resource Consent API
       summary: Fetch MSISDNs
-      description: "This API returns the list of resource registered by customer for location tracking. Optional query params consent, tracking and daysSinceLastLocationFetched can be used to further filter the result.This API returns the list of resource for which consent initiated by customer for location tracking. \n\n"
+      description: This API returns the list of resource registered by customer for location tracking. Optional query params consent, tracking and daysSinceLastLocationFetched can be used to further filter the result.This API returns the list of resource for which consent initiated by customer for location tracking.
       operationId: findAllUsingGET_2
       parameters:
       - name: access_token
@@ -86,7 +86,27 @@ paths:
       tags:
       - Resource Consent API
       summary: Initiate Consent
-      description: "This API shall allow the customer to initiate consent on number prefixed by 91 via available channel. Current supported channels are IVR and SMS. \n Use this to \n - Initiating new consent\n - Initiating consent if current state is REJECTED \n - Initiate consent in different language then previous\n\n> *__Supported Language__*\n> *English(en) | Hindi(hi) | Assamese(as) | Bengali(bn) | Oriya(or) | Kannada(kn) | Malayalam(ml) | Tamil(ta) | Telugu(te)*\n\n__Sample Message__:\n - __Customer with short code__ :To allow ABC Pvt Ltd. to fetch your location using your SIM Provider, please reply \"Y\" (Toll Free). \n - __Customer without short code__: To allow ABC Pvt Ltd. to fetch your location using your SIM Provider, please reply \"{unique_id} Y\" (Toll Free)."
+      description: 'This API shall allow the customer to initiate consent on number prefixed by 91 via available channel. Current supported channels are IVR and SMS.
+
+        Use this to
+
+        - Initiating new consent
+
+        - Initiating consent if current state is REJECTED
+
+        - Initiate consent in different language then previous
+
+
+        > *__Supported Language__*
+
+        > *English(en) | Hindi(hi) | Assamese(as) | Bengali(bn) | Oriya(or) | Kannada(kn) | Malayalam(ml) | Tamil(ta) | Telugu(te)*
+
+
+        __Sample Message__:
+
+        - __Customer with short code__ :To allow ABC Pvt Ltd. to fetch your location using your SIM Provider, please reply "Y" (Toll Free).
+
+        - __Customer without short code__: To allow ABC Pvt Ltd. to fetch your location using your SIM Provider, please reply "{unique_id} Y" (Toll Free).'
       operationId: initiateConsentUsingPOST_3
       parameters:
       - name: access_token
@@ -188,9 +208,7 @@ paths:
       tags:
       - Resource Consent API
       summary: Modify Resource
-      description: 'API to modify tracking and alias(name) for registered msisdn.
-
-        '
+      description: API to modify tracking and alias(name) for registered msisdn.
       operationId: patchResourceUsingPATCH_3
       parameters:
       - name: access_token
@@ -229,7 +247,23 @@ paths:
       tags:
       - Resource Consent API
       summary: Fetch Consent Details
-      description: "API to get the consent details insight\n>  *__Consent  States__*    -- _PROCESSING | INITIATED | PENDING | ALLOWED | REJECTED | FAILED_\n\n*__Consent Events Types__*  -- _MT | DR | MO | CALL | CDR_\n\n - _MT- Event when platform sends consent via SMS_\n - _DR- Event when delivery report is received against a sent MT event_\n - _MO- Event when platform receives a valid consent sent by user via SMS_\n - _CALL- Event when platform initiates consent call via IVR_\n - _CDR- Event when platform receives call data record  against the initiated CALL event_\n\n"
+      description: 'API to get the consent details insight
+
+        > *__Consent States__* -- _PROCESSING | INITIATED | PENDING | ALLOWED | REJECTED | FAILED_
+
+
+        *__Consent Events Types__* -- _MT | DR | MO | CALL | CDR_
+
+
+        - _MT- Event when platform sends consent via SMS_
+
+        - _DR- Event when delivery report is received against a sent MT event_
+
+        - _MO- Event when platform receives a valid consent sent by user via SMS_
+
+        - _CALL- Event when platform initiates consent call via IVR_
+
+        - _CDR- Event when platform receives call data record against the initiated CALL event_'
       operationId: getConsentUsingGET_2
       parameters:
       - name: access_token
@@ -265,6 +299,64 @@ paths:
       deprecated: false
 components:
   schemas:
+    ConsentEventMeta:
+      type: object
+      properties:
+        callStatus:
+          type: string
+        consentId:
+          type: string
+        delivered:
+          type: boolean
+        keyPressed:
+          type: boolean
+        language:
+          type: string
+          enum:
+          - EN
+          - HI
+          - AS
+          - BN
+          - OR
+          - KN
+          - ML
+          - TA
+          - TE
+      title: ConsentEventMeta
+    ConsentEvents:
+      type: object
+      properties:
+        channel:
+          type: string
+          enum:
+          - IVR
+          - SMS
+        consentId:
+          type: string
+        initiatedBy:
+          type: string
+          enum:
+          - PLATFORM
+          - CUSTOMER
+        meta:
+          $ref: '#/components/schemas/ConsentEventMeta'
+        status:
+          type: string
+          enum:
+          - FAIL
+          - SUCCESS
+        timestamp:
+          type: string
+          format: date-time
+        type:
+          type: string
+          enum:
+          - MT
+          - DR
+          - MO
+          - CALL
+          - CDR
+      title: ConsentEvents
     ConsentResponse:
       type: object
       properties:
@@ -307,48 +399,6 @@ components:
           type: string
           format: date-time
       title: ConsentResponse
-    ConsentRequest:
-      type: object
-      required:
-      - msisdn
-      properties:
-        channel:
-          type: string
-          example: SMS
-          description: The channel to initiate consent. Defaults to SMS
-        language:
-          type: string
-          example: EN
-          description: Preferred language to initiate the consent. Default to EN(english)
-        msisdn:
-          type: string
-          example: 91XXXXXXXXXX
-          description: The Airtel number must be prefixed with 91 followed by 10 digit mobile number.
-      title: ConsentRequest
-    ConsentEventMeta:
-      type: object
-      properties:
-        callStatus:
-          type: string
-        consentId:
-          type: string
-        delivered:
-          type: boolean
-        keyPressed:
-          type: boolean
-        language:
-          type: string
-          enum:
-          - EN
-          - HI
-          - AS
-          - BN
-          - OR
-          - KN
-          - ML
-          - TA
-          - TE
-      title: ConsentEventMeta
     ResourcePatchOptions:
       type: object
       properties:
@@ -361,40 +411,6 @@ components:
           example: true
           description: enable/disable tracking for a MSISDN.
       title: ResourcePatchOptions
-    ConsentEvents:
-      type: object
-      properties:
-        channel:
-          type: string
-          enum:
-          - IVR
-          - SMS
-        consentId:
-          type: string
-        initiatedBy:
-          type: string
-          enum:
-          - PLATFORM
-          - CUSTOMER
-        meta:
-          $ref: '#/components/schemas/ConsentEventMeta'
-        status:
-          type: string
-          enum:
-          - FAIL
-          - SUCCESS
-        timestamp:
-          type: string
-          format: date-time
-        type:
-          type: string
-          enum:
-          - MT
-          - DR
-          - MO
-          - CALL
-          - CDR
-      title: ConsentEvents
     ResourceResponseDto:
       type: object
       properties:
@@ -431,6 +447,24 @@ components:
         tracking:
           type: boolean
       title: ResourceResponseDto
+    ConsentRequest:
+      type: object
+      required:
+      - msisdn
+      properties:
+        channel:
+          type: string
+          example: SMS
+          description: The channel to initiate consent. Defaults to SMS
+        language:
+          type: string
+          example: EN
+          description: Preferred language to initiate the consent. Default to EN(english)
+        msisdn:
+          type: string
+          example: 91XXXXXXXXXX
+          description: The Airtel number must be prefixed with 91 followed by 10 digit mobile number.
+      title: ConsentRequest
   requestBodies:
     ResourcePatchOptions:
       content:

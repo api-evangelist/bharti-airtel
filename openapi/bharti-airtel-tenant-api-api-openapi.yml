@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: "Airtel Locate platform enables enterprises and small businesses to easily track device location to enhance their IoT use cases irrespective of device's GPS capabilities. Airtel Locate APIs will allow you to easily get Assets' location and manage consent. \n\nKey word : \n* MSISDN – represents a valid 10 or 13 digit airtel mobile number \n* Locate – Airtel Locate platform\n* Resource – a resource is equivalent to a MSISDN\n* Location – location of the resource \n* License – represents an Airtel Locate customer’s commercial license to use location API’s "
+  description: Airtel Locate platform enables enterprises and small businesses to easily track device location to enhance their IoT use cases irrespective of device's GPS capabilities.
   version: 1.4.8
   title: Locate API Catalog Tenant API
   contact:
@@ -10,20 +10,14 @@ servers:
 - url: https://openapi.airtel.in/
 tags:
 - name: Tenant API
-  description: '
-
-    These set of Tenant APIs allow customer to initiate consent, fetch consent details, delete consent, fetch list of msisdn for consent was initiated and various other API to handle tenant msisdn''s and their consent.
-
-    '
+  description: These set of Tenant APIs allow customer to initiate consent, fetch consent details, delete consent, fetch list of msisdn for consent was initiated and various other API to handle tenant msisdn's and their consent.
 paths:
   /locate/apis/customers/{customerBaId}/tenants:
     get:
       tags:
       - Tenant API
       summary: Fetch Customer Tenants
-      description: 'This API returns the list of tenants registered by customer.
-
-        '
+      description: This API returns the list of tenants registered by customer.
       operationId: getCustomerTenantsUsingGET_1
       parameters:
       - name: access_token
@@ -104,7 +98,7 @@ paths:
       tags:
       - Tenant API
       summary: Fetch Tenant Consent purpose
-      description: "This API returns the list of available tenant consent purpose for initiating consent. This API returns the list of consent purpose for which consent can be initiated by customer for location tracking. \n\n"
+      description: This API returns the list of available tenant consent purpose for initiating consent. This API returns the list of consent purpose for which consent can be initiated by customer for location tracking.
       operationId: getAllConsentPurposeUsingGET_1
       parameters:
       - name: access_token
@@ -173,7 +167,7 @@ paths:
       tags:
       - Tenant API
       summary: Fetch MSISDNs
-      description: "This API returns the list of resource registered by customer for location tracking. Optional query params consent, tracking and daysSinceLastLocationFetched can be used to further filter the result.This API returns the list of resource for which consent initiated by customer for location tracking. \n\n"
+      description: This API returns the list of resource registered by customer for location tracking. Optional query params consent, tracking and daysSinceLastLocationFetched can be used to further filter the result.This API returns the list of resource for which consent initiated by customer for location tracking.
       operationId: findAllUsingGET_3
       parameters:
       - name: access_token
@@ -272,7 +266,27 @@ paths:
       tags:
       - Tenant API
       summary: Initiate Consent
-      description: "This API shall allow the customer to initiate consent on number prefixed by 91 via available channel. Current supported channels are IVR and SMS. \n Use this to \n - Initiating new consent\n - Initiating consent if current state is REJECTED \n - Initiate consent in different language then previous\n\n> *__Supported Language__*\n> *English(en) | Hindi(hi) | Assamese(as) | Bengali(bn) | Oriya(or) | Kannada(kn) | Malayalam(ml) | Tamil(ta) | Telugu(te)*\n\n__Sample Message__:\n - __Customer with short code__ :To allow ABC Pvt Ltd. to fetch your location using your SIM Provider, please reply \"Y\" (Toll Free). \n - __Customer without short code__: To allow ABC Pvt Ltd. to fetch your location using your SIM Provider, please reply \"{unique_id} Y\" (Toll Free)."
+      description: 'This API shall allow the customer to initiate consent on number prefixed by 91 via available channel. Current supported channels are IVR and SMS.
+
+        Use this to
+
+        - Initiating new consent
+
+        - Initiating consent if current state is REJECTED
+
+        - Initiate consent in different language then previous
+
+
+        > *__Supported Language__*
+
+        > *English(en) | Hindi(hi) | Assamese(as) | Bengali(bn) | Oriya(or) | Kannada(kn) | Malayalam(ml) | Tamil(ta) | Telugu(te)*
+
+
+        __Sample Message__:
+
+        - __Customer with short code__ :To allow ABC Pvt Ltd. to fetch your location using your SIM Provider, please reply "Y" (Toll Free).
+
+        - __Customer without short code__: To allow ABC Pvt Ltd. to fetch your location using your SIM Provider, please reply "{unique_id} Y" (Toll Free).'
       operationId: initiateConsentUsingPOST_4
       parameters:
       - name: access_token
@@ -392,9 +406,7 @@ paths:
       tags:
       - Tenant API
       summary: Modify Resource
-      description: 'API to modify tracking and alias(name) for registered msisdn.
-
-        '
+      description: API to modify tracking and alias(name) for registered msisdn.
       operationId: patchResourceUsingPATCH_4
       parameters:
       - name: access_token
@@ -439,7 +451,23 @@ paths:
       tags:
       - Tenant API
       summary: Fetch Consent Details
-      description: "API to get the consent details insight\n>  *__Consent  States__*    -- _PROCESSING | INITIATED | PENDING | ALLOWED | REJECTED | FAILED_\n\n*__Consent Events Types__*  -- _MT | DR | MO | CALL | CDR_\n\n - _MT- Event when platform sends consent via SMS_\n - _DR- Event when delivery report is received against a sent MT event_\n - _MO- Event when platform receives a valid consent sent by user via SMS_\n - _CALL- Event when platform initiates consent call via IVR_\n - _CDR- Event when platform receives call data record  against the initiated CALL event_\n\n"
+      description: 'API to get the consent details insight
+
+        > *__Consent States__* -- _PROCESSING | INITIATED | PENDING | ALLOWED | REJECTED | FAILED_
+
+
+        *__Consent Events Types__* -- _MT | DR | MO | CALL | CDR_
+
+
+        - _MT- Event when platform sends consent via SMS_
+
+        - _DR- Event when delivery report is received against a sent MT event_
+
+        - _MO- Event when platform receives a valid consent sent by user via SMS_
+
+        - _CALL- Event when platform initiates consent call via IVR_
+
+        - _CDR- Event when platform receives call data record against the initiated CALL event_'
       operationId: getConsentUsingGET_3
       parameters:
       - name: access_token
@@ -597,7 +625,188 @@ paths:
           description: "Error in Fetching location of msisdn because of network error in HLR, \n MME, MSC. The ~5-10% of such error is expected.| Error retrieving geocode while processing request. Please try again!"
       deprecated: false
 components:
+  requestBodies:
+    AddressValidationDto:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AddressValidationDto'
+      description: address
+      required: true
+    ResourcePatchOptions:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResourcePatchOptions'
+      description: resourcePatchOptions
+      required: true
   schemas:
+    AddressValidationDto:
+      type: object
+      required:
+      - address
+      properties:
+        address:
+          type: string
+          example: string
+          description: address to be validated
+      title: AddressValidationDto
+    AsyncCorrelationId:
+      type: object
+      properties:
+        correlationId:
+          type: string
+      title: AsyncCorrelationId
+    ConsentEventMeta:
+      type: object
+      properties:
+        callStatus:
+          type: string
+        consentId:
+          type: string
+        delivered:
+          type: boolean
+        keyPressed:
+          type: boolean
+        language:
+          type: string
+          enum:
+          - EN
+          - HI
+          - AS
+          - BN
+          - OR
+          - KN
+          - ML
+          - TA
+          - TE
+      title: ConsentEventMeta
+    ConsentEvents:
+      type: object
+      properties:
+        channel:
+          type: string
+          enum:
+          - IVR
+          - SMS
+        consentId:
+          type: string
+        initiatedBy:
+          type: string
+          enum:
+          - PLATFORM
+          - CUSTOMER
+        meta:
+          $ref: '#/components/schemas/ConsentEventMeta'
+        status:
+          type: string
+          enum:
+          - FAIL
+          - SUCCESS
+        timestamp:
+          type: string
+          format: date-time
+        type:
+          type: string
+          enum:
+          - MT
+          - DR
+          - MO
+          - CALL
+          - CDR
+      title: ConsentEvents
+    CustomerTenantProfileResponseDto:
+      type: object
+      properties:
+        address:
+          type: string
+        city:
+          type: string
+        customerSpocContactNumber:
+          type: string
+        customerSpocEmail:
+          type: string
+        customerSpocName:
+          type: string
+        pincode:
+          type: string
+        state:
+          type: string
+      title: CustomerTenantProfileResponseDto
+    LocationResponse:
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/LatLong'
+        message:
+          type: string
+        retrievedAt:
+          type: string
+          format: date-time
+          example: yyyy-MM-dd HH:mm:ss
+          description: location
+        status:
+          type: string
+      title: LocationResponse
+    LatLong:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        radius:
+          type: string
+      title: LatLong
+    AddressValidationResponseDto:
+      type: object
+      properties:
+        distance:
+          type: number
+          format: double
+        distanceUnit:
+          type: string
+          description: Km/m
+        geocode:
+          $ref: '#/components/schemas/GeocodeDetails'
+        message:
+          type: string
+          description: when the subscriber is absent or in restricted zone.
+        networkCoordinates:
+          $ref: '#/components/schemas/LatLong'
+        status:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+      title: AddressValidationResponseDto
+    CustomerTenantResponseDto:
+      type: object
+      properties:
+        active:
+          type: boolean
+        consentChannels:
+          type: array
+          items:
+            type: string
+            enum:
+            - IVR
+            - SMS
+        createdAt:
+          type: string
+          format: date-time
+        customerBaId:
+          type: string
+        id:
+          type: integer
+          format: int64
+        organizationName:
+          type: string
+        profile:
+          $ref: '#/components/schemas/CustomerTenantProfileResponseDto'
+      title: CustomerTenantResponseDto
     ConsentResponse:
       type: object
       properties:
@@ -640,146 +849,6 @@ components:
           type: string
           format: date-time
       title: ConsentResponse
-    AddressValidationDto:
-      type: object
-      required:
-      - address
-      properties:
-        address:
-          type: string
-          example: string
-          description: address to be validated
-      title: AddressValidationDto
-    AsyncCorrelationId:
-      type: object
-      properties:
-        correlationId:
-          type: string
-      title: AsyncCorrelationId
-    LocationResponse:
-      type: object
-      properties:
-        location:
-          $ref: '#/components/schemas/LatLong'
-        message:
-          type: string
-        retrievedAt:
-          type: string
-          format: date-time
-          example: yyyy-MM-dd HH:mm:ss
-          description: location
-        status:
-          type: string
-      title: LocationResponse
-    GeocodeDetails:
-      type: object
-      properties:
-        formattedAddress:
-          type: string
-          description: this shows the formatted address of the POI.
-        geocodeLevel:
-          type: string
-          description: this shows on which level the POI has been geocoded.
-        inputAddress:
-          type: string
-        latitude:
-          type: number
-          format: double
-        longitude:
-          type: number
-          format: double
-      title: GeocodeDetails
-    CustomerTenantResponseDto:
-      type: object
-      properties:
-        active:
-          type: boolean
-        consentChannels:
-          type: array
-          items:
-            type: string
-            enum:
-            - IVR
-            - SMS
-        createdAt:
-          type: string
-          format: date-time
-        customerBaId:
-          type: string
-        id:
-          type: integer
-          format: int64
-        organizationName:
-          type: string
-        profile:
-          $ref: '#/components/schemas/CustomerTenantProfileResponseDto'
-      title: CustomerTenantResponseDto
-    CustomerTenantProfileResponseDto:
-      type: object
-      properties:
-        address:
-          type: string
-        city:
-          type: string
-        customerSpocContactNumber:
-          type: string
-        customerSpocEmail:
-          type: string
-        customerSpocName:
-          type: string
-        pincode:
-          type: string
-        state:
-          type: string
-      title: CustomerTenantProfileResponseDto
-    ConsentEventMeta:
-      type: object
-      properties:
-        callStatus:
-          type: string
-        consentId:
-          type: string
-        delivered:
-          type: boolean
-        keyPressed:
-          type: boolean
-        language:
-          type: string
-          enum:
-          - EN
-          - HI
-          - AS
-          - BN
-          - OR
-          - KN
-          - ML
-          - TA
-          - TE
-      title: ConsentEventMeta
-    ResourcePatchOptions:
-      type: object
-      properties:
-        alias:
-          type: string
-          example: Albert Einstein
-          description: The name to msisdn for which consent was initiated
-        isTrackingEnabled:
-          type: boolean
-          example: true
-          description: enable/disable tracking for a MSISDN.
-      title: ResourcePatchOptions
-    LatLong:
-      type: object
-      properties:
-        latitude:
-          type: number
-          format: double
-        longitude:
-          type: number
-          format: double
-        radius:
-          type: string
-      title: LatLong
     TenantConsentRequest:
       type: object
       required:
@@ -811,62 +880,24 @@ components:
         purposeValue:
           type: string
       title: ConsentPurpose
-    ConsentEvents:
+    GeocodeDetails:
       type: object
       properties:
-        channel:
+        formattedAddress:
           type: string
-          enum:
-          - IVR
-          - SMS
-        consentId:
+          description: this shows the formatted address of the POI.
+        geocodeLevel:
           type: string
-        initiatedBy:
+          description: this shows on which level the POI has been geocoded.
+        inputAddress:
           type: string
-          enum:
-          - PLATFORM
-          - CUSTOMER
-        meta:
-          $ref: '#/components/schemas/ConsentEventMeta'
-        status:
-          type: string
-          enum:
-          - FAIL
-          - SUCCESS
-        timestamp:
-          type: string
-          format: date-time
-        type:
-          type: string
-          enum:
-          - MT
-          - DR
-          - MO
-          - CALL
-          - CDR
-      title: ConsentEvents
-    AddressValidationResponseDto:
-      type: object
-      properties:
-        distance:
+        latitude:
           type: number
           format: double
-        distanceUnit:
-          type: string
-          description: Km/m
-        geocode:
-          $ref: '#/components/schemas/GeocodeDetails'
-        message:
-          type: string
-          description: when the subscriber is absent or in restricted zone.
-        networkCoordinates:
-          $ref: '#/components/schemas/LatLong'
-        status:
-          type: string
-        timestamp:
-          type: string
-          format: date-time
-      title: AddressValidationResponseDto
+        longitude:
+          type: number
+          format: double
+      title: GeocodeDetails
     ResourceResponseDto:
       type: object
       properties:
@@ -903,18 +934,15 @@ components:
         tracking:
           type: boolean
       title: ResourceResponseDto
-  requestBodies:
     ResourcePatchOptions:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ResourcePatchOptions'
-      description: resourcePatchOptions
-      required: true
-    AddressValidationDto:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AddressValidationDto'
-      description: address
-      required: true
+      type: object
+      properties:
+        alias:
+          type: string
+          example: Albert Einstein
+          description: The name to msisdn for which consent was initiated
+        isTrackingEnabled:
+          type: boolean
+          example: true
+          description: enable/disable tracking for a MSISDN.
+      title: ResourcePatchOptions

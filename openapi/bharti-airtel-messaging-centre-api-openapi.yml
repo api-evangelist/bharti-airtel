@@ -1,10 +1,17 @@
 openapi: 3.2.0
 info:
-  version: '1.0'
+  version: ''
   title: Airtel IoT Messaging Centre API
   contact:
     email: m2m.support@airtel.com
-  description: "# Overview\n ## Introduction\n <div class=\"iot-intro\">Airtel IoT Developer Portal showcases APIs that allows you\n to access data of the CMP Billable account from any external application. Using the APIs, you\n can perform almost all the operations that you perform through the CMP portal including Managing\n SIM Inventory, Changing SIM state (Test Mode, Activate, Change Plan, Safe custody), Monitoring\n data usage, Performing bulk operations and so on.</div>\n                     \n In this section, you’ll learn Airtel IoT Developer Portal Dashboard.\n\n   ## API Credentials\n   This section provide static details of Customer which will be used for accessing APIs.\n\n \n   <div class=\"bullet-list\">  Key Authentication   </div>\n    <div class=\"bullet-list-content\" > A Unique Identification Secret Key per Customer, must be passed in Headers while calling API and will be used for Authentication purpose.</div>\n   \n\n   <div class=\"bullet-list\" > Customer Information  </div>\n  <div class=\"bullet-list-content\" > Customer Information will show details of Customer Developer Account. This shows Customer Id, Customer Account No, Email Id, iv-user, Name, Developer Created By and Developer Created On. Some of these information will be used in accessing APIs.</div>\n\n\n   <div class=\"bullet-list\" > OAuth2.0  </div>\n  <div class=\"bullet-list-content\" > Customer has to use unique Client Id and Client Secret mentioned in OAuth Credential table for Authentication of APIs.</div>\n  \n\n ## Usage Information\n This section provide Customer API usages details. This can show details based on different timestamps:       \n   \n ## Activating your first SIM \n\n <div id=\"auth-2.0-page\" ><section class=\"kong-doc\"><h2>Generating OAuth 2.0 token</h2> <p>\n       The OAuth 2.0 authorization code grant will be used by customer to gain access to protected\n       resources, such as APIs.\n       This set of APIs shall allow user to generate Access Token and refresh Access Token to perform\n       any action on CMP via the API gateway.\n     </p> <h2><a id=\"Request_an_Access_Token_0\"></a>Request an Access Token</h2> <p>To get a token by using the client Id &amp; Client Secret, send a POST request to the <code>/developer/generate/authtoken</code></p> <h1><a id=\"auth-request\"></a>Sample Request</h1> <pre><code>curl -X POST \"https://openapi.airtel.in/iot/api/developer/generate/authtoken\"\n         -H \"accept: application/json\"\n         -H \"apikey: XXXXXXXXXXXXXXXXXXXXXX\"\n         -H \"iv-user: XXXXXXXXXXXXXXXXXXXXXX\"\n         -H \"Content-Type: application/x-www-form-urlencoded\"\n         -d \"client_id=XXXXXXXXXXXXXXXXXXXXXX&amp;client_secret=XXXXXXXXXXXXXXXXXXXXXX\"\n       </code></pre> <h1><a id=\"auth-response\"></a>Sample Response</h1> <pre><code>{\n           \"data\": {\n             \"refresh_token\": \"XXXXXXXXXXXXXXXXXXXXXX\",\n             \"token_type\": \"bearer\",\n             \"access_token\": \"XXXXXXXXXXXXXXXXXXXXXX\",\n             \"expires_in\": 1800\n           }\n         }\n         </code></pre> &nbsp; &nbsp; &nbsp; &nbsp;You can generate same request response from Airtel IoT Developer Portal. To do so :\n           <ul><li>Navigate to <em>Documentation</em> → <em>Account Authorization</em> → <em>Generate Access Token</em> → <em>Test Endpoint</em></li> <li>Put values of <strong>apikey</strong>, <strong>client_id</strong>, <strong>client_secret</strong>, <strong>iv-user</strong> in mentioned text fields from Dashboard</li> <li><strong>Make API Call</strong>.</li></ul></section></div>\n\n <div id=\"sim-inventory-page\" ><section class=\"kong-doc\"><h1>Fetch SIM Inventory</h1> <p>\n       This API shall allow user to fetch the details of SIMs on that Customer\n       Account. It can fetch the details of one or more SIMs at a time.\n     </p> <h1><a id=\"sim-inventory-request\"></a>Sample Request</h1> \n     <pre><code>curl -X GET \"https://openapi.airtel.in/iot/api/customer/details/basket/0/sims\n       ?pageNo=1&amp;pageSize=1&amp;simStatus=INITIAL\"\n       -H \"accept: application/json\"\n       -H \"Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXX\"\n       -H \"apikey: XXXXXXXXXXXXXXXXXXXXXX\"\n       -H \"customer-id: XXXX\"\n       -H \"iv-user: XXXXXXXXXXXXXXXXXXXXXX\"\n     </code></pre> <h1><a id=\"sim-inventory-response\"></a>Sample Response</h1> <pre><code>{\n       \"data\":\n       {\n         \"sims\": [\n         {\n           \"simId\": \"5165173\",\n           \"mobileNo\": \"51967694502\",\n           \"simNo\": \"9999000000000000000\",\n           \"imsi\": \"30811010404043400\",\n           \"lsi\": \" \",\n           \"status\": \"INITIAL\",\n           \"isPaired\": \"0\",\n           \"isPrepaidSim\": \"0\",\n           \"circleName\": \"DELHI\",\n           \"planCode\": \"M2M_PLN_0324\",\n           \"planName\": \"VTS 49 special plan(without voice with sms)\",\n           \"description\": \"VTS 49 special plan(without voice with sms)\",\n           \"dataType\": \"2G\",\n           \"dataUnits\": \"250\",\n           \"planType\": \"0\"\n         }\n         ],\n         \"total\": \"10000\"\n       }\n     }\n     </code></pre> \n        &nbsp; &nbsp; &nbsp; &nbsp;You can generate same request response from Airtel IoT Developer Portal. To do so :\n       <ul><li>Navigate to <em>Documentation</em> → <em>Manage SIMs</em> → <em>Fetch SIMs</em> → <em>Test Endpoint</em></li> <li>Replace Bearer Token from access token generated from\n           <a id=\"go-to-auth\" class=\"nav-link\">Generating OAuth 2.0 token</a></li><li>Put values of <strong>apikey</strong>, <strong>iv-user</strong> &amp; <strong>customer-id</strong> in mentioned text fields from Dashboard.</li> <li>Select <strong>simStatus</strong> as <strong>INITIAL</strong></li> <li><strong>Make API Call</strong>.</li></ul></section></div>\n \n <div ><section class=\"kong-doc\"><h1 id=\"fetch-plans-page\">Fetch Plans</h1> <p>\n       This API shall allow user to fetch the details of Plans that are associated with the Customer\n       Account. It returns the Plan code, plan name, plan description and whether it is a test plan or\n       actual plan as defined on the account.\n     </p> <h1 id=\"fetchPlans-request\"> Sample Request</h1><h1><pre><code>curl -X GET \"https://openapi.airtel.in/iot/api/customer/details/plans\"\n         -H \"accept: application/json\"\n         -H \"Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXX\"\n         -H \"apikey: XXXXXXXXXXXXXXXXXXXXXX\"\n         -H \"customer-id: XXXX\"\n         -H \"iv-user: XXXXXXXXXXXXXXXXXXXXXX\"\n       </code></pre></h1><h1 id=\"fetchPlans-response\">Sample Response</h1> <pre><code>{\n         \"data\": [\n         {\n           \"planCode\": \"M2M_PLN_0001\",\n           \"planName\": \"M2M-2G-1GB PLAN\",\n           \"planDescription\": \"M2M-2G-1GB PLAN\",\n           \"testPlan\": false\n         },\n         {\n           \"planCode\": \"M2M_PLN_0003\",\n           \"planName\": \"M2M 3G - 100 MB PLAN\",\n           \"planDescription\": \"M2M 3G - 100 MB PLAN\",\n           \"testPlan\": true\n         }\n         ]\n       }\n     </code></pre> &nbsp; &nbsp; &nbsp; &nbsp;You can generate same request response from Airtel IoT Developer Portal. To do so :\n         <ul><li>Navigate to <em>Documentation</em> → <em>Account Details</em> → <em>Fetch Customer Plans</em> → <em>Test Endpoint</em></li> <li>Replace Bearer Token from access token generated from\n             <a id=\"go-to-auth\" class=\"nav-link\">Generating OAuth 2.0 token</a></li> <li>Put values of <strong>apikey</strong>, <strong>iv-user</strong> &amp; <strong>customer-id</strong> in mentioned text fields from Dashboard.</li> <li><strong>Make API Call</strong>.</li></ul></section></div>\n       <div id=\"activate-sim-page\" ><section class=\"kong-doc\"><h1>Perform Activation</h1> <p>\n       This API shall allow user to change the state of SIM from Available (Initial to Activate) to\n       Active with Plan that is associated with the Billable account. It requires inputs as mobile\n       number and plan code.\n     </p> <h1 id=\"activate-sim-request\"> Sample Request</h1><h1><pre><code>curl -X POST \"https://openapi.airtel.in/iot/api/om/job/sim/activate\"\n         -H \"accept: application/json\"\n         -H \"Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXX\"\n         -H \"apikey: XXXXXXXXXXXXXXXXXXXXXXXXX\"\n         -H \"customer-id: XXXX\"\n         -H \"iv-user: XXXXXXXXXXXXXXXXXXXXXXXXX\"\n         -H \"Content-Type: application/json\"\n         -d \"{ \\\"simDOList\\\": [ { \\\"mobileNO\\\": \\\"51967694502\\\",\n         \\\"planDO\\\": { \\\"planCode\\\": \\\"M2M_PLN_0001\\\" } } ]}\"\n       </code></pre></h1><h1><a id=\"activate-sim-response\"></a>Sample Response</h1> <pre><code>{\n       \"data\": {\n           \"jobId\": 795405,\n           \"jobType\": \"ACTIVATE_SIM\",\n           \"orderCount\": 0,\n           \"successCount\": 0,\n           \"failureCount\": 0,\n           \"inProgressCount\": 0,\n           \"rejectedCount\": 0,\n           \"orderInitiateDate\": \"25-04-2019 03:35:40 PM\",\n           \"statusMessage\": \"Your request is in progress\"\n       }\n   }\n   </code></pre> &nbsp; &nbsp; &nbsp; &nbsp;You can generate same request response from Airtel IoT Developer Portal. To do so :\n   <ul><li>Navigate to <em>Documentation</em> → <em>New Orders</em> → <em>Activate Sim</em> → <em>Activate Sim</em> → <em>Test Endpoint</em></li> <li>Replace Bearer Token from access token generated from\n     <a id=\"go-to-auth\" class=\"nav-link\">Generating OAuth 2.0 token</a></li> <li>Put values of <strong>apikey</strong>, <strong>iv-user</strong> &amp; <strong>customer-id</strong> in mentioned text fields from Dashboard.</li> <li>Put mobileNo in body fetched from response of API\n     <a id=\"go-to-sim-inventory\" class=\"nav-link\">Fetch SIM Inventory</a></li> <li>Put planCode in body fetched from response of API\n     <a id=\"go-to-fetch-plans\" class=\"nav-link\"> Fetch Plans </a></li> <li><strong>Make API Call</strong>.</li></ul><hr> <p><strong>NOTE</strong><br>\n   The JobId in the response is important to track the status of activation order. The details of JobId can be fetched from Fetch Jobs API. There shall be Order ID(s) within a JobId to view status of specific Order(s) in a JobId.</p> <hr></section></div>\n"
+  description: '# Overview
+
+    ## Introduction
+
+
+    Airtel IoT Developer Portal showcases APIs that allows you
+
+    to access data of the CMP Billable account from any external application.'
 servers:
 - url: https://m2m.airteliot.co.in/iot/api/
 security: []
@@ -286,7 +293,13 @@ paths:
       tags:
       - Messaging Centre
       summary: Send Custom SMS
-      description: 'This API is used to initiate request for sending either Text or Binary SMS on M2M SIMs. A single job can be used to send SMS to a maximum of 10 MSISDNs. This is an asynchronous API which will take input in specified JSON format mentioning MSISDN(s) and Custom Message. In return it will provide a Job ID by which status of Job created by request can be tracked using ''Fetch SMS Jobs'' and ''Fetch SMS Job Orders'' APIs. Use API for below mentioned scenarios </br><ul><li><u>Send Text SMS</u> : Pass <b>binarySMS</b> value as <b>false</b>. Maximum allowed content length of <b>customMessage</b> is 160 characters.</li><li><u>Send Binary SMS</u> : Pass <b>binarySMS</b> value as <b>true</b>. Maximum allowed content length of <b>customMessage</b> is 1000 characters. And content must be in 8-bit Binary format</li></ul>'
+      description: 'This API is used to initiate request for sending either Text or Binary SMS on M2M SIMs. A single job can be used to send SMS to a maximum of 10 MSISDNs. This is an asynchronous API which will take input in specified JSON format mentioning MSISDN(s) and Custom Message. In return it will provide a Job ID by which status of Job created by request can be tracked using ''Fetch SMS Jobs'' and ''Fetch SMS Job Orders'' APIs. Use API for below mentioned scenarios
+
+
+        Send Text SMS : Pass binarySMS value as false. Maximum allowed content length of customMessage is 160 characters.
+
+
+        Send Binary SMS : Pass binarySMS value as true. Maximum allowed content length of customMessage is 1000 characters. And content must be in 8-bit Binary format'
       operationId: sendCustomSMSUsingPOST
       parameters:
       - name: Authorization
@@ -750,6 +763,14 @@ paths:
       deprecated: false
 components:
   schemas:
+    SMSBatchDO:
+      title: SMSBatchDO
+      type: object
+      properties:
+        simsDO:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimDO'
     OrderVO:
       title: OrderVO
       type: object
@@ -771,6 +792,44 @@ components:
           type: string
         simNo:
           type: string
+    SmsTemplateView:
+      title: SmsTemplateView
+      type: object
+      properties:
+        smsTemplates:
+          type: array
+          items:
+            $ref: '#/components/schemas/SmsTemplate'
+        totalRecords:
+          type: integer
+          format: int32
+    SMSQuotaVO:
+      title: SMSQuotaVO
+      type: object
+      properties:
+        expiryDate:
+          type: string
+          example: dd/MM/yyyy
+        outgoingSMSBalance:
+          type: integer
+          format: int64
+        rolloverSMSQuota:
+          type: integer
+          format: int64
+        totalBalance:
+          type: integer
+          format: int64
+    CustomerPlanResponseVO:
+      title: CustomerPlanResponseVO
+      type: object
+      properties:
+        customerPlanVOs:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerPlanVO'
+        totalRecords:
+          type: integer
+          format: int64
     CustomerPlanVO:
       title: CustomerPlanVO
       type: object
@@ -810,38 +869,31 @@ components:
           type: string
         subscriptionEvent:
           type: string
-    CustomerPlanResponseVO:
-      title: CustomerPlanResponseVO
+    CustomSMSBatchDO:
+      title: CustomSMSBatchDO
       type: object
       properties:
-        customerPlanVOs:
+        customMessageDOS:
           type: array
           items:
-            $ref: '#/components/schemas/CustomerPlanVO'
-        totalRecords:
-          type: integer
-          format: int64
-    OrderVOResponse:
-      title: OrderVOResponse
+            $ref: '#/components/schemas/CustomMessageDO'
+    CustomMessageDO:
+      title: CustomMessageDO
+      required:
+      - binarySMS
+      - customMessage
+      - mobileNO
       type: object
       properties:
-        orderVOs:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderVO'
-        total:
-          type: integer
-          format: int64
-    JobVoResponse:
-      title: JobVoResponse
-      type: object
-      properties:
-        jobs:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobVO'
-        total:
+        binarySMS:
+          type: boolean
+          description: 'false'
+        customMessage:
           type: string
+          description: Message to send against Mobile Number. Maximum length of message can be 160 characters.
+        mobileNO:
+          type: string
+          description: Mobile No.
     Sms:
       title: Sms
       type: object
@@ -876,30 +928,6 @@ components:
           type: string
         templateName:
           type: string
-    DownloadSmsTemplateVO:
-      title: DownloadSmsTemplateVO
-      type: object
-      properties:
-        basketName:
-          type: string
-        completionDate:
-          type: string
-        creationDate:
-          type: string
-        downloadFileId:
-          type: integer
-          format: int32
-        downloadType:
-          type: string
-        extension:
-          type: string
-        fileName:
-          type: string
-        progress:
-          type: integer
-          format: int32
-        status:
-          type: string
     SimDO:
       title: SimDO
       required:
@@ -909,76 +937,6 @@ components:
         mobileNO:
           type: string
           description: Mobile No.
-    BulkSms:
-      title: BulkSms
-      type: object
-      properties:
-        createdBy:
-          type: string
-        customerId:
-          type: integer
-          format: int64
-        errorFileName:
-          type: string
-        failureOrders:
-          type: integer
-          format: int32
-        jobCreationTime:
-          type: string
-          format: date-time
-        jobId:
-          type: integer
-          format: int64
-        jobStatus:
-          type: string
-        jobType:
-          type: string
-        rejectedOrders:
-          type: integer
-          format: int32
-        successOrders:
-          type: integer
-          format: int32
-        totalOrders:
-          type: integer
-          format: int32
-        uploadFileName:
-          type: string
-    SMSQuotaVO:
-      title: SMSQuotaVO
-      type: object
-      properties:
-        expiryDate:
-          type: string
-          example: dd/MM/yyyy
-        outgoingSMSBalance:
-          type: integer
-          format: int64
-        rolloverSMSQuota:
-          type: integer
-          format: int64
-        totalBalance:
-          type: integer
-          format: int64
-    MessageHistory:
-      title: MessageHistory
-      type: object
-      properties:
-        messageDetails:
-          type: array
-          items:
-            $ref: '#/components/schemas/Sms'
-        total:
-          type: integer
-          format: int32
-    SMSBatchDO:
-      title: SMSBatchDO
-      type: object
-      properties:
-        simsDO:
-          type: array
-          items:
-            $ref: '#/components/schemas/SimDO'
     SmsTemplate:
       title: SmsTemplate
       type: object
@@ -1003,54 +961,27 @@ components:
           type: number
         version:
           type: number
-    DownloadTemplateDO:
-      title: DownloadTemplateDO
+    OrderVOResponse:
+      title: OrderVOResponse
       type: object
       properties:
-        basketId:
-          type: integer
-          format: int32
-        smsData:
-          type: string
-          enum:
-          - Y
-          - N
-    SmsTemplateView:
-      title: SmsTemplateView
-      type: object
-      properties:
-        smsTemplates:
+        orderVOs:
           type: array
           items:
-            $ref: '#/components/schemas/SmsTemplate'
-        totalRecords:
+            $ref: '#/components/schemas/OrderVO'
+        total:
           type: integer
-          format: int32
-    CustomSMSBatchDO:
-      title: CustomSMSBatchDO
+          format: int64
+    JobVoResponse:
+      title: JobVoResponse
       type: object
       properties:
-        customMessageDOS:
+        jobs:
           type: array
           items:
-            $ref: '#/components/schemas/CustomMessageDO'
-    CustomMessageDO:
-      title: CustomMessageDO
-      required:
-      - binarySMS
-      - customMessage
-      - mobileNO
-      type: object
-      properties:
-        binarySMS:
-          type: boolean
-          description: 'false'
-        customMessage:
+            $ref: '#/components/schemas/JobVO'
+        total:
           type: string
-          description: Message to send against Mobile Number. Maximum length of message can be 160 characters.
-        mobileNO:
-          type: string
-          description: Mobile No.
     JobVO:
       title: JobVO
       type: object
@@ -1108,6 +1039,88 @@ components:
         uploadFileName:
           type: string
           description: Upload File Name
+    DownloadTemplateDO:
+      title: DownloadTemplateDO
+      type: object
+      properties:
+        basketId:
+          type: integer
+          format: int32
+        smsData:
+          type: string
+          enum:
+          - Y
+          - N
+    DownloadSmsTemplateVO:
+      title: DownloadSmsTemplateVO
+      type: object
+      properties:
+        basketName:
+          type: string
+        completionDate:
+          type: string
+        creationDate:
+          type: string
+        downloadFileId:
+          type: integer
+          format: int32
+        downloadType:
+          type: string
+        extension:
+          type: string
+        fileName:
+          type: string
+        progress:
+          type: integer
+          format: int32
+        status:
+          type: string
+    MessageHistory:
+      title: MessageHistory
+      type: object
+      properties:
+        messageDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sms'
+        total:
+          type: integer
+          format: int32
+    BulkSms:
+      title: BulkSms
+      type: object
+      properties:
+        createdBy:
+          type: string
+        customerId:
+          type: integer
+          format: int64
+        errorFileName:
+          type: string
+        failureOrders:
+          type: integer
+          format: int32
+        jobCreationTime:
+          type: string
+          format: date-time
+        jobId:
+          type: integer
+          format: int64
+        jobStatus:
+          type: string
+        jobType:
+          type: string
+        rejectedOrders:
+          type: integer
+          format: int32
+        successOrders:
+          type: integer
+          format: int32
+        totalOrders:
+          type: integer
+          format: int32
+        uploadFileName:
+          type: string
 x-tagGroups:
 - name: Manage Customer APIs
   tags:
