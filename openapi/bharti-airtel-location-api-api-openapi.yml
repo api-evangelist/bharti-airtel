@@ -74,6 +74,18 @@ paths:
       deprecated: false
 components:
   schemas:
+    LatLong:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        radius:
+          type: string
+      title: LatLong
     LocationResponse:
       type: object
       properties:
@@ -95,15 +107,3 @@ components:
         correlationId:
           type: string
       title: AsyncCorrelationId
-    LatLong:
-      type: object
-      properties:
-        latitude:
-          type: number
-          format: double
-        longitude:
-          type: number
-          format: double
-        radius:
-          type: string
-      title: LatLong

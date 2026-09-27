@@ -328,6 +328,8 @@ apis:
   humanURL: https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility
   baseURL: https://iqsms.airtel.in/api/v1
   tags:
+  - Inventory
+  tags_raw:
   - Inventory Management
   properties:
   - type: OpenAPI

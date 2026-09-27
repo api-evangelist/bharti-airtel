@@ -19,6 +19,65 @@ tags:
 - name: SIM LifeCycle
   description: This API shall allow user to change the state of SIMs.
 paths:
+  /job/activate/test/sims:
+    post:
+      tags:
+      - SIM LifeCycle
+      summary: Activate SIM in Test Mode
+      description: This API shall allow user to change the state of SIM from Available (Ready to Activate) to Activate in Test Mode. It requires inputs as mobile number and plan code.
+      operationId: activateTestSimsUsingPOST
+      parameters:
+      - name: Authorization
+        in: header
+        description: Authorization Header (Value must be like Bearer <Developer Access Token>)
+        required: true
+        schema:
+          type: string
+          default: Bearer XXXXXXXXXXXXXX
+      - name: apikey
+        in: header
+        description: Developer API Key
+        required: true
+        schema:
+          type: string
+      - name: customer-id
+        in: header
+        description: 'Unique ID to identify Customer (shared during On-Boarding process) '
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: iv-user
+        in: header
+        description: Developer Account User ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: generateOrder
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateOrderWithPlan'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobVO'
+        '201':
+          description: Resource Created Successfully
+          content: {}
+        '400':
+          description: Request Message is not correct
+          content: {}
+        '500':
+          description: Internal Server Error.
+          content: {}
+      deprecated: false
+      x-codegen-request-body-name: generateOrder
   /job/activate/sim/from/test:
     post:
       tags:
@@ -491,116 +550,8 @@ paths:
           content: {}
       deprecated: false
       x-codegen-request-body-name: generateOrder
-  /job/activate/test/sims:
-    post:
-      tags:
-      - SIM LifeCycle
-      summary: Activate SIM in Test Mode
-      description: This API shall allow user to change the state of SIM from Available (Ready to Activate) to Activate in Test Mode. It requires inputs as mobile number and plan code.
-      operationId: activateTestSimsUsingPOST
-      parameters:
-      - name: Authorization
-        in: header
-        description: Authorization Header (Value must be like Bearer <Developer Access Token>)
-        required: true
-        schema:
-          type: string
-          default: Bearer XXXXXXXXXXXXXX
-      - name: apikey
-        in: header
-        description: Developer API Key
-        required: true
-        schema:
-          type: string
-      - name: customer-id
-        in: header
-        description: 'Unique ID to identify Customer (shared during On-Boarding process) '
-        required: true
-        schema:
-          type: integer
-          format: int64
-      - name: iv-user
-        in: header
-        description: Developer Account User ID
-        required: true
-        schema:
-          type: string
-      requestBody:
-        description: generateOrder
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GenerateOrderWithPlan'
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/JobVO'
-        '201':
-          description: Resource Created Successfully
-          content: {}
-        '400':
-          description: Request Message is not correct
-          content: {}
-        '500':
-          description: Internal Server Error.
-          content: {}
-      deprecated: false
-      x-codegen-request-body-name: generateOrder
 components:
   schemas:
-    GeneratedTempDisconnectOrder:
-      title: GeneratedTempDisconnectOrder
-      required:
-      - reason
-      - simDOList
-      type: object
-      properties:
-        reason:
-          type: string
-          description: Disconnection Reason.
-          enum:
-          - NUMBER_NOT_REQUIRED
-          - PRICING_CONCERN
-          - NETWORK_COVERAGE_ISSUE
-          - BILLING_OR_COLLECTION_ISSUE
-          - CONTRACT_EXPIRED
-        simDOList:
-          type: array
-          description: List of SIM
-          items:
-            $ref: '#/components/schemas/SimDO'
-    GenerateOrder:
-      title: GenerateOrder
-      required:
-      - simDOList
-      type: object
-      properties:
-        simDOList:
-          type: array
-          description: List of SIM
-          items:
-            $ref: '#/components/schemas/SimDO'
-    SimDO:
-      title: SimDO
-      required:
-      - mobileNO
-      type: object
-      properties:
-        mobileNO:
-          type: string
-          description: Mobile No.
-    SwapSim:
-      title: SwapSim
-      type: object
-      properties:
-        existingSIMNo:
-          type: string
-        newSIMNo:
-          type: string
     SimDOWithPlan:
       title: SimDOWithPlan
       required:
@@ -612,6 +563,26 @@ components:
           description: Mobile No.
         planDO:
           $ref: '#/components/schemas/PlanDO'
+    GenerateOrderWithPlan:
+      title: GenerateOrderWithPlan
+      required:
+      - simDOList
+      type: object
+      properties:
+        simDOList:
+          type: array
+          description: List of SIM
+          items:
+            $ref: '#/components/schemas/SimDOWithPlan'
+    SimDO:
+      title: SimDO
+      required:
+      - mobileNO
+      type: object
+      properties:
+        mobileNO:
+          type: string
+          description: Mobile No.
     JobVO:
       title: JobVO
       type: object
@@ -669,17 +640,14 @@ components:
         uploadFileName:
           type: string
           description: Upload File Name
-    GenerateOrderWithPlan:
-      title: GenerateOrderWithPlan
-      required:
-      - simDOList
+    SwapSim:
+      title: SwapSim
       type: object
       properties:
-        simDOList:
-          type: array
-          description: List of SIM
-          items:
-            $ref: '#/components/schemas/SimDOWithPlan'
+        existingSIMNo:
+          type: string
+        newSIMNo:
+          type: string
     PlanDO:
       title: PlanDO
       required:
@@ -689,6 +657,38 @@ components:
         planCode:
           type: string
           description: Plan Code
+    GeneratedTempDisconnectOrder:
+      title: GeneratedTempDisconnectOrder
+      required:
+      - reason
+      - simDOList
+      type: object
+      properties:
+        reason:
+          type: string
+          description: Disconnection Reason.
+          enum:
+          - NUMBER_NOT_REQUIRED
+          - PRICING_CONCERN
+          - NETWORK_COVERAGE_ISSUE
+          - BILLING_OR_COLLECTION_ISSUE
+          - CONTRACT_EXPIRED
+        simDOList:
+          type: array
+          description: List of SIM
+          items:
+            $ref: '#/components/schemas/SimDO'
+    GenerateOrder:
+      title: GenerateOrder
+      required:
+      - simDOList
+      type: object
+      properties:
+        simDOList:
+          type: array
+          description: List of SIM
+          items:
+            $ref: '#/components/schemas/SimDO'
 x-tagGroups:
 - name: Manage Customer APIs
   tags:

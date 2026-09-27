@@ -167,54 +167,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    UserStats:
-      title: UserStats
-      type: object
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        totalUserBaskets:
-          type: string
-        totalUserSims:
-          type: string
-        userId:
-          type: string
-    CustomerAddressVO:
-      title: CustomerAddressVO
-      type: object
-      properties:
-        addressLine1:
-          type: string
-        addressLine2:
-          type: string
-        addressLine3:
-          type: string
-        addressType:
-          type: string
-        billingAddress:
-          type: string
-        city:
-          type: string
-        country:
-          type: string
-        pincode:
-          type: string
-        state:
-          type: string
-    CustomerContactsVO:
-      title: CustomerContactsVO
-      type: object
-      properties:
-        emailAddress:
-          type: string
-        isPrimary:
-          type: string
-        mobileNo:
-          type: string
-        type:
-          type: string
     CustomerPreferencesVO:
       title: CustomerPreferencesVO
       type: object
@@ -283,6 +235,82 @@ components:
           type: string
         primaryPhoneNumberSetDefault:
           type: boolean
+    UserStats:
+      title: UserStats
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        totalUserBaskets:
+          type: string
+        totalUserSims:
+          type: string
+        userId:
+          type: string
+    CustomerStats:
+      title: CustomerStats
+      type: object
+      properties:
+        totalActiveSims:
+          type: string
+        totalAvailableSims:
+          type: string
+        totalBaskets:
+          type: string
+        totalInActiveSims:
+          type: string
+        totalInProgressSims:
+          type: string
+        totalSafeCustodySims:
+          type: string
+        totalSims:
+          type: string
+        totalSuspendedSims:
+          type: string
+        totalTempDisconnectedSims:
+          type: string
+        totalTestModeSims:
+          type: string
+        userStats:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserStats'
+    CustomerAddressVO:
+      title: CustomerAddressVO
+      type: object
+      properties:
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        addressLine3:
+          type: string
+        addressType:
+          type: string
+        billingAddress:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        pincode:
+          type: string
+        state:
+          type: string
+    CustomerContactsVO:
+      title: CustomerContactsVO
+      type: object
+      properties:
+        emailAddress:
+          type: string
+        isPrimary:
+          type: string
+        mobileNo:
+          type: string
+        type:
+          type: string
     PlanDetailsVO:
       title: PlanDetailsVO
       type: object
@@ -467,34 +495,6 @@ components:
           type: string
         userAcceptingKYC:
           type: string
-    CustomerStats:
-      title: CustomerStats
-      type: object
-      properties:
-        totalActiveSims:
-          type: string
-        totalAvailableSims:
-          type: string
-        totalBaskets:
-          type: string
-        totalInActiveSims:
-          type: string
-        totalInProgressSims:
-          type: string
-        totalSafeCustodySims:
-          type: string
-        totalSims:
-          type: string
-        totalSuspendedSims:
-          type: string
-        totalTempDisconnectedSims:
-          type: string
-        totalTestModeSims:
-          type: string
-        userStats:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserStats'
 x-tagGroups:
 - name: Manage Customer APIs
   tags:

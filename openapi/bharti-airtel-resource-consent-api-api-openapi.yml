@@ -299,30 +299,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    ConsentEventMeta:
-      type: object
-      properties:
-        callStatus:
-          type: string
-        consentId:
-          type: string
-        delivered:
-          type: boolean
-        keyPressed:
-          type: boolean
-        language:
-          type: string
-          enum:
-          - EN
-          - HI
-          - AS
-          - BN
-          - OR
-          - KN
-          - ML
-          - TA
-          - TE
-      title: ConsentEventMeta
     ConsentEvents:
       type: object
       properties:
@@ -447,6 +423,30 @@ components:
         tracking:
           type: boolean
       title: ResourceResponseDto
+    ConsentEventMeta:
+      type: object
+      properties:
+        callStatus:
+          type: string
+        consentId:
+          type: string
+        delivered:
+          type: boolean
+        keyPressed:
+          type: boolean
+        language:
+          type: string
+          enum:
+          - EN
+          - HI
+          - AS
+          - BN
+          - OR
+          - KN
+          - ML
+          - TA
+          - TE
+      title: ConsentEventMeta
     ConsentRequest:
       type: object
       required:

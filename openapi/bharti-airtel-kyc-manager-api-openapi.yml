@@ -189,35 +189,6 @@ components:
       properties:
         message:
           type: string
-    SimKycDetailsWOPlanVO:
-      title: SimKycDetailsWOPlanVO
-      type: object
-      properties:
-        activationDate:
-          type: string
-        complianceDate:
-          type: string
-        kycCompletionDate:
-          type: string
-        mobileNo:
-          type: string
-        simNo:
-          type: string
-        simStatus:
-          type: string
-        status:
-          type: string
-    SimKycDetailsWOPlan:
-      title: SimKycDetailsWOPlan
-      type: object
-      properties:
-        simKycList:
-          type: array
-          items:
-            $ref: '#/components/schemas/SimKycDetailsWOPlanVO'
-        totalRecords:
-          type: integer
-          format: int64
     SimKycDo:
       title: SimKycDo
       required:
@@ -275,6 +246,35 @@ components:
         registrationNo:
           type: string
           description: registration number.
+    SimKycDetailsWOPlanVO:
+      title: SimKycDetailsWOPlanVO
+      type: object
+      properties:
+        activationDate:
+          type: string
+        complianceDate:
+          type: string
+        kycCompletionDate:
+          type: string
+        mobileNo:
+          type: string
+        simNo:
+          type: string
+        simStatus:
+          type: string
+        status:
+          type: string
+    SimKycDetailsWOPlan:
+      title: SimKycDetailsWOPlan
+      type: object
+      properties:
+        simKycList:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimKycDetailsWOPlanVO'
+        totalRecords:
+          type: integer
+          format: int64
 x-tagGroups:
 - name: Manage Customer APIs
   tags:

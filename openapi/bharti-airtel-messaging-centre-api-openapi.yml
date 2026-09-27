@@ -763,35 +763,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    SMSBatchDO:
-      title: SMSBatchDO
-      type: object
-      properties:
-        simsDO:
-          type: array
-          items:
-            $ref: '#/components/schemas/SimDO'
-    OrderVO:
-      title: OrderVO
-      type: object
-      properties:
-        mobileNo:
-          type: string
-        orderCompletionTime:
-          type: string
-        orderId:
-          type: integer
-          format: int64
-        orderInitiateDate:
-          type: string
-        orderStatus:
-          type: string
-        orderType:
-          type: string
-        remarks:
-          type: string
-        simNo:
-          type: string
     SmsTemplateView:
       title: SmsTemplateView
       type: object
@@ -803,22 +774,6 @@ components:
         totalRecords:
           type: integer
           format: int32
-    SMSQuotaVO:
-      title: SMSQuotaVO
-      type: object
-      properties:
-        expiryDate:
-          type: string
-          example: dd/MM/yyyy
-        outgoingSMSBalance:
-          type: integer
-          format: int64
-        rolloverSMSQuota:
-          type: integer
-          format: int64
-        totalBalance:
-          type: integer
-          format: int64
     CustomerPlanResponseVO:
       title: CustomerPlanResponseVO
       type: object
@@ -830,6 +785,64 @@ components:
         totalRecords:
           type: integer
           format: int64
+    SmsTemplate:
+      title: SmsTemplate
+      type: object
+      properties:
+        createdBy:
+          type: string
+        createdOn:
+          type: string
+        lastUpdatedBy:
+          type: string
+        lastUpdatedOn:
+          type: string
+        status:
+          type: string
+        templateId:
+          type: number
+        templateName:
+          type: string
+        templateTxt:
+          type: string
+        totalRecords:
+          type: number
+        version:
+          type: number
+    Sms:
+      title: Sms
+      type: object
+      properties:
+        message:
+          type: string
+        messageDate:
+          type: string
+        messageFailureCode:
+          type: string
+        messageJobId:
+          type: integer
+          format: int64
+        messageOrderId:
+          type: integer
+          format: int64
+        messageStatus:
+          type: string
+        messageStatusRemarks:
+          type: string
+        messageText:
+          type: string
+        messageType:
+          type: string
+        msisdn:
+          type: string
+        sentBy:
+          type: string
+        shortCode:
+          type: string
+        status:
+          type: string
+        templateName:
+          type: string
     CustomerPlanVO:
       title: CustomerPlanVO
       type: object
@@ -877,110 +890,72 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CustomMessageDO'
-    CustomMessageDO:
-      title: CustomMessageDO
-      required:
-      - binarySMS
-      - customMessage
-      - mobileNO
+    SMSBatchDO:
+      title: SMSBatchDO
       type: object
       properties:
-        binarySMS:
-          type: boolean
-          description: 'false'
-        customMessage:
-          type: string
-          description: Message to send against Mobile Number. Maximum length of message can be 160 characters.
-        mobileNO:
-          type: string
-          description: Mobile No.
-    Sms:
-      title: Sms
+        simsDO:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimDO'
+    DownloadSmsTemplateVO:
+      title: DownloadSmsTemplateVO
       type: object
       properties:
-        message:
+        basketName:
           type: string
-        messageDate:
+        completionDate:
           type: string
-        messageFailureCode:
+        creationDate:
           type: string
-        messageJobId:
+        downloadFileId:
           type: integer
-          format: int64
-        messageOrderId:
+          format: int32
+        downloadType:
+          type: string
+        extension:
+          type: string
+        fileName:
+          type: string
+        progress:
           type: integer
-          format: int64
-        messageStatus:
-          type: string
-        messageStatusRemarks:
-          type: string
-        messageText:
-          type: string
-        messageType:
-          type: string
-        msisdn:
-          type: string
-        sentBy:
-          type: string
-        shortCode:
-          type: string
+          format: int32
         status:
           type: string
-        templateName:
-          type: string
-    SimDO:
-      title: SimDO
-      required:
-      - mobileNO
-      type: object
-      properties:
-        mobileNO:
-          type: string
-          description: Mobile No.
-    SmsTemplate:
-      title: SmsTemplate
+    BulkSms:
+      title: BulkSms
       type: object
       properties:
         createdBy:
           type: string
-        createdOn:
-          type: string
-        lastUpdatedBy:
-          type: string
-        lastUpdatedOn:
-          type: string
-        status:
-          type: string
-        templateId:
-          type: number
-        templateName:
-          type: string
-        templateTxt:
-          type: string
-        totalRecords:
-          type: number
-        version:
-          type: number
-    OrderVOResponse:
-      title: OrderVOResponse
-      type: object
-      properties:
-        orderVOs:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderVO'
-        total:
+        customerId:
           type: integer
           format: int64
-    JobVoResponse:
-      title: JobVoResponse
-      type: object
-      properties:
-        jobs:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobVO'
-        total:
+        errorFileName:
+          type: string
+        failureOrders:
+          type: integer
+          format: int32
+        jobCreationTime:
+          type: string
+          format: date-time
+        jobId:
+          type: integer
+          format: int64
+        jobStatus:
+          type: string
+        jobType:
+          type: string
+        rejectedOrders:
+          type: integer
+          format: int32
+        successOrders:
+          type: integer
+          format: int32
+        totalOrders:
+          type: integer
+          format: int32
+        uploadFileName:
           type: string
     JobVO:
       title: JobVO
@@ -1039,6 +1014,85 @@ components:
         uploadFileName:
           type: string
           description: Upload File Name
+    OrderVOResponse:
+      title: OrderVOResponse
+      type: object
+      properties:
+        orderVOs:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderVO'
+        total:
+          type: integer
+          format: int64
+    OrderVO:
+      title: OrderVO
+      type: object
+      properties:
+        mobileNo:
+          type: string
+        orderCompletionTime:
+          type: string
+        orderId:
+          type: integer
+          format: int64
+        orderInitiateDate:
+          type: string
+        orderStatus:
+          type: string
+        orderType:
+          type: string
+        remarks:
+          type: string
+        simNo:
+          type: string
+    CustomMessageDO:
+      title: CustomMessageDO
+      required:
+      - binarySMS
+      - customMessage
+      - mobileNO
+      type: object
+      properties:
+        binarySMS:
+          type: boolean
+          description: 'false'
+        customMessage:
+          type: string
+          description: Message to send against Mobile Number. Maximum length of message can be 160 characters.
+        mobileNO:
+          type: string
+          description: Mobile No.
+    MessageHistory:
+      title: MessageHistory
+      type: object
+      properties:
+        messageDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sms'
+        total:
+          type: integer
+          format: int32
+    SimDO:
+      title: SimDO
+      required:
+      - mobileNO
+      type: object
+      properties:
+        mobileNO:
+          type: string
+          description: Mobile No.
+    JobVoResponse:
+      title: JobVoResponse
+      type: object
+      properties:
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobVO'
+        total:
+          type: string
     DownloadTemplateDO:
       title: DownloadTemplateDO
       type: object
@@ -1051,76 +1105,22 @@ components:
           enum:
           - Y
           - N
-    DownloadSmsTemplateVO:
-      title: DownloadSmsTemplateVO
+    SMSQuotaVO:
+      title: SMSQuotaVO
       type: object
       properties:
-        basketName:
+        expiryDate:
           type: string
-        completionDate:
-          type: string
-        creationDate:
-          type: string
-        downloadFileId:
-          type: integer
-          format: int32
-        downloadType:
-          type: string
-        extension:
-          type: string
-        fileName:
-          type: string
-        progress:
-          type: integer
-          format: int32
-        status:
-          type: string
-    MessageHistory:
-      title: MessageHistory
-      type: object
-      properties:
-        messageDetails:
-          type: array
-          items:
-            $ref: '#/components/schemas/Sms'
-        total:
-          type: integer
-          format: int32
-    BulkSms:
-      title: BulkSms
-      type: object
-      properties:
-        createdBy:
-          type: string
-        customerId:
+          example: dd/MM/yyyy
+        outgoingSMSBalance:
           type: integer
           format: int64
-        errorFileName:
-          type: string
-        failureOrders:
-          type: integer
-          format: int32
-        jobCreationTime:
-          type: string
-          format: date-time
-        jobId:
+        rolloverSMSQuota:
           type: integer
           format: int64
-        jobStatus:
-          type: string
-        jobType:
-          type: string
-        rejectedOrders:
+        totalBalance:
           type: integer
-          format: int32
-        successOrders:
-          type: integer
-          format: int32
-        totalOrders:
-          type: integer
-          format: int32
-        uploadFileName:
-          type: string
+          format: int64
 x-tagGroups:
 - name: Manage Customer APIs
   tags:

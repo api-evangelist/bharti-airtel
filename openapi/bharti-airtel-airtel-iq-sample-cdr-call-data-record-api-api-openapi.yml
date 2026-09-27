@@ -32,67 +32,6 @@ paths:
         required: true
 components:
   schemas:
-    event:
-      type: object
-      properties:
-        audioURL:
-          type: string
-          description: audio URL in event, if event is received for any audio
-        causeCode:
-          type: string
-          example: 699
-          description: If the event is for a hang up scenario, this field specifies reasons for hang up
-        comments:
-          type: string
-          description: Comments for event, if any
-        event:
-          type: string
-          example: CalledNumber
-          description: Actual event
-        eventId:
-          type: string
-          example: 12ab
-          description: event ID
-        eventType:
-          type: string
-          example: CALL
-          description: 'Event type. Eg : RECORD, MEDIA, DTMF, CALL'
-        metaData:
-          type: object
-          description: Metadata for event
-        participantAddress:
-          type: string
-          example: 9999999999
-          description: Participant number for whom event received
-        participantIndex:
-          type: integer
-          format: int32
-        sipCode:
-          type: string
-          example: 16
-          description: SIP responses are the codes used by Session Initiation Protocol for communication and indicate the status of the request. This field specifies sip code in event, if any
-        time:
-          type: string
-          format: date-time
-          example: 1594695097249
-          description: 'Time of event. Format : Epoch millis'
-        waitTime:
-          type: string
-          description: This field will be populated when there is waiting component in call flow
-      title: event
-      description: Event received during call
-    SampleResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          example: CREATED
-          description: message
-        statusCode:
-          type: string
-          example: 201
-          description: status code
-      title: SampleResponse
     participant:
       type: object
       properties:
@@ -240,54 +179,6 @@ components:
           description: 'Action triggered for the call initiated to the participant no. Eg : Disconnected, NetworkError, NotReachable, Busy, Noanswer, Removed, Answer'
       title: participant
       description: Object specifying Participant information passed
-    CallQualityParamsVo:
-      type: object
-      properties:
-        averageJitter:
-          type: number
-          format: double
-        averageLatency:
-          type: number
-          format: double
-        averagePacketLoss:
-          type: number
-          format: double
-        mos:
-          type: number
-          format: double
-        packetsReceived:
-          type: number
-          format: double
-        packetsSent:
-          type: number
-          format: double
-      title: CallQualityParamsVo
-    audio:
-      type: object
-      properties:
-        audioURL:
-          type: string
-          description: Sound File URL which can be played during the wait time of the call
-        dtmfInput:
-          type: string
-          example: 1
-          description: DTMF input provided for audio
-        endTime:
-          type: string
-          format: date-time
-          example: 1594695096005
-          description: 'end time of audio. Format : Epoch millis'
-        startTime:
-          type: string
-          format: date-time
-          example: 1594695096005
-          description: 'start time of audio. Format : Epoch millis'
-        status:
-          type: string
-          example: Stopped
-          description: 'Status of audio. Eg: Stopped, Played, NotFound, Others'
-      title: audio
-      description: Object specifying Audio information passed
     SampleRequest:
       type: object
       properties:
@@ -481,3 +372,112 @@ components:
           example: '2020-07-14 02:54:09'
           description: 'End time of call. Format : yyyy-MM-dd hh:mm:ss'
       title: SampleRequest
+    event:
+      type: object
+      properties:
+        audioURL:
+          type: string
+          description: audio URL in event, if event is received for any audio
+        causeCode:
+          type: string
+          example: 699
+          description: If the event is for a hang up scenario, this field specifies reasons for hang up
+        comments:
+          type: string
+          description: Comments for event, if any
+        event:
+          type: string
+          example: CalledNumber
+          description: Actual event
+        eventId:
+          type: string
+          example: 12ab
+          description: event ID
+        eventType:
+          type: string
+          example: CALL
+          description: 'Event type. Eg : RECORD, MEDIA, DTMF, CALL'
+        metaData:
+          type: object
+          description: Metadata for event
+        participantAddress:
+          type: string
+          example: 9999999999
+          description: Participant number for whom event received
+        participantIndex:
+          type: integer
+          format: int32
+        sipCode:
+          type: string
+          example: 16
+          description: SIP responses are the codes used by Session Initiation Protocol for communication and indicate the status of the request. This field specifies sip code in event, if any
+        time:
+          type: string
+          format: date-time
+          example: 1594695097249
+          description: 'Time of event. Format : Epoch millis'
+        waitTime:
+          type: string
+          description: This field will be populated when there is waiting component in call flow
+      title: event
+      description: Event received during call
+    CallQualityParamsVo:
+      type: object
+      properties:
+        averageJitter:
+          type: number
+          format: double
+        averageLatency:
+          type: number
+          format: double
+        averagePacketLoss:
+          type: number
+          format: double
+        mos:
+          type: number
+          format: double
+        packetsReceived:
+          type: number
+          format: double
+        packetsSent:
+          type: number
+          format: double
+      title: CallQualityParamsVo
+    audio:
+      type: object
+      properties:
+        audioURL:
+          type: string
+          description: Sound File URL which can be played during the wait time of the call
+        dtmfInput:
+          type: string
+          example: 1
+          description: DTMF input provided for audio
+        endTime:
+          type: string
+          format: date-time
+          example: 1594695096005
+          description: 'end time of audio. Format : Epoch millis'
+        startTime:
+          type: string
+          format: date-time
+          example: 1594695096005
+          description: 'start time of audio. Format : Epoch millis'
+        status:
+          type: string
+          example: Stopped
+          description: 'Status of audio. Eg: Stopped, Played, NotFound, Others'
+      title: audio
+      description: Object specifying Audio information passed
+    SampleResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: CREATED
+          description: message
+        statusCode:
+          type: string
+          example: 201
+          description: status code
+      title: SampleResponse

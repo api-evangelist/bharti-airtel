@@ -239,14 +239,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    SmsWhitelistBatchDO:
-      title: SmsWhitelistBatchDO
-      type: object
-      properties:
-        simWTDoList:
-          type: array
-          items:
-            $ref: '#/components/schemas/SmsWhitelistNoDO'
     WhitelistResponse:
       title: WhitelistResponse
       type: object
@@ -258,17 +250,34 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WhitelistVO'
-    SMSWTLResponse:
-      title: SMSWTLResponse
+    SMSWTLDetailsVO:
+      title: SMSWTLDetailsVO
       type: object
       properties:
-        smsWTDetailsVO:
-          type: array
-          items:
-            $ref: '#/components/schemas/SMSWTLDetailsVO'
-        total:
-          type: integer
-          format: int32
+        basketName:
+          type: string
+        msisdn:
+          type: string
+        remainingOrderCount:
+          type: string
+        simNo:
+          type: string
+        whitelistNumber1:
+          type: string
+        whitelistNumber2:
+          type: string
+        whitelistNumber3:
+          type: string
+        whitelistNumber4:
+          type: string
+        whitelistType1:
+          type: string
+        whitelistType2:
+          type: string
+        whitelistType3:
+          type: string
+        whitelistType4:
+          type: string
     JobVO:
       title: JobVO
       type: object
@@ -326,65 +335,6 @@ components:
         uploadFileName:
           type: string
           description: Upload File Name
-    SMSWTLDetailsVO:
-      title: SMSWTLDetailsVO
-      type: object
-      properties:
-        basketName:
-          type: string
-        msisdn:
-          type: string
-        remainingOrderCount:
-          type: string
-        simNo:
-          type: string
-        whitelistNumber1:
-          type: string
-        whitelistNumber2:
-          type: string
-        whitelistNumber3:
-          type: string
-        whitelistNumber4:
-          type: string
-        whitelistType1:
-          type: string
-        whitelistType2:
-          type: string
-        whitelistType3:
-          type: string
-        whitelistType4:
-          type: string
-    WhitelistVO:
-      title: WhitelistVO
-      type: object
-      properties:
-        basketName:
-          type: string
-        msisdn:
-          type: string
-        remainingOrderCount:
-          type: integer
-          format: int32
-        simNo:
-          type: string
-        voiceWhitelisted:
-          type: string
-        whitelistNumber1:
-          type: string
-        whitelistNumber2:
-          type: string
-        whitelistNumber3:
-          type: string
-        whitelistNumber4:
-          type: string
-        whitelistType1:
-          type: string
-        whitelistType2:
-          type: string
-        whitelistType3:
-          type: string
-        whitelistType4:
-          type: string
     SmsWhitelistNoDO:
       title: SmsWhitelistNoDO
       required:
@@ -426,6 +376,56 @@ components:
           example: OUTGOING
           enum:
           - ${SmsWhitelistNoDO.SMSWtlTypes.allowableValues}
+    WhitelistVO:
+      title: WhitelistVO
+      type: object
+      properties:
+        basketName:
+          type: string
+        msisdn:
+          type: string
+        remainingOrderCount:
+          type: integer
+          format: int32
+        simNo:
+          type: string
+        voiceWhitelisted:
+          type: string
+        whitelistNumber1:
+          type: string
+        whitelistNumber2:
+          type: string
+        whitelistNumber3:
+          type: string
+        whitelistNumber4:
+          type: string
+        whitelistType1:
+          type: string
+        whitelistType2:
+          type: string
+        whitelistType3:
+          type: string
+        whitelistType4:
+          type: string
+    SMSWTLResponse:
+      title: SMSWTLResponse
+      type: object
+      properties:
+        smsWTDetailsVO:
+          type: array
+          items:
+            $ref: '#/components/schemas/SMSWTLDetailsVO'
+        total:
+          type: integer
+          format: int32
+    SmsWhitelistBatchDO:
+      title: SmsWhitelistBatchDO
+      type: object
+      properties:
+        simWTDoList:
+          type: array
+          items:
+            $ref: '#/components/schemas/SmsWhitelistNoDO'
 x-tagGroups:
 - name: Manage Customer APIs
   tags:

@@ -58,14 +58,6 @@ paths:
           description: "Error in Fetching location of msisdn because of network error in HLR, \n MME, MSC. The ~5-10% of such error is expected.| Error retrieving geocode while processing request. Please try again!"
       deprecated: false
 components:
-  requestBodies:
-    AddressValidationDto:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AddressValidationDto'
-      description: address
-      required: true
   schemas:
     AddressValidationDto:
       type: object
@@ -129,3 +121,11 @@ components:
           type: number
           format: double
       title: GeocodeDetails
+  requestBodies:
+    AddressValidationDto:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AddressValidationDto'
+      description: address
+      required: true

@@ -625,62 +625,7 @@ paths:
           description: "Error in Fetching location of msisdn because of network error in HLR, \n MME, MSC. The ~5-10% of such error is expected.| Error retrieving geocode while processing request. Please try again!"
       deprecated: false
 components:
-  requestBodies:
-    AddressValidationDto:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AddressValidationDto'
-      description: address
-      required: true
-    ResourcePatchOptions:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ResourcePatchOptions'
-      description: resourcePatchOptions
-      required: true
   schemas:
-    AddressValidationDto:
-      type: object
-      required:
-      - address
-      properties:
-        address:
-          type: string
-          example: string
-          description: address to be validated
-      title: AddressValidationDto
-    AsyncCorrelationId:
-      type: object
-      properties:
-        correlationId:
-          type: string
-      title: AsyncCorrelationId
-    ConsentEventMeta:
-      type: object
-      properties:
-        callStatus:
-          type: string
-        consentId:
-          type: string
-        delivered:
-          type: boolean
-        keyPressed:
-          type: boolean
-        language:
-          type: string
-          enum:
-          - EN
-          - HI
-          - AS
-          - BN
-          - OR
-          - KN
-          - ML
-          - TA
-          - TE
-      title: ConsentEventMeta
     ConsentEvents:
       type: object
       properties:
@@ -715,98 +660,6 @@ components:
           - CALL
           - CDR
       title: ConsentEvents
-    CustomerTenantProfileResponseDto:
-      type: object
-      properties:
-        address:
-          type: string
-        city:
-          type: string
-        customerSpocContactNumber:
-          type: string
-        customerSpocEmail:
-          type: string
-        customerSpocName:
-          type: string
-        pincode:
-          type: string
-        state:
-          type: string
-      title: CustomerTenantProfileResponseDto
-    LocationResponse:
-      type: object
-      properties:
-        location:
-          $ref: '#/components/schemas/LatLong'
-        message:
-          type: string
-        retrievedAt:
-          type: string
-          format: date-time
-          example: yyyy-MM-dd HH:mm:ss
-          description: location
-        status:
-          type: string
-      title: LocationResponse
-    LatLong:
-      type: object
-      properties:
-        latitude:
-          type: number
-          format: double
-        longitude:
-          type: number
-          format: double
-        radius:
-          type: string
-      title: LatLong
-    AddressValidationResponseDto:
-      type: object
-      properties:
-        distance:
-          type: number
-          format: double
-        distanceUnit:
-          type: string
-          description: Km/m
-        geocode:
-          $ref: '#/components/schemas/GeocodeDetails'
-        message:
-          type: string
-          description: when the subscriber is absent or in restricted zone.
-        networkCoordinates:
-          $ref: '#/components/schemas/LatLong'
-        status:
-          type: string
-        timestamp:
-          type: string
-          format: date-time
-      title: AddressValidationResponseDto
-    CustomerTenantResponseDto:
-      type: object
-      properties:
-        active:
-          type: boolean
-        consentChannels:
-          type: array
-          items:
-            type: string
-            enum:
-            - IVR
-            - SMS
-        createdAt:
-          type: string
-          format: date-time
-        customerBaId:
-          type: string
-        id:
-          type: integer
-          format: int64
-        organizationName:
-          type: string
-        profile:
-          $ref: '#/components/schemas/CustomerTenantProfileResponseDto'
-      title: CustomerTenantResponseDto
     ConsentResponse:
       type: object
       properties:
@@ -849,55 +702,95 @@ components:
           type: string
           format: date-time
       title: ConsentResponse
-    TenantConsentRequest:
+    AddressValidationDto:
       type: object
       required:
-      - msisdn
-      - purpose
+      - address
       properties:
-        channel:
+        address:
           type: string
-          example: SMS
-          description: The channel to initiate consent. Defaults to SMS
-        language:
-          type: string
-          example: EN
-          description: Preferred language to initiate the consent. Default to EN(english)
-        msisdn:
-          type: string
-          example: 91XXXXXXXXXX
-          description: The Airtel number must be prefixed with 91 followed by 10 digit mobile number.
-        purpose:
-          type: string
-          example: TRACKING
-          description: The purpose to initiate consent.
-      title: TenantConsentRequest
-    ConsentPurpose:
+          example: string
+          description: address to be validated
+      title: AddressValidationDto
+    ResourcePatchOptions:
       type: object
       properties:
-        purposeKey:
+        alias:
           type: string
-        purposeValue:
-          type: string
-      title: ConsentPurpose
-    GeocodeDetails:
+          example: Albert Einstein
+          description: The name to msisdn for which consent was initiated
+        isTrackingEnabled:
+          type: boolean
+          example: true
+          description: enable/disable tracking for a MSISDN.
+      title: ResourcePatchOptions
+    LatLong:
       type: object
       properties:
-        formattedAddress:
-          type: string
-          description: this shows the formatted address of the POI.
-        geocodeLevel:
-          type: string
-          description: this shows on which level the POI has been geocoded.
-        inputAddress:
-          type: string
         latitude:
           type: number
           format: double
         longitude:
           type: number
           format: double
-      title: GeocodeDetails
+        radius:
+          type: string
+      title: LatLong
+    CustomerTenantProfileResponseDto:
+      type: object
+      properties:
+        address:
+          type: string
+        city:
+          type: string
+        customerSpocContactNumber:
+          type: string
+        customerSpocEmail:
+          type: string
+        customerSpocName:
+          type: string
+        pincode:
+          type: string
+        state:
+          type: string
+      title: CustomerTenantProfileResponseDto
+    AddressValidationResponseDto:
+      type: object
+      properties:
+        distance:
+          type: number
+          format: double
+        distanceUnit:
+          type: string
+          description: Km/m
+        geocode:
+          $ref: '#/components/schemas/GeocodeDetails'
+        message:
+          type: string
+          description: when the subscriber is absent or in restricted zone.
+        networkCoordinates:
+          $ref: '#/components/schemas/LatLong'
+        status:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+      title: AddressValidationResponseDto
+    LocationResponse:
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/LatLong'
+        message:
+          type: string
+        retrievedAt:
+          type: string
+          format: date-time
+          example: yyyy-MM-dd HH:mm:ss
+          description: location
+        status:
+          type: string
+      title: LocationResponse
     ResourceResponseDto:
       type: object
       properties:
@@ -934,15 +827,122 @@ components:
         tracking:
           type: boolean
       title: ResourceResponseDto
-    ResourcePatchOptions:
+    CustomerTenantResponseDto:
       type: object
       properties:
-        alias:
-          type: string
-          example: Albert Einstein
-          description: The name to msisdn for which consent was initiated
-        isTrackingEnabled:
+        active:
           type: boolean
-          example: true
-          description: enable/disable tracking for a MSISDN.
-      title: ResourcePatchOptions
+        consentChannels:
+          type: array
+          items:
+            type: string
+            enum:
+            - IVR
+            - SMS
+        createdAt:
+          type: string
+          format: date-time
+        customerBaId:
+          type: string
+        id:
+          type: integer
+          format: int64
+        organizationName:
+          type: string
+        profile:
+          $ref: '#/components/schemas/CustomerTenantProfileResponseDto'
+      title: CustomerTenantResponseDto
+    ConsentPurpose:
+      type: object
+      properties:
+        purposeKey:
+          type: string
+        purposeValue:
+          type: string
+      title: ConsentPurpose
+    GeocodeDetails:
+      type: object
+      properties:
+        formattedAddress:
+          type: string
+          description: this shows the formatted address of the POI.
+        geocodeLevel:
+          type: string
+          description: this shows on which level the POI has been geocoded.
+        inputAddress:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+      title: GeocodeDetails
+    ConsentEventMeta:
+      type: object
+      properties:
+        callStatus:
+          type: string
+        consentId:
+          type: string
+        delivered:
+          type: boolean
+        keyPressed:
+          type: boolean
+        language:
+          type: string
+          enum:
+          - EN
+          - HI
+          - AS
+          - BN
+          - OR
+          - KN
+          - ML
+          - TA
+          - TE
+      title: ConsentEventMeta
+    TenantConsentRequest:
+      type: object
+      required:
+      - msisdn
+      - purpose
+      properties:
+        channel:
+          type: string
+          example: SMS
+          description: The channel to initiate consent. Defaults to SMS
+        language:
+          type: string
+          example: EN
+          description: Preferred language to initiate the consent. Default to EN(english)
+        msisdn:
+          type: string
+          example: 91XXXXXXXXXX
+          description: The Airtel number must be prefixed with 91 followed by 10 digit mobile number.
+        purpose:
+          type: string
+          example: TRACKING
+          description: The purpose to initiate consent.
+      title: TenantConsentRequest
+    AsyncCorrelationId:
+      type: object
+      properties:
+        correlationId:
+          type: string
+      title: AsyncCorrelationId
+  requestBodies:
+    AddressValidationDto:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AddressValidationDto'
+      description: address
+      required: true
+    ResourcePatchOptions:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResourcePatchOptions'
+      description: resourcePatchOptions
+      required: true

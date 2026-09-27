@@ -270,15 +270,26 @@ components:
             $ref: '#/components/schemas/OrderVO'
         total:
           type: string
-    Jobs:
-      title: Jobs
+    OrderVO:
+      title: OrderVO
       type: object
       properties:
-        jobs:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobVO'
-        total:
+        mobileNo:
+          type: string
+        orderCompletionTime:
+          type: string
+        orderId:
+          type: integer
+          format: int64
+        orderInitiateDate:
+          type: string
+        orderStatus:
+          type: string
+        orderType:
+          type: string
+        remarks:
+          type: string
+        simNo:
           type: string
     JobVO:
       title: JobVO
@@ -337,26 +348,15 @@ components:
         uploadFileName:
           type: string
           description: Upload File Name
-    OrderVO:
-      title: OrderVO
+    Jobs:
+      title: Jobs
       type: object
       properties:
-        mobileNo:
-          type: string
-        orderCompletionTime:
-          type: string
-        orderId:
-          type: integer
-          format: int64
-        orderInitiateDate:
-          type: string
-        orderStatus:
-          type: string
-        orderType:
-          type: string
-        remarks:
-          type: string
-        simNo:
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobVO'
+        total:
           type: string
 x-tagGroups:
 - name: Manage Customer APIs

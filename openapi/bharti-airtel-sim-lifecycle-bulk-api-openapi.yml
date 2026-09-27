@@ -180,23 +180,6 @@ components:
         status:
           type: string
           description: Download Status
-    DownloadTemplate:
-      title: DownloadTemplate
-      required:
-      - basketId
-      type: object
-      properties:
-        action:
-          type: string
-          enum:
-          - ALL
-          - ACTIVATE_ORDER
-          - CHANGE_ORDER
-          - ACTIVATE_TEST_ORDER
-        basketId:
-          type: integer
-          description: Basket ID
-          format: int64
     JobVO:
       title: JobVO
       type: object
@@ -254,6 +237,23 @@ components:
         uploadFileName:
           type: string
           description: Upload File Name
+    DownloadTemplate:
+      title: DownloadTemplate
+      required:
+      - basketId
+      type: object
+      properties:
+        action:
+          type: string
+          enum:
+          - ALL
+          - ACTIVATE_ORDER
+          - CHANGE_ORDER
+          - ACTIVATE_TEST_ORDER
+        basketId:
+          type: integer
+          description: Basket ID
+          format: int64
 x-tagGroups:
 - name: Manage Customer APIs
   tags:

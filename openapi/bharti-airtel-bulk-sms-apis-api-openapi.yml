@@ -157,52 +157,6 @@ paths:
               - sourceAddress
 components:
   schemas:
-    SendSmsResponseVO:
-      type: object
-      properties:
-        customerId:
-          type: string
-          description: Specifies the source/client's id registered and wants to use the SMS APIs
-        destinationAddress:
-          type: array
-          description: Specifies the mobile numbers on which message requests were submitted
-          items:
-            type: string
-        dltTemplateId:
-          type: string
-          description: Specifies the template id received after dlt registration.
-        entityId:
-          type: string
-          description: Specifies the entity id received after dlt registration.
-        errorMessage:
-          type: string
-          description: Specifies the error message if received any during sms request
-        incorrectNum:
-          type: array
-          description: Specifies incorrect numbers in request (less than 10 digit numbers)
-          items:
-            type: string
-        message:
-          type: string
-          description: Specifies the message for which request was received
-        messageRequestId:
-          type: string
-          description: Specifies unique message request id
-        messageType:
-          type: string
-          description: Specifies the type of message sent.
-          enum:
-          - PROMOTIONAL
-          - TRANSACTIONAL
-          - SERVICE_IMPLICIT
-          - SERVICE_EXPLICIT
-        metaData:
-          type: object
-          description: Specifies the additional information received with each sms
-        sourceAddress:
-          type: string
-          description: Specifies the shortcode/senderId through which message was sent
-      title: SendSmsResponseVO
     SingleSmsRequestVO:
       type: object
       required:
@@ -292,6 +246,52 @@ components:
           format: int32
           description: validity for which the url will be active
       title: UrlShortenerParams
+    SendSmsResponseVO:
+      type: object
+      properties:
+        customerId:
+          type: string
+          description: Specifies the source/client's id registered and wants to use the SMS APIs
+        destinationAddress:
+          type: array
+          description: Specifies the mobile numbers on which message requests were submitted
+          items:
+            type: string
+        dltTemplateId:
+          type: string
+          description: Specifies the template id received after dlt registration.
+        entityId:
+          type: string
+          description: Specifies the entity id received after dlt registration.
+        errorMessage:
+          type: string
+          description: Specifies the error message if received any during sms request
+        incorrectNum:
+          type: array
+          description: Specifies incorrect numbers in request (less than 10 digit numbers)
+          items:
+            type: string
+        message:
+          type: string
+          description: Specifies the message for which request was received
+        messageRequestId:
+          type: string
+          description: Specifies unique message request id
+        messageType:
+          type: string
+          description: Specifies the type of message sent.
+          enum:
+          - PROMOTIONAL
+          - TRANSACTIONAL
+          - SERVICE_IMPLICIT
+          - SERVICE_EXPLICIT
+        metaData:
+          type: object
+          description: Specifies the additional information received with each sms
+        sourceAddress:
+          type: string
+          description: Specifies the shortcode/senderId through which message was sent
+      title: SendSmsResponseVO
     CMRequest:
       type: object
       required:

@@ -418,6 +418,98 @@ components:
         status:
           type: string
           description: Download Status
+    BasketDetailsVO:
+      title: BasketDetailsVO
+      type: object
+      properties:
+        activeSims:
+          type: string
+        availableSims:
+          type: string
+        basketId:
+          type: string
+        basketName:
+          type: string
+        basketPermission:
+          type: string
+        creationDate:
+          type: string
+        customerId:
+          type: string
+        emailId:
+          type: string
+        firstName:
+          type: string
+        inActiveSims:
+          type: string
+        inProgressSims:
+          type: string
+        lastName:
+          type: string
+        managedBy:
+          type: string
+        mobileNo:
+          type: string
+        parentBasketId:
+          type: string
+        remarks:
+          type: string
+        safeCustodySims:
+          type: string
+        suspendedSims:
+          type: string
+        testModeSims:
+          type: string
+        totalSims:
+          type: string
+    Sims:
+      title: Sims
+      type: object
+      properties:
+        sims:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimDetailsVO'
+        total:
+          type: string
+    SimApnVO:
+      title: SimApnVO
+      type: object
+      properties:
+        attachedApnIp:
+          type: string
+        attachedApnIpType:
+          type: string
+        attachedApnName:
+          type: string
+        attchedApnType:
+          type: string
+    Baskets:
+      title: Baskets
+      type: object
+      properties:
+        baskets:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasketDetailsVO'
+        totalActiveSims:
+          type: string
+        totalAvailableSims:
+          type: string
+        totalBaskets:
+          type: string
+        totalInActiveSims:
+          type: string
+        totalInProgressSims:
+          type: string
+        totalSafeCustodySims:
+          type: string
+        totalSims:
+          type: string
+        totalSuspendedSims:
+          type: string
+        totalTestModeSims:
+          type: string
     SimDetailsVO:
       title: SimDetailsVO
       type: object
@@ -480,26 +572,14 @@ components:
           type: string
         status:
           type: string
-    SimApnVO:
-      title: SimApnVO
+    DownloadHistoriesVo:
+      title: DownloadHistoriesVo
       type: object
       properties:
-        attachedApnIp:
-          type: string
-        attachedApnIpType:
-          type: string
-        attachedApnName:
-          type: string
-        attchedApnType:
-          type: string
-    Sims:
-      title: Sims
-      type: object
-      properties:
-        sims:
+        downloadHistories:
           type: array
           items:
-            $ref: '#/components/schemas/SimDetailsVO'
+            $ref: '#/components/schemas/DownloadHistoryView'
         total:
           type: string
     DownloadHistoryView:
@@ -535,86 +615,6 @@ components:
         status:
           type: string
           description: Download Status
-    Baskets:
-      title: Baskets
-      type: object
-      properties:
-        baskets:
-          type: array
-          items:
-            $ref: '#/components/schemas/BasketDetailsVO'
-        totalActiveSims:
-          type: string
-        totalAvailableSims:
-          type: string
-        totalBaskets:
-          type: string
-        totalInActiveSims:
-          type: string
-        totalInProgressSims:
-          type: string
-        totalSafeCustodySims:
-          type: string
-        totalSims:
-          type: string
-        totalSuspendedSims:
-          type: string
-        totalTestModeSims:
-          type: string
-    BasketDetailsVO:
-      title: BasketDetailsVO
-      type: object
-      properties:
-        activeSims:
-          type: string
-        availableSims:
-          type: string
-        basketId:
-          type: string
-        basketName:
-          type: string
-        basketPermission:
-          type: string
-        creationDate:
-          type: string
-        customerId:
-          type: string
-        emailId:
-          type: string
-        firstName:
-          type: string
-        inActiveSims:
-          type: string
-        inProgressSims:
-          type: string
-        lastName:
-          type: string
-        managedBy:
-          type: string
-        mobileNo:
-          type: string
-        parentBasketId:
-          type: string
-        remarks:
-          type: string
-        safeCustodySims:
-          type: string
-        suspendedSims:
-          type: string
-        testModeSims:
-          type: string
-        totalSims:
-          type: string
-    DownloadHistoriesVo:
-      title: DownloadHistoriesVo
-      type: object
-      properties:
-        downloadHistories:
-          type: array
-          items:
-            $ref: '#/components/schemas/DownloadHistoryView'
-        total:
-          type: string
 x-tagGroups:
 - name: Manage Customer APIs
   tags:
