@@ -626,240 +626,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    ConsentEvents:
-      type: object
-      properties:
-        channel:
-          type: string
-          enum:
-          - IVR
-          - SMS
-        consentId:
-          type: string
-        initiatedBy:
-          type: string
-          enum:
-          - PLATFORM
-          - CUSTOMER
-        meta:
-          $ref: '#/components/schemas/ConsentEventMeta'
-        status:
-          type: string
-          enum:
-          - FAIL
-          - SUCCESS
-        timestamp:
-          type: string
-          format: date-time
-        type:
-          type: string
-          enum:
-          - MT
-          - DR
-          - MO
-          - CALL
-          - CDR
-      title: ConsentEvents
-    ConsentResponse:
-      type: object
-      properties:
-        channel:
-          type: string
-          enum:
-          - IVR
-          - SMS
-        consent:
-          type: string
-          enum:
-          - PROCESSING
-          - INITIATED
-          - ALLOWED
-          - PENDING
-          - REJECTED
-          - FAILED
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/ConsentEvents'
-        lastRecordedConsent:
-          type: string
-          enum:
-          - PROCESSING
-          - INITIATED
-          - ALLOWED
-          - PENDING
-          - REJECTED
-          - FAILED
-        lastRecordedConsentChannel:
-          type: string
-          enum:
-          - IVR
-          - SMS
-        lastRecordedConsentUpdatedAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-      title: ConsentResponse
-    AddressValidationDto:
-      type: object
-      required:
-      - address
-      properties:
-        address:
-          type: string
-          example: string
-          description: address to be validated
-      title: AddressValidationDto
-    ResourcePatchOptions:
-      type: object
-      properties:
-        alias:
-          type: string
-          example: Albert Einstein
-          description: The name to msisdn for which consent was initiated
-        isTrackingEnabled:
-          type: boolean
-          example: true
-          description: enable/disable tracking for a MSISDN.
-      title: ResourcePatchOptions
-    LatLong:
-      type: object
-      properties:
-        latitude:
-          type: number
-          format: double
-        longitude:
-          type: number
-          format: double
-        radius:
-          type: string
-      title: LatLong
-    CustomerTenantProfileResponseDto:
-      type: object
-      properties:
-        address:
-          type: string
-        city:
-          type: string
-        customerSpocContactNumber:
-          type: string
-        customerSpocEmail:
-          type: string
-        customerSpocName:
-          type: string
-        pincode:
-          type: string
-        state:
-          type: string
-      title: CustomerTenantProfileResponseDto
-    AddressValidationResponseDto:
-      type: object
-      properties:
-        distance:
-          type: number
-          format: double
-        distanceUnit:
-          type: string
-          description: Km/m
-        geocode:
-          $ref: '#/components/schemas/GeocodeDetails'
-        message:
-          type: string
-          description: when the subscriber is absent or in restricted zone.
-        networkCoordinates:
-          $ref: '#/components/schemas/LatLong'
-        status:
-          type: string
-        timestamp:
-          type: string
-          format: date-time
-      title: AddressValidationResponseDto
-    LocationResponse:
-      type: object
-      properties:
-        location:
-          $ref: '#/components/schemas/LatLong'
-        message:
-          type: string
-        retrievedAt:
-          type: string
-          format: date-time
-          example: yyyy-MM-dd HH:mm:ss
-          description: location
-        status:
-          type: string
-      title: LocationResponse
-    ResourceResponseDto:
-      type: object
-      properties:
-        consent:
-          type: string
-          enum:
-          - PROCESSING
-          - INITIATED
-          - ALLOWED
-          - PENDING
-          - REJECTED
-          - FAILED
-        consentPurpose:
-          type: string
-        language:
-          type: string
-          enum:
-          - EN
-          - HI
-          - AS
-          - BN
-          - OR
-          - KN
-          - ML
-          - TA
-          - TE
-        lastFetchedLocationTimestamp:
-          type: string
-          format: date-time
-        msisdn:
-          type: string
-        name:
-          type: string
-        tracking:
-          type: boolean
-      title: ResourceResponseDto
-    CustomerTenantResponseDto:
-      type: object
-      properties:
-        active:
-          type: boolean
-        consentChannels:
-          type: array
-          items:
-            type: string
-            enum:
-            - IVR
-            - SMS
-        createdAt:
-          type: string
-          format: date-time
-        customerBaId:
-          type: string
-        id:
-          type: integer
-          format: int64
-        organizationName:
-          type: string
-        profile:
-          $ref: '#/components/schemas/CustomerTenantProfileResponseDto'
-      title: CustomerTenantResponseDto
-    ConsentPurpose:
-      type: object
-      properties:
-        purposeKey:
-          type: string
-        purposeValue:
-          type: string
-      title: ConsentPurpose
     GeocodeDetails:
       type: object
       properties:
@@ -902,6 +668,198 @@ components:
           - TA
           - TE
       title: ConsentEventMeta
+    ConsentResponse:
+      type: object
+      properties:
+        channel:
+          type: string
+          enum:
+          - IVR
+          - SMS
+        consent:
+          type: string
+          enum:
+          - PROCESSING
+          - INITIATED
+          - ALLOWED
+          - PENDING
+          - REJECTED
+          - FAILED
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsentEvents'
+        lastRecordedConsent:
+          type: string
+          enum:
+          - PROCESSING
+          - INITIATED
+          - ALLOWED
+          - PENDING
+          - REJECTED
+          - FAILED
+        lastRecordedConsentChannel:
+          type: string
+          enum:
+          - IVR
+          - SMS
+        lastRecordedConsentUpdatedAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      title: ConsentResponse
+    LatLong:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        radius:
+          type: string
+      title: LatLong
+    AddressValidationResponseDto:
+      type: object
+      properties:
+        distance:
+          type: number
+          format: double
+        distanceUnit:
+          type: string
+          description: Km/m
+        geocode:
+          $ref: '#/components/schemas/GeocodeDetails'
+        message:
+          type: string
+          description: when the subscriber is absent or in restricted zone.
+        networkCoordinates:
+          $ref: '#/components/schemas/LatLong'
+        status:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+      title: AddressValidationResponseDto
+    CustomerTenantResponseDto:
+      type: object
+      properties:
+        active:
+          type: boolean
+        consentChannels:
+          type: array
+          items:
+            type: string
+            enum:
+            - IVR
+            - SMS
+        createdAt:
+          type: string
+          format: date-time
+        customerBaId:
+          type: string
+        id:
+          type: integer
+          format: int64
+        organizationName:
+          type: string
+        profile:
+          $ref: '#/components/schemas/CustomerTenantProfileResponseDto'
+      title: CustomerTenantResponseDto
+    ResourceResponseDto:
+      type: object
+      properties:
+        consent:
+          type: string
+          enum:
+          - PROCESSING
+          - INITIATED
+          - ALLOWED
+          - PENDING
+          - REJECTED
+          - FAILED
+        consentPurpose:
+          type: string
+        language:
+          type: string
+          enum:
+          - EN
+          - HI
+          - AS
+          - BN
+          - OR
+          - KN
+          - ML
+          - TA
+          - TE
+        lastFetchedLocationTimestamp:
+          type: string
+          format: date-time
+        msisdn:
+          type: string
+        name:
+          type: string
+        tracking:
+          type: boolean
+      title: ResourceResponseDto
+    AsyncCorrelationId:
+      type: object
+      properties:
+        correlationId:
+          type: string
+      title: AsyncCorrelationId
+    LocationResponse:
+      type: object
+      properties:
+        location:
+          $ref: '#/components/schemas/LatLong'
+        message:
+          type: string
+        retrievedAt:
+          type: string
+          format: date-time
+          example: yyyy-MM-dd HH:mm:ss
+          description: location
+        status:
+          type: string
+      title: LocationResponse
+    ConsentEvents:
+      type: object
+      properties:
+        channel:
+          type: string
+          enum:
+          - IVR
+          - SMS
+        consentId:
+          type: string
+        initiatedBy:
+          type: string
+          enum:
+          - PLATFORM
+          - CUSTOMER
+        meta:
+          $ref: '#/components/schemas/ConsentEventMeta'
+        status:
+          type: string
+          enum:
+          - FAIL
+          - SUCCESS
+        timestamp:
+          type: string
+          format: date-time
+        type:
+          type: string
+          enum:
+          - MT
+          - DR
+          - MO
+          - CALL
+          - CDR
+      title: ConsentEvents
     TenantConsentRequest:
       type: object
       required:
@@ -925,24 +883,66 @@ components:
           example: TRACKING
           description: The purpose to initiate consent.
       title: TenantConsentRequest
-    AsyncCorrelationId:
+    CustomerTenantProfileResponseDto:
       type: object
       properties:
-        correlationId:
+        address:
           type: string
-      title: AsyncCorrelationId
-  requestBodies:
+        city:
+          type: string
+        customerSpocContactNumber:
+          type: string
+        customerSpocEmail:
+          type: string
+        customerSpocName:
+          type: string
+        pincode:
+          type: string
+        state:
+          type: string
+      title: CustomerTenantProfileResponseDto
+    ResourcePatchOptions:
+      type: object
+      properties:
+        alias:
+          type: string
+          example: Albert Einstein
+          description: The name to msisdn for which consent was initiated
+        isTrackingEnabled:
+          type: boolean
+          example: true
+          description: enable/disable tracking for a MSISDN.
+      title: ResourcePatchOptions
+    ConsentPurpose:
+      type: object
+      properties:
+        purposeKey:
+          type: string
+        purposeValue:
+          type: string
+      title: ConsentPurpose
     AddressValidationDto:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AddressValidationDto'
-      description: address
-      required: true
+      type: object
+      required:
+      - address
+      properties:
+        address:
+          type: string
+          example: string
+          description: address to be validated
+      title: AddressValidationDto
+  requestBodies:
     ResourcePatchOptions:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ResourcePatchOptions'
       description: resourcePatchOptions
+      required: true
+    AddressValidationDto:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AddressValidationDto'
+      description: address
       required: true

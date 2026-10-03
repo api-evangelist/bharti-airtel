@@ -239,17 +239,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    WhitelistResponse:
-      title: WhitelistResponse
-      type: object
-      properties:
-        total:
-          type: integer
-          format: int32
-        whitelistDetails:
-          type: array
-          items:
-            $ref: '#/components/schemas/WhitelistVO'
     SMSWTLDetailsVO:
       title: SMSWTLDetailsVO
       type: object
@@ -278,6 +267,55 @@ components:
           type: string
         whitelistType4:
           type: string
+    SmsWhitelistBatchDO:
+      title: SmsWhitelistBatchDO
+      type: object
+      properties:
+        simWTDoList:
+          type: array
+          items:
+            $ref: '#/components/schemas/SmsWhitelistNoDO'
+    SmsWhitelistNoDO:
+      title: SmsWhitelistNoDO
+      required:
+      - msisdn
+      type: object
+      properties:
+        msisdn:
+          type: string
+          description: Mobile No.
+        whitelistNumber1:
+          type: string
+          description: First number for whitelist
+        whitelistNumber2:
+          type: string
+          description: Second number for whitelist
+        whitelistNumber3:
+          type: string
+          description: Third number for whitelist
+        whitelistNumber4:
+          type: string
+          description: Fourth number for whitelist
+        whitelistNumberType1:
+          type: string
+          example: INCOMING
+          enum:
+          - ${SmsWhitelistNoDO.SMSWtlTypes.allowableValues}
+        whitelistNumberType2:
+          type: string
+          example: INCOMING
+          enum:
+          - ${SmsWhitelistNoDO.SMSWtlTypes.allowableValues}
+        whitelistNumberType3:
+          type: string
+          example: OUTGOING
+          enum:
+          - ${SmsWhitelistNoDO.SMSWtlTypes.allowableValues}
+        whitelistNumberType4:
+          type: string
+          example: OUTGOING
+          enum:
+          - ${SmsWhitelistNoDO.SMSWtlTypes.allowableValues}
     JobVO:
       title: JobVO
       type: object
@@ -335,47 +373,28 @@ components:
         uploadFileName:
           type: string
           description: Upload File Name
-    SmsWhitelistNoDO:
-      title: SmsWhitelistNoDO
-      required:
-      - msisdn
+    WhitelistResponse:
+      title: WhitelistResponse
       type: object
       properties:
-        msisdn:
-          type: string
-          description: Mobile No.
-        whitelistNumber1:
-          type: string
-          description: First number for whitelist
-        whitelistNumber2:
-          type: string
-          description: Second number for whitelist
-        whitelistNumber3:
-          type: string
-          description: Third number for whitelist
-        whitelistNumber4:
-          type: string
-          description: Fourth number for whitelist
-        whitelistNumberType1:
-          type: string
-          example: INCOMING
-          enum:
-          - ${SmsWhitelistNoDO.SMSWtlTypes.allowableValues}
-        whitelistNumberType2:
-          type: string
-          example: INCOMING
-          enum:
-          - ${SmsWhitelistNoDO.SMSWtlTypes.allowableValues}
-        whitelistNumberType3:
-          type: string
-          example: OUTGOING
-          enum:
-          - ${SmsWhitelistNoDO.SMSWtlTypes.allowableValues}
-        whitelistNumberType4:
-          type: string
-          example: OUTGOING
-          enum:
-          - ${SmsWhitelistNoDO.SMSWtlTypes.allowableValues}
+        total:
+          type: integer
+          format: int32
+        whitelistDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/WhitelistVO'
+    SMSWTLResponse:
+      title: SMSWTLResponse
+      type: object
+      properties:
+        smsWTDetailsVO:
+          type: array
+          items:
+            $ref: '#/components/schemas/SMSWTLDetailsVO'
+        total:
+          type: integer
+          format: int32
     WhitelistVO:
       title: WhitelistVO
       type: object
@@ -407,25 +426,6 @@ components:
           type: string
         whitelistType4:
           type: string
-    SMSWTLResponse:
-      title: SMSWTLResponse
-      type: object
-      properties:
-        smsWTDetailsVO:
-          type: array
-          items:
-            $ref: '#/components/schemas/SMSWTLDetailsVO'
-        total:
-          type: integer
-          format: int32
-    SmsWhitelistBatchDO:
-      title: SmsWhitelistBatchDO
-      type: object
-      properties:
-        simWTDoList:
-          type: array
-          items:
-            $ref: '#/components/schemas/SmsWhitelistNoDO'
 x-tagGroups:
 - name: Manage Customer APIs
   tags:

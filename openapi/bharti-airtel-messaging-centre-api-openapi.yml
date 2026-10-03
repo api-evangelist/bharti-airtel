@@ -763,86 +763,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    SmsTemplateView:
-      title: SmsTemplateView
-      type: object
-      properties:
-        smsTemplates:
-          type: array
-          items:
-            $ref: '#/components/schemas/SmsTemplate'
-        totalRecords:
-          type: integer
-          format: int32
-    CustomerPlanResponseVO:
-      title: CustomerPlanResponseVO
-      type: object
-      properties:
-        customerPlanVOs:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomerPlanVO'
-        totalRecords:
-          type: integer
-          format: int64
-    SmsTemplate:
-      title: SmsTemplate
-      type: object
-      properties:
-        createdBy:
-          type: string
-        createdOn:
-          type: string
-        lastUpdatedBy:
-          type: string
-        lastUpdatedOn:
-          type: string
-        status:
-          type: string
-        templateId:
-          type: number
-        templateName:
-          type: string
-        templateTxt:
-          type: string
-        totalRecords:
-          type: number
-        version:
-          type: number
-    Sms:
-      title: Sms
-      type: object
-      properties:
-        message:
-          type: string
-        messageDate:
-          type: string
-        messageFailureCode:
-          type: string
-        messageJobId:
-          type: integer
-          format: int64
-        messageOrderId:
-          type: integer
-          format: int64
-        messageStatus:
-          type: string
-        messageStatusRemarks:
-          type: string
-        messageText:
-          type: string
-        messageType:
-          type: string
-        msisdn:
-          type: string
-        sentBy:
-          type: string
-        shortCode:
-          type: string
-        status:
-          type: string
-        templateName:
-          type: string
     CustomerPlanVO:
       title: CustomerPlanVO
       type: object
@@ -882,22 +802,6 @@ components:
           type: string
         subscriptionEvent:
           type: string
-    CustomSMSBatchDO:
-      title: CustomSMSBatchDO
-      type: object
-      properties:
-        customMessageDOS:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomMessageDO'
-    SMSBatchDO:
-      title: SMSBatchDO
-      type: object
-      properties:
-        simsDO:
-          type: array
-          items:
-            $ref: '#/components/schemas/SimDO'
     DownloadSmsTemplateVO:
       title: DownloadSmsTemplateVO
       type: object
@@ -922,41 +826,108 @@ components:
           format: int32
         status:
           type: string
-    BulkSms:
-      title: BulkSms
+    DownloadTemplateDO:
+      title: DownloadTemplateDO
+      type: object
+      properties:
+        basketId:
+          type: integer
+          format: int32
+        smsData:
+          type: string
+          enum:
+          - Y
+          - N
+    OrderVO:
+      title: OrderVO
+      type: object
+      properties:
+        mobileNo:
+          type: string
+        orderCompletionTime:
+          type: string
+        orderId:
+          type: integer
+          format: int64
+        orderInitiateDate:
+          type: string
+        orderStatus:
+          type: string
+        orderType:
+          type: string
+        remarks:
+          type: string
+        simNo:
+          type: string
+    SmsTemplateView:
+      title: SmsTemplateView
+      type: object
+      properties:
+        smsTemplates:
+          type: array
+          items:
+            $ref: '#/components/schemas/SmsTemplate'
+        totalRecords:
+          type: integer
+          format: int32
+    Sms:
+      title: Sms
+      type: object
+      properties:
+        message:
+          type: string
+        messageDate:
+          type: string
+        messageFailureCode:
+          type: string
+        messageJobId:
+          type: integer
+          format: int64
+        messageOrderId:
+          type: integer
+          format: int64
+        messageStatus:
+          type: string
+        messageStatusRemarks:
+          type: string
+        messageText:
+          type: string
+        messageType:
+          type: string
+        msisdn:
+          type: string
+        sentBy:
+          type: string
+        shortCode:
+          type: string
+        status:
+          type: string
+        templateName:
+          type: string
+    SmsTemplate:
+      title: SmsTemplate
       type: object
       properties:
         createdBy:
           type: string
-        customerId:
-          type: integer
-          format: int64
-        errorFileName:
+        createdOn:
           type: string
-        failureOrders:
-          type: integer
-          format: int32
-        jobCreationTime:
+        lastUpdatedBy:
           type: string
-          format: date-time
-        jobId:
-          type: integer
-          format: int64
-        jobStatus:
+        lastUpdatedOn:
           type: string
-        jobType:
+        status:
           type: string
-        rejectedOrders:
-          type: integer
-          format: int32
-        successOrders:
-          type: integer
-          format: int32
-        totalOrders:
-          type: integer
-          format: int32
-        uploadFileName:
+        templateId:
+          type: number
+        templateName:
           type: string
+        templateTxt:
+          type: string
+        totalRecords:
+          type: number
+        version:
+          type: number
     JobVO:
       title: JobVO
       type: object
@@ -1025,27 +996,114 @@ components:
         total:
           type: integer
           format: int64
-    OrderVO:
-      title: OrderVO
+    JobVoResponse:
+      title: JobVoResponse
       type: object
       properties:
-        mobileNo:
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobVO'
+        total:
           type: string
-        orderCompletionTime:
+    BulkSms:
+      title: BulkSms
+      type: object
+      properties:
+        createdBy:
           type: string
-        orderId:
+        customerId:
           type: integer
           format: int64
-        orderInitiateDate:
+        errorFileName:
           type: string
-        orderStatus:
+        failureOrders:
+          type: integer
+          format: int32
+        jobCreationTime:
           type: string
-        orderType:
+          format: date-time
+        jobId:
+          type: integer
+          format: int64
+        jobStatus:
           type: string
-        remarks:
+        jobType:
           type: string
-        simNo:
+        rejectedOrders:
+          type: integer
+          format: int32
+        successOrders:
+          type: integer
+          format: int32
+        totalOrders:
+          type: integer
+          format: int32
+        uploadFileName:
           type: string
+    CustomerPlanResponseVO:
+      title: CustomerPlanResponseVO
+      type: object
+      properties:
+        customerPlanVOs:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerPlanVO'
+        totalRecords:
+          type: integer
+          format: int64
+    SimDO:
+      title: SimDO
+      required:
+      - mobileNO
+      type: object
+      properties:
+        mobileNO:
+          type: string
+          description: Mobile No.
+    MessageHistory:
+      title: MessageHistory
+      type: object
+      properties:
+        messageDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sms'
+        total:
+          type: integer
+          format: int32
+    SMSQuotaVO:
+      title: SMSQuotaVO
+      type: object
+      properties:
+        expiryDate:
+          type: string
+          example: dd/MM/yyyy
+        outgoingSMSBalance:
+          type: integer
+          format: int64
+        rolloverSMSQuota:
+          type: integer
+          format: int64
+        totalBalance:
+          type: integer
+          format: int64
+    CustomSMSBatchDO:
+      title: CustomSMSBatchDO
+      type: object
+      properties:
+        customMessageDOS:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomMessageDO'
+    SMSBatchDO:
+      title: SMSBatchDO
+      type: object
+      properties:
+        simsDO:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimDO'
     CustomMessageDO:
       title: CustomMessageDO
       required:
@@ -1063,64 +1121,6 @@ components:
         mobileNO:
           type: string
           description: Mobile No.
-    MessageHistory:
-      title: MessageHistory
-      type: object
-      properties:
-        messageDetails:
-          type: array
-          items:
-            $ref: '#/components/schemas/Sms'
-        total:
-          type: integer
-          format: int32
-    SimDO:
-      title: SimDO
-      required:
-      - mobileNO
-      type: object
-      properties:
-        mobileNO:
-          type: string
-          description: Mobile No.
-    JobVoResponse:
-      title: JobVoResponse
-      type: object
-      properties:
-        jobs:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobVO'
-        total:
-          type: string
-    DownloadTemplateDO:
-      title: DownloadTemplateDO
-      type: object
-      properties:
-        basketId:
-          type: integer
-          format: int32
-        smsData:
-          type: string
-          enum:
-          - Y
-          - N
-    SMSQuotaVO:
-      title: SMSQuotaVO
-      type: object
-      properties:
-        expiryDate:
-          type: string
-          example: dd/MM/yyyy
-        outgoingSMSBalance:
-          type: integer
-          format: int64
-        rolloverSMSQuota:
-          type: integer
-          format: int64
-        totalBalance:
-          type: integer
-          format: int64
 x-tagGroups:
 - name: Manage Customer APIs
   tags:

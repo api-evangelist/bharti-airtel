@@ -260,16 +260,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    Orders:
-      title: Orders
-      type: object
-      properties:
-        orders:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderVO'
-        total:
-          type: string
     OrderVO:
       title: OrderVO
       type: object
@@ -290,6 +280,16 @@ components:
         remarks:
           type: string
         simNo:
+          type: string
+    Jobs:
+      title: Jobs
+      type: object
+      properties:
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobVO'
+        total:
           type: string
     JobVO:
       title: JobVO
@@ -348,14 +348,14 @@ components:
         uploadFileName:
           type: string
           description: Upload File Name
-    Jobs:
-      title: Jobs
+    Orders:
+      title: Orders
       type: object
       properties:
-        jobs:
+        orders:
           type: array
           items:
-            $ref: '#/components/schemas/JobVO'
+            $ref: '#/components/schemas/OrderVO'
         total:
           type: string
 x-tagGroups:

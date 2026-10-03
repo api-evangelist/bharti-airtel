@@ -59,16 +59,24 @@ paths:
       deprecated: false
 components:
   schemas:
-    AddressValidationDto:
+    GeocodeDetails:
       type: object
-      required:
-      - address
       properties:
-        address:
+        formattedAddress:
           type: string
-          example: string
-          description: address to be validated
-      title: AddressValidationDto
+          description: this shows the formatted address of the POI.
+        geocodeLevel:
+          type: string
+          description: this shows on which level the POI has been geocoded.
+        inputAddress:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+      title: GeocodeDetails
     LatLong:
       type: object
       properties:
@@ -103,24 +111,16 @@ components:
           type: string
           format: date-time
       title: AddressValidationResponseDto
-    GeocodeDetails:
+    AddressValidationDto:
       type: object
+      required:
+      - address
       properties:
-        formattedAddress:
+        address:
           type: string
-          description: this shows the formatted address of the POI.
-        geocodeLevel:
-          type: string
-          description: this shows on which level the POI has been geocoded.
-        inputAddress:
-          type: string
-        latitude:
-          type: number
-          format: double
-        longitude:
-          type: number
-          format: double
-      title: GeocodeDetails
+          example: string
+          description: address to be validated
+      title: AddressValidationDto
   requestBodies:
     AddressValidationDto:
       content:

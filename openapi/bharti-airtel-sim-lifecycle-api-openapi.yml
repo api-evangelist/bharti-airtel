@@ -552,17 +552,6 @@ paths:
       x-codegen-request-body-name: generateOrder
 components:
   schemas:
-    SimDOWithPlan:
-      title: SimDOWithPlan
-      required:
-      - mobileNO
-      type: object
-      properties:
-        mobileNO:
-          type: string
-          description: Mobile No.
-        planDO:
-          $ref: '#/components/schemas/PlanDO'
     GenerateOrderWithPlan:
       title: GenerateOrderWithPlan
       required:
@@ -574,8 +563,40 @@ components:
           description: List of SIM
           items:
             $ref: '#/components/schemas/SimDOWithPlan'
-    SimDO:
-      title: SimDO
+    GeneratedTempDisconnectOrder:
+      title: GeneratedTempDisconnectOrder
+      required:
+      - reason
+      - simDOList
+      type: object
+      properties:
+        reason:
+          type: string
+          description: Disconnection Reason.
+          enum:
+          - NUMBER_NOT_REQUIRED
+          - PRICING_CONCERN
+          - NETWORK_COVERAGE_ISSUE
+          - BILLING_OR_COLLECTION_ISSUE
+          - CONTRACT_EXPIRED
+        simDOList:
+          type: array
+          description: List of SIM
+          items:
+            $ref: '#/components/schemas/SimDO'
+    GenerateOrder:
+      title: GenerateOrder
+      required:
+      - simDOList
+      type: object
+      properties:
+        simDOList:
+          type: array
+          description: List of SIM
+          items:
+            $ref: '#/components/schemas/SimDO'
+    SimDOWithPlan:
+      title: SimDOWithPlan
       required:
       - mobileNO
       type: object
@@ -583,6 +604,8 @@ components:
         mobileNO:
           type: string
           description: Mobile No.
+        planDO:
+          $ref: '#/components/schemas/PlanDO'
     JobVO:
       title: JobVO
       type: object
@@ -640,14 +663,6 @@ components:
         uploadFileName:
           type: string
           description: Upload File Name
-    SwapSim:
-      title: SwapSim
-      type: object
-      properties:
-        existingSIMNo:
-          type: string
-        newSIMNo:
-          type: string
     PlanDO:
       title: PlanDO
       required:
@@ -657,38 +672,23 @@ components:
         planCode:
           type: string
           description: Plan Code
-    GeneratedTempDisconnectOrder:
-      title: GeneratedTempDisconnectOrder
-      required:
-      - reason
-      - simDOList
+    SwapSim:
+      title: SwapSim
       type: object
       properties:
-        reason:
+        existingSIMNo:
           type: string
-          description: Disconnection Reason.
-          enum:
-          - NUMBER_NOT_REQUIRED
-          - PRICING_CONCERN
-          - NETWORK_COVERAGE_ISSUE
-          - BILLING_OR_COLLECTION_ISSUE
-          - CONTRACT_EXPIRED
-        simDOList:
-          type: array
-          description: List of SIM
-          items:
-            $ref: '#/components/schemas/SimDO'
-    GenerateOrder:
-      title: GenerateOrder
+        newSIMNo:
+          type: string
+    SimDO:
+      title: SimDO
       required:
-      - simDOList
+      - mobileNO
       type: object
       properties:
-        simDOList:
-          type: array
-          description: List of SIM
-          items:
-            $ref: '#/components/schemas/SimDO'
+        mobileNO:
+          type: string
+          description: Mobile No.
 x-tagGroups:
 - name: Manage Customer APIs
   tags:

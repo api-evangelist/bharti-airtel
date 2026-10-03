@@ -167,73 +167,17 @@ paths:
       deprecated: false
 components:
   schemas:
-    CustomerPreferencesVO:
-      title: CustomerPreferencesVO
+    PlanDetailsVO:
+      title: PlanDetailsVO
       type: object
       properties:
-        additionalCustEmailId:
+        planCode:
           type: string
-        additionalCustMobileNo:
+        planDescription:
           type: string
-        additionalCustName:
+        planName:
           type: string
-        additionalCustomerEmailId:
-          type: string
-        additionalCustomerMobileNo:
-          type: string
-        additionalCustomerName:
-          type: string
-        alternatePhoneNumber:
-          type: string
-        attribute1:
-          type: string
-        attribute2:
-          type: string
-        attribute3:
-          type: string
-        attribute4:
-          type: string
-        attribute5:
-          type: string
-        createdBy:
-          type: string
-        createdOn:
-          type: string
-        defaultAddress:
-          type: string
-        defaultEmail:
-          type: string
-        lastUpdatedBy:
-          type: string
-        lastUpdatedOn:
-          type: string
-        notifyActivationSim:
-          type: boolean
-        notifyBasketCreated:
-          type: boolean
-        notifyByEmail:
-          type: boolean
-        notifyBySMS:
-          type: boolean
-        notifyBySms:
-          type: boolean
-        notifyFreshOrder:
-          type: boolean
-        notifyLOC:
-          type: boolean
-        notifyLoc:
-          type: boolean
-        notifyPlanChange:
-          type: boolean
-        notifyPlanChanged:
-          type: boolean
-        notifySimActivation:
-          type: boolean
-        prepaidCustomer:
-          type: boolean
-        primaryPhoneNumber:
-          type: string
-        primaryPhoneNumberSetDefault:
+        testPlan:
           type: boolean
     UserStats:
       title: UserStats
@@ -249,80 +193,6 @@ components:
           type: string
         userId:
           type: string
-    CustomerStats:
-      title: CustomerStats
-      type: object
-      properties:
-        totalActiveSims:
-          type: string
-        totalAvailableSims:
-          type: string
-        totalBaskets:
-          type: string
-        totalInActiveSims:
-          type: string
-        totalInProgressSims:
-          type: string
-        totalSafeCustodySims:
-          type: string
-        totalSims:
-          type: string
-        totalSuspendedSims:
-          type: string
-        totalTempDisconnectedSims:
-          type: string
-        totalTestModeSims:
-          type: string
-        userStats:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserStats'
-    CustomerAddressVO:
-      title: CustomerAddressVO
-      type: object
-      properties:
-        addressLine1:
-          type: string
-        addressLine2:
-          type: string
-        addressLine3:
-          type: string
-        addressType:
-          type: string
-        billingAddress:
-          type: string
-        city:
-          type: string
-        country:
-          type: string
-        pincode:
-          type: string
-        state:
-          type: string
-    CustomerContactsVO:
-      title: CustomerContactsVO
-      type: object
-      properties:
-        emailAddress:
-          type: string
-        isPrimary:
-          type: string
-        mobileNo:
-          type: string
-        type:
-          type: string
-    PlanDetailsVO:
-      title: PlanDetailsVO
-      type: object
-      properties:
-        planCode:
-          type: string
-        planDescription:
-          type: string
-        planName:
-          type: string
-        testPlan:
-          type: boolean
     CustomerDetailsVO:
       title: CustomerDetailsVO
       type: object
@@ -494,6 +364,136 @@ components:
         uinNo:
           type: string
         userAcceptingKYC:
+          type: string
+    CustomerStats:
+      title: CustomerStats
+      type: object
+      properties:
+        totalActiveSims:
+          type: string
+        totalAvailableSims:
+          type: string
+        totalBaskets:
+          type: string
+        totalInActiveSims:
+          type: string
+        totalInProgressSims:
+          type: string
+        totalSafeCustodySims:
+          type: string
+        totalSims:
+          type: string
+        totalSuspendedSims:
+          type: string
+        totalTempDisconnectedSims:
+          type: string
+        totalTestModeSims:
+          type: string
+        userStats:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserStats'
+    CustomerPreferencesVO:
+      title: CustomerPreferencesVO
+      type: object
+      properties:
+        additionalCustEmailId:
+          type: string
+        additionalCustMobileNo:
+          type: string
+        additionalCustName:
+          type: string
+        additionalCustomerEmailId:
+          type: string
+        additionalCustomerMobileNo:
+          type: string
+        additionalCustomerName:
+          type: string
+        alternatePhoneNumber:
+          type: string
+        attribute1:
+          type: string
+        attribute2:
+          type: string
+        attribute3:
+          type: string
+        attribute4:
+          type: string
+        attribute5:
+          type: string
+        createdBy:
+          type: string
+        createdOn:
+          type: string
+        defaultAddress:
+          type: string
+        defaultEmail:
+          type: string
+        lastUpdatedBy:
+          type: string
+        lastUpdatedOn:
+          type: string
+        notifyActivationSim:
+          type: boolean
+        notifyBasketCreated:
+          type: boolean
+        notifyByEmail:
+          type: boolean
+        notifyBySMS:
+          type: boolean
+        notifyBySms:
+          type: boolean
+        notifyFreshOrder:
+          type: boolean
+        notifyLOC:
+          type: boolean
+        notifyLoc:
+          type: boolean
+        notifyPlanChange:
+          type: boolean
+        notifyPlanChanged:
+          type: boolean
+        notifySimActivation:
+          type: boolean
+        prepaidCustomer:
+          type: boolean
+        primaryPhoneNumber:
+          type: string
+        primaryPhoneNumberSetDefault:
+          type: boolean
+    CustomerContactsVO:
+      title: CustomerContactsVO
+      type: object
+      properties:
+        emailAddress:
+          type: string
+        isPrimary:
+          type: string
+        mobileNo:
+          type: string
+        type:
+          type: string
+    CustomerAddressVO:
+      title: CustomerAddressVO
+      type: object
+      properties:
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        addressLine3:
+          type: string
+        addressType:
+          type: string
+        billingAddress:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        pincode:
+          type: string
+        state:
           type: string
 x-tagGroups:
 - name: Manage Customer APIs

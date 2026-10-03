@@ -273,59 +273,21 @@ paths:
       x-codegen-request-body-name: basketDO
 components:
   schemas:
-    DownloadHistoryVO:
-      title: DownloadHistoryVO
+    DeviceRadiusResponseVO:
+      title: DeviceRadiusResponseVO
       type: object
       properties:
-        basketName:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RadiusObjects'
+        resCode:
           type: string
-          description: Basket Name
-        completionDate:
+        resStatus:
           type: string
-          description: Download Request Completion Date and Time
-        creationDate:
-          type: string
-          description: Download Request Creation Date and Time
-        downloadFileId:
+        totalCount:
           type: integer
-          description: Download Request ID
-          format: int64
-        downloadType:
-          type: string
-          description: Download Type
-        extension:
-          type: string
-          description: File Extension
-        fileName:
-          type: string
-          description: File Name
-        progress:
-          type: integer
-          description: File Download Progress
           format: int32
-        status:
-          type: string
-          description: Download Status
-    RolloverQuota:
-      title: RolloverQuota
-      type: object
-      properties:
-        allocatedQuota:
-          type: string
-        availableQuota:
-          type: string
-        quotaUnit:
-          type: string
-    BasketDO:
-      title: BasketDO
-      required:
-      - basketId
-      type: object
-      properties:
-        basketId:
-          type: integer
-          description: Basket ID
-          format: int64
     RadiusObjects:
       title: RadiusObjects
       type: object
@@ -363,39 +325,45 @@ components:
           type: string
         totalActiveSession:
           type: string
-    DeviceAttributesDO:
-      title: DeviceAttributesDO
+    DataUsageResponseVO:
+      title: DataUsageResponseVO
       type: object
       properties:
-        attrName:
+        basketName:
           type: string
-        attrValue:
+          description: Basket Name
+        dataSegregation:
+          $ref: '#/components/schemas/DataSegregation'
+        dataUsageFound:
+          type: boolean
+        dataUsageUnits:
           type: string
-    DeviceRadiusResponseVO:
-      title: DeviceRadiusResponseVO
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/RadiusObjects'
-        resCode:
+        error:
           type: string
-        resStatus:
+          description: Error Message
+        mobileNo:
           type: string
-        totalCount:
-          type: integer
-          format: int32
-    ActivePlanQuota:
-      title: ActivePlanQuota
-      type: object
-      properties:
-        allocatedQuota:
+          description: Mobile Number
+        planCode:
           type: string
-        availableQuota:
+          description: Plan Code
+        planName:
           type: string
-        quotaUnit:
+          description: Plan Name
+        prepaid:
+          type: boolean
+        remainingDataUsage:
           type: string
+          description: Remaining Data
+        simNo:
+          type: string
+          description: SIM Number
+        totalDataUsage:
+          type: string
+          description: Total Data Usage
+        usedDataUsage:
+          type: string
+          description: Used Data
     DeviceIMEIResponseVO:
       title: DeviceIMEIResponseVO
       type: object
@@ -439,45 +407,6 @@ components:
         previousDeviceIMEI:
           type: string
           description: Previous Device IMEI
-    DataUsageResponseVO:
-      title: DataUsageResponseVO
-      type: object
-      properties:
-        basketName:
-          type: string
-          description: Basket Name
-        dataSegregation:
-          $ref: '#/components/schemas/DataSegregation'
-        dataUsageFound:
-          type: boolean
-        dataUsageUnits:
-          type: string
-        error:
-          type: string
-          description: Error Message
-        mobileNo:
-          type: string
-          description: Mobile Number
-        planCode:
-          type: string
-          description: Plan Code
-        planName:
-          type: string
-          description: Plan Name
-        prepaid:
-          type: boolean
-        remainingDataUsage:
-          type: string
-          description: Remaining Data
-        simNo:
-          type: string
-          description: SIM Number
-        totalDataUsage:
-          type: string
-          description: Total Data Usage
-        usedDataUsage:
-          type: string
-          description: Used Data
     DataSegregation:
       title: DataSegregation
       type: object
@@ -486,6 +415,16 @@ components:
           $ref: '#/components/schemas/ActivePlanQuota'
         rolloverQuota:
           $ref: '#/components/schemas/RolloverQuota'
+    ActivePlanQuota:
+      title: ActivePlanQuota
+      type: object
+      properties:
+        allocatedQuota:
+          type: string
+        availableQuota:
+          type: string
+        quotaUnit:
+          type: string
     DeviceFrequencyDO:
       title: DeviceFrequencyDO
       type: object
@@ -493,6 +432,67 @@ components:
         band:
           type: string
         technology:
+          type: string
+    BasketDO:
+      title: BasketDO
+      required:
+      - basketId
+      type: object
+      properties:
+        basketId:
+          type: integer
+          description: Basket ID
+          format: int64
+    DownloadHistoryVO:
+      title: DownloadHistoryVO
+      type: object
+      properties:
+        basketName:
+          type: string
+          description: Basket Name
+        completionDate:
+          type: string
+          description: Download Request Completion Date and Time
+        creationDate:
+          type: string
+          description: Download Request Creation Date and Time
+        downloadFileId:
+          type: integer
+          description: Download Request ID
+          format: int64
+        downloadType:
+          type: string
+          description: Download Type
+        extension:
+          type: string
+          description: File Extension
+        fileName:
+          type: string
+          description: File Name
+        progress:
+          type: integer
+          description: File Download Progress
+          format: int32
+        status:
+          type: string
+          description: Download Status
+    RolloverQuota:
+      title: RolloverQuota
+      type: object
+      properties:
+        allocatedQuota:
+          type: string
+        availableQuota:
+          type: string
+        quotaUnit:
+          type: string
+    DeviceAttributesDO:
+      title: DeviceAttributesDO
+      type: object
+      properties:
+        attrName:
+          type: string
+        attrValue:
           type: string
 x-tagGroups:
 - name: Manage Customer APIs

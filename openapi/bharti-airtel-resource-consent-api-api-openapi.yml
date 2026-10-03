@@ -299,40 +299,30 @@ paths:
       deprecated: false
 components:
   schemas:
-    ConsentEvents:
+    ConsentEventMeta:
       type: object
       properties:
-        channel:
+        callStatus:
           type: string
-          enum:
-          - IVR
-          - SMS
         consentId:
           type: string
-        initiatedBy:
+        delivered:
+          type: boolean
+        keyPressed:
+          type: boolean
+        language:
           type: string
           enum:
-          - PLATFORM
-          - CUSTOMER
-        meta:
-          $ref: '#/components/schemas/ConsentEventMeta'
-        status:
-          type: string
-          enum:
-          - FAIL
-          - SUCCESS
-        timestamp:
-          type: string
-          format: date-time
-        type:
-          type: string
-          enum:
-          - MT
-          - DR
-          - MO
-          - CALL
-          - CDR
-      title: ConsentEvents
+          - EN
+          - HI
+          - AS
+          - BN
+          - OR
+          - KN
+          - ML
+          - TA
+          - TE
+      title: ConsentEventMeta
     ConsentResponse:
       type: object
       properties:
@@ -375,18 +365,6 @@ components:
           type: string
           format: date-time
       title: ConsentResponse
-    ResourcePatchOptions:
-      type: object
-      properties:
-        alias:
-          type: string
-          example: Albert Einstein
-          description: The name to msisdn for which consent was initiated
-        isTrackingEnabled:
-          type: boolean
-          example: true
-          description: enable/disable tracking for a MSISDN.
-      title: ResourcePatchOptions
     ResourceResponseDto:
       type: object
       properties:
@@ -423,30 +401,52 @@ components:
         tracking:
           type: boolean
       title: ResourceResponseDto
-    ConsentEventMeta:
+    ConsentEvents:
       type: object
       properties:
-        callStatus:
-          type: string
-        consentId:
-          type: string
-        delivered:
-          type: boolean
-        keyPressed:
-          type: boolean
-        language:
+        channel:
           type: string
           enum:
-          - EN
-          - HI
-          - AS
-          - BN
-          - OR
-          - KN
-          - ML
-          - TA
-          - TE
-      title: ConsentEventMeta
+          - IVR
+          - SMS
+        consentId:
+          type: string
+        initiatedBy:
+          type: string
+          enum:
+          - PLATFORM
+          - CUSTOMER
+        meta:
+          $ref: '#/components/schemas/ConsentEventMeta'
+        status:
+          type: string
+          enum:
+          - FAIL
+          - SUCCESS
+        timestamp:
+          type: string
+          format: date-time
+        type:
+          type: string
+          enum:
+          - MT
+          - DR
+          - MO
+          - CALL
+          - CDR
+      title: ConsentEvents
+    ResourcePatchOptions:
+      type: object
+      properties:
+        alias:
+          type: string
+          example: Albert Einstein
+          description: The name to msisdn for which consent was initiated
+        isTrackingEnabled:
+          type: boolean
+          example: true
+          description: enable/disable tracking for a MSISDN.
+      title: ResourcePatchOptions
     ConsentRequest:
       type: object
       required:
