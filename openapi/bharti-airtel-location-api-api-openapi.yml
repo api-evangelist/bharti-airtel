@@ -80,6 +80,18 @@ components:
         correlationId:
           type: string
       title: AsyncCorrelationId
+    LatLong:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        radius:
+          type: string
+      title: LatLong
     LocationResponse:
       type: object
       properties:
@@ -95,15 +107,3 @@ components:
         status:
           type: string
       title: LocationResponse
-    LatLong:
-      type: object
-      properties:
-        latitude:
-          type: number
-          format: double
-        longitude:
-          type: number
-          format: double
-        radius:
-          type: string
-      title: LatLong

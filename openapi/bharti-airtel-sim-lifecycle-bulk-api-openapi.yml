@@ -147,39 +147,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    DownloadHistoryVO:
-      title: DownloadHistoryVO
-      type: object
-      properties:
-        basketName:
-          type: string
-          description: Basket Name
-        completionDate:
-          type: string
-          description: Download Request Completion Date and Time
-        creationDate:
-          type: string
-          description: Download Request Creation Date and Time
-        downloadFileId:
-          type: integer
-          description: Download Request ID
-          format: int64
-        downloadType:
-          type: string
-          description: Download Type
-        extension:
-          type: string
-          description: File Extension
-        fileName:
-          type: string
-          description: File Name
-        progress:
-          type: integer
-          description: File Download Progress
-          format: int32
-        status:
-          type: string
-          description: Download Status
     JobVO:
       title: JobVO
       type: object
@@ -254,6 +221,39 @@ components:
           type: integer
           description: Basket ID
           format: int64
+    DownloadHistoryVO:
+      title: DownloadHistoryVO
+      type: object
+      properties:
+        basketName:
+          type: string
+          description: Basket Name
+        completionDate:
+          type: string
+          description: Download Request Completion Date and Time
+        creationDate:
+          type: string
+          description: Download Request Creation Date and Time
+        downloadFileId:
+          type: integer
+          description: Download Request ID
+          format: int64
+        downloadType:
+          type: string
+          description: Download Type
+        extension:
+          type: string
+          description: File Extension
+        fileName:
+          type: string
+          description: File Name
+        progress:
+          type: integer
+          description: File Download Progress
+          format: int32
+        status:
+          type: string
+          description: Download Status
 x-tagGroups:
 - name: Manage Customer APIs
   tags:

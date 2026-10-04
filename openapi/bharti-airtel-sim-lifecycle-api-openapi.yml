@@ -563,27 +563,6 @@ components:
           description: List of SIM
           items:
             $ref: '#/components/schemas/SimDOWithPlan'
-    GeneratedTempDisconnectOrder:
-      title: GeneratedTempDisconnectOrder
-      required:
-      - reason
-      - simDOList
-      type: object
-      properties:
-        reason:
-          type: string
-          description: Disconnection Reason.
-          enum:
-          - NUMBER_NOT_REQUIRED
-          - PRICING_CONCERN
-          - NETWORK_COVERAGE_ISSUE
-          - BILLING_OR_COLLECTION_ISSUE
-          - CONTRACT_EXPIRED
-        simDOList:
-          type: array
-          description: List of SIM
-          items:
-            $ref: '#/components/schemas/SimDO'
     GenerateOrder:
       title: GenerateOrder
       required:
@@ -595,17 +574,6 @@ components:
           description: List of SIM
           items:
             $ref: '#/components/schemas/SimDO'
-    SimDOWithPlan:
-      title: SimDOWithPlan
-      required:
-      - mobileNO
-      type: object
-      properties:
-        mobileNO:
-          type: string
-          description: Mobile No.
-        planDO:
-          $ref: '#/components/schemas/PlanDO'
     JobVO:
       title: JobVO
       type: object
@@ -672,14 +640,38 @@ components:
         planCode:
           type: string
           description: Plan Code
-    SwapSim:
-      title: SwapSim
+    SimDOWithPlan:
+      title: SimDOWithPlan
+      required:
+      - mobileNO
       type: object
       properties:
-        existingSIMNo:
+        mobileNO:
           type: string
-        newSIMNo:
+          description: Mobile No.
+        planDO:
+          $ref: '#/components/schemas/PlanDO'
+    GeneratedTempDisconnectOrder:
+      title: GeneratedTempDisconnectOrder
+      required:
+      - reason
+      - simDOList
+      type: object
+      properties:
+        reason:
           type: string
+          description: Disconnection Reason.
+          enum:
+          - NUMBER_NOT_REQUIRED
+          - PRICING_CONCERN
+          - NETWORK_COVERAGE_ISSUE
+          - BILLING_OR_COLLECTION_ISSUE
+          - CONTRACT_EXPIRED
+        simDOList:
+          type: array
+          description: List of SIM
+          items:
+            $ref: '#/components/schemas/SimDO'
     SimDO:
       title: SimDO
       required:
@@ -689,6 +681,14 @@ components:
         mobileNO:
           type: string
           description: Mobile No.
+    SwapSim:
+      title: SwapSim
+      type: object
+      properties:
+        existingSIMNo:
+          type: string
+        newSIMNo:
+          type: string
 x-tagGroups:
 - name: Manage Customer APIs
   tags:

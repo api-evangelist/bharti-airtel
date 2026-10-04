@@ -385,8 +385,62 @@ paths:
       deprecated: false
 components:
   schemas:
-    DownloadHistoryView:
-      title: DownloadHistoryView
+    BasketDetailsVO:
+      title: BasketDetailsVO
+      type: object
+      properties:
+        activeSims:
+          type: string
+        availableSims:
+          type: string
+        basketId:
+          type: string
+        basketName:
+          type: string
+        basketPermission:
+          type: string
+        creationDate:
+          type: string
+        customerId:
+          type: string
+        emailId:
+          type: string
+        firstName:
+          type: string
+        inActiveSims:
+          type: string
+        inProgressSims:
+          type: string
+        lastName:
+          type: string
+        managedBy:
+          type: string
+        mobileNo:
+          type: string
+        parentBasketId:
+          type: string
+        remarks:
+          type: string
+        safeCustodySims:
+          type: string
+        suspendedSims:
+          type: string
+        testModeSims:
+          type: string
+        totalSims:
+          type: string
+    Sims:
+      title: Sims
+      type: object
+      properties:
+        sims:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimDetailsVO'
+        total:
+          type: string
+    DownloadHistoryVO:
+      title: DownloadHistoryVO
       type: object
       properties:
         basketName:
@@ -418,38 +472,6 @@ components:
         status:
           type: string
           description: Download Status
-    Sims:
-      title: Sims
-      type: object
-      properties:
-        sims:
-          type: array
-          items:
-            $ref: '#/components/schemas/SimDetailsVO'
-        total:
-          type: string
-    DownloadHistoriesVo:
-      title: DownloadHistoriesVo
-      type: object
-      properties:
-        downloadHistories:
-          type: array
-          items:
-            $ref: '#/components/schemas/DownloadHistoryView'
-        total:
-          type: string
-    SimApnVO:
-      title: SimApnVO
-      type: object
-      properties:
-        attachedApnIp:
-          type: string
-        attachedApnIpType:
-          type: string
-        attachedApnName:
-          type: string
-        attchedApnType:
-          type: string
     SimDetailsVO:
       title: SimDetailsVO
       type: object
@@ -512,52 +534,30 @@ components:
           type: string
         status:
           type: string
-    BasketDetailsVO:
-      title: BasketDetailsVO
+    SimApnVO:
+      title: SimApnVO
       type: object
       properties:
-        activeSims:
+        attachedApnIp:
           type: string
-        availableSims:
+        attachedApnIpType:
           type: string
-        basketId:
+        attachedApnName:
           type: string
-        basketName:
+        attchedApnType:
           type: string
-        basketPermission:
+    DownloadHistoriesVo:
+      title: DownloadHistoriesVo
+      type: object
+      properties:
+        downloadHistories:
+          type: array
+          items:
+            $ref: '#/components/schemas/DownloadHistoryView'
+        total:
           type: string
-        creationDate:
-          type: string
-        customerId:
-          type: string
-        emailId:
-          type: string
-        firstName:
-          type: string
-        inActiveSims:
-          type: string
-        inProgressSims:
-          type: string
-        lastName:
-          type: string
-        managedBy:
-          type: string
-        mobileNo:
-          type: string
-        parentBasketId:
-          type: string
-        remarks:
-          type: string
-        safeCustodySims:
-          type: string
-        suspendedSims:
-          type: string
-        testModeSims:
-          type: string
-        totalSims:
-          type: string
-    DownloadHistoryVO:
-      title: DownloadHistoryVO
+    DownloadHistoryView:
+      title: DownloadHistoryView
       type: object
       properties:
         basketName:

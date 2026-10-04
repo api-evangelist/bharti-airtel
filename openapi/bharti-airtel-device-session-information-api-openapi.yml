@@ -273,97 +273,6 @@ paths:
       x-codegen-request-body-name: basketDO
 components:
   schemas:
-    DeviceRadiusResponseVO:
-      title: DeviceRadiusResponseVO
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/RadiusObjects'
-        resCode:
-          type: string
-        resStatus:
-          type: string
-        totalCount:
-          type: integer
-          format: int32
-    RadiusObjects:
-      title: RadiusObjects
-      type: object
-      properties:
-        3GPPIMEISV:
-          type: string
-        3GPPIMSI:
-          type: string
-        3GPPIMSIMCCMNC:
-          type: string
-        3GPPRATType:
-          type: string
-        3GPPSessionStopIndicator:
-          type: integer
-          format: int64
-        acctInputPackets:
-          type: string
-        acctOutputPackets:
-          type: string
-        acctSessionId:
-          type: string
-        acctStatusType:
-          type: string
-        acctTerminateCause:
-          type: string
-        calledStationId:
-          type: string
-        callingStationId:
-          type: string
-        framedIPAddress:
-          type: string
-        sessionStartTimestamp:
-          type: string
-        sessionStopTimestamp:
-          type: string
-        totalActiveSession:
-          type: string
-    DataUsageResponseVO:
-      title: DataUsageResponseVO
-      type: object
-      properties:
-        basketName:
-          type: string
-          description: Basket Name
-        dataSegregation:
-          $ref: '#/components/schemas/DataSegregation'
-        dataUsageFound:
-          type: boolean
-        dataUsageUnits:
-          type: string
-        error:
-          type: string
-          description: Error Message
-        mobileNo:
-          type: string
-          description: Mobile Number
-        planCode:
-          type: string
-          description: Plan Code
-        planName:
-          type: string
-          description: Plan Name
-        prepaid:
-          type: boolean
-        remainingDataUsage:
-          type: string
-          description: Remaining Data
-        simNo:
-          type: string
-          description: SIM Number
-        totalDataUsage:
-          type: string
-          description: Total Data Usage
-        usedDataUsage:
-          type: string
-          description: Used Data
     DeviceIMEIResponseVO:
       title: DeviceIMEIResponseVO
       type: object
@@ -407,16 +316,45 @@ components:
         previousDeviceIMEI:
           type: string
           description: Previous Device IMEI
-    DataSegregation:
-      title: DataSegregation
+    RadiusObjects:
+      title: RadiusObjects
       type: object
       properties:
-        activePlanQuota:
-          $ref: '#/components/schemas/ActivePlanQuota'
-        rolloverQuota:
-          $ref: '#/components/schemas/RolloverQuota'
-    ActivePlanQuota:
-      title: ActivePlanQuota
+        3GPPIMEISV:
+          type: string
+        3GPPIMSI:
+          type: string
+        3GPPIMSIMCCMNC:
+          type: string
+        3GPPRATType:
+          type: string
+        3GPPSessionStopIndicator:
+          type: integer
+          format: int64
+        acctInputPackets:
+          type: string
+        acctOutputPackets:
+          type: string
+        acctSessionId:
+          type: string
+        acctStatusType:
+          type: string
+        acctTerminateCause:
+          type: string
+        calledStationId:
+          type: string
+        callingStationId:
+          type: string
+        framedIPAddress:
+          type: string
+        sessionStartTimestamp:
+          type: string
+        sessionStopTimestamp:
+          type: string
+        totalActiveSession:
+          type: string
+    RolloverQuota:
+      title: RolloverQuota
       type: object
       properties:
         allocatedQuota:
@@ -425,24 +363,6 @@ components:
           type: string
         quotaUnit:
           type: string
-    DeviceFrequencyDO:
-      title: DeviceFrequencyDO
-      type: object
-      properties:
-        band:
-          type: string
-        technology:
-          type: string
-    BasketDO:
-      title: BasketDO
-      required:
-      - basketId
-      type: object
-      properties:
-        basketId:
-          type: integer
-          description: Basket ID
-          format: int64
     DownloadHistoryVO:
       title: DownloadHistoryVO
       type: object
@@ -476,8 +396,18 @@ components:
         status:
           type: string
           description: Download Status
-    RolloverQuota:
-      title: RolloverQuota
+    BasketDO:
+      title: BasketDO
+      required:
+      - basketId
+      type: object
+      properties:
+        basketId:
+          type: integer
+          description: Basket ID
+          format: int64
+    ActivePlanQuota:
+      title: ActivePlanQuota
       type: object
       properties:
         allocatedQuota:
@@ -485,6 +415,22 @@ components:
         availableQuota:
           type: string
         quotaUnit:
+          type: string
+    DataSegregation:
+      title: DataSegregation
+      type: object
+      properties:
+        activePlanQuota:
+          $ref: '#/components/schemas/ActivePlanQuota'
+        rolloverQuota:
+          $ref: '#/components/schemas/RolloverQuota'
+    DeviceFrequencyDO:
+      title: DeviceFrequencyDO
+      type: object
+      properties:
+        band:
+          type: string
+        technology:
           type: string
     DeviceAttributesDO:
       title: DeviceAttributesDO
@@ -494,6 +440,60 @@ components:
           type: string
         attrValue:
           type: string
+    DataUsageResponseVO:
+      title: DataUsageResponseVO
+      type: object
+      properties:
+        basketName:
+          type: string
+          description: Basket Name
+        dataSegregation:
+          $ref: '#/components/schemas/DataSegregation'
+        dataUsageFound:
+          type: boolean
+        dataUsageUnits:
+          type: string
+        error:
+          type: string
+          description: Error Message
+        mobileNo:
+          type: string
+          description: Mobile Number
+        planCode:
+          type: string
+          description: Plan Code
+        planName:
+          type: string
+          description: Plan Name
+        prepaid:
+          type: boolean
+        remainingDataUsage:
+          type: string
+          description: Remaining Data
+        simNo:
+          type: string
+          description: SIM Number
+        totalDataUsage:
+          type: string
+          description: Total Data Usage
+        usedDataUsage:
+          type: string
+          description: Used Data
+    DeviceRadiusResponseVO:
+      title: DeviceRadiusResponseVO
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RadiusObjects'
+        resCode:
+          type: string
+        resStatus:
+          type: string
+        totalCount:
+          type: integer
+          format: int32
 x-tagGroups:
 - name: Manage Customer APIs
   tags:

@@ -183,11 +183,23 @@ paths:
       x-codegen-request-body-name: requestDo
 components:
   schemas:
-    UpdateSimKycResponseVo:
-      title: UpdateSimKycResponseVo
+    SimKycDetailsWOPlanVO:
+      title: SimKycDetailsWOPlanVO
       type: object
       properties:
-        message:
+        activationDate:
+          type: string
+        complianceDate:
+          type: string
+        kycCompletionDate:
+          type: string
+        mobileNo:
+          type: string
+        simNo:
+          type: string
+        simStatus:
+          type: string
+        status:
           type: string
     SimKycDo:
       title: SimKycDo
@@ -246,24 +258,6 @@ components:
         registrationNo:
           type: string
           description: registration number.
-    SimKycDetailsWOPlanVO:
-      title: SimKycDetailsWOPlanVO
-      type: object
-      properties:
-        activationDate:
-          type: string
-        complianceDate:
-          type: string
-        kycCompletionDate:
-          type: string
-        mobileNo:
-          type: string
-        simNo:
-          type: string
-        simStatus:
-          type: string
-        status:
-          type: string
     SimKycDetailsWOPlan:
       title: SimKycDetailsWOPlan
       type: object
@@ -275,6 +269,12 @@ components:
         totalRecords:
           type: integer
           format: int64
+    UpdateSimKycResponseVo:
+      title: UpdateSimKycResponseVo
+      type: object
+      properties:
+        message:
+          type: string
 x-tagGroups:
 - name: Manage Customer APIs
   tags:

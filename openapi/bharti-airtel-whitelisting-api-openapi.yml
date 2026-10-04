@@ -239,83 +239,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    SMSWTLDetailsVO:
-      title: SMSWTLDetailsVO
-      type: object
-      properties:
-        basketName:
-          type: string
-        msisdn:
-          type: string
-        remainingOrderCount:
-          type: string
-        simNo:
-          type: string
-        whitelistNumber1:
-          type: string
-        whitelistNumber2:
-          type: string
-        whitelistNumber3:
-          type: string
-        whitelistNumber4:
-          type: string
-        whitelistType1:
-          type: string
-        whitelistType2:
-          type: string
-        whitelistType3:
-          type: string
-        whitelistType4:
-          type: string
-    SmsWhitelistBatchDO:
-      title: SmsWhitelistBatchDO
-      type: object
-      properties:
-        simWTDoList:
-          type: array
-          items:
-            $ref: '#/components/schemas/SmsWhitelistNoDO'
-    SmsWhitelistNoDO:
-      title: SmsWhitelistNoDO
-      required:
-      - msisdn
-      type: object
-      properties:
-        msisdn:
-          type: string
-          description: Mobile No.
-        whitelistNumber1:
-          type: string
-          description: First number for whitelist
-        whitelistNumber2:
-          type: string
-          description: Second number for whitelist
-        whitelistNumber3:
-          type: string
-          description: Third number for whitelist
-        whitelistNumber4:
-          type: string
-          description: Fourth number for whitelist
-        whitelistNumberType1:
-          type: string
-          example: INCOMING
-          enum:
-          - ${SmsWhitelistNoDO.SMSWtlTypes.allowableValues}
-        whitelistNumberType2:
-          type: string
-          example: INCOMING
-          enum:
-          - ${SmsWhitelistNoDO.SMSWtlTypes.allowableValues}
-        whitelistNumberType3:
-          type: string
-          example: OUTGOING
-          enum:
-          - ${SmsWhitelistNoDO.SMSWtlTypes.allowableValues}
-        whitelistNumberType4:
-          type: string
-          example: OUTGOING
-          enum:
-          - ${SmsWhitelistNoDO.SMSWtlTypes.allowableValues}
     JobVO:
       title: JobVO
       type: object
@@ -373,17 +296,42 @@ components:
         uploadFileName:
           type: string
           description: Upload File Name
-    WhitelistResponse:
-      title: WhitelistResponse
+    SmsWhitelistBatchDO:
+      title: SmsWhitelistBatchDO
       type: object
       properties:
-        total:
-          type: integer
-          format: int32
-        whitelistDetails:
+        simWTDoList:
           type: array
           items:
-            $ref: '#/components/schemas/WhitelistVO'
+            $ref: '#/components/schemas/SmsWhitelistNoDO'
+    SMSWTLDetailsVO:
+      title: SMSWTLDetailsVO
+      type: object
+      properties:
+        basketName:
+          type: string
+        msisdn:
+          type: string
+        remainingOrderCount:
+          type: string
+        simNo:
+          type: string
+        whitelistNumber1:
+          type: string
+        whitelistNumber2:
+          type: string
+        whitelistNumber3:
+          type: string
+        whitelistNumber4:
+          type: string
+        whitelistType1:
+          type: string
+        whitelistType2:
+          type: string
+        whitelistType3:
+          type: string
+        whitelistType4:
+          type: string
     SMSWTLResponse:
       title: SMSWTLResponse
       type: object
@@ -395,6 +343,58 @@ components:
         total:
           type: integer
           format: int32
+    SmsWhitelistNoDO:
+      title: SmsWhitelistNoDO
+      required:
+      - msisdn
+      type: object
+      properties:
+        msisdn:
+          type: string
+          description: Mobile No.
+        whitelistNumber1:
+          type: string
+          description: First number for whitelist
+        whitelistNumber2:
+          type: string
+          description: Second number for whitelist
+        whitelistNumber3:
+          type: string
+          description: Third number for whitelist
+        whitelistNumber4:
+          type: string
+          description: Fourth number for whitelist
+        whitelistNumberType1:
+          type: string
+          example: INCOMING
+          enum:
+          - ${SmsWhitelistNoDO.SMSWtlTypes.allowableValues}
+        whitelistNumberType2:
+          type: string
+          example: INCOMING
+          enum:
+          - ${SmsWhitelistNoDO.SMSWtlTypes.allowableValues}
+        whitelistNumberType3:
+          type: string
+          example: OUTGOING
+          enum:
+          - ${SmsWhitelistNoDO.SMSWtlTypes.allowableValues}
+        whitelistNumberType4:
+          type: string
+          example: OUTGOING
+          enum:
+          - ${SmsWhitelistNoDO.SMSWtlTypes.allowableValues}
+    WhitelistResponse:
+      title: WhitelistResponse
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int32
+        whitelistDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/WhitelistVO'
     WhitelistVO:
       title: WhitelistVO
       type: object

@@ -79,56 +79,6 @@ paths:
       x-codegen-request-body-name: requestDO
 components:
   schemas:
-    WhitelistNumberDO:
-      title: WhitelistNumberDO
-      type: object
-      properties:
-        msisdn:
-          type: string
-        whitelistNumber1:
-          type: string
-          description: Whitelist Number 1
-        whitelistNumber2:
-          type: string
-          description: Whitelist Number 2
-        whitelistNumber3:
-          type: string
-          description: Whitelist Number 3
-        whitelistNumber4:
-          type: string
-          description: Whitelist Number 4
-        whitelistNumberType1:
-          type: string
-          description: provide whitelist type from one of the allowed values
-          example: ${whitelist.type.example}
-          enum:
-          - ${INCOMING
-          - OUTGOING
-          - INCOMINGANDOUTGOING}
-        whitelistNumberType2:
-          type: string
-          description: provide whitelist type from one of the allowed values
-          example: ${whitelist.type.example}
-          enum:
-          - ${INCOMING
-          - OUTGOING
-          - INCOMINGANDOUTGOING}
-        whitelistNumberType3:
-          type: string
-          description: provide whitelist type from one of the allowed values
-          example: ${whitelist.type.example}
-          enum:
-          - ${INCOMING
-          - OUTGOING
-          - INCOMINGANDOUTGOING}
-        whitelistNumberType4:
-          type: string
-          description: provide whitelist type from one of the allowed values
-          example: ${whitelist.type.example}
-          enum:
-          - ${INCOMING
-          - OUTGOING
-          - INCOMINGANDOUTGOING}
     JobVO:
       title: JobVO
       type: object
@@ -186,6 +136,56 @@ components:
         uploadFileName:
           type: string
           description: Upload File Name
+    WhitelistNumberDO:
+      title: WhitelistNumberDO
+      type: object
+      properties:
+        msisdn:
+          type: string
+        whitelistNumber1:
+          type: string
+          description: Whitelist Number 1
+        whitelistNumber2:
+          type: string
+          description: Whitelist Number 2
+        whitelistNumber3:
+          type: string
+          description: Whitelist Number 3
+        whitelistNumber4:
+          type: string
+          description: Whitelist Number 4
+        whitelistNumberType1:
+          type: string
+          description: provide whitelist type from one of the allowed values
+          example: ${whitelist.type.example}
+          enum:
+          - ${INCOMING
+          - OUTGOING
+          - INCOMINGANDOUTGOING}
+        whitelistNumberType2:
+          type: string
+          description: provide whitelist type from one of the allowed values
+          example: ${whitelist.type.example}
+          enum:
+          - ${INCOMING
+          - OUTGOING
+          - INCOMINGANDOUTGOING}
+        whitelistNumberType3:
+          type: string
+          description: provide whitelist type from one of the allowed values
+          example: ${whitelist.type.example}
+          enum:
+          - ${INCOMING
+          - OUTGOING
+          - INCOMINGANDOUTGOING}
+        whitelistNumberType4:
+          type: string
+          description: provide whitelist type from one of the allowed values
+          example: ${whitelist.type.example}
+          enum:
+          - ${INCOMING
+          - OUTGOING
+          - INCOMINGANDOUTGOING}
 x-tagGroups:
 - name: Manage Customer APIs
   tags:

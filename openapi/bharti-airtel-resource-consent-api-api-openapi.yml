@@ -298,31 +298,15 @@ paths:
           description: Msisdn not found for customer
       deprecated: false
 components:
+  requestBodies:
+    ResourcePatchOptions:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResourcePatchOptions'
+      description: resourcePatchOptions
+      required: true
   schemas:
-    ConsentEventMeta:
-      type: object
-      properties:
-        callStatus:
-          type: string
-        consentId:
-          type: string
-        delivered:
-          type: boolean
-        keyPressed:
-          type: boolean
-        language:
-          type: string
-          enum:
-          - EN
-          - HI
-          - AS
-          - BN
-          - OR
-          - KN
-          - ML
-          - TA
-          - TE
-      title: ConsentEventMeta
     ConsentResponse:
       type: object
       properties:
@@ -447,6 +431,30 @@ components:
           example: true
           description: enable/disable tracking for a MSISDN.
       title: ResourcePatchOptions
+    ConsentEventMeta:
+      type: object
+      properties:
+        callStatus:
+          type: string
+        consentId:
+          type: string
+        delivered:
+          type: boolean
+        keyPressed:
+          type: boolean
+        language:
+          type: string
+          enum:
+          - EN
+          - HI
+          - AS
+          - BN
+          - OR
+          - KN
+          - ML
+          - TA
+          - TE
+      title: ConsentEventMeta
     ConsentRequest:
       type: object
       required:
@@ -465,11 +473,3 @@ components:
           example: 91XXXXXXXXXX
           description: The Airtel number must be prefixed with 91 followed by 10 digit mobile number.
       title: ConsentRequest
-  requestBodies:
-    ResourcePatchOptions:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ResourcePatchOptions'
-      description: resourcePatchOptions
-      required: true

@@ -260,37 +260,6 @@ paths:
       deprecated: false
 components:
   schemas:
-    OrderVO:
-      title: OrderVO
-      type: object
-      properties:
-        mobileNo:
-          type: string
-        orderCompletionTime:
-          type: string
-        orderId:
-          type: integer
-          format: int64
-        orderInitiateDate:
-          type: string
-        orderStatus:
-          type: string
-        orderType:
-          type: string
-        remarks:
-          type: string
-        simNo:
-          type: string
-    Jobs:
-      title: Jobs
-      type: object
-      properties:
-        jobs:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobVO'
-        total:
-          type: string
     JobVO:
       title: JobVO
       type: object
@@ -348,6 +317,16 @@ components:
         uploadFileName:
           type: string
           description: Upload File Name
+    Jobs:
+      title: Jobs
+      type: object
+      properties:
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobVO'
+        total:
+          type: string
     Orders:
       title: Orders
       type: object
@@ -357,6 +336,27 @@ components:
           items:
             $ref: '#/components/schemas/OrderVO'
         total:
+          type: string
+    OrderVO:
+      title: OrderVO
+      type: object
+      properties:
+        mobileNo:
+          type: string
+        orderCompletionTime:
+          type: string
+        orderId:
+          type: integer
+          format: int64
+        orderInitiateDate:
+          type: string
+        orderStatus:
+          type: string
+        orderType:
+          type: string
+        remarks:
+          type: string
+        simNo:
           type: string
 x-tagGroups:
 - name: Manage Customer APIs

@@ -58,25 +58,25 @@ paths:
           description: "Error in Fetching location of msisdn because of network error in HLR, \n MME, MSC. The ~5-10% of such error is expected.| Error retrieving geocode while processing request. Please try again!"
       deprecated: false
 components:
+  requestBodies:
+    AddressValidationDto:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AddressValidationDto'
+      description: address
+      required: true
   schemas:
-    GeocodeDetails:
+    AddressValidationDto:
       type: object
+      required:
+      - address
       properties:
-        formattedAddress:
+        address:
           type: string
-          description: this shows the formatted address of the POI.
-        geocodeLevel:
-          type: string
-          description: this shows on which level the POI has been geocoded.
-        inputAddress:
-          type: string
-        latitude:
-          type: number
-          format: double
-        longitude:
-          type: number
-          format: double
-      title: GeocodeDetails
+          example: string
+          description: address to be validated
+      title: AddressValidationDto
     LatLong:
       type: object
       properties:
@@ -111,21 +111,21 @@ components:
           type: string
           format: date-time
       title: AddressValidationResponseDto
-    AddressValidationDto:
+    GeocodeDetails:
       type: object
-      required:
-      - address
       properties:
-        address:
+        formattedAddress:
           type: string
-          example: string
-          description: address to be validated
-      title: AddressValidationDto
-  requestBodies:
-    AddressValidationDto:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AddressValidationDto'
-      description: address
-      required: true
+          description: this shows the formatted address of the POI.
+        geocodeLevel:
+          type: string
+          description: this shows on which level the POI has been geocoded.
+        inputAddress:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+      title: GeocodeDetails
