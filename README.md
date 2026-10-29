@@ -1,4 +1,4 @@
-# Bharti Airtel (bharti-airtel)
+# Bharti Airtel
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,134 +64,157 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Bharti Airtel Limited is an Indian multinational telecommunications operator headquartered in New Delhi, and one of the two dominant mobile network operators in its home market of India. It runs mobile (2G/4G/5G), fixed broadband, DTH, enterprise connectivity, data centre and payments-bank businesses across India and South Asia, and through the separately listed Airtel Africa across fourteen African countries. In the value chain Airtel is an access-network owner: it holds the spectrum, the SIM estate, the subscriber identity and the network signalling that the rest of the industry resells.
+Bharti Airtel Limited is an Indian multinational telecommunications operator headquartered in New Delhi, and one of the two dominant mobile network operators in its home market of India alongside Reliance Jio. It runs mobile (2G/4G/5G), fixed broadband, DTH television, enterprise connectivity, data centre (Nxtra) and payments-bank businesses across India, South Asia and — through the separately listed Airtel Africa — fourteen African countries. In the telecom value chain Airtel is an access-network owner: it holds the spectrum, the SIM estate, the subscriber identity and the network signalling that the rest of the industry resells. Its API posture is split in two, and the split is the whole story. The connectivity-product side is genuinely API-native and publicly documented: Airtel IQ, the operator's CPaaS suite, publishes open Swagger for its SMS and CDR reporting APIs and offers a self-serve trial account, while the Airtel IoT and Airtel Locate developer portals publish complete OpenAPI 3.0 catalogues (43 and 19 operations) as Redoc pages that need no login. The network-API side — the CAMARA and GSMA Open Gateway surface that defines this sector — is the opposite: Airtel is a GSMA Open Gateway signatory, a founding operator shareholder in Aduna (the Ericsson-led network-API joint venture), and has commercially launched a CAMARA SIM Swap API to Indian banks through a federated Jio/Vi/Airtel channel, yet it publishes no CAMARA endpoint, no CAMARA specification, no CIBA authorization surface and no network-API developer portal of its own. Developers reach Airtel's network capabilities only through aggregators — Aduna, and Nokia's Network as Code platform — never directly. Its own "Airtel API Marketplace" at developers.airtel.in is a login wall, and its original 2017 Smart API partner programme at openapi.airtel.in/smartapi survives as an unmaintained legacy portal.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/bharti-airtel/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/bharti-airtel/refs/heads/main/apis.yml)
+**Areas:** Telecommunications · India · Mobile Network Operator · Network APIs · CAMARA · Open Gateway · SIM Swap · CPaaS · Messaging · SMS · RCS · Voice
 
-## The split
+## Bharti Airtel on APIs.io
 
-Airtel's API posture divides cleanly in two, and the division is the whole story.
+Everything profiled for Bharti Airtel is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/bharti-airtel/](https://apis.io/providers/bharti-airtel/)** — or go straight to one of the APIs or properties below.
 
-**The connectivity products are genuinely API-native.** Airtel IQ (CPaaS) publishes open Swagger for SMS and CDR reporting and offers a self-serve trial account. The Airtel IoT and Airtel Locate developer portals publish complete OpenAPI 3.0 catalogues — 43 and 19 operations — as Redoc pages that need no login at all.
+### APIs (20)
 
-**The network APIs are not reachable from Airtel.** Airtel is a GSMA Open Gateway signatory, a founding operator shareholder in Aduna, and has commercially launched a CAMARA SIM Swap API to Indian banks. Yet it publishes no CAMARA endpoint, no CAMARA specification, no CIBA authorization surface and no network-API developer portal of its own. Developers reach Airtel's network capabilities only through aggregators — Aduna, and Nokia's Network as Code platform — never directly.
+- [Airtel Smart API (legacy)](https://apis.io/apis/bharti-airtel/airtel-smart-api/) — Airtel's original partner developer programme, launched in 2017 and now an unmaintained legacy portal (the site still carries a 2017 copyright). Its public…
+- [Bharti Airtel Account Authorization API](https://apis.io/apis/bharti-airtel/bharti-airtel-account-authorization-api/) — This set of APIs shall allow user to generate Access Token and refresh Access Token to perform any action on CMP via the API gateway.
+- [Bharti Airtel Account Details API](https://apis.io/apis/bharti-airtel/bharti-airtel-account-details-api/) — This set of APIs fetch various details about a Billable Customer Account including Customer Profile, Plan details, User details and so on.
+- [Bharti Airtel IQ Sample CDR(Call Data Record) API](https://apis.io/apis/bharti-airtel/bharti-airtel-airtel-iq-sample-cdr-call-data-record-api-api/) — <strong>Call Detail Record (CDR)</strong> is the detailed record of the call, which contains various call details such as Time, Date, Duration, Caller_ID,…
+- [Bharti Airtel Authorization API](https://apis.io/apis/bharti-airtel/bharti-airtel-authorization-api-api/) — This API will help you to generate token from the client credentials shared upon subscription to location services. In case you have not yet subscribed to…
+- [Bharti Airtel Bulk SMS APIs API](https://apis.io/apis/bharti-airtel/bharti-airtel-bulk-sms-apis-api/) — These APIs can be used to send Bulk SMS in different ways as documented below
+- [Bharti Airtel Device & Session Information API](https://apis.io/apis/bharti-airtel/bharti-airtel-device-session-information-api/) — To data usage on a specific SIM, this API will allow user to get total data allocation, available data, used data, device information & session information…
+- [Bharti Airtel Individual SMS APIs API](https://apis.io/apis/bharti-airtel/bharti-airtel-individual-sms-apis-api/) — These APIs can be used to send a single SMS in a single request as documented below
+- [Bharti Airtel Inventory Management API](https://apis.io/apis/bharti-airtel/bharti-airtel-inventory-management-api/) — This set of APIs fetch various details about Sim details, Basket details and so on in the account.
+- [Bharti Airtel Job Status API](https://apis.io/apis/bharti-airtel/bharti-airtel-job-status-api/) — This API will allow user to fetch Job details for any operations being performed in that Billable account.
+- [Bharti Airtel KYC Manager API](https://apis.io/apis/bharti-airtel/bharti-airtel-kyc-manager-api/) — This set of APIs to manage SIM KYC details.
+- [Bharti Airtel Location API](https://apis.io/apis/bharti-airtel/bharti-airtel-location-api-api/) — This API will return location of MSISDN including Latitude and Longitude.
+- [Bharti Airtel Messaging Centre API](https://apis.io/apis/bharti-airtel/bharti-airtel-messaging-centre-api/) — These set of APIs allow lifecycle management of the Messaging Centre functionality
+- [Bharti Airtel Resource Consent API](https://apis.io/apis/bharti-airtel/bharti-airtel-resource-consent-api-api/) — This set of APIs allow customer initiate consent, fetch consent details, delete resource, fetch list of msisdn for consent was initiated and various other…
+- [Bharti Airtel SIM LifeCycle API](https://apis.io/apis/bharti-airtel/bharti-airtel-sim-lifecycle-api/) — This API shall allow user to change the state of SIMs.
+- [Bharti Airtel SIM LifeCycle Bulk API](https://apis.io/apis/bharti-airtel/bharti-airtel-sim-lifecycle-bulk-api/) — This API shall allow user to change the state of SIMs.
+- [Bharti Airtel Tenant API](https://apis.io/apis/bharti-airtel/bharti-airtel-tenant-api-api/) — These set of Tenant APIs allow customer to initiate consent, fetch consent details, delete consent, fetch list of msisdn for consent was initiated and…
+- [Bharti Airtel Validation API](https://apis.io/apis/bharti-airtel/bharti-airtel-validation-api-api/) — These set of APIs allow customer to validate a physical address against network fetched live location. To get access to these API's please email to…
+- [Bharti Airtel Whitelisting API](https://apis.io/apis/bharti-airtel/bharti-airtel-whitelisting-api/) — This set of APIs to manage whitelisting numbers on Airtel IoT portal in Batch
+- [Bharti Airtel Whitelisting APIs API](https://apis.io/apis/bharti-airtel/bharti-airtel-whitelisting-apis-api/) — The Whitelisting APIs API from Bharti Airtel — 1 operation(s) for whitelisting apis.
 
-## Tags
+### Published properties
 
-- Telecommunications
-- India
-- Mobile Network Operator
-- Network APIs
-- CAMARA
-- Open Gateway
-- SIM Swap
-- CPaaS
-- Messaging
-- SMS
-- RCS
-- Voice
-- IoT
-- M2M
-- Device Location
-- Broadband
-- 5G
-- Identity Verification
-- Carrier Billing
-- Consent Management
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Timestamps
+#### AsyncAPI (1)
 
-- **Created:** 2026-07-25
-- **Modified:** 2026-07-25
+Event-driven and webhook contracts.
 
-## APIs
+- [Bharti Airtel Webhooks](https://apis.io/asyncapis/bharti-airtel/bharti-airtel-webhooks/)
 
-### Airtel IQ SMS API
+#### MCP servers (1)
 
-The messaging half of Airtel IQ, Airtel's network-embedded CPaaS suite. Sends single, bulk, CSV-batch and content-moderated A2P SMS over Airtel's pan-India network, with TRAI DLT (Hyperledger-based distributed ledger) scrubbing for sender header, content template and consent compliance applied in-path.
+Model Context Protocol servers that expose the API to agents.
 
-- **Human URL:** [https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility](https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility)
-- **Base URL:** `https://iqsms.airtel.in/api/v1`
-- **Auth:** HTTP Basic, API-key credentials from the IQ dashboard
+- [bharti-airtel](https://apis.io/servers/bharti-airtel/bharti-airtel/)
 
-#### Properties
+#### Agentic access (1)
 
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Bharti Airtel Agentic Access](https://apis.io/agentic-access/bharti-airtel/bharti-airtel-agentic-access/)
+
+#### Collections (4)
+
+Postman and Open Collection request collections.
+
+- [Airtel IoT](https://apis.io/collections/bharti-airtel/open-bharti-airtel-iot/)
+- [Airtel IQ API Documentation](https://apis.io/collections/bharti-airtel/open-bharti-airtel-iq-reporting/)
+- [Airtel IQ SMS Core APIs](https://apis.io/collections/bharti-airtel/open-bharti-airtel-iq-sms/)
+- [Locate API Catalog](https://apis.io/collections/bharti-airtel/open-bharti-airtel-locate/)
+
+#### Overlays (4)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Bharti Airtel Iot Overlay](https://apis.io/overlays/bharti-airtel/bharti-airtel-iot-overlay/)
+- [Bharti Airtel Iq Reporting Overlay](https://apis.io/overlays/bharti-airtel/bharti-airtel-iq-reporting-overlay/)
+- [Bharti Airtel Iq Sms Overlay](https://apis.io/overlays/bharti-airtel/bharti-airtel-iq-sms-overlay/)
+- [Bharti Airtel Locate Overlay](https://apis.io/overlays/bharti-airtel/bharti-airtel-locate-overlay/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Bharti Airtel Authentication](https://apis.io/security/bharti-airtel/bharti-airtel-authentication/)
+- [Bharti Airtel Domain Security](https://apis.io/security/bharti-airtel/bharti-airtel-domain-security/)
+- [Bharti Airtel Vulnerability Disclosure](https://apis.io/security/bharti-airtel/bharti-airtel-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Bharti Airtel Scopes](https://apis.io/scopes/bharti-airtel/bharti-airtel-scopes/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.airtel.in/)
 - [Documentation](https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/overview)
-- [API Reference](https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility)
-- [OpenAPI](openapi/bharti-airtel-iq-sms-openapi.yml) — Swagger 2.0
-- [Sign Up](https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup)
+- [Getting started](https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview)
+- [API reference](https://www.airtel.in/business/b2b/airtel-iq/api-docs/sms/sms-utility)
+- [Pricing](https://www.airtel.in/business/b2b/cpaas)
+- [Sign up](https://www.airtel.in/business/b2b/airtel-ccp/dashboard/#/signup)
+- [Support](https://www.airtel.in/contact-us)
+- [Blog](https://www.airtel.in/blog/)
+- [Terms of service](https://www.airtel.in/mobile/terms-conditions)
+- [Privacy policy](https://www.airtel.in/privacy-policy/)
 
-### Airtel IQ Reporting API
+## API Evangelist rating
 
-The Call Detail Record (CDR) reporting surface of Airtel IQ. Returns per-call time, date, duration, caller ID, destination number, status and call-recording URL for voice traffic placed through Airtel IQ Intelliphones and call flows.
+**Kin Score 46.7** — developing · rubric 0.25.0 · scored 2026-10-23
 
-- **Human URL:** [https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr](https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr)
-- **Base URL:** `https://openapi.airtel.in/gateway/airtel-xchange-reporting/v2`
+| Facet | Score |
+|---|---|
+| Discoverability | 69.6 |
+| Contract quality | 52.0 |
+| Contract governance | 4.5 |
+| Operational transparency | 18.4 |
+| Developer ergonomics | 56.5 |
+| Access clarity | 44.7 |
 
-#### Properties
+**Agent readiness 28.1** — agent-aware
 
-- [Documentation](https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/overview)
-- [API Reference](https://www.airtel.in/business/b2b/airtel-iq/api-docs/voice/sample-cdr)
-- [OpenAPI](openapi/bharti-airtel-iq-reporting-openapi.yml) — Swagger 2.0
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | — |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | distinct |
 
-### Airtel IoT API
+**Regulatory alignment 49.2** — Telecommunications
 
-Airtel's IoT/M2M connectivity-management API — 43 operations across account authorization, account details, inventory management, SIM lifecycle (activate, swap, change plan, safe custody, temporary disconnection), bulk SIM lifecycle, job status, device and session information, SMS and voice whitelisting, KYC management, and a messaging centre.
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/bharti-airtel/](https://apis.io/providers/bharti-airtel/).
 
-- **Human URL:** [https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/](https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/)
-- **Base URL:** `https://m2m.airteliot.co.in/iot/api/`
-- **Auth:** OAuth 2.0 client-credentials with refresh tokens
+## How this profile is made
 
-#### Properties
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
 
-- [Documentation](https://www.airtel.in/m2m/business/b2b/m2m-solutions/documentation/m2m-solutions/)
-- [OpenAPI](openapi/bharti-airtel-iot-openapi.yml) — OpenAPI 3.0.1, 42 paths, 63 schemas
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Bharti Airtel: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
 
-### Airtel Locate API
+## Open an issue
 
-Airtel's network-based device-location platform, letting enterprises track a device by MSISDN without relying on the device's GPS. Nineteen operations across Authorization, Resource Consent, Location, Address Validation and Tenant management, with explicit per-subscriber consent capture and an asynchronous mode that posts location to a customer-registered callback listener.
-
-This is Airtel's proprietary location API — **not** the CAMARA Device Location or Location Verification API.
-
-- **Human URL:** [https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/](https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/)
-- **Base URL:** `https://openapi.airtel.in/locate/apis`
-- **Auth:** OAuth 2.0 bearer token plus consent gate
-
-#### Properties
-
-- [Documentation](https://www.airtel.in/m2m/business/b2b/locate-solution/documentation/locate-solution/)
-- [OpenAPI](openapi/bharti-airtel-locate-openapi.yml) — OpenAPI 3.0.0, v1.4.8
-
-### Airtel Smart API (legacy)
-
-Airtel's original partner developer programme, launched in 2017 and now unmaintained — the site still carries a 2017 copyright. Its public documentation still describes real OAuth 2.0 authorization-code and implicit flows and three partner services: carrier-billing charge, subscription activation/deactivation, and an LRN (local routing number) and porting lookup, plus an Aadhaar/UIDAI DigiAuth authentication and e-KYC integration. Production hosts are redacted to `<IP>:<Port>`, so no specification was harvestable.
-
-- **Human URL:** [https://openapi.airtel.in/smartapi/#/docs](https://openapi.airtel.in/smartapi/#/docs)
-
-## CAMARA and GSMA Open Gateway posture
-
-| Signal | Finding |
-| --- | --- |
-| GSMA Open Gateway member | **Yes** — one of the 21 founding carriers (MWC, February 2023) |
-| Aduna | **Yes** — founding operator shareholder in the Ericsson-led JV (July 2025) |
-| CAMARA APIs launched | **SIM Swap** — commercially live to Indian banks via a GSMA-certified federated Airtel/Jio/Vi channel (GSMA, 9 October 2025) |
-| CAMARA APIs announced only | **Number Verification** — "planned before the end of 2025"; no endpoint or spec found |
-| CAMARA endpoint on an Airtel host | **None** |
-| CAMARA OpenAPI published by Airtel | **None** |
-| CIBA | **Absent** from every public Airtel surface |
-| Listed on github.com/camaraproject | **No** |
-| Channel to developers | Aduna, and Nokia Network as Code — never Airtel directly |
-
-A commercially launched SIM Swap API is stronger than a press release. It is still materially weaker than a developer surface: there is no way for a developer to discover, read about, or call a CAMARA API from anything Airtel operates.
-
-## TM Forum
-
-No TM Forum Open API conformance certification was found, and no TMF-numbered API is published on any Airtel host. The legacy Smart API portal's router still whitelists a public `/docs/Tmforum` route, but the corresponding content has been removed — a dangling route, not an implementation.
-
-## Dead and missing developer hosts
-
-`developer.airtel.in`, `docs.airtel.in`, `api.airtel.in`, `opengateway.airtel.in`, `developers.opengateway.airtel.in` and `iot.airtel.in` all fail to resolve or connect. `airtel.in/developer`, `/developers` and `/opengateway` return HTTP 200 but serve the generic consumer homepage — soft 404s, not portals.
-
-## Notes
-
-Full reviewer findings, HTTP statuses and spec provenance are in [review.yml](review.yml). Verbatim source specifications are preserved under [openapi/_original/](openapi/_original/).
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/bharti-airtel/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
